@@ -7,9 +7,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ContactCardComponent } from './contact-card/contact-card.component';
 
 @NgModule({
-  declarations: [AppComponent,FormsComponent],
+  declarations: [AppComponent,FormsComponent, ContactCardComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

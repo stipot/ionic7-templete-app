@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {FormsComponent} from './forms/forms.component'
+import { ContactCardComponent } from './contact-card/contact-card.component';
 const routes: Routes = [
   {
     path: '',
@@ -14,7 +15,14 @@ const routes: Routes = [
   {
     path: 'forms', 
     component: FormsComponent
+  },
+
+  {
+    path: 'contact-card', 
+    component: ContactCardComponent
   }
+
+
 ];
 
 @NgModule({

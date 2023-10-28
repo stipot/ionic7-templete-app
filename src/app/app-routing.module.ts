@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {FormsComponent} from './forms/forms.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'forms', 
     component: FormsComponent
+  },
+  {
+    path: 'profil',
+    loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
   }
 ];
 

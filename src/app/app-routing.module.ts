@@ -18,6 +18,7 @@ const routes: Routes = [
     path: 'forms',
     component: FormsComponent
   },
+  
   {
     path: 'contact-card',
     component: ContactCardComponent

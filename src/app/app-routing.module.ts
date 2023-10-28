@@ -10,7 +10,15 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  }
+  },
+  {
+    path: 'page-not-found',
+    loadChildren: () => import('./page-not-found/page-not-found.module').then( m => m.PageNotFoundPageModule)
+
+  },
+  { path: '**', redirectTo: 'page-not-found' }
+
+
 ];
 
 @NgModule({

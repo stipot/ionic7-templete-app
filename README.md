@@ -1,0 +1,1 @@
+# ionic7-full-starter-app

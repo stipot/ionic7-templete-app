@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'forms', 
     component: FormsComponent
+  },  {
+    path: 'filters',
+    loadChildren: () => import('./forms/filters/filters.module').then( m => m.FiltersPageModule)
   }
+
 ];
 
 @NgModule({

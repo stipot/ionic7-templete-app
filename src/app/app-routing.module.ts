@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { FormsComponent } from './forms/forms.component'
+import { ContactCardComponent } from './contact-card/contact-card.component';
+import { SettingsComponent } from "./settings/settings.component"
+
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'folder/',
     pathMatch: 'full'
   },
   {
@@ -13,6 +16,21 @@ const routes: Routes = [
   },
   {
     path: 'forms',
+    component: FormsComponent
+  },
+  {
+    path: 'contact-card',
+    component: ContactCardComponent
+  }, {
+    path: 'settings',
+    component: SettingsComponent
+  },
+  {
+    path: 'profil',
+    loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
+  },
+  {
+    path: 'forms', 
     component: FormsComponent
   },
   {

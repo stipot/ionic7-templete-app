@@ -1,0 +1,38 @@
+{
+    "userImage": "src/assets/sample-images/notifications/diana.jpg",
+    "name": "Бочкова Диана Ашотовна",
+    "membership": "ПРО",
+    "job": "Программист-консультант, внедренец",
+    "likes": "1448",
+    "followers": "666K",
+    "following": "666",
+    "about": "Всем привет! Меня зовут Дианчик, я люблю работать и люблю всех вас!",
+    "friends": [
+        {
+            "image": "src/assets/sample-images/notifications/mike.jpg",
+            "name": "Майкл"
+        },
+        {
+            "image": "src/assets/sample-images/notifications/trevor.jpg",
+            "name": "Тревор"
+        },
+        {
+            "image": "src/assets/sample-images/notifications/fran.jpg",
+            "name": "Франклин"
+        }
+    ],
+    "photos": [
+        {
+            "image": "./assets/sample-images/travel/Travel2-64.47.png"
+        },
+        {
+            "image": "./assets/sample-images/travel/Travel3-64.47.png"
+        },
+        {
+            "image": "./assets/sample-images/travel/Travel4-64.47.png"
+        },
+        {
+            "image": "./assets/sample-images/travel/Travel5-64.47.png"
+        }
+    ]
+}

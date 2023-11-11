@@ -28,6 +28,18 @@ const routes: Routes = [
   {
     path: 'profil',
     loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
+  },
+  {
+    path: 'forms', 
+    component: FormsComponent
+  },
+  {
+    path: 'filters',
+    loadChildren: () => import('./forms/filters/filters.module').then(m => m.FiltersPageModule)
+  }, 
+  {
+    path: 'validations',
+    loadChildren: () => import('./forms/validations/validations.module').then(m => m.ValidationsPageModule)
   }
 
 ];

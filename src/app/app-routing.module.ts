@@ -18,15 +18,17 @@ const routes: Routes = [
     path: 'forms',
     component: FormsComponent
   },
-  
   {
     path: 'contact-card',
     component: ContactCardComponent
   }, {
     path: 'settings',
     component: SettingsComponent
+  },
+  {
+    path: 'profil',
+    loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
   }
-
 
 ];
 

@@ -12,7 +12,8 @@ export class AppComponent {
     { title: 'Archived', url: '/folder/archived', icon: 'archive' },
     { title: 'Trash', url: '/folder/trash', icon: 'trash' },
     { title: 'Spam', url: '/folder/spam', icon: 'warning' },
-    { title: 'Filters', url:'/forms/filters',icon: 'reader-outline'}
+    { title: 'Filters', url:'/filters',icon: 'reader-outline'},
+    { title: 'Validations', url: '/validations', icon: '' },    
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {}

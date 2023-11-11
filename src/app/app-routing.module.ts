@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {FormsComponent} from './forms/forms.component'
+import { FormsComponent } from './forms/forms.component'
 const routes: Routes = [
   {
     path: '',
@@ -9,14 +9,19 @@ const routes: Routes = [
   },
   {
     path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
   },
   {
-    path: 'forms', 
+    path: 'forms',
     component: FormsComponent
-  },  {
+  },
+  {
     path: 'filters',
-    loadChildren: () => import('./forms/filters/filters.module').then( m => m.FiltersPageModule)
+    loadChildren: () => import('./forms/filters/filters.module').then(m => m.FiltersPageModule)
+  }, 
+  {
+    path: 'validations',
+    loadChildren: () => import('./forms/validations/validations.module').then(m => m.ValidationsPageModule)
   }
 
 ];
@@ -27,4 +32,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-select class="always-flip" toggleIcon="caret-down-sharp" interface="popover" label="Select Theme"
+        placeholder="Select theme">
+        <ion-select-option value="Dark">Dark</ion-select-option>
+        <ion-select-option value="White">White</ion-select-option>
+        <ion-select-option value="Black">Black</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-select label="Language" label-placement="floating" fill="outline">
+    <ion-select-option value="Russian">Русский</ion-select-option>
+    <ion-select-option value="English">English</ion-select-option>
+    <ion-select-option value="France">Français</ion-select-option>
+    <ion-select-option value="Italian">Italiano</ion-select-option>
+
+  </ion-select>
+
+</ion-content>

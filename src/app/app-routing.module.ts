@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { FormsComponent } from './forms/forms.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
+import { FoodComponent } from "./food/food.component"
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'validations',
     loadChildren: () => import('./forms/validations/validations.module').then(m => m.ValidationsPageModule)
+  },
+  {
+    path: 'food',
+    loadChildren: () => import('./food/food.component').then(m => m.FoodComponent)
   }
 
 ];

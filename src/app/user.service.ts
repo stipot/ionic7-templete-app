@@ -7,8 +7,9 @@ import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 export class UserService {
   constructor(private firestore: Firestore) {}
   // Метод получения писем из базы данных
-  getMails() {
+  getNotes() {
     const mailsRef = collection(this.firestore, 'mail');
     return collectionData(mailsRef);
   }
+  
 }

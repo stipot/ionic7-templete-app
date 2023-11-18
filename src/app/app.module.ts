@@ -10,8 +10,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { NotesComponent } from './notes/notes.component';
 @NgModule({
-  declarations: [AppComponent, FormsComponent],
+  declarations: [AppComponent, FormsComponent, NotesComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

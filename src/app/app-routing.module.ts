@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {FormsComponent} from './forms/forms.component'
+import { NotesComponent } from './notes/notes.component'
 
 const routes: Routes = [
   {
@@ -19,7 +20,12 @@ const routes: Routes = [
   {
     path: 'profil',
     loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
-  }
+  },
+  // Добавляем путь в роутинг для перемещения на страницу пометок
+  {
+    path: 'notes', 
+    component: NotesComponent
+  },
 ];
 
 @NgModule({

@@ -11,9 +11,7 @@ export class FolderPage implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   // При помощи конструктора вызываем метод из user.services и выводим данные в консоль
   constructor(private userService: UserService) {
-    this.userService.getMails().subscribe((res) => {
-      console.log(res);
-    });
+
   }
 
   ngOnInit() {

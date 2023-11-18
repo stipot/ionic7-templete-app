@@ -12,6 +12,8 @@ export class AppComponent {
     { title: 'Архив', url: '/folder/archived', icon: 'архив' },
     { title: 'Корзина', url: '/folder/trash', icon: 'корзина' },
     { title: 'Спам', url: '/folder/spam', icon: 'предупреждения/спам' },
+    // Добавляем поле для перехода на страницу пометок
+    { title: 'Пометки', url: '/notes', icon: 'Пометки' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
   constructor() {}

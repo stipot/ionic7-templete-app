@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { FormsComponent } from './forms/forms.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
+import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 
 const routes: Routes = [
   {
@@ -40,9 +41,13 @@ const routes: Routes = [
   {
     path: 'validations',
     loadChildren: () => import('./forms/validations/validations.module').then(m => m.ValidationsPageModule)
-  }
+  },
 
-];
+  {
+    path: 'privacy policy',
+    component: PrivacyPolicyComponent
+  },
+]
 
 @NgModule({
   imports: [

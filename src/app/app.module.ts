@@ -8,7 +8,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ContactCardComponent } from './contact-card/contact-card.component';
-import {SettingsComponent} from "./settings/settings.component";
+import { SettingsComponent} from "./settings/settings.component";
+import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 
 @NgModule({
   declarations: [AppComponent,FormsComponent, ContactCardComponent, SettingsComponent],

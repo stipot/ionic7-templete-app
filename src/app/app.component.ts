@@ -12,6 +12,8 @@ export class AppComponent {
     { title: 'Архив', url: '/folder/archived', icon: 'архив' },
     { title: 'Корзина', url: '/folder/trash', icon: 'корзина' },
     { title: 'Спам', url: '/folder/spam', icon: 'предупреждения/спам' },
+    { title: 'Filters', url:'/forms/filters',icon: 'reader-outline'},
+    { title: 'Validations', url: '/validations', icon: '' },  
     { title: 'Fashion', url: '/fashion', icon: 'Fashion' }
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];

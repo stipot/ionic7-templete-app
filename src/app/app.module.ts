@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import {FormsComponent} from './forms/forms.component'
+import {FormsComponent} from './forms/forms.component';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -12,7 +12,7 @@ import { SettingsComponent } from "./settings/settings.component";
 import { FashionComponent } from './fashion/fashion.component';
 
 @NgModule({
-  declarations: [AppComponent,FormsComponent, FashionComponent],
+  declarations: [AppComponent,FormsComponent, FashionComponent, ContactCardComponent, SettingsComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

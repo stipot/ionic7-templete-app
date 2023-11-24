@@ -7,21 +7,23 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="notes-validations-content">
-    <ion-list class="inputs-list" lines="full">
-
-      <ion-item class="input-item">
-        <b> <ion-label position="floating">Текст</ion-label></b>
-        <ion-input type="text" formControlName="text" clearInput required ></ion-input>
-      </ion-item>   
-
-      <ion-button>Сохранить</ion-button>
-    </ion-list>
-    <ion-label>
-      <!-- <ul>
-        <li *ngFor="let note of notes">{{ note.note }}</li>
-      </ul> -->
-      
-    </ion-label>
-
-
-</ion-content>  
+  <ion-list class="inputs-list" lines="full">
+    <ion-item class="input-item">
+      <b><ion-label position="floating">Текст</ion-label></b>
+      <ion-input
+        type="text"
+        clearInput
+        required
+        name="noteData"
+        [(ngModel)]="noteData"
+        class="note-input"
+      ></ion-input>
+    </ion-item>
+    <!-- <p>{{ noteData }}</p> -->
+    <ion-button (click)="saveData()">Сохранить</ion-button>
+  </ion-list>
+  <ion-item style="margin-top: 10px" *ngFor="let note of notes">
+    <p>{{ note.text }}</p>
+  </ion-item>
+  <ion-label> </ion-label>
+</ion-content>

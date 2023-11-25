@@ -1,0 +1,35 @@
+// Custom variables
+// Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
+:host {
+    --page-margin: var(--app-fair-margin);
+  }
+  
+  // Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
+  .not-found-content {
+    --padding-start: var(--page-margin);
+    --padding-end: var(--page-margin);
+    --padding-top: var(--page-margin);
+    --padding-bottom: var(--page-margin);
+  
+    .illustration-wrapper {
+      margin: 0px 10%;
+    }
+  
+    .not-found-title {
+      text-align: center;
+      font-size: 30px;
+      font-weight: 500;
+    }
+  
+    .not-found-text {
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 40px;
+      font-weight: 500;
+    }
+  
+    .go-home-btn {
+      margin: 0px;
+    }
+  }
+  

@@ -11,8 +11,11 @@ import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { NotesComponent } from './notes/notes.component';
+import { ContactCardComponent } from './contact-card/contact-card.component';
+import { SettingsComponent } from "./settings/settings.component";
+
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent],
+  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

@@ -7,12 +7,13 @@ import { addDoc } from 'firebase/firestore';
 export class UserService {
   constructor(private firestore: Firestore) {}
   // Метод получения писем из базы данных
-  getNotes() {
-    const notesRef = collection(this.firestore, 'notes');
-    return collectionData(notesRef);
+  getData(collectionName: any) {
+    const collectionRef = collection(this.firestore, collectionName);
+    return collectionData(collectionRef);
   }
-  addNote(text: any) {
-    const notesRef = collection(this.firestore, 'notes');
-    addDoc(notesRef, { text: text });
+  // Метод для записи в коллекцию
+  addData(text: any, collectionName: any) {
+    const collectionRef = collection(this.firestore, collectionName);
+    addDoc(collectionRef, { text: text });
   }
 }

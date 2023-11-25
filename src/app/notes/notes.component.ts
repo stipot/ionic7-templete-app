@@ -11,7 +11,7 @@ export class NotesComponent implements OnInit {
   notes: any = [];
 
   constructor(private userService: UserService) {
-    this.userService.getNotes().subscribe((res) => {
+    this.userService.getData('notes').subscribe((res) => {
       this.notes.length = 0;
       res.map((element: any) => {
         this.notes.push(element);
@@ -22,7 +22,7 @@ export class NotesComponent implements OnInit {
 
   saveData() {
     if (this.noteData) {
-      this.userService.addNote(this.noteData);
+      this.userService.addData(this.noteData, 'notes');
       this.noteData = '';
     }
     console.log(this.noteData);

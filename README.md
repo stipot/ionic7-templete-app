@@ -9,17 +9,30 @@ The student project to build complete Mobile & PWA starter app template
 node -v
 ```
 
-
 ## Install dependencies
+
 Run `npm install` to install the project dependencies.
 
-## Development Workflow
+## Install ionic
 
-Run `ionic build` or `ionic build --prod` to build the project
+npm install -g cordova ionic
+
+## Add npm as a variable
+
+value: C:\Users\"username"\AppData\Roaming\npm
+name: PATH
+
+## Set policy in terminal
+
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ### To test the app in the browser
 
 Run `ionic serve` to start a live-reload dev server
+
+## Development Workflow
+
+Run `ionic build` or `ionic build --prod` to build the project
 
 ### To test the app as a Native App
 
@@ -30,34 +43,42 @@ This project uses [Capacitor](https://capacitor.ionicframework.com/docs/) (spiri
 Before starting make sure to read the [Capacitor Required Dependencies](https://capacitor.ionicframework.com/docs/getting-started/dependencies).
 
 The Capacitor workflow involves a few consistent tasks:
+
 - [Develop and build your Web App](https://capacitor.ionicframework.com/docs/basics/workflow/#1-develop-and-build-your-web-app)
 - [Copy your Web Assets](https://capacitor.ionicframework.com/docs/basics/workflow/#2-copy-your-web-assets)
 - [Open your Native IDE](https://capacitor.ionicframework.com/docs/basics/workflow/#3-open-your-native-ide)
 - [Periodic Maintenance](https://capacitor.ionicframework.com/docs/basics/workflow/#4-periodic-maintenance)
 
 #### iOS Platform
+
 This app has an ios folder which contains the iOS native app.
 Read how to [build this app for iOS](https://capacitor.ionicframework.com/docs/basics/building-your-app#ios).
 
 #### Android Platform
+
 This app has an android folder which contains the Android native app.
 Read how to [build this app for Android](https://capacitor.ionicframework.com/docs/basics/building-your-app#android).
 
 ### Want to use Cordova?
+
 The PRO version of the template uses Capacitor instead of Cordova, however, if you are not yet ready to use it, in the following link we show you how to remove Capacitor and add Cordova to this project: https://ionic-4-full-starter-app-docs.ionicthemes.com/capacitor#steps-to-remove-capacitor-and-add-cordova
 
 ## Support
+
 Drop us a line to contact@ionicthemes.com
 
 ## Acknowledgements
+
 This template uses some icons inspired in [Flaticon](https://www.flaticon.com/). If you want to use the original icons in your app, please make sure you grab a new license that fit your use case when modifying this template. We currently use the `Free for commercial use WITH ATTRIBUTION` license in this template as a way to showcase and promote the awesome work and [designs by **catkuro** from Flaticon](https://www.flaticon.com/packs/home-decor).
 
 ### Committing code
+
 To ensure code quality, we follow and enforce the [Angular Commit Message Guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines)
 These guidelines define a Commit Message Format and certain rules that will help teams achieve consistency with version control and source code management practices.
 
 #### Commit Message Format
-Each commit message consists of a **header**, a **body** and a **footer**.  The header has a special
+
+Each commit message consists of a **header**, a **body** and a **footer**. The header has a special
 format that includes a **type**, a **scope** and a **subject**:
 
 ```
@@ -80,6 +101,7 @@ Samples: (even more [samples](https://github.com/angular/angular/commits/master)
 ```
 docs(changelog): update changelog to beta.5
 ```
+
 ```
 fix(release): need to depend on latest rxjs and zone.js
 
@@ -87,9 +109,11 @@ The version in our package.json gets copied to the one we publish, and users nee
 ```
 
 #### Revert
+
 If the commit reverts a previous commit, it should begin with `revert: `, followed by the header of the reverted commit. In the body it should say: `This reverts commit <hash>.`, where the hash is the SHA of the commit being reverted.
 
 #### Type
+
 Must be one of the following:
 
 * **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
@@ -103,44 +127,49 @@ Must be one of the following:
 * **test**: Adding missing tests or correcting existing tests
 
 #### Scope
+
 The scope should be the name of the npm package affected (as perceived by the person reading the changelog generated from commit messages.
 
 The following is the list of supported scopes:
 
-* **walkthrough-page**
-* **login-page**
-* **preload-image-component**
+- **walkthrough-page**
+- **login-page**
+- **preload-image-component**
 
 There are currently a few exceptions:
 
-* **packaging**: used for changes that change the npm package layout in all of our packages, e.g.
+- **packaging**: used for changes that change the npm package layout in all of our packages, e.g.
   public path changes, package.json changes done to all packages, d.ts file/format changes, changes
   to bundles, etc.
-* **changelog**: used for updating the release notes in CHANGELOG.md
-* none/empty string: useful for `style`, `test` and `refactor` changes that are done across all
+- **changelog**: used for updating the release notes in CHANGELOG.md
+- none/empty string: useful for `style`, `test` and `refactor` changes that are done across all
   packages (e.g. `style: add missing semicolons`) and for docs changes that are not related to a
   specific package (e.g. `docs: fix typo in tutorial`).
 
 #### Subject
+
 The subject contains a succinct description of the change:
 
-* use the imperative, present tense: "change" not "changed" nor "changes"
-* don't capitalize the first letter
-* no dot (.) at the end
+- use the imperative, present tense: "change" not "changed" nor "changes"
+- don't capitalize the first letter
+- no dot (.) at the end
 
 #### Body
+
 Just as in the **subject**, use the imperative, present tense: "change" not "changed" nor "changes".
 The body should include the motivation for the change and contrast this with previous behavior.
 
 #### Footer
+
 The footer should contain any information about **Breaking Changes** and is also the place to
 reference GitHub issues that this commit **Closes**.
 
 **Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines. The rest of the commit message is then used for this.
 
-
 ## Troubleshooting
+
 ### See what dependencies and versions you have installed in your project
+
 This is useful to track compilation ERRORS
 
 - Run `npm ls` to list all installed packages

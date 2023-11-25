@@ -9,14 +9,14 @@
 <ion-content class="filters-content">
   <ion-item-group class="filters-group">
     <ion-item-divider>
-      <ion-label>Price Filters</ion-label>
+      <ion-label>Фильтры цены</ion-label>
     </ion-item-divider>
     <form [formGroup]="rangeForm" class="range-list">
       <ion-row class="range-item">
         <ion-col size="12">
           <div class="range-header">
             <span class="range-value">{{ rangeForm.controls["dual"]["value"]["lower"] }}</span>
-            <span class="range-label">Price</span>
+            <span class="range-label">Цена</span>
             <span class="range-value">{{ rangeForm.controls["dual"]["value"]["upper"]  }}</span>
           </div>
         </ion-col>  
@@ -27,32 +27,38 @@
       <ion-row class="range-item">
         <ion-col size="10">
           <div class="range-header">
-            <span class="range-label">Amount</span>
+            <span class="range-label">Количество гостей</span>
             <span class="range-value">{{ rangeForm.controls["single"]["value"] }}</span>
           </div>
         </ion-col>
         <ion-col size="10">
-          <ion-range class="range-control" formControlName="single" color="secondary"  min="0" max="10" step="1"></ion-range>
+          <ion-range class="range-control" formControlName="single" color="secondary"  min="1" max="10" step="1"></ion-range>
         </ion-col>
       </ion-row>
     </form>
 
     <ion-item-divider>
-      <ion-label></ion-label>
+      <ion-label>Требования</ion-label>
     </ion-item-divider>
     <form [formGroup]="checkboxForm">
       <ion-list class="checkbox-list" lines="full">
-        <ion-item class="checkbox-item">
-          <ion-label class="checkbox-label">Room сleaning</ion-label>
+        <ion-item class="checkbox-item" *ngFor="let typeOfRequir of typeOfRequirs">
+          <ion-label class="checkbox-label">{{typeOfRequir}}</ion-label>
           <ion-checkbox color="secondary" formControlName="filter_1"></ion-checkbox>
         </ion-item>
-        <ion-item class="checkbox-item">
-          <ion-label class="checkbox-label">Аll inclusive</ion-label>
-          <ion-checkbox color="dark" formControlName="filter_2"></ion-checkbox>
-        </ion-item>
-        <ion-item class="checkbox-item">
-          <ion-label class="checkbox-label">Order room service</ion-label>
-          <ion-checkbox color="dark" formControlName="filter_3"></ion-checkbox>
-        </ion-item>
+       </ion-list> 
+    </form>
+
+    <ion-item-divider>
+      <ion-label>Тип номера</ion-label>
+    </ion-item-divider> 
+    <form [formGroup]="radioForm">
+      <ion-list class="radio-list" lines="full">
+        <ion-radio-group class="radio-group" formControlName="selected_option">
+          <ion-item class="radio-item" *ngFor="let typeOfRoom of typeOfRooms">
+            <ion-label class="radio-label">{{typeOfRoom.title_field}}</ion-label>
+            <ion-radio slot="start" color="secondary" value="{{typeOfRoom.value_fieled}}"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
       </ion-list>
     </form>

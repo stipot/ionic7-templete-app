@@ -4,6 +4,7 @@ import {FormsComponent} from './forms/forms.component'
 import { NotesComponent } from './notes/notes.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
     loadChildren: () => import('./page-not-found/page-not-found.module').then( m => m.PageNotFoundPageModule)
 
   },
-  { path: '**', redirectTo: 'page-not-found' },
+ 
   {
     path: 'forms',
     component: FormsComponent
@@ -50,6 +51,10 @@ const routes: Routes = [
     component: NotesComponent
   },
   {
+    path: 'signup', 
+    component: SignupComponent
+  },
+  {
     path: 'filters',
     loadChildren: () => import('./forms/filters/filters.module').then(m => m.FiltersPageModule)
   }, 
@@ -57,6 +62,7 @@ const routes: Routes = [
     path: 'validations',
     loadChildren: () => import('./forms/validations/validations.module').then(m => m.ValidationsPageModule)
   },
+  { path: '**', redirectTo: 'page-not-found' },
 
 ];
 

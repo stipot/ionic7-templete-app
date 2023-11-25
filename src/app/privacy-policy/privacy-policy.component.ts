@@ -10,5 +10,8 @@ export class PrivacyPolicyComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+  dismiss(){
+    
+  }
 
 }

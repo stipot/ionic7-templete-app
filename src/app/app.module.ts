@@ -12,7 +12,7 @@ import { SettingsComponent} from "./settings/settings.component";
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 
 @NgModule({
-  declarations: [AppComponent,FormsComponent, ContactCardComponent, SettingsComponent],
+  declarations: [AppComponent,FormsComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

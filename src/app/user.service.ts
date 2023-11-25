@@ -6,14 +6,23 @@ import { addDoc } from 'firebase/firestore';
 })
 export class UserService {
   constructor(private firestore: Firestore) {}
-  // Метод получения писем из базы данных
+  /**
+   * Get data from Firestore
+   * @param collectionName - component name
+   * @returns - json data
+   */
   getData(collectionName: any) {
     const collectionRef = collection(this.firestore, collectionName);
     return collectionData(collectionRef);
   }
-  // Метод для записи в коллекцию
-  addData(text: any, collectionName: any) {
+  
+  /**
+   * Data store in Firestore
+   * @param data - json data
+   * @param collectionName - component name
+   */
+  addData(data: any, collectionName: any) {
     const collectionRef = collection(this.firestore, collectionName);
-    addDoc(collectionRef, { text: text });
+    addDoc(collectionRef, { data: data });
   }
 }

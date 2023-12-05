@@ -38,8 +38,6 @@ Run `ionic build` or `ionic build --prod` to build the project
 
 This project uses [Capacitor](https://capacitor.ionicframework.com/docs/) (spiritual successor to Cordova).
 
-[Read this post](https://ionicthemes.com/tutorials/about/native-cross-platform-web-apps-with-ionic-capacitor) to get an introduction about Capacitor and learn the main differences between Capacitor and Cordova.
-
 Before starting make sure to read the [Capacitor Required Dependencies](https://capacitor.ionicframework.com/docs/getting-started/dependencies).
 
 The Capacitor workflow involves a few consistent tasks:

@@ -1,10 +1,10 @@
 # ionic7-full-starter-app
 
 The student project to build complete Mobile & PWA starter app template
+[Demo application](https://ionic7-templete-app-public.web.app/)
 
-# [Demo application](https://ionic7-templete-app-public.web.app/)
-# [Documentation](https://stipot.github.io/ionic7-templete-app/)
 # Documentation
+Full [Documentation](https://stipot.github.io/ionic7-templete-app/).
 ## Minimum requirements
 - [NodeJS 16.17](https://nodejs.org/en/blog/release/v16.17.0)
 ```

@@ -16,7 +16,7 @@
     <ion-item class="input-item">
       <ion-input type="email" fill="solid" placeholder="Email" labelPlacement="floating" helperText="Enter a valid email" errorText="Invalid email" ngModel email></ion-input>
     </ion-item>
-    
+
     <div>
       <ion-item class="input-item">
         <ion-input type="password" fill="solid" placeholder="Password" labelPlacement="floating"></ion-input>
@@ -46,4 +46,12 @@
       </div>
     </div>
   </ion-list>
+
+  <ion-button class="signup-btn" type="submit" expand="block" >Sign Up</ion-button>
+  <ion-row class="other-auth-options-row">
+    <ion-button class="login-btn" fill="clear" [routerLink]="['/auth/login']">
+      Already have an account?
+    </ion-button>
+  </ion-row>
+
 </ion-content>

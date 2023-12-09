@@ -14,18 +14,12 @@
 
   <ion-list class="inputs-list" lines="full">
     <ion-item class="input-item">
-      <ion-input type="email" placeholder="Email" clearInput autocapitalize="off" inputmode="email"></ion-input>
+      <ion-input type="email" fill="solid" placeholder="Email" labelPlacement="floating" helperText="Enter a valid email" errorText="Invalid email" ngModel email></ion-input>
     </ion-item>
-    <div class="error-container">
-      <div class="error-message">
-        <ion-icon name="information-circle-outline"></ion-icon>
-        <span>1</span>
-      </div>
-    </div>
-
+    
     <div>
       <ion-item class="input-item">
-          <ion-input type="password" placeholder="Password"></ion-input>
+        <ion-input type="password" fill="solid" placeholder="Password" labelPlacement="floating"></ion-input>
       </ion-item>
       <div class="error-container">
           <div class="error-message">
@@ -33,23 +27,23 @@
             <span>2</span>
           </div>
       </div>
-   
+
       <ion-item class="input-item">
-          <ion-input type="password" placeholder="Confirm Password"></ion-input>
+        <ion-input type="password" placeholder="Confirm Password"></ion-input>
       </ion-item>
       <div class="error-container">
-          <div class="error-message">
-            <ion-icon name="information-circle-outline"></ion-icon>
-            <span>3</span>
-          </div>
+        <div class="error-message">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          <span>3</span>
+        </div>
       </div>
     </div>
 
     <div class="error-container">
-        <div class="error-message">
-          <ion-icon name="information-circle-outline"></ion-icon>
-          <span>4</span>
-        </div>
+      <div class="error-message">
+        <ion-icon name="information-circle-outline"></ion-icon>
+        <span>4</span>
+      </div>
     </div>
   </ion-list>
 </ion-content>

@@ -44,7 +44,7 @@ const routes: Routes = [
   },
   {
     path: 'food',
-    loadChildren: () => import('./food/food.component').then(m => m.FoodComponent)
+    component: FoodComponent
   }
 
 ];

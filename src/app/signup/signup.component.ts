@@ -10,16 +10,7 @@ import { ModalController, MenuController } from '@ionic/angular';
 })
 export class SignupComponent  implements OnInit {
 
-  constructor() { }
-  appTitle = "Ionic 7 Template App"
-  ngOnInit() {}
-
-
   validation_messages = {
-    'email': [
-      { type: 'required', message: 'Email is required.' },
-      { type: 'pattern', message: 'Enter a valid email.' }
-    ],
     'password': [
       { type: 'required', message: 'Password is required.' },
       { type: 'minlength', message: 'Password must be at least 5 characters long.' }
@@ -31,4 +22,8 @@ export class SignupComponent  implements OnInit {
       { type: 'areNotEqual', message: 'Password mismatch' }
     ]
   }
+
+  constructor() { }
+  appTitle = "Ionic 7 Template App"
+  ngOnInit() {}
 }

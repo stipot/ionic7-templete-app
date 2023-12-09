@@ -4,6 +4,7 @@ import { FormsComponent } from './forms/forms.component'
 import { NotesComponent } from './notes/notes.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
+import {LoginPageModule } from "./login/login.module"
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
     path: 'page-not-found',
     loadChildren: () => import('./page-not-found/page-not-found.module').then(m => m.PageNotFoundPageModule)
 
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'contact-card',
@@ -56,6 +61,10 @@ const routes: Routes = [
     path: 'contact-card',
     component: ContactCardComponent
   }, { path: '**', redirectTo: 'page-not-found' },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
 ];
 
 @NgModule({

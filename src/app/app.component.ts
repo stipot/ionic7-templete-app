@@ -16,7 +16,9 @@ export class AppComponent {
     { title: 'Пометки', url: '/notes', icon: 'Пометки' },
     { title: 'Filters', url:'/filters',icon: 'reader-outline'},
     { title: 'Validations', url: '/validations', icon: '' },  
+    { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
+    { title: 'Login', url: '/login', icon: '' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
-  constructor() {}
+  constructor() { }
 }

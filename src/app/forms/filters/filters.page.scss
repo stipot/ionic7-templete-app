@@ -1,0 +1,45 @@
+.text-align-right{
+text-align: end;
+}
+
+ion-range::part(tick) {
+  background: #0279f0;
+}
+
+ion-range::part(tick-active) {
+  background: #233b2d;
+}
+
+ion-range::part(pin) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #074de6;
+  color: #fff;
+
+  border-radius: 50%;
+  transform: scale(1.01);
+
+  top: -20px;
+
+  min-width: 28px;
+  height: 28px;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+ion-range::part(pin)::before {
+  content: none;
+}
+
+ion-range::part(knob) {
+  background: #233b2d;
+}
+
+ion-range::part(bar) {
+  background: #074de6;
+}
+
+ion-range::part(bar-active) {
+  background: #074de6;
+}

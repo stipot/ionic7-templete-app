@@ -14,9 +14,11 @@ export class AppComponent {
     { title: 'Спам', url: '/folder/spam', icon: 'предупреждения/спам' },
     // Добавляем поле для перехода на страницу пометок
     { title: 'Пометки', url: '/notes', icon: 'Пометки' },
-    { title: 'Filters', url:'/forms/filters',icon: 'reader-outline'},
+    { title: 'Filters', url:'/filters',icon: 'reader-outline'},
     { title: 'Validations', url: '/validations', icon: '' },  
+    { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
+    { title: 'Login', url: '/login', icon: '' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
-  constructor() {}
+  constructor() { }
 }

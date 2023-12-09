@@ -6,6 +6,7 @@ import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
 import {LoginPageModule } from "./login/login.module"
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: 'notes',
     component: NotesComponent
+  },
+  {
+    path: 'signup', 
+    component: SignupComponent
   },
   {
     path: 'filters',

@@ -15,9 +15,10 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { NotesComponent } from './notes/notes.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent],
+  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, SignupComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

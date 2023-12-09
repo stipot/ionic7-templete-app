@@ -11,5 +11,16 @@
   <h2 class="auth-title">
     {{appTitle}}
   </h2>
-</ion-content>
 
+  <ion-list class="inputs-list" lines="full">
+    <ion-item class="input-item">
+      <ion-input type="email" placeholder="Email" clearInput autocapitalize="off" inputmode="email"></ion-input>
+    </ion-item>
+    <div class="error-container">
+      <div class="error-message">
+        <ion-icon name="information-circle-outline"></ion-icon>
+        <span>1</span>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

@@ -33,4 +33,5 @@ export class FiltersPage {
   rangeChange(range: Range) {
     console.log('range change', range);
   }
+ 
 }

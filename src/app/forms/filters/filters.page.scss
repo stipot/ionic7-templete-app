@@ -1,54 +1,45 @@
-.range-item {
-    --ion-grid-column-padding: 0px;
-
-    padding-top: var(--page-margin);
-    padding-inline-start: var(--page-margin);
-    padding-inline-end: var(--page-margin);
-    // box-shadow at the top
-    box-shadow: inset 0 6px 3px -8px  var(--ion-color-darkest);
+.text-align-right{
+text-align: end;
 }
-.range-header {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: calc(var(--page-margin) / 2);
 
-    .range-value {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-      color: var(--ion-color-medium);
-    }
+ion-range::part(tick) {
+  background: #0279f0;
+}
 
-    .range-label {
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.2px;
-      color: var(--ion-color-medium);
-    }
-  }
+ion-range::part(tick-active) {
+  background: #233b2d;
+}
 
-  .range-control {
-    // override the pin color
-    --ion-text-color: var(--ion-color-medium);
+ion-range::part(pin) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-  .checkbox-list {
-    .checkbox-item {
-      --padding-start: var(--page-margin);
-      --padding-end: var(--page-margin);
-      --inner-padding-end: 0px;
+  background: #074de6;
+  color: #fff;
 
-      .checkbox-label {
-        font-size: 14px;
-				font-weight: 500;
-				letter-spacing: 0.2px;
-  			color: var(--ion-color-medium);
-      }
+  border-radius: 50%;
+  transform: scale(1.01);
 
-      ion-checkbox {
-        margin-inline-end: 0px;
-      }
-    }
-  }
+  top: -20px;
+
+  min-width: 28px;
+  height: 28px;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+ion-range::part(pin)::before {
+  content: none;
+}
+
+ion-range::part(knob) {
+  background: #233b2d;
+}
+
+ion-range::part(bar) {
+  background: #074de6;
+}
+
+ion-range::part(bar-active) {
+  background: #074de6;
+}

@@ -1,7 +1,14 @@
 {
-    "site":
-    {
-        "TITLE": "Hello sir",
-        "description": "Hello World!"
-    }
-}
+    "1": "Welcome",
+    "2": "Inbox", 
+    "3": "Outbox", 
+    "4": "Like", 
+    "5": "Archive", 
+    "6": "TrashBox",
+    "7": "Spam", 
+    "8": "Notes", 
+    "9": "Fitres", 
+    "10": "Validation", 
+    "11": "Ptivacy",
+    "12": "Login"
+  }

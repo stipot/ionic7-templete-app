@@ -19,7 +19,12 @@ const routes: Routes = [
   {
     path: 'profil',
     loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
-  }
+  },
+  {
+    path: 'forgot',
+    loadChildren: () => import('./auth/forgot/forgot.module').then( m => m.ForgotPageModule)
+  },
+
 ];
 
 @NgModule({

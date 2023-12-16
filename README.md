@@ -1,8 +1,10 @@
 # ionic7-full-starter-app
 
 The student project to build complete Mobile & PWA starter app template
+[Demo application](https://ionic7-templete-app-public.web.app/)
 
 # Documentation
+Full [Documentation](https://stipot.github.io/ionic7-templete-app/).
 ## Minimum requirements
 - [NodeJS 16.17](https://nodejs.org/en/blog/release/v16.17.0)
 ```
@@ -37,8 +39,6 @@ Run `ionic build` or `ionic build --prod` to build the project
 ### To test the app as a Native App
 
 This project uses [Capacitor](https://capacitor.ionicframework.com/docs/) (spiritual successor to Cordova).
-
-[Read this post](https://ionicthemes.com/tutorials/about/native-cross-platform-web-apps-with-ionic-capacitor) to get an introduction about Capacitor and learn the main differences between Capacitor and Cordova.
 
 Before starting make sure to read the [Capacitor Required Dependencies](https://capacitor.ionicframework.com/docs/getting-started/dependencies).
 

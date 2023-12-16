@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { FormsComponent } from './forms/forms.component';
+import { FormsComponent } from './forms/forms.component'
+import { NotesComponent } from './notes/notes.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
-import { SettingsComponent } from "./settings/settings.component";
-import { FashionComponent } from './fashion/fashion.component';
+import { SettingsComponent } from "./settings/settings.component"
+import {LoginPageModule } from "./login/login.module"
+import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {
@@ -16,8 +19,13 @@ const routes: Routes = [
     loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
   },
   {
-    path: 'forms',
-    component: FormsComponent
+    path: 'page-not-found',
+    loadChildren: () => import('./page-not-found/page-not-found.module').then(m => m.PageNotFoundPageModule)
+
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'contact-card',
@@ -28,11 +36,24 @@ const routes: Routes = [
   },
   {
     path: 'profil',
-    loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
+    loadChildren: () => import('./profil/profil.module').then(m => m.ProfilPageModule)
   },
   {
-    path: 'forms', 
+    path: 'forms',
     component: FormsComponent
+  },
+  {
+    path: 'profil',
+    loadChildren: () => import('./profil/profil.module').then(m => m.ProfilPageModule)
+  },
+  // Добавляем путь в роутинг для перемещения на страницу пометок
+  {
+    path: 'notes',
+    component: NotesComponent
+  },
+  {
+    path: 'signup', 
+    component: SignupComponent
   },
   {
     path: 'fashion',
@@ -41,12 +62,23 @@ const routes: Routes = [
   {
     path: 'filters',
     loadChildren: () => import('./forms/filters/filters.module').then(m => m.FiltersPageModule)
-  }, 
+  },
   {
     path: 'validations',
     loadChildren: () => import('./forms/validations/validations.module').then(m => m.ValidationsPageModule)
-  }
-
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent
+  },
+  {
+    path: 'contact-card',
+    component: ContactCardComponent
+  }, { path: '**', redirectTo: 'page-not-found' },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListenDecorator } from 'ionicons/dist/types/stencil-public-runtime';
 import { HttpClient } from '@angular/common/http';
+import { ItemReorderEventDetail } from '@ionic/angular';
 
 
 interface Task {
@@ -36,9 +37,10 @@ export class TodoListComponent  implements OnInit {
 
   }
 
-  getData() {
-   return this.http.get<Task>(this.URL);
+  handleReorder(ev: CustomEvent<ItemReorderEventDetail>) {
+    ev.detail.complete()
   }
+
 
   public taskCompleted(e:Event) {
     console.log(e)

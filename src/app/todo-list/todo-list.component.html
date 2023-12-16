@@ -28,7 +28,9 @@
   <ion-label>Задачи отсутствуют</ion-label>
 </div>
 
-  <ion-card *ngFor="let task of data" [ngClass]="{'done': task.isActive}">
+<!-- <ion-list>
+  <ion-reorder-group [disabled]="false">
+  <ion-card *ngFor="let task of data" [ngClass]="{'done': task.isActive}" >
     <ion-checkbox class="check" labelPlacement="end" [(ngModel)]="task.isActive">
       <ion-card-header>
         
@@ -40,6 +42,23 @@
         {{ task.description }}
       </ion-card-content>
   </ion-checkbox>
+  <ion-reorder slot="end"></ion-reorder>
   </ion-card>
+</ion-reorder-group>
+</ion-list> -->
   
+<ion-list>
+  <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
+    <ion-item *ngFor="let task of data" [ngClass]="{'done': task.isActive}">
+      <ion-checkbox class="check"  slot="start"  [(ngModel)]="task.isActive"/>
+      <ion-label> 
+        <h2>{{ task.name }} </h2>
+        <p>{{ task.description }}</p>
+      </ion-label>
+    <ion-reorder slot="end"></ion-reorder>
+  </ion-item>
+
+  </ion-reorder-group>
+</ion-list>
+
 </ion-content>

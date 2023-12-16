@@ -194,3 +194,4 @@ TODO:
 - текстовое поля для ввода задачи как в weeek.ru
 - отображение блоков с задачами (название+описание)
 - данные хранить локально в (src/asserts/sample-data или создать папку в src/asserts/ в формате json)
+- reorder items https://ionicframework.jp/docs/v6/api/reorder/

@@ -12,10 +12,14 @@ export class AppComponent {
     { title: 'Архив', url: '/folder/archived', icon: 'архив' },
     { title: 'Корзина', url: '/folder/trash', icon: 'корзина' },
     { title: 'Спам', url: '/folder/spam', icon: 'предупреждения/спам' },
+    // Добавляем поле для перехода на страницу пометок
     { title: 'Food', url: '/food', icon: 'Food' },
-    { title: 'Filters', url:'/forms/filters',icon: 'reader-outline'},
+    { title: 'Пометки', url: '/notes', icon: 'Пометки' },
+    { title: 'Filters', url:'/filters',icon: 'reader-outline'},
     { title: 'Validations', url: '/validations', icon: '' },  
+    { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
+    { title: 'Login', url: '/login', icon: '' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
-  constructor() {}
+  constructor() { }
 }

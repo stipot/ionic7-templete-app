@@ -1,3 +1,4 @@
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -10,8 +11,8 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     <ion-item>
-      <ion-select class="always-flip" toggleIcon="caret-down-sharp" interface="popover" label="Select Theme"
-        placeholder="Select theme">
+      <ion-select class="always-flip" toggleIcon="caret-down-sharp" interface="popover" label="Selected Theme"
+        placeholder="Theme">
         <ion-select-option value="Dark">Dark</ion-select-option>
         <ion-select-option value="White">White</ion-select-option>
         <ion-select-option value="Black">Black</ion-select-option>
@@ -24,7 +25,22 @@
     <ion-select-option value="English">English</ion-select-option>
     <ion-select-option value="France">Français</ion-select-option>
     <ion-select-option value="Italian">Italiano</ion-select-option>
-
   </ion-select>
 
-</ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-select class="always-flip" toggleIcon="caret-down-sharp" interface="popover" label="Fonts"
+        placeholder="Font">
+        <ion-select-option value="TimesNewRoman">TimesNewRoman</ion-select-option>
+        <ion-select-option value="Calibri">Calibri</ion-select-option>
+        <ion-select-option value="Arial">Arial</ion-select-option>
+        <ion-select-option value="Block">Block</ion-select-option> 
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-button expand="Назад">Назад</ion-button>
+
+
+

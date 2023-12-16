@@ -1,0 +1,29 @@
+// Custom variables
+// Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
+:host {
+    --page-margin: var(--app-broad-margin);
+    --page-background: var(--app-background-shade);
+  }
+  
+  // Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
+  .legal-content {
+    --background: var(--page-background);
+    --padding-start: var(--page-margin);
+    --padding-end: var(--page-margin);
+    --padding-top: var(--page-margin);
+    --padding-bottom: var(--page-margin);
+  
+    .legal-title {
+      color: var(--ion-color-secondary);
+      margin: var(--page-margin) 0px calc(var(--page-margin) / 2);
+    }
+  
+    .legal-text {
+      color: var(--ion-color-medium);
+      margin: calc(var(--page-margin) / 2) 0px var(--page-margin);
+      font-size: 14px;
+      line-height: 20px;
+      text-align: justify;
+    }
+  }
+  

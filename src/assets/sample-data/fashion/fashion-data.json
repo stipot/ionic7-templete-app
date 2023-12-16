@@ -11,30 +11,36 @@
             "name": "Кроссовки Crocodile",
             "description" : "кросссовки из зеленого настоящего крокодила",
             "price" : "16000 рублей",
+            "picture" : "",
             "quantity" : "846"
         },
         {
             "name": "Куртка Adidas",
             "description" : "санкционный товар",
             "price" : "20000 рублей",
+            "picture" : "",
             "quantity" : "1"
+
         },
         {
             "name": "Кепка nike",
             "description" : "голубая кепка из синтетических материалов,идеально подходит для пробежек",
             "price" : "2000 рублей",
+            "picture" : "https://avatars.mds.yandex.net/get-mpic/5277894/img_id1545836816401032018.jpeg/600x800",
             "quantity" : "91"
         },
         {
             "name": "Джемпер",
             "description" : "утепленный джемпер",
             "price" : "6000 рублей",
+            "picture" : "",
             "quantity" : "83"
         },
         {
             "name": "Рубашка",
             "description" : "рубашка в рубчик ",
             "price" : "3000 рублей",
+            "picture" : "",
             "quantity" : "50"
         }
 

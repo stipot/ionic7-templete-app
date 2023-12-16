@@ -27,25 +27,6 @@
 <div *ngIf="data.length == 0" class="message">
   <ion-label>Задачи отсутствуют</ion-label>
 </div>
-
-<!-- <ion-list>
-  <ion-reorder-group [disabled]="false">
-  <ion-card *ngFor="let task of data" [ngClass]="{'done': task.isActive}" >
-    <ion-checkbox class="check" labelPlacement="end" [(ngModel)]="task.isActive">
-      <ion-card-header>
-        
-          <ion-card-title>{{ task.name }}</ion-card-title>
-      
-      </ion-card-header>
-    
-      <ion-card-content>
-        {{ task.description }}
-      </ion-card-content>
-  </ion-checkbox>
-  <ion-reorder slot="end"></ion-reorder>
-  </ion-card>
-</ion-reorder-group>
-</ion-list> -->
   
 <ion-list>
   <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">

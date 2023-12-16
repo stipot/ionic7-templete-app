@@ -14,9 +14,10 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { NotesComponent } from './notes/notes.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent],
+  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, TodoListComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

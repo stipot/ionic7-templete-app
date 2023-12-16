@@ -4,6 +4,7 @@ import { FormsComponent } from './forms/forms.component'
 import { NotesComponent } from './notes/notes.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
+import { TodoListComponent } from './todo-list/todo-list.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'notes',
     component: NotesComponent
+  },
+  {
+    path: 'todo-list',
+    component: TodoListComponent
   },
   {
     path: 'filters',

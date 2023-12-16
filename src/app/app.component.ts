@@ -14,6 +14,7 @@ export class AppComponent {
     { title: 'Спам', url: '/folder/spam', icon: 'предупреждения/спам' },
     // Добавляем поле для перехода на страницу пометок
     { title: 'Пометки', url: '/notes', icon: 'Пометки' },
+    {title: 'Список дел', url: '/todo-list', icon: 'todo-list'},
     { title: 'Filters', url:'/filters',icon: 'reader-outline'},
     { title: 'Validations', url: '/validations', icon: '' },  
   ];

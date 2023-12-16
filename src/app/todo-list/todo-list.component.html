@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Список дел</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-card *ngFor="for let task of data">
+    <ion-checkbox class="check" labelPlacement="end">
+      <ion-card-header>
+        
+          <ion-card-title>{{ task.name }}</ion-card-title>
+      
+      </ion-card-header>
+    
+      <ion-card-content>
+        {{ task.description }}
+      </ion-card-content>
+  </ion-checkbox>
+  </ion-card>
+  
+</ion-content>

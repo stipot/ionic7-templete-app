@@ -24,9 +24,12 @@
   </ion-row>
 </ion-grid>
 
+<div *ngIf="data.length == 0" class="message">
+  <ion-label>Задачи отсутствуют</ion-label>
+</div>
 
-  <ion-card *ngFor="let task of data" disabled={{task.isActive}}>
-    <ion-checkbox class="check" labelPlacement="end" (ionChange)="taskCompleted($event)">
+  <ion-card *ngFor="let task of data" [ngClass]="{'done': task.isActive}">
+    <ion-checkbox class="check" labelPlacement="end" [(ngModel)]="task.isActive">
       <ion-card-header>
         
           <ion-card-title>{{ task.name }}</ion-card-title>

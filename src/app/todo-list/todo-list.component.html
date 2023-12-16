@@ -8,8 +8,25 @@
 </ion-header>
 <ion-content>
 
-  <ion-card *ngFor="for let task of data">
-    <ion-checkbox class="check" labelPlacement="end">
+<ion-grid>
+  <ion-row class="ion-align-items-center">
+    <ion-col>
+        <ion-item>
+          <ion-input placeholder="Название задачи" (keypress)="taskCompleted($event)" [(ngModel)]="name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea placeholder="Описание задачи" [(ngModel)]="description"></ion-textarea>
+        </ion-item>
+    </ion-col>
+    <ion-col size="auto">
+      <ion-button (click)="createTask()">+</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+  <ion-card *ngFor="let task of data" disabled={{task.isActive}}>
+    <ion-checkbox class="check" labelPlacement="end" (ionChange)="taskCompleted($event)">
       <ion-card-header>
         
           <ion-card-title>{{ task.name }}</ion-card-title>

@@ -7,7 +7,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { NgFor } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {SettingsComponent} from "./settings/settings.component"
+import {SettingsComponent} from "./settings/settings.component";
+import { HttpClientModule } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -27,6 +28,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     provideFirestore(() => getFirestore()),
     FormsModule,
     NgFor,
+    HttpClientModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

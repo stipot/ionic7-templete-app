@@ -184,3 +184,5 @@ Open the System, search for "Changes" select: "Change the environment variables 
 In the window that opens, select the user environment variables table for %USER%, the Path variable Parameter "Change", "create" a new path
 Path parameter Path :%AppData%\npm "It is recommended to check the operation of the path through the line of the file explorer "
 Then click "ok" and !restart the computer! to save changes.
+
+Delete: test commit

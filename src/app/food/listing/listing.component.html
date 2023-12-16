@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="app/categories"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Food Listing</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="food-listing-content">
+  <ng-container *ngIf="listing?.items">
+    <div class="listing-item" *ngFor="let item of listing.items">
+      <div class="cover-wrapper">
+        <a class="cover-anchor" [routerLink]="['/app/categories/food/', item.slug]">
+          <app-image-shell class="cover-image add-overlay" animation="spinner" [display]="'cover'" [src]="item.image">
+            <app-aspect-ratio [ratio]="{w:35, h:15}">
+              <div class="cover-icon-wrapper">
+                <app-aspect-ratio [ratio]="{w: 20, h: 7}">
+                  <app-image-shell class="item-icon" [src]="item.icon"></app-image-shell>
+                </app-aspect-ratio>
+              </div>
+            </app-aspect-ratio>
+          </app-image-shell>
+        </a>
+      </div>
+      <ion-row class="info-row">
+        <ion-col class="description-col">
+          <ion-row class="description-wrapper">
+            <h3 class="item-name">
+              <a class="name-anchor" [routerLink]="['/app/categories/food/', item.slug]">
+                <app-text-shell [data]="item.name"></app-text-shell>
+              </a>
+            </h3>
+            <p class="item-address">
+              <app-text-shell [data]="item.address"></app-text-shell>
+            </p>
+            <ion-row class="item-tags">
+              <ion-col class="tag-wrapper" *ngFor="let tag of item.tags">
+                <span class="item-tag">
+                  <app-text-shell [data]="tag"></app-text-shell>
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-row>
+        </ion-col>
+        <ion-col class="stats-col" size="2">
+          <span class="item-rating" [attr.ratingBase]="item.rating | floor">
+            <app-text-shell [data]="item.rating"></app-text-shell>
+          </span>
+          <div class="item-price-range">
+            <span class="price" *ngFor="let price of [].constructor(item.priceRange)">$</span>
+            <span class="no-price" *ngFor="let price of [].constructor(5 - (item.priceRange || 1))">$</span>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="pictures-row">
+        <ion-col class="picture-wrapper" size="2" *ngFor="let picture of item.pictures.slice(0, 5); let i = index">
+          <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+            <app-image-shell class="picture-image" [src]="picture" [alt]="'food image'"></app-image-shell>
+          </app-aspect-ratio>
+          <a class="has-more-pictures" [routerLink]="['/app/categories/food/', item.slug]" *ngIf="i == 4 && item.pictures.length > 5">
+            <span class="pictures-count">{{ item.pictures.length - 5 }}</span>
+          </a>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ng-container>
+</ion-content>

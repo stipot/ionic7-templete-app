@@ -4,6 +4,7 @@ import { FormsComponent } from './forms/forms.component'
 import { NotesComponent } from './notes/notes.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
+import { FoodComponent } from "./food/food.component"
 import {LoginPageModule } from "./login/login.module"
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
@@ -64,6 +65,10 @@ const routes: Routes = [
     loadChildren: () => import('./forms/validations/validations.module').then(m => m.ValidationsPageModule)
   },
   {
+    path: 'food',
+    component: FoodComponent
+  },{
+
     path: 'privacy-policy',
     component: PrivacyPolicyComponent
   },

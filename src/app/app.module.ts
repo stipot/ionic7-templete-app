@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsComponent } from './forms/forms.component';
+import {FoodComponent} from './food/food.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { NgFor } from '@angular/common';
@@ -18,7 +19,7 @@ import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.componen
 import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, SignupComponent],
+  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, SignupComponent, FoodComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

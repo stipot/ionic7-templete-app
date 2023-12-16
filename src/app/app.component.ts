@@ -13,6 +13,7 @@ export class AppComponent {
     { title: 'Корзина', url: '/folder/trash', icon: 'корзина' },
     { title: 'Спам', url: '/folder/spam', icon: 'предупреждения/спам' },
     // Добавляем поле для перехода на страницу пометок
+    { title: 'Food', url: '/food', icon: 'Food' },
     { title: 'Пометки', url: '/notes', icon: 'Пометки' },
     { title: 'Filters', url:'/filters',icon: 'reader-outline'},
     { title: 'Validations', url: '/validations', icon: '' },  

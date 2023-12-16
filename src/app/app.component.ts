@@ -15,6 +15,7 @@ export class AppComponent {
     // Добавляем поле для перехода на страницу пометок
     { title: 'Пометки', url: '/notes', icon: 'Пометки' },
     { title: 'Filters', url:'/filters',icon: 'reader-outline'},
+    { title: 'Fashion', url:'/fashion',icon: 'fashion'},
     { title: 'Validations', url: '/validations', icon: '' },  
     { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
     { title: 'Login', url: '/login', icon: '' },

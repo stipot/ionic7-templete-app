@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Filters</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content >
+  <ion-item-group >
+    <ion-item-divider>
+      <ion-label>Фильтры цены</ion-label>
+    </ion-item-divider>
+    <form [formGroup]="rangeForm" >
+      <ion-row class="range-item">
+        <ion-col  size="4">
+          {{ rangeForm.controls["dual"]["value"]["lower"] }}
+        </ion-col>  
+        <ion-col size="4">Цена</ion-col>   
+        <ion-col size="4" class="text-align-right">{{ rangeForm.controls["dual"]["value"]["upper"]  }}</ion-col>
+        <ion-col size="12" >
+          <ion-range aria-label="Custom range" formControlName="dual" color="secondary" dualKnobs="true"  min="0" max="20000" step="100"></ion-range>
+        </ion-col>
+      </ion-row>
+      <ion-row class="range-item">
+        <ion-col size="5">Количество гостей</ion-col>
+        <ion-col size="5">{{ rangeForm.controls["single"]["value"] }}</ion-col>
+        <ion-col size="12">
+          <ion-range aria-label="Custom range" [min]="0" [max]="10" [value]="5" formControlName="single" [pin]="true"
+  [ticks]="true" [snaps]="true"></ion-range>
+        </ion-col>
+      </ion-row>
+    </form>
+
+    <ion-item-divider>
+      <ion-label>Требования</ion-label>
+    </ion-item-divider>
+    <form [formGroup]="checkboxForm">
+      <ion-list class="checkbox-list" lines="full">
+        <ion-item class="checkbox-item" *ngFor="let typeOfRequir of typeOfRequirs">
+          <ion-label class="checkbox-label">{{typeOfRequir}}</ion-label>
+          <ion-checkbox color="secondary" formControlName="filter_1"></ion-checkbox>
+        </ion-item>
+       </ion-list> 
+    </form>
+
+    <ion-item-divider>
+      <ion-label>Тип номера</ion-label>
+    </ion-item-divider> 
+    <form [formGroup]="radioForm">
+      <ion-list class="radio-list" lines="full">
+        <ion-radio-group class="radio-group" formControlName="selected_option">
+          <ion-item class="radio-item" *ngFor="let typeOfRoom of typeOfRooms">
+            <ion-label class="radio-label">{{typeOfRoom.title_field}}</ion-label>
+            <ion-radio slot="start" color="secondary" value="{{typeOfRoom.value_fieled}}"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </form>

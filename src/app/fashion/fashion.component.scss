@@ -9,23 +9,30 @@ div.main-body{
     align-items: center;
 }
 
-.product-name{
-    --color: black;
-    background-color: #aaa;
-    word-wrap: break-all;
-    font-size: 20px;
-    text-align: center;
-    height: 190px;
-    width: 190px;
-}
 .product-card{
     --ion-item-background: #bbb;
-    height: 200px;
-    width: 200px;
+    background-color: #bbb;
+    height: 350px;
+    width: 650px;
     display: inline-block;
     word-wrap: break-all;
     margin-right: 5px;
     margin-left: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.product-name{
+    --color: rgb(0, 0, 0);
+    background-color: #aaa;
+    word-wrap: break-all;
+    font-size: 20px;
+    text-align: center;
+    height: 100px;
+    width: 100px;
+}
+
+.product-img {
+    height: 250px;
+    width: 250px;
 }

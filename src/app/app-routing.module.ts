@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./page-not-found/page-not-found.module').then( m => m.PageNotFoundPageModule)
 
   },
-  { path: '**', redirectTo: 'page-not-found' },
+  
   {
     path: 'forms',
     component: FormsComponent
@@ -57,7 +57,7 @@ const routes: Routes = [
     path: 'validations',
     loadChildren: () => import('./forms/validations/validations.module').then(m => m.ValidationsPageModule)
   },
-
+  { path: '**', redirectTo: 'page-not-found' },
 ];
 
 @NgModule({

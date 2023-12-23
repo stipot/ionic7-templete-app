@@ -22,8 +22,11 @@
     <!-- <p>{{ noteData }}</p> -->
     <ion-button (click)="saveData()">Сохранить</ion-button>
   </ion-list>
-  <ion-item style="margin-top: 10px" *ngFor="let note of notes">
-    <p>{{ note.text }}</p>
-  </ion-item>
+  <ion-list>
+    <ion-item style="margin-top: 10px;" *ngFor="let note of notes">
+      <p>{{ note.data }}</p>
+      <ion-button class="remove-note">x</ion-button>
+    </ion-item>
+  </ion-list>
   <ion-label> </ion-label>
 </ion-content>

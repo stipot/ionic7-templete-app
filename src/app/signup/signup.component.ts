@@ -12,8 +12,13 @@ export class SignupComponent  implements OnInit {
 
   signupForm: FormGroup;
   matching_passwords_group: FormGroup;
+  email: string = ""
 
   validation_messages = {
+    'email': [
+      { type: 'required', message: 'Email is required.' },
+      { type: 'pattern', message: 'Enter a valid email.' }
+    ],
     'password': [
       { type: 'required', message: 'Password is required.' },
       { type: 'minlength', message: 'Password must be at least 5 characters long.' }
@@ -40,6 +45,10 @@ export class SignupComponent  implements OnInit {
     });
 
     this.signupForm = new FormGroup({
+      'email': new FormControl('test@test.com', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
       'matching_passwords': this.matching_passwords_group
     });
 

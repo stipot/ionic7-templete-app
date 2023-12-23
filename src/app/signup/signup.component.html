@@ -27,7 +27,7 @@
       </div>
       <div formGroupName="matching_passwords">
         <ion-item class="input-item">
-          <ion-input type="password" fill="solid" placeholder="Password" formControlName="password" labelPlacement="floating"></ion-input>
+          <ion-input type="password"  placeholder="Password" formControlName="password"></ion-input>
         </ion-item>
         <div class="error-container">
           <ng-container *ngFor="let validation of validation_messages.password">
@@ -38,7 +38,7 @@
           </ng-container>
         </div>
         <ion-item class="input-item">
-          <ion-input type="password" fill="solid" placeholder="Confirm Password" formControlName="confirm_password" labelPlacement="floating"></ion-input>
+          <ion-input type="password" placeholder="Confirm Password" formControlName="confirm_password"></ion-input>
         </ion-item>
         <div class="error-container">
           <ng-container *ngFor="let validation of validation_messages.confirm_password">

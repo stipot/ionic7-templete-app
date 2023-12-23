@@ -9,11 +9,17 @@ import { ModalController } from '@ionic/angular';
 })
 export class PrivacyPolicyComponent  implements OnInit {
 
+lang:string="ru"
+
   constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {}
   dismiss(){
     return this.modalCtrl.dismiss();
+  }
+
+  handleChange(ev: any) {
+    console.log('Current value:', JSON.stringify(ev.target.value));
   }
 
 }

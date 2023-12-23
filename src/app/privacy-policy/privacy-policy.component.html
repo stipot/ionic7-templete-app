@@ -7,15 +7,31 @@
       <ion-button (click)="dismiss()">Close</ion-button>
     </ion-buttons>
     <ion-title>
-      Privacy Policy
+      <div *ngIf="lang=='ru' === false">
+        Privacy Policy
+      </div>
     </ion-title>
+    <ion-title>
+      <div *ngIf="lang=='ru' === true">
+        Политика конфиденциальности
+      </div>
+    </ion-title>
+    <ion-list>
+      <ion-item>
+        <ion-select aria-label="Fruit" interface="popover" placeholder="Select languages">
+          <ion-select-option value="ru">Русский</ion-select-option>
+          <ion-select-option value="en">English</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding"  size="6">
+  <div *ngIf="lang=='ru' === false">
   <h3 class="legal-title">1. Introduction</h3>
   <p class="legal-text">
-    We are responsible for maintaining and protecting the Personal Information under our control. We have designated an individual or individuals who is/are responsible for compliance with our privacy policy.
+    We are responsible for mainta ining and protecting the Personal Information under our control. We have designated an individual or individuals who is/are responsible for compliance with our privacy policy.
   </p>
   <h3 class="legal-title">2. Identifying Purposes</h3>
   <p class="legal-text">
@@ -25,4 +41,20 @@
   <p class="legal-text">
     Knowledge and consent are required for the collection, use or disclosure of Personal Information except where required or permitted by law. Providing us with your Personal Information is always your choice. However, your decision not to provide certain information may limit our ability to provide you with our products or services. We will not require you to consent to the collection, use, or disclosure of information as a condition to the supply of a product or service, except as required to be able to supply the product or service.
   </p>
+</div>
+<div *ngIf="lang=='ru' === true">
+  <h3 class="legal-title">1. Вступление</h3>
+  <p class="legal-text">
+    Мы несем ответственность за хранение и защиту личной информации, находящейся под нашим контролем. Мы назначили физическое лицо или отдельных лиц, которые несут ответственность за соблюдение нашей политики конфиденциальности.
+  </p>
+  <h3 class="legal-title">2. Идентифицирующие цели</h3>
+  <p class="legal-text">
+    Мы собираем, используем и раскрываем личную информацию, чтобы предоставить вам продукт или услугу, которые вы запросили, и предложить вам дополнительные продукты и услуги, которые, по нашему мнению, могут вас заинтересовать. Цели, для которых мы собираем личную информацию, будут определены до или во время сбора информации. При определенных обстоятельствах цели, для которых собирается информация, могут быть ясны, и согласие может подразумеваться, например, когда ваше имя, адрес и платежная информация предоставляются в рамках процесса оформления заказа.
+  </p>
+  <h3 class="legal-title">3. Согласие</h3>
+  <p class="legal-text">
+    Для сбора, использования или раскрытия личной информации требуются знания и согласие, за исключением случаев, когда это требуется или разрешено законом. Предоставление нам вашей личной информации всегда является вашим выбором. Однако ваше решение не предоставлять определенную информацию может ограничить нашу способность предоставлять вам наши продукты или услуги. Мы не будем требовать от вас согласия на сбор, использование или раскрытие информации в качестве условия поставки продукта или услуги, за исключением случаев, когда это требуется для возможности поставки продукта или услуги.
+  </p>
+</div>
+
 </ion-content>

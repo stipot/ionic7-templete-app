@@ -83,4 +83,11 @@ ion-range::part(bar-active) {
       --checkbox-tag-active-background: var(--ion-color-secondary);
     }
   }
+  .checkbox-button{
+    --checkbox-background-checked: #00378a;
+    --size: 24px;
+    --border-radius:10px;
+    --border-color-checked:#330092;
+  }
+
 }

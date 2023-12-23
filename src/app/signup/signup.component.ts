@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController, MenuController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { ModalController, MenuController } from '@ionic/angular';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
-export class SignupComponent  implements OnInit {
+export class SignupComponent implements OnInit {
 
   validation_messages = {
     'password': [
@@ -23,7 +24,16 @@ export class SignupComponent  implements OnInit {
     ]
   }
 
-  constructor() { }
   appTitle = "Ionic 7 Template App"
-  ngOnInit() {}
+  constructor (private modalCtrl: PrivacyPolicyComponent){}
+  ngOnInit() { }
+
+  async show() {
+    /* const modal = await this.modalCtrl.create({
+      component: PrivacyPolicyComponent
+    });
+    modal.present();
+  
+    const { data, role} = await modal.onWillDismiss(); */
+  }
 }

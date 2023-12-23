@@ -3,3 +3,4 @@
 This component displays data from the following variables:
 - typeOfRooms - variable containing the types of rooms in the hotel
 - typeOfRequirs - an array containing requirements for hotel rooms
+-

@@ -17,6 +17,7 @@ export class AppComponent {
     { title: 'Filters', url:'/filters',icon: 'reader-outline'},
     { title: 'Validations', url: '/validations', icon: '' },  
     { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
+    { title: 'Login', url: '/login', icon: '' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
   constructor() { }

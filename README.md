@@ -116,15 +116,15 @@ If the commit reverts a previous commit, it should begin with `revert: `, follow
 
 Must be one of the following:
 
-* **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-* **ci**: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
-* **doc**: Documentation only changes
-* **feat**: A new feature
-* **fix**: A bug fix
-* **perf**: A code change that improves performance
-* **ref**: A code change that neither fixes a bug nor adds a feature
-* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-* **test**: Adding missing tests or correcting existing tests
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci**: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+- **doc**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **ref**: A code change that neither fixes a bug nor adds a feature
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- **test**: Adding missing tests or correcting existing tests
 
 #### Scope
 
@@ -176,7 +176,6 @@ This is useful to track compilation ERRORS
 - To find the installed version of a specific package run `npm list package_name` (ex: `npm list @ionic/core`)
 - To find out which packages need to be updated, you can use `npm outdated -g --depth=0`
 - In particular, run `ng version` to output Angular CLI version and all Angular related installed packages and versions
-
 ## Windows Environment Variables error
 - setting environment variables, if an error occurs in the parameters of the ionic serve command(Error command not found)
 Solution:

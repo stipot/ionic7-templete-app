@@ -1,0 +1,58 @@
+div.main-body{
+    background: BlueViolet;
+    color: BlueViolet;
+    height: 1000px;
+}
+
+.goods_list{
+    display: flexbox;
+    align-items: center;
+}
+
+.product-card{
+    --ion-item-background: #bbb;
+    background-color: #bbb;
+    height: 350px;
+    width: 600px;
+    display: inline-block;
+    word-wrap: break-all;
+    margin-right: 5px;
+    margin-left: 25px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.product-name{
+    --color: rgb(0, 0, 0);
+    background-color: #aaa;
+    word-wrap: break-all;
+    font-size: 20px;
+    text-align: center;
+    height: 100px;
+    width: 100px;
+}
+
+.product-card{
+    --color: rgb(0, 0, 0);
+    word-wrap: break-all;
+    font-size: 16px;
+    text-align: center;
+}
+
+.product-img {
+    height: 250px;
+    width: 250px;
+}
+
+div[scrollx=true],div[scrolly=true] {
+    position: relative;
+    overflow: hidden;
+}
+
+div[scrollx=true] {
+   overflow-x: auto;
+}
+
+div[scrolly=true] {
+   overflow-y: auto;
+}

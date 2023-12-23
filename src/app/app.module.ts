@@ -5,13 +5,15 @@ import { FormsComponent } from './forms/forms.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { NgFor } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {SettingsComponent} from "./settings/settings.component"
-
 import { environment } from '../environments/environment';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { NotesComponent } from './notes/notes.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
@@ -29,8 +31,9 @@ import { FashionComponent } from './fashion/fashion.component';
     provideFirestore(() => getFirestore()),
     FormsModule,
     NgFor,
+    HttpClientModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,49 +1,46 @@
-{
-    "goods": [
+[
         {
             "name": "Пальто Pochantek",
             "description" : "пальто из натурального шёлка",
-            "price" : "10000 рублей",
+            "price" : 10000,
             "picture" : "",
-            "quantity" : "1234"
+            "quantity" : 1234
         },
         {
             "name": "Кроссовки Crocodile",
             "description" : "кросссовки из зеленого настоящего крокодила",
-            "price" : "16000 рублей",
+            "price" : 16000,
             "picture" : "",
-            "quantity" : "846"
+            "quantity" : 846
         },
         {
             "name": "Куртка Adidas",
             "description" : "санкционный товар",
-            "price" : "20000 рублей",
+            "price" : 20000,
             "picture" : "",
-            "quantity" : "1"
+            "quantity" : 1
 
         },
         {
             "name": "Кепка nike",
             "description" : "голубая кепка из синтетических материалов,идеально подходит для пробежек",
-            "price" : "2000 рублей",
+            "price" : 2000,
             "picture" : "https://avatars.mds.yandex.net/get-mpic/5277894/img_id1545836816401032018.jpeg/600x800",
-            "quantity" : "91"
+            "quantity" : 91
         },
         {
             "name": "Джемпер",
             "description" : "утепленный джемпер",
-            "price" : "6000 рублей",
+            "price" : 6000,
             "picture" : "",
-            "quantity" : "83"
+            "quantity" : 83
         },
         {
             "name": "Рубашка",
             "description" : "рубашка в рубчик ",
-            "price" : "3000 рублей",
+            "price" : 3000,
             "picture" : "",
-            "quantity" : "50"
+            "quantity" : 50
         }
 
 ]
-
-}

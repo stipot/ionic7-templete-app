@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsComponent } from './forms/forms.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { NgFor } from '@angular/common';
 import { AppComponent } from './app.component';
@@ -28,6 +28,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     FormsModule,
+    ReactiveFormsModule,
     NgFor,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],

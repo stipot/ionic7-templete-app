@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ForgotPasswordComponent} from './forgot-password.component';
 
@@ -11,7 +12,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class ForgotPasswordPageRoutingModule {}

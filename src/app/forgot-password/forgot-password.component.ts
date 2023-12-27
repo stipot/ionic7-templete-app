@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormGroup, FormControl, FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-forgot-password',
@@ -8,19 +8,30 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 })
 export class ForgotPasswordComponent  implements OnInit {
 
-  forgotPasswordForm: FormGroup;
+  ionicForm!: FormGroup;
 
   
-  constructor() {
-    this.forgotPasswordForm = new FormGroup({
-    'email': new FormControl('test@test.com', Validators.compose([
-      Validators.required,
-      Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-    ]))
-  });
-    
-   }
+  constructor(public formBuilder: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.ionicForm=this.formBuilder.group({
+      email: ['',
+      [
+        Validators.required,
+        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$')
+      ]]
+    })
+  }
+  get errorControl() {
+    return this.ionicForm.controls;
+  }
 
+  submitForm = () => {
+    if (this.ionicForm.valid) {
+      console.log(this.ionicForm.value);
+      return false;
+    } else {
+      return console.log('Please provide all the required values!');
+    }
+  };
 }

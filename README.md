@@ -1,5 +1,5 @@
 # ionic7-full-starter-app
-Проект беца
+Проект беца? lflf 
 The student project to build complete Mobile & PWA starter app template
 [Demo application](https://ionic7-templete-app-public.web.app/)
 

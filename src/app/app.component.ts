@@ -10,18 +10,18 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class AppComponent {
   public appPages = [
-    { title: '1', url: '/folder/inbox', icon: 'входящие' },
-    { title: '2', url: '/folder/outbox', icon: 'исходящие' },
-    { title: '3', url: '/folder/favorites', icon: 'понравившиеся' },
-    { title: '4', url: '/folder/archived', icon: 'архив' },
-    { title: '5', url: '/folder/trash', icon: 'корзина' },
-    { title: '6', url: '/folder/spam', icon: 'предупреждения/спам' },
+    { title: 'inbox', url: '/folder/inbox', icon: 'входящие' },
+    { title: 'outbox', url: '/folder/outbox', icon: 'исходящие' },
+    { title: 'favorutes', url: '/folder/favorites', icon: 'понравившиеся' },
+    { title: 'archived', url: '/folder/archived', icon: 'архив' },
+    { title: 'trash', url: '/folder/trash', icon: 'корзина' },
+    { title: 'spam', url: '/folder/spam', icon: 'предупреждения/спам' },
     // Добавляем поле для перехода на страницу пометок
-    { title: '7', url: '/notes', icon: 'Пометки' },
-    { title: '8', url:'/filters',icon: 'reader-outline'},
-    { title: '9', url: '/validations', icon: '' },  
-    { title: '10', url: '/privacy-policy', icon: 'battery-full-outline' },
-    { title: '11', url: '/login', icon: '' },
+    { title: 'notes', url: '/notes', icon: 'Пометки' },
+    { title: 'filters', url:'/filters',icon: 'reader-outline'},
+    { title: 'validations', url: '/validations', icon: '' },  
+    { title: 'privacy-policy', url: '/privacy-policy', icon: 'battery-full-outline' },
+    { title: 'login', url: '/login', icon: '' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
 

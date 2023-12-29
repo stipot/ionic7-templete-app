@@ -12,9 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsComponent } from './forms/forms.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from './settings/settings.component';
-import { SignupComponent } from './signup/signup.component';
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-import { NotesComponent } from './notes/notes.component';
+
 
 // Фабрика для создания TranslateLoader с использованием HttpClient
 export function HttpLoaderFactory(http: HttpClient) {
@@ -22,7 +20,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, FormsComponent, ContactCardComponent, SettingsComponent, SignupComponent, PrivacyPolicyComponent, NotesComponent, NotesComponent,],
+  declarations: [AppComponent, FormsComponent, ContactCardComponent, SettingsComponent,],
   imports: [
     FormsModule,
     BrowserModule,

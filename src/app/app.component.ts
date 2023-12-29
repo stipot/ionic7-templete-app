@@ -10,9 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class AppComponent {
   public appPages = [
-    { title: 'inbox', url: '/folder/inbox', icon: 'входящие' },
+    { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
     { title: 'outbox', url: '/folder/outbox', icon: 'исходящие' },
-    { title: 'favorutes', url: '/folder/favorites', icon: 'понравившиеся' },
+    { title: 'favorites', url: '/folder/favorites', icon: 'понравившиеся' },
     { title: 'archived', url: '/folder/archived', icon: 'архив' },
     { title: 'trash', url: '/folder/trash', icon: 'корзина' },
     { title: 'spam', url: '/folder/spam', icon: 'предупреждения/спам' },
@@ -26,7 +26,7 @@ export class AppComponent {
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
 
   constructor(private translate: TranslateService) {
-    this.translate.setDefaultLang('ru');
+    this.translate.setDefaultLang('en');
   }
 
   changeLanguage(lang: string) {

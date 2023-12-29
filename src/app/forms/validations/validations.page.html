@@ -1,6 +1,8 @@
+<!-- validations.component.html -->
+
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Validations</ion-title>
+    <ion-title>{{ 'Validations' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,47 +10,39 @@
 
   <ion-list class="inputs-list">
 
-
-
     <ion-item class="input-item">
-      <ion-input label="Username" placeholder="Enter text"></ion-input>
-    </ion-item>
-
-
-    <ion-item class="input-item">
-      <ion-input label="Name" placeholder="Enter text"></ion-input>
-    </ion-item>
-
-
-    <ion-item class="input-item">
-      <ion-input label="Last Name" placeholder="Enter text"></ion-input>
+      <ion-input label="{{ 'Username' | translate }}" placeholder="{{ 'Enter text' | translate }}"></ion-input>
     </ion-item>
 
     <ion-item class="input-item">
-      <ion-input label="Email input" type="email" placeholder="email@domain.com"></ion-input>
+      <ion-input label="{{ 'Name' | translate }}" placeholder="{{ 'Enter text' | translate }}"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-item">
+      <ion-input label="{{ 'Last Name' | translate }}" placeholder="{{ 'Enter text' | translate }}"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-item">
+      <ion-input label="{{ 'Email input' | translate }}" type="email" placeholder="{{ 'email@domain.com' | translate }}"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input label="Phone" type="tel" placeholder="888-888-8888"></ion-input>
+      <ion-input label="{{ 'Phone' | translate }}" type="tel" placeholder="{{ '888-888-8888' | translate }}"></ion-input>
     </ion-item>
 
     <ion-list-header>
-      <ion-label>Gender</ion-label>
+      <ion-label>{{ 'Gender' | translate }}</ion-label>
     </ion-list-header>
 
     <ion-radio-group value="turtles">
-      <ion-radio value="female"> female </ion-radio><br />
-      <ion-radio value="male"> male </ion-radio><br />
+      <ion-radio value="female">{{ 'female' | translate }}</ion-radio><br />
+      <ion-radio value="male">{{ 'male' | translate }}</ion-radio><br />
     </ion-radio-group>
 
     <ion-item>
-      <ion-input label="Password" type="password" value="password"></ion-input>
+      <ion-input label="{{ 'Password' | translate }}" type="password" value="{{ 'password' | translate }}"></ion-input>
     </ion-item>
 
-
-
-
   </ion-list>
-
 
 </ion-content>

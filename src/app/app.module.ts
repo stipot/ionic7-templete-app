@@ -24,11 +24,11 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     FormsModule,
     BrowserModule,
-    IonicModule.forRoot(), 
+    IonicModule.forRoot(), // Важно для доступности Ionic компонентов
     AppRoutingModule,
     HttpClientModule,
     
-    TranslateModule.forRoot({
+    TranslateModule.forRoot({ // Настройка ngx-translate
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
@@ -38,7 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    
+    // Другие сервисы и провайдеры
   ],
   bootstrap: [AppComponent]
 })

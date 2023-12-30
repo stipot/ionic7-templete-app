@@ -9,43 +9,46 @@
   <ion-list class="inputs-list">
 
 
-
     <ion-item class="input-item">
-      <ion-input label="Username" placeholder="Enter text"></ion-input>
+      <ion-input label="Username" labelPlacement="floating" fill="solid" color="tertiary" placeholder="" helperText="Enter a valid Username" errorText="Invalid Username"  ngModel  required></ion-input>
     </ion-item>
 
 
     <ion-item class="input-item">
-      <ion-input label="Name" placeholder="Enter text"></ion-input>
+      <ion-input label="Name" labelPlacement="floating" fill="solid" color="secondary" placeholder="" helperText="Enter a valid Name" errorText="Invalid Name"  ngModel  required></ion-input>
     </ion-item>
 
 
     <ion-item class="input-item">
-      <ion-input label="Last Name" placeholder="Enter text"></ion-input>
+      <ion-input label="Last Name" labelPlacement="floating" fill="solid" color="secondary" placeholder="" helperText="Enter a valid Last Name" errorText="Invalid Last Name"  ngModel  required></ion-input>
     </ion-item>
 
     <ion-item class="input-item">
-      <ion-input label="Email input" type="email" placeholder="email@domain.com"></ion-input>
+      <ion-input label="Email" type="email"  fill="solid" color="secondary" labelPlacement="floating" placeholder="" helperText="Enter a valid email" errorText="Invalid email"  ngModel email  required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input label="Phone" type="tel" placeholder="888-888-8888"></ion-input>
+      <ion-input label="Phone" type="tel" labelPlacement="floating" fill="solid" color="secondary" placeholder="" helperText="Enter a valid Phone" errorText="Invalid Phone"  ngModel tel  required></ion-input>
     </ion-item>
 
-    <ion-list-header>
-      <ion-label>Gender</ion-label>
-    </ion-list-header>
-
-    <ion-radio-group value="turtles">
-      <ion-radio value="female"> female </ion-radio><br />
-      <ion-radio value="male"> male </ion-radio><br />
-    </ion-radio-group>
 
     <ion-item>
-      <ion-input label="Password" type="password" value="password"></ion-input>
+      <ion-select label="Gender" label-placement="floating">
+        <ion-select-option value="female">female</ion-select-option>
+        <ion-select-option value="male">male</ion-select-option>
+        <ion-select-option value="other">other</ion-select-option>
+      </ion-select>
     </ion-item>
 
 
+
+    <ion-item>
+      <ion-input label="Password" type="password" labelPlacement="floating" fill="solid" color="secondary" value="" helperText="Enter a valid Password" errorText="Invalid Password"  ngModel password  required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Confirm Password" type="password" labelPlacement="floating" fill="solid" color="secondary" value="" helperText="Enter a valid Password" errorText="Invalid Password"  ngModel password  required></ion-input>
+    </ion-item>
 
 
   </ion-list>

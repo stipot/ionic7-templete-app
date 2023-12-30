@@ -1,0 +1,95 @@
+ // Custom variables
+// Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
+:host {
+    --page-margin: var(--app-broad-margin);
+    --page-background: var(--app-background-shade);
+  }
+  
+  // Note:  All the CSS variables defined below are overrides of Ionic elements CSS Custom Properties
+  .signup-content {
+    --background: var(--page-background);
+    --padding-start: var(--page-margin);
+    --padding-end: var(--page-margin);
+    --padding-top: var(--page-margin);
+    --padding-bottom: var(--page-margin);
+  
+    .auth-title {
+      color: var(--ion-color-dark);
+      font-weight: bold;
+      margin-top: calc(var(--page-margin) / 2);
+      margin-bottom: calc(var(--page-margin) * (3/2));
+      letter-spacing: 0.6px;
+    }
+  
+  
+    .inputs-list {
+      --ion-item-background: var(--page-background);
+  
+      .input-item {
+        --padding-start: 0px;
+        --padding-end: 0px;
+        --inner-padding-end: 0px;
+      }
+  
+      .error-container {
+        .error-message {
+          margin: calc(var(--page-margin) / 2) 0px;
+          display: flex;
+          align-items: center;
+          color: var(--ion-color-danger);
+          font-size: 14px;
+  
+          ion-icon {
+            padding-inline-end: calc(var(--page-margin) / 2);
+          }
+        }
+      }
+    }
+  
+    .signup-btn {
+      margin: calc(var(--page-margin) / 2) 10px;
+    }
+  
+    .other-auth-options-row {
+      justify-content: flex-end;
+      align-items: center;
+  
+      .login-btn {
+        --color: var(--ion-color-secondary);
+        margin: 0px;
+  
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  
+    .social-auth-options {
+      .options-divider {
+        color: var(--ion-color-medium);
+            margin: var(--page-margin) 0px;
+            text-align: center;
+      }
+  
+      .social-auth-btn {
+        margin: 0px;
+  
+        &:not(:first-child) {
+          margin-top: var(--page-margin);
+        }
+      }
+    }
+  
+      .legal-stuff {
+          text-align: center;
+      font-size: 14px;
+      margin: var(--page-margin) 0px;
+      color: var(--ion-color-medium);
+  
+          .legal-action {
+              font-weight: 500;
+              color: var(--ion-color-secondary);
+        cursor: pointer;
+          }
+      }
+  }

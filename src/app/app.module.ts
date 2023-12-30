@@ -8,19 +8,25 @@ import { NgFor } from '@angular/common';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
+import {SettingsComponent} from "./settings/settings.component"
+
 import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { NotesComponent } from './notes/notes.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
-import { SettingsComponent } from "./settings/settings.component";
+import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
+import { SignupComponent } from './signup/signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent],
+  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    ReactiveFormsModule,
     // Инициализация базы данных
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

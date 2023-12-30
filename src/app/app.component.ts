@@ -18,15 +18,17 @@ export class AppComponent {
     { title: 'spam', url: '/folder/spam', icon: 'предупреждения/спам' },
     // Добавляем поле для перехода на страницу пометок
     { title: 'notes', url: '/notes', icon: 'Пометки' },
-    { title: 'filters', url:'/filters',icon: 'reader-outline'},
-    { title: 'validations', url: '/validations', icon: '' },  
+    { title: 'filters', url: '/filters', icon: 'reader-outline' },
+    { title: 'validations', url: '/validations', icon: '' },
     { title: 'privacy-policy', url: '/privacy-policy', icon: 'battery-full-outline' },
     { title: 'login', url: '/login', icon: '' },
+    { title: 'ToDo list', url: '/todo-list', icon: 'todo-list' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
 
   constructor(private translate: TranslateService) {
-    this.translate.setDefaultLang('en');
+    this.translate.setDefaultLang('ru');
+    this.translate.use('ru');
   }
 
   changeLanguage(lang: string) {

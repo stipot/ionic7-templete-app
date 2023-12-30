@@ -4,6 +4,7 @@ import { FormsComponent } from './forms/forms.component'
 import { NotesComponent } from './notes/notes.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
+import { TodoListComponent } from './todo-list/todo-list.component';
 import {LoginPageModule } from "./login/login.module"
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'notes',
     component: NotesComponent
+  },
+  {
+    path: 'todo-list',
+    component: TodoListComponent
   },
   {
     path: 'signup', 

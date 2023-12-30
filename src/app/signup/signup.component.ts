@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,} from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
-
 
 @Component({
   selector: 'app-signup',
@@ -25,15 +24,14 @@ export class SignupComponent implements OnInit {
   }
 
   appTitle = "Ionic 7 Template App"
-  constructor (private modalCtrl: PrivacyPolicyComponent){}
+  constructor (public modalController: ModalController){}
   ngOnInit() { }
 
   async show() {
-    /* const modal = await this.modalCtrl.create({
+      const modal = await this.modalController.create({
       component: PrivacyPolicyComponent
     });
-    modal.present();
-  
-    const { data, role} = await modal.onWillDismiss(); */
+    modal.present(); 
+    const {data, role} = await modal.onWillDismiss(); 
   }
 }

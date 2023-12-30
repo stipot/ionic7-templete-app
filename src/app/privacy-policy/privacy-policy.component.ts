@@ -21,5 +21,8 @@ lang:string="ru"
   handleChange(ev: any) {
     console.log('Current value:', JSON.stringify(ev.target.value));
   }
+  optionSelected(ln:any){
+    this.lang = ln.target.value
+  }
 
 }

@@ -70,11 +70,12 @@ const routes: Routes = [
   {
     path: 'contact-card',
     component: ContactCardComponent
-  }, { path: '**', redirectTo: 'page-not-found' },
+  }, 
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+  { path: '**', redirectTo: 'page-not-found' },
 ];
 
 @NgModule({

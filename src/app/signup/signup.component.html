@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="signup-content">
+<ion-content>
   <h2 class="auth-title">
     {{appTitle}}
   </h2>
@@ -59,20 +59,28 @@
       </div>
   </ion-list>
 
-  <ion-button class="signup-btn" type="submit" expand="block" >Sign Up</ion-button>
-  <ion-row class="other-auth-options-row">
-    <ion-button class="login-btn" fill="clear" [routerLink]="['/login']">
-      Already have an account?
-    </ion-button>
-  </ion-row>
+<ion-grid>
+  <ion-row class="ion-justify-content-center">
+  <ion-list lines="none">
+    <ion-item><ion-button class="signup-btn" type="submit" expand="block" size="default" style="min-width: 200px">Sign Up</ion-button></ion-item>
+    <ion-row class="other-auth-options-row">
+    </ion-row>
+  </ion-list>
+</ion-row>
+</ion-grid>
 </form>
 
-  <div class="social-auth-options">
-    <p class="options-divider">Or</p>
-    <ion-button class="social-auth-btn facebook-auth-btn" expand="block">Sign Up with Facebook</ion-button>
-    <ion-button class="social-auth-btn google-auth-btn" expand="block">Sign Up with Google</ion-button>
-    <ion-button class="social-auth-btn twitter-auth-btn" expand="block">Sign Up with Twitter</ion-button>
-  </div>
+<ion-grid>
+  <ion-row class="ion-justify-content-center">
+<ion-list lines="none">
+    <ion-item><p>Or</p></ion-item>
+    <ion-item><ion-button class="social-auth-btn facebook-auth-btn" size="default" style="min-width: 240px" expand="block">Sign Up with Facebook</ion-button></ion-item>
+      <ion-item><ion-button class="social-auth-btn google-auth-btn" size="default" style="min-width: 240px" expand="block">Sign Up with Google</ion-button></ion-item>
+        <ion-item><ion-button class="social-auth-btn twitter-auth-btn" size="default" style="min-width: 240px" expand="block">Sign Up with Twitter</ion-button></ion-item>
+    </ion-list>
+  </ion-row>
+</ion-grid>
+
 
   <div class="legal-stuff">
     By creating an account you agree to our <a class="legal-action">Privacy Policy</a> and <a class="legal-action">Terms

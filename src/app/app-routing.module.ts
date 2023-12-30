@@ -53,7 +53,7 @@ const routes: Routes = [
   },
   {
     path: 'signup', 
-    component: SignupComponent
+    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
   },
   {
     path: 'filters',
@@ -70,11 +70,12 @@ const routes: Routes = [
   {
     path: 'contact-card',
     component: ContactCardComponent
-  }, { path: '**', redirectTo: 'page-not-found' },
+  }, 
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+  { path: '**', redirectTo: 'page-not-found' },
 ];
 
 @NgModule({

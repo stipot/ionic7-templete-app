@@ -56,7 +56,7 @@ const routes: Routes = [
   },
   {
     path: 'signup', 
-    component: SignupComponent
+    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
   },
   {
     path: 'filters',

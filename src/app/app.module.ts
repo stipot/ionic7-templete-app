@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsComponent } from './forms/forms.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { NgFor } from '@angular/common';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import {SettingsComponent} from "./settings/settings.component"
 
@@ -16,20 +17,24 @@ import { NotesComponent } from './notes/notes.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, SignupComponent, ForgotPasswordComponent],
+  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    ReactiveFormsModule,
     // Инициализация базы данных
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     FormsModule,
     ReactiveFormsModule,
-    NgFor,
+    NgFor, 
+    HttpClientModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

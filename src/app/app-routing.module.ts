@@ -7,6 +7,8 @@ import { SettingsComponent } from "./settings/settings.component"
 import {LoginPageModule } from "./login/login.module"
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
+import { IntroComponent } from './intro/intro.component';
+
 
 const routes: Routes = [
   {
@@ -70,17 +72,23 @@ const routes: Routes = [
   {
     path: 'contact-card',
     component: ContactCardComponent
-  }, { path: '**', redirectTo: 'page-not-found' },
-  {
+  }, 
+    {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
+
+  { path: 'intro', 
+    component: IntroComponent 
+  },
+  { path: '**', redirectTo: 'page-not-found' },
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
+  
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

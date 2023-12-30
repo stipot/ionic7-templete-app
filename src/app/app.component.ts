@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { register } from 'swiper/element/bundle';
+
+register ();
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -18,6 +23,7 @@ export class AppComponent {
     { title: 'Validations', url: '/validations', icon: '' },  
     { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
     { title: 'Login', url: '/login', icon: '' },
+    { title: 'Intro', url: '/intro', icon: '' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
   constructor() { }

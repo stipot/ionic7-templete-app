@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="signup-content">
+<ion-content>
   <h2 class="auth-title">
     {{appTitle}}
   </h2>
@@ -15,11 +15,13 @@
   <form [formGroup]="signupForm">
     <ion-list class="inputs-list" lines="full">
       <ion-item class="input-item">
-        <ion-input type="email" placeholder="Email" formControlName="email" clearInput autocapitalize="off" inputmode="email"></ion-input>
+        <ion-input type="email" placeholder="Email" formControlName="email" clearInput autocapitalize="off"
+          inputmode="email"></ion-input>
       </ion-item>
       <div class="error-container">
         <ng-container *ngFor="let validation of validation_messages.email">
-          <div class="error-message" *ngIf="signupForm.get('email')?.hasError(validation.type) && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
+          <div class="error-message"
+            *ngIf="signupForm.get('email')?.hasError(validation.type) && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
             <ion-icon name="information-circle-outline"></ion-icon>
             <span>{{ validation.message }}</span>
           </div>
@@ -27,11 +29,12 @@
       </div>
       <div formGroupName="matching_passwords">
         <ion-item class="input-item">
-          <ion-input type="password"  placeholder="Password" formControlName="password"></ion-input>
+          <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
         </ion-item>
         <div class="error-container">
           <ng-container *ngFor="let validation of validation_messages.password">
-            <div class="error-message" *ngIf="signupForm.get('matching_passwords')?.get('password')?.hasError(validation.type) && (signupForm.get('matching_passwords')?.get('password')?.dirty || signupForm.get('matching_passwords')?.get('password')?.touched)">
+            <div class="error-message"
+              *ngIf="signupForm.get('matching_passwords')?.get('password')?.hasError(validation.type) && (signupForm.get('matching_passwords')?.get('password')?.dirty || signupForm.get('matching_passwords')?.get('password')?.touched)">
               <ion-icon name="information-circle-outline"></ion-icon>
               <span>{{ validation.message }}</span>
             </div>
@@ -42,7 +45,8 @@
         </ion-item>
         <div class="error-container">
           <ng-container *ngFor="let validation of validation_messages.confirm_password">
-            <div class="error-message" *ngIf="signupForm.get('matching_passwords')?.get('confirm_password')?.hasError(validation.type) && (signupForm.get('matching_passwords')?.get('confirm_password')?.dirty || signupForm.get('matching_passwords')?.get('confirm_password')?.touched)">
+            <div class="error-message"
+              *ngIf="signupForm.get('matching_passwords')?.get('confirm_password')?.hasError(validation.type) && (signupForm.get('matching_passwords')?.get('confirm_password')?.dirty || signupForm.get('matching_passwords')?.get('confirm_password')?.touched)">
               <ion-icon name="information-circle-outline"></ion-icon>
               <span>{{ validation.message }}</span>
             </div>
@@ -51,32 +55,43 @@
       </div>
       <div class="error-container">
         <ng-container *ngFor="let validation of validation_messages.matching_passwords">
-          <div class="error-message" *ngIf="signupForm.get('matching_passwords')?.hasError(validation.type) && (signupForm.get('matching_passwords')?.get('confirm_password')?.dirty || signupForm.get('matching_passwords')?.get('confirm_password')?.touched)">
+          <div class="error-message"
+            *ngIf="signupForm.get('matching_passwords')?.hasError(validation.type) && (signupForm.get('matching_passwords')?.get('confirm_password')?.dirty || signupForm.get('matching_passwords')?.get('confirm_password')?.touched)">
             <ion-icon name="information-circle-outline"></ion-icon>
             <span>{{ validation.message }}</span>
           </div>
         </ng-container>
       </div>
-  </ion-list>
+    </ion-list>
 
-  <ion-button class="signup-btn" type="submit" expand="block" >Sign Up</ion-button>
-  <ion-row class="other-auth-options-row">
-    <ion-button class="login-btn" fill="clear" [routerLink]="['/login']">
-      Already have an account?
-    </ion-button>
-  </ion-row>
-</form>
+    <ion-button class="signup-btn" type="submit" expand="block" >Sign Up</ion-button>
+
+    <ion-list lines="none">
+        <ion-item>
+          <ion-button slot="end" fill="clear" [routerLink]="['/login']">
+            Already have an account?
+          </ion-button>
+        </ion-item>
+    </ion-list>
+  </form>
+
+
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col push="6"><p class="options-divider">Or</p></ion-col>
+    </ion-row>
+  </ion-grid>
 
   <div class="social-auth-options">
-    <p class="options-divider">Or</p>
     <ion-button class="social-auth-btn facebook-auth-btn" expand="block">Sign Up with Facebook</ion-button>
     <ion-button class="social-auth-btn google-auth-btn" expand="block">Sign Up with Google</ion-button>
     <ion-button class="social-auth-btn twitter-auth-btn" expand="block">Sign Up with Twitter</ion-button>
   </div>
 
-  <div class="legal-stuff">
-    By creating an account you agree to our <a class="legal-action">Privacy Policy</a> and <a class="legal-action">Terms
-      of use</a>.
-  </div>
+  <ion-grid >
+    <ion-row class="ion-justify-content-center">
+      By creating an account you agree to our &nbsp;<a>Privacy Policy</a>&nbsp;and&nbsp;<a>Terms of use</a>.
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

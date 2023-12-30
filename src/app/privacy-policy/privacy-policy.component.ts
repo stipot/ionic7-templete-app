@@ -14,8 +14,8 @@ lang:string="ru"
   constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {}
-  dismiss(){
-    return this.modalCtrl.dismiss();
+  dismiss(): void {
+     this.modalCtrl.dismiss();
   }
 
   handleChange(ev: any) {

@@ -13,7 +13,7 @@ export class FiltersPage {
   radioForm: FormGroup;
   typeOfRooms = [{ title_field: "Стандартный", value_fieled: "347" }, { title_field: "Люкс", value_fieled: "403" }, { title_field: "Полу-люкс", value_fieled: "555" }];
   typeOfRequirs = ["Уборка номеров", "Всё включено", "Обслуживание номеров"]
-
+  facilities = ["Парковка", "Бесплатный WI-FI","Можно с животными","Трансфер от аэропорта"]
   constructor() {
     this.rangeForm = new FormGroup({
       single: new FormControl(2),
@@ -28,9 +28,12 @@ export class FiltersPage {
     this.radioForm = new FormGroup({
       selected_option: new FormControl(this.typeOfRooms[0])
     });
+
+ 
   }
 
   rangeChange(range: Range) {
     console.log('range change', range);
   }
+ 
 }

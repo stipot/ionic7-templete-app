@@ -8,7 +8,7 @@ import {LoginPageModule } from "./login/login.module"
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
+import {DealsComponent} from './deals/deals.component';
 
 
 const routes: Routes = [
@@ -33,7 +33,12 @@ const routes: Routes = [
   {
     path: 'contact-card',
     component: ContactCardComponent
-  }, {
+  }, 
+  {
+    path: 'deals',
+    component: DealsComponent
+  }, 
+  {
     path: 'settings',
     component: SettingsComponent
   },

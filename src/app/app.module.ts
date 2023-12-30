@@ -21,6 +21,7 @@ import { ContactCardComponent } from './contact-card/contact-card.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {AppSharedComponentsModule} from './shared/common.module'
 
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
@@ -35,6 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
+    AppSharedComponentsModule,
     // Инициализация базы данных
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

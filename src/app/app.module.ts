@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -7,28 +7,42 @@ import { IonicRouteStrategy } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FormsComponent } from './forms/forms.component';
+import { NgFor } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsComponent } from './forms/forms.component';
+import {SettingsComponent} from "./settings/settings.component"
+
+import { environment } from '../environments/environment';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { NotesComponent } from './notes/notes.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
-import { SettingsComponent } from './settings/settings.component';
+import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
+import { SignupComponent } from './signup/signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
-// Фабрика для создания TranslateLoader с использованием HttpClient
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18s/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent, FormsComponent, ContactCardComponent, SettingsComponent,],
+  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent],
   imports: [
-    FormsModule,
     BrowserModule,
-    IonicModule.forRoot(), // Важно для доступности Ionic компонентов
+    IonicModule.forRoot(),
     AppRoutingModule,
+    ReactiveFormsModule,
+    // Инициализация базы данных
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+    FormsModule,
+    ReactiveFormsModule,
+    NgFor, 
     HttpClientModule,
-    
-    TranslateModule.forRoot({ // Настройка ngx-translate
+    TranslateModule.forRoot({ 
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
@@ -36,10 +50,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    // Другие сервисы и провайдеры
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
+

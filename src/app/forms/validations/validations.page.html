@@ -2,47 +2,121 @@
 
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>{{ 'Validations' | translate }}</ion-title>
+    <ion-title>Validations</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="validations-content">
 
+
+  <ion-item-divider>
+    <ion-label>User</ion-label>
+  </ion-item-divider>
   <ion-list class="inputs-list">
 
-    <ion-item class="input-item">
-      <ion-input label="{{ 'Username' | translate }}" placeholder="{{ 'Enter text' | translate }}"></ion-input>
-    </ion-item>
 
     <ion-item class="input-item">
-      <ion-input label="{{ 'Name' | translate }}" placeholder="{{ 'Enter text' | translate }}"></ion-input>
+      <ion-input label="Username" labelPlacement="floating" fill="solid" color="tertiary" placeholder="" helperText="Enter a valid Username" errorText="Invalid Username"  ngModel  required></ion-input>
     </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.username">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
 
     <ion-item class="input-item">
-      <ion-input label="{{ 'Last Name' | translate }}" placeholder="{{ 'Enter text' | translate }}"></ion-input>
+      <ion-input label="Name" labelPlacement="floating" fill="solid" color="secondary" placeholder="" helperText="Enter a valid Name" errorText="Invalid Name"  ngModel  required></ion-input>
     </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.name">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
 
     <ion-item class="input-item">
-      <ion-input label="{{ 'Email input' | translate }}" type="email" placeholder="{{ 'email@domain.com' | translate }}"></ion-input>
+      <ion-input label="Last Name" labelPlacement="floating" fill="solid" color="secondary" placeholder="" helperText="Enter a valid Last Name" errorText="Invalid Last Name"  ngModel  required></ion-input>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.lastname">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
+    <ion-item class="input-item">
+      <ion-input label="Email" type="email"  fill="solid" color="secondary" labelPlacement="floating" placeholder="" helperText="Enter a valid email" errorText="Invalid email"  ngModel email  required></ion-input>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.email">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
+    <ion-item-divider>
+      <ion-label>Countrie & Phone</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-select label="Countrie" label-placement="floating">
+        <ion-select-option *ngFor="let countrie of countrie" [value]="countrie" >{{ countrie }}</ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
-      <ion-input label="{{ 'Phone' | translate }}" type="tel" placeholder="{{ '888-888-8888' | translate }}"></ion-input>
+      <ion-input label="Phone" type="tel" labelPlacement="floating" fill="solid" color="secondary" placeholder="" helperText="Enter a valid Phone" errorText="Invalid Phone"  ngModel tel  required></ion-input>
     </ion-item>
 
-    <ion-list-header>
-      <ion-label>{{ 'Gender' | translate }}</ion-label>
-    </ion-list-header>
+    <ion-item-divider>
+      <ion-label>Gender</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-select label="Gender" label-placement="floating">
+        <ion-select-option *ngFor="let gender of genders" [value]="gender" >{{ gender }}</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-    <ion-radio-group value="turtles">
-      <ion-radio value="female">{{ 'female' | translate }}</ion-radio><br />
-      <ion-radio value="male">{{ 'male' | translate }}</ion-radio><br />
-    </ion-radio-group>
+
+    <ion-item-divider>
+      <ion-label>Password</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-input label="Password" type="password" labelPlacement="floating" fill="solid" color="secondary" value="" helperText="Enter a valid Password" errorText="Invalid Password"  ngModel password  required></ion-input>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.password">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
 
     <ion-item>
-      <ion-input label="{{ 'Password' | translate }}" type="password" value="{{ 'password' | translate }}"></ion-input>
+      <ion-input label="Confirm Password" type="password" labelPlacement="floating" fill="solid" color="secondary" value="" helperText="Enter a valid Password" errorText="Invalid Password"  ngModel password  required></ion-input>
     </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.confirm_password">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
 
+    <ion-item>
+      <ion-checkbox>I accept terms and conditions</ion-checkbox>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.terms">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
   </ion-list>
+
+  <ion-button class="submit-btn" type="submit" expand="block" fill="outline">Submit</ion-button>
 
 </ion-content>

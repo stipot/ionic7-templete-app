@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { NgFor } from '@angular/common';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import {SettingsComponent} from "./settings/settings.component"
 
@@ -30,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     FormsModule,
-    NgFor,
+    NgFor, 
+    HttpClientModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -9,9 +9,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import {SettingsComponent} from "./settings/settings.component";
+import {UserComponent} from "./user/user.component"
 
 @NgModule({
-  declarations: [AppComponent,FormsComponent, ContactCardComponent, SettingsComponent],
+  declarations: [AppComponent,FormsComponent, ContactCardComponent, SettingsComponent, UserComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

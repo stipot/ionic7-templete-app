@@ -3,6 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { FormsComponent } from './forms/forms.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
+import { Component } from '@angular/core';
+import {UserComponent} from "./user/user.component"
+
 
 const routes: Routes = [
   {
@@ -28,7 +31,12 @@ const routes: Routes = [
   {
     path: 'profil',
     loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule)
+  },
+  {  
+    path:'user',
+    component: UserComponent
   }
+
 
 ];
 

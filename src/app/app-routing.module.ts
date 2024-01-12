@@ -9,6 +9,7 @@ import {LoginPageModule } from "./login/login.module"
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 
 
 
@@ -74,6 +75,10 @@ const routes: Routes = [
   {
     path: 'privacy-policy',
     component: PrivacyPolicyComponent
+  },
+  {
+    path: 'barcode-scanner',
+    component: BarcodeScannerComponent
   },
   {
     path: 'contact-card',

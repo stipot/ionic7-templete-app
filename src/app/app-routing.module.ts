@@ -9,6 +9,7 @@ import {LoginPageModule } from "./login/login.module"
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 
 import {DealsComponent} from './deals/deals.component';
@@ -98,11 +99,14 @@ const routes: Routes = [
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
   },
+  {
+    path: 'rss-data',
+    component: RssDataComponent
+  },
   { 
     path: '**', 
   redirectTo: 'page-not-found' 
-  }
-
+  },
 ];
 
 @NgModule({

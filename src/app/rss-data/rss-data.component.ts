@@ -1,21 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+
+
 
 @Component({
   selector: 'app-rss-data',
   templateUrl: './rss-data.component.html',
-  styleUrls: ['./rss-data.component.css']
+  styleUrls: ['./rss-data.component.scss']
 })
-export class RssDataComponent {
+export class RssDataComponent implements OnInit {
 
   rssData: any;
 
   constructor(private http: HttpClient) {
-    this.fetchRssData();
+  }
+  ngOnInit() {
+    this.fetchRssData()
   }
 
   fetchRssData() {
-    const rssUrl = 'https://example.com/rss-feed'; // Замените на URL вашего RSS-ленты новостей
+    const rssUrl = 'https://news.un.org/feed/subscribe/ru/news/topic/law-and-crime-prevention/feed/rss.xml'; // Замените на URL вашего RSS-ленты новостей
 
     this.http.get(rssUrl, { responseType: 'text' })
       .subscribe((data: any) => {
@@ -32,6 +37,7 @@ export class RssDataComponent {
         }
 
         this.rssData = parsedData;
+        // console.log("Данные",parsedData)
       });
   }
 }

@@ -5,18 +5,19 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 import { IonicRouteStrategy } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsComponent } from './forms/forms.component';
 import { NgFor } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {SettingsComponent} from "./settings/settings.component"
+import {SettingsComponent} from "./settings/settings.component";  
 
 import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { NotesComponent } from './notes/notes.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
@@ -31,7 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent],
+  declarations: [AppComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -53,8 +54,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TranslateService],
   bootstrap: [AppComponent],
+  exports: [TranslateModule], 
 })
 export class AppModule {}
 

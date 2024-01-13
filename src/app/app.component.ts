@@ -23,6 +23,7 @@ export class AppComponent {
     { title: 'privacy-policy', url: '/privacy-policy', icon: 'battery-full-outline' },
     { title: 'login', url: '/login', icon: '' },
     { title: 'ToDo list', url: '/todo-list', icon: 'todo-list' },
+    { title: 'barcode-scanner', url: '/barcode-scanner', icon: '' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
 

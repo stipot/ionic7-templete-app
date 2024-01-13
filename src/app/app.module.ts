@@ -26,7 +26,7 @@ import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.compone
 import {AppSharedComponentsModule} from './shared/common.module'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/I18s/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18s/', '.json');
 }
 @NgModule({
   declarations: [AppComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent, BarcodeScannerComponent],

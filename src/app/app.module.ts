@@ -25,11 +25,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import {AppSharedComponentsModule} from './shared/common.module'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import {DealsComponent} from './deals/deals.component';
+
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18s/', '.json');
+  return new TranslateHttpLoader(http, './assets/I18s/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent, BarcodeScannerComponent],
+  declarations: [AppComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

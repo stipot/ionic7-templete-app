@@ -28,7 +28,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import {DealsComponent} from './deals/deals.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18s/', '.json');
+  return new TranslateHttpLoader(http, './assets/I18s/', '.json');
 }
 
 @NgModule({

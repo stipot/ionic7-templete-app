@@ -27,7 +27,7 @@ import {AppSharedComponentsModule} from './shared/common.module'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18s/', '.json');
+  return new TranslateHttpLoader(http, './assets/I18s/', '.json');
 }
 
 @NgModule({

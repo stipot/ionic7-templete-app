@@ -12,13 +12,13 @@ export class NotesComponent implements OnInit {
   notes: any = [];
 
   constructor(private userService: UserService) {
-    this.userService.getData('notes').subscribe((res) => {
-      this.notes.length = 0;
-      res.map((element: any) => {
-        this.notes.push(element);
-      });
-      console.log(this.notes);
-    });
+    // this.userService.getData('notes').subscribe((res) => {
+    //   this.notes.length = 0;
+    //   res.map((element: any) => {
+    //     this.notes.push(element);
+    //   });
+    //   console.log(this.notes);
+    // });
   }
 
   saveData() {

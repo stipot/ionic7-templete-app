@@ -3,9 +3,9 @@ import { ListenDecorator } from 'ionicons/dist/types/stencil-public-runtime';
 import { HttpClient } from '@angular/common/http';
 import { IonInput, ItemReorderEventDetail } from '@ionic/angular';
 
+import { UserService } from '../user.service';
 
 interface Task {
-  id: number,
   name: string,
   description: string,
   isActive: boolean,
@@ -18,6 +18,7 @@ interface Task {
 })
 
 export class TodoListComponent  implements OnInit {
+  private readonly COLLECTION = "todo-list"
   private readonly URL = "assets/sample-data/tasks.json"
   
   @ViewChild('autofocus', {static: false}) inputBox?: IonInput;
@@ -26,19 +27,25 @@ export class TodoListComponent  implements OnInit {
   name: string = ""
   description: string = ""
 
-  activeTask: Task = {id: 0, name: "", description: "", isActive: false}
+  activeTask: Task = {name: "", description: "", isActive: false}
 
 
-  constructor(protected http: HttpClient) { 
-    this.http.get(this.URL)
-      .subscribe((res: any) => {
-        this.data = res;
-      });
-
-      
+  constructor(protected http: HttpClient, private db: UserService) { 
+      this.downloadData()
   }
 
   ngOnInit() {
+  }
+
+  private async downloadData() {
+    console.log("Download")
+    let tmp = await this.db.getData(this.COLLECTION)
+
+    for(let el of tmp.items) {
+      console.log('item:', el)
+      let task: Task = {name: el.name, description: el.description, isActive: el.isActive}
+      this.data.push(task)
+    }
   }
 
 
@@ -68,11 +75,14 @@ export class TodoListComponent  implements OnInit {
 
     this.activeTask.name = this.name
     this.activeTask.description = this.description
-
+    
   }
 
   public deleteItem(task: Task) {
-    this.data = this.data.filter((item) => item != task)
+    console.log("Delete: ", task)
+    let data = this.data.filter((item) => item != task)
+    this.db.updateData(this.COLLECTION, data)
+    this.data = data
   }
 
   public deleteAllCompletedItems() {
@@ -87,8 +97,10 @@ export class TodoListComponent  implements OnInit {
     this.inputBox?.setFocus()
 
     if (this.name != "") {
-      let task: Task = {id: 100, name: this.name, description: this.description, isActive: false}
+      let task: Task = {name: this.name, description: this.description, isActive: false}
       this.data.push(task)
+      this.db.updateData(this.COLLECTION, this.data)
+
 
       this.name = ""
       this.description = ""

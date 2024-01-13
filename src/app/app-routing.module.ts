@@ -10,6 +10,9 @@ import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.componen
 import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
+import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
+
+import {DealsComponent} from './deals/deals.component';
 
 
 const routes: Routes = [
@@ -34,7 +37,12 @@ const routes: Routes = [
   {
     path: 'contact-card',
     component: ContactCardComponent
-  }, {
+  }, 
+  {
+    path: 'deals',
+    component: DealsComponent
+  }, 
+  {
     path: 'settings',
     component: SettingsComponent
   },
@@ -74,6 +82,10 @@ const routes: Routes = [
   {
     path: 'privacy-policy',
     component: PrivacyPolicyComponent
+  },
+  {
+    path: 'barcode-scanner',
+    component: BarcodeScannerComponent
   },
   {
     path: 'contact-card',

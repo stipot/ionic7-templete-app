@@ -22,17 +22,17 @@ import { ContactCardComponent } from './contact-card/contact-card.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import {AppSharedComponentsModule} from './shared/common.module'
-
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
+import {DealsComponent} from './deals/deals.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18s/', '.json');
+  return new TranslateHttpLoader(http, './assets/I18s/', '.json');
 }
-
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent, RssDataComponent],
+  declarations: [AppComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

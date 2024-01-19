@@ -19,13 +19,27 @@
         class="note-input"
       ></ion-input>
     </ion-item>
-    <!-- <p>{{ noteData }}</p> -->
     <ion-button (click)="saveData()">Сохранить</ion-button>
   </ion-list>
-  <ion-list>
-    <ion-item style="margin-top: 10px;" *ngFor="let note of notes">
-      <p>{{ note.data }}</p>
-      <ion-button class="remove-note">x</ion-button>
+  <ion-list class="remove-note-list">
+    <ion-item
+      class="remove-note"
+      style="margin-top: 10px"
+      *ngFor="let note of notes"
+    >
+      <p id="{{ note.id }}">{{ note.data }}</p>
+      <ion-button
+        (click)="removeDocument(note.id)"
+        slot="end"
+        class="remove-note"
+        >x</ion-button
+      >
+      <ion-button
+        (click)="updateDocument(note.id)"
+        slot="end"
+        class="remove-note"
+        >edit</ion-button
+      >
     </ion-item>
   </ion-list>
   <ion-label> </ion-label>

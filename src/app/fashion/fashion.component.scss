@@ -1,20 +1,30 @@
 div.main-body{
-    background: BlueViolet;
-    color: BlueViolet;
-    height: 1000px;
+    background: rgb(0, 0, 0);
+    color: black;
+    height: 100%;
+    overflow-y:scroll; 
+    position:relative;
 }
 
 .goods_list{
-    display: flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#dialog-prd {
     align-items: center;
 }
 
 .product-card{
-    --ion-item-background: #bbb;
-    background-color: #bbb;
-    height: 350px;
-    width: 600px;
-    display: inline-block;
+    --ion-item-background: #ffffff;
+    background-color: #ffffff;
+    height: 360px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     word-wrap: break-all;
     margin-right: 5px;
     margin-left: 25px;
@@ -23,36 +33,59 @@ div.main-body{
 }
 
 .product-name{
-    --color: rgb(0, 0, 0);
-    background-color: #aaa;
-    word-wrap: break-all;
+    color: black;
+    white-space: nowrap;
     font-size: 20px;
-    text-align: center;
-    height: 100px;
-    width: 100px;
+    text-align: bottom;
+    padding: auto;
+    display: flex;
+    margin-top: 10px;
 }
 
-.product-card{
-    --color: rgb(0, 0, 0);
-    word-wrap: break-all;
-    font-size: 16px;
-    text-align: center;
+.ion-padding{
+    display: flex;
+    align-items: center;
 }
 
-.product-img {
+.product-img{
     height: 250px;
     width: 250px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.btn-close{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 100%;
+}
+
+.prd-price{
+    color: rgb(0, 0, 0);
+    white-space: nowrap;
+    font-size: 20px;
+    text-align: bottom;
+    margin-top: 5px;
+    padding: auto;
+    display: flex;
+}
+
+.prd-quan{
+    color: rgb(0, 0, 0);
+    white-space: nowrap;
+    font-size: 20px;
+    text-align: bottom;
+    margin-top: 15px;
+    padding: auto;
+    display: flex;
 }
 
 div[scrollx=true],div[scrolly=true] {
     position: relative;
-    overflow: hidden;
-}
-
-div[scrollx=true] {
-   overflow-x: auto;
+    overflow: scroll;
 }
 
 div[scrolly=true] {
-   overflow-y: auto;
+   overflow-y: scroll;
 }

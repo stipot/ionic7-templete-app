@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FashionService {
 
-  products: Dress[] = []
+  products: Dress[] = [];
 
   constructor(public http: HttpClient) { }
 
@@ -16,6 +16,6 @@ export class FashionService {
   }
 
   getData(): any {
-    return this.http.get<any>('./assets/sample-data/fashion/fashion-data.json')
+    return this.http.get<Dress>('./assets/sample-data/fashion/fashion-data.json');
   }
 }

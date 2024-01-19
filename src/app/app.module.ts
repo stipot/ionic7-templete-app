@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { FormsComponent } from './forms/forms.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { IonicModule } from '@ionic/angular';
+import { IonicRouteStrategy } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FormsComponent } from './forms/forms.component';
 import { NgFor } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,28 +16,42 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {SettingsComponent} from "./settings/settings.component"
+import {SettingsComponent} from "./settings/settings.component";  
+
 import { environment } from '../environments/environment';
 import { NotesComponent } from './notes/notes.component';
+import { TodoListComponent } from './todo-list/todo-list.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
 import { FashionComponent } from './fashion/fashion.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
+import {AppSharedComponentsModule} from './shared/common.module'
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RssDataComponent } from './rss-data/rss-data.component';
+import {DealsComponent} from './deals/deals.component';
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/I18s/', '.json');
+}
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, SignupComponent, FashionComponent],
+  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    ReactiveFormsModule,
+    AppSharedComponentsModule,
     // Инициализация базы данных
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     FormsModule,
     NgFor,
-    HttpClientModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, HttpClient],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+  exports: [TranslateModule], 
 })
 export class AppModule {}
+

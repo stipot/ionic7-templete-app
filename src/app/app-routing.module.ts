@@ -4,10 +4,17 @@ import { FormsComponent } from './forms/forms.component'
 import { NotesComponent } from './notes/notes.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
+import { TodoListComponent } from './todo-list/todo-list.component';
 import {LoginPageModule } from "./login/login.module"
 import { FashionComponent } from './fashion/fashion.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RssDataComponent } from './rss-data/rss-data.component';
+import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
+
+import {DealsComponent} from './deals/deals.component';
+
 
 const routes: Routes = [
   {
@@ -31,7 +38,12 @@ const routes: Routes = [
   {
     path: 'contact-card',
     component: ContactCardComponent
-  }, {
+  }, 
+  {
+    path: 'deals',
+    component: DealsComponent
+  }, 
+  {
     path: 'settings',
     component: SettingsComponent
   },
@@ -53,8 +65,12 @@ const routes: Routes = [
     component: NotesComponent
   },
   {
+    path: 'todo-list',
+    component: TodoListComponent
+  },
+  {
     path: 'signup', 
-    component: SignupComponent
+    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
   },
   {
     path: 'fashion',
@@ -73,12 +89,28 @@ const routes: Routes = [
     component: PrivacyPolicyComponent
   },
   {
+    path: 'barcode-scanner',
+    component: BarcodeScannerComponent
+  },
+  {
     path: 'contact-card',
     component: ContactCardComponent
-  }, { path: '**', redirectTo: 'page-not-found' },
+  }, 
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
+  },
+  {
+    path: 'rss-data',
+    component: RssDataComponent
+  },
+  { 
+    path: '**', 
+  redirectTo: 'page-not-found' 
   },
 ];
 

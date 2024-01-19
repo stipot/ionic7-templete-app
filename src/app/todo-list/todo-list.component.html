@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Список дел</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+<ion-grid>
+  <ion-row class="ion-align-items-center">
+    <ion-col>
+        <ion-item>
+          <ion-input #autofocus  placeholder="Название задачи" (ionChange)="onChange()" (keypress)="taskCompleted($event)" [(ngModel)]="name" (keyup.enter)="enterEvent()"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea placeholder="Описание задачи" (ionChange)="onChange()" [(ngModel)]="description"></ion-textarea>
+        </ion-item>
+    </ion-col>
+    <ion-col size="auto">
+      <ion-button (click)="createTask()">+</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<div *ngIf="data.length == 0" class="message">
+  <ion-label>Задачи отсутствуют</ion-label>
+</div>
+  
+<ion-list>
+  <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
+    <ion-item *ngFor="let task of data">
+      <ion-checkbox class="check"  slot="start"  [(ngModel)]="task.isActive" [ngClass]="{'done': task.isActive}"/> 
+      <ion-label (click)="onClick(task)" style="z-index:3" [ngClass]="{'done': task.isActive}"> 
+        <h2>{{ task.name }} </h2>
+        <p>{{ task.description }}</p>
+      </ion-label>
+      <ion-button color="danger" (click)="deleteItem(task)" [ngClass]="{'button-active': !task.isActive}">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+      
+    <ion-reorder slot="end" [ngClass]="{'done': task.isActive}"></ion-reorder>
+  </ion-item>
+
+  </ion-reorder-group>
+</ion-list>
+<!-- delete all completed -->
+
+</ion-content>
+<ion-footer>
+  <ion-button expand="block" color="warning" (click)="deleteAllCompletedItems()">Удалить все выполненные задачи</ion-button>
+</ion-footer>

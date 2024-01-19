@@ -1,3 +1,22 @@
+:host {
+  --page-margin: var(--app-fair-margin);
+  --page-background: var(--app-background-shade);
+
+  --page-tags-gutter: 5px;
+
+  --page-color-radio-items-per-row: 5;
+  --page-color-radio-gutter: 2%;
+  --page-color-radio-width: calc((100% - (2 * var(--page-color-radio-gutter) * var(--page-color-radio-items-per-row))) / var(--page-color-radio-items-per-row));
+}
+ion-item-divider {
+  --background: var(--page-background);
+  --padding-bottom: calc(var(--page-margin) / 2);
+  --padding-top: calc(var(--page-margin) / 2);
+  --padding-start: var(--page-margin);
+  --padding-end: var(--page-margin);
+
+  border: none;
+}
 .text-align-right{
 text-align: end;
 }
@@ -42,4 +61,33 @@ ion-range::part(bar) {
 
 ion-range::part(bar-active) {
   background: #074de6;
+}
+.checkbox-tags {
+  padding: calc(var(--page-margin) / 2) calc(var(--page-margin) - var(--page-tags-gutter));
+
+  
+
+  .checkbox-tag {
+    padding: 0px var(--page-tags-gutter);
+    margin: var(--page-tags-gutter) 0px;
+  }
+
+  // Add a deeper selector to override default colors
+  .square-checkbox-tags {
+    background-color: var(--page-background);
+
+    .checkbox-tag {
+      --checkbox-tag-color: var(--ion-color-medium);
+      --checkbox-tag-background: var(--ion-color-lightest);
+      --checkbox-tag-active-color: var(--ion-color-lightest);
+      --checkbox-tag-active-background: var(--ion-color-secondary);
+    }
+  }
+  .checkbox-button{
+    --checkbox-background-checked: #00378a;
+    --size: 24px;
+    --border-radius:10px;
+    --border-color-checked:#330092;
+  }
+
 }

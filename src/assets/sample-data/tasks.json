@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "Добавить новую вкладку",
+        "description": "Использовать ionic framework",
+        "isActive": false
+    },
+    {
+        "id": 2,
+        "name": "Удалить сервис",
+        "description": "Добаить универсальный сервис",
+        "isActive": false
+    },
+    {
+        "id": 3,
+        "name": "Написать README.md",
+        "description": "Задокументировать проделанные шаги",
+        "isActive": true
+    }
+]

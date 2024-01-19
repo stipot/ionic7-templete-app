@@ -183,3 +183,14 @@ Open the System, search for "Changes" select: "Change the environment variables 
 In the window that opens, select the user environment variables table for %USER%, the Path variable Parameter "Change", "create" a new path
 Path parameter Path :%AppData%\npm "It is recommended to check the operation of the path through the line of the file explorer "
 Then click "ok" and !restart the computer! to save changes.
+
+#### Todo-list
+
+  ng generate component todo-list
+  ng generate service todo-list
+
+TODO:
+- текстовое поля для ввода задачи как в weeek.ru
+- отображение блоков с задачами (название+описание)
+- данные хранить локально в (src/asserts/sample-data или создать папку в src/asserts/ в формате json)
+- reorder items https://ionicframework.jp/docs/v6/api/reorder/

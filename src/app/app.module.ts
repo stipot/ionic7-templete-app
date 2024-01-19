@@ -9,8 +9,6 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsComponent } from './forms/forms.component';
 import { NgFor } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
@@ -47,9 +45,18 @@ export function HttpLoaderFactory(http: HttpClient) {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     FormsModule,
-    NgFor,
+    ReactiveFormsModule,
+    NgFor, 
+    HttpClientModule,
+    TranslateModule.forRoot({ 
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TranslateService],
   bootstrap: [AppComponent],
   exports: [TranslateModule], 
 })

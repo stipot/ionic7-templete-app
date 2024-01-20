@@ -17,10 +17,11 @@ export class AppComponent {
     // Добавляем поле для перехода на страницу пометок
     { title: 'Пометки', url: '/notes', icon: 'Пометки' },
     { title: 'Filters', url:'/filters',icon: 'reader-outline'},
-    { title: 'Validations', url: '/validations', icon: '' },  
+    { title: 'Validations', url: '/validations', icon: '' },
     { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
     { title: 'Login', url: '/login', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },
+    { title: 'Terms of service', url: '/terms-of-service', icon: '' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
   constructor(private translate: TranslateService) {

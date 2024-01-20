@@ -14,7 +14,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {SettingsComponent} from "./settings/settings.component";  
+import {SettingsComponent} from "./settings/settings.component";
 
 import { environment } from '../environments/environment';
 import { NotesComponent } from './notes/notes.component';
@@ -32,12 +32,13 @@ import {AppSharedComponentsModule} from './shared/common.module'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {DealsComponent} from './deals/deals.component';
+import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18s/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent],
+  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent, TermsOfServiceComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -49,9 +50,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     provideFirestore(() => getFirestore()),
     FormsModule,
     ReactiveFormsModule,
-    NgFor, 
+    NgFor,
     HttpClientModule,
-    TranslateModule.forRoot({ 
+    TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,

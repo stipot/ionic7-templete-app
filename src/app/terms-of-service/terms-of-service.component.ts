@@ -10,5 +10,8 @@ export class TermsOfServiceComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {}
+  dismiss(){
+
+}
 
 }

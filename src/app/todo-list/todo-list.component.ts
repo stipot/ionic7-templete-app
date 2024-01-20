@@ -38,14 +38,14 @@ export class TodoListComponent  implements OnInit {
   }
 
   private async downloadData() {
-    console.log("Download")
-    let tmp = await this.db.getData(this.COLLECTION)
+  //   console.log("Download")
+  //   let tmp = await this.db.getData(this.COLLECTION)
 
-    for(let el of tmp.items) {
-      console.log('item:', el)
-      let task: Task = {name: el.name, description: el.description, isActive: el.isActive}
-      this.data.push(task)
-    }
+  //   for(let el of tmp.items) {
+  //     console.log('item:', el)
+  //     let task: Task = {name: el.name, description: el.description, isActive: el.isActive}
+  //     this.data.push(task)
+  //   }
   }
 
 

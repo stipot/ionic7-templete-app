@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
+import { TranslateService } from '@ngx-translate/core';
 
 register ();
 
@@ -26,8 +27,12 @@ export class AppComponent {
     { title: 'Intro', url: '/intro', icon: '' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
-  constructor() { }
-  changeLanguage(lang: any){
+  constructor(private translate: TranslateService) {
+    this.translate.setDefaultLang('ru');
+    this.translate.use('ru');
+  }
 
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
   }
 }

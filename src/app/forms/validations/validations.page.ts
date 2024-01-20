@@ -36,6 +36,9 @@ export class ValidationsPage implements OnInit {
     ],
       'terms': [
         {message: 'You must accept terms and conditions.' }
+      ],
+      'data': [
+        {message: 'Data is required.'}
       ]
     
   };

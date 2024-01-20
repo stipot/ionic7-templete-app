@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-terms-of-service',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsOfServiceComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
 
+  
   ngOnInit() {}
 
+  dismiss(): void {
+    this.modalCtrl.dismiss();
+ }
 }

@@ -13,7 +13,8 @@ import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
-import {RecipesPageModule} from './recipes/recipes.module';
+import {RecipesPageModule} from './recipes/recipes.module'
+import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 
 import {DealsComponent} from './deals/deals.component';
 
@@ -43,11 +44,11 @@ const routes: Routes = [
   {
     path: 'contact-card',
     component: ContactCardComponent
-  }, 
+  },
   {
     path: 'deals',
     component: DealsComponent
-  }, 
+  },
   {
     path: 'settings',
     component: SettingsComponent
@@ -82,7 +83,7 @@ const routes: Routes = [
     component: TodoListComponent
   },
   {
-    path: 'signup', 
+    path: 'signup',
     loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
   },
   {
@@ -102,13 +103,17 @@ const routes: Routes = [
     component: PrivacyPolicyComponent
   },
   {
+    path: 'terms-of-service',
+    component: TermsOfServiceComponent
+  },
+  {
     path: 'barcode-scanner',
     component: BarcodeScannerComponent
   },
   {
     path: 'contact-card',
     component: ContactCardComponent
-  }, 
+  },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
@@ -121,16 +126,16 @@ const routes: Routes = [
     path: 'rss-data',
     component: RssDataComponent
   },
-  { path: 'intro', 
-  component: IntroComponent 
+  { path: 'intro',
+  component: IntroComponent
 },
   {
     path: 'owerview',
     loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
   },
-  { 
-    path: '**', 
-  redirectTo: 'page-not-found' 
+  {
+    path: '**',
+  redirectTo: 'page-not-found'
   },
   {
     path: 'recipes',
@@ -143,7 +148,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-  
+
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

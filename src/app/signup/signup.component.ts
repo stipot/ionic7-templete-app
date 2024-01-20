@@ -1,6 +1,7 @@
-import { Component, OnInit,} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, MenuController } from '@ionic/angular';
+import { Validators, FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 
 @Component({
@@ -8,7 +9,11 @@ import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.compone
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent  implements OnInit {
+  pageTitle = "Sign up"
+  signupForm: FormGroup;
+  matching_passwords_group: FormGroup;
+  email: string = ""
 
   validation_messages = {
     'email': [
@@ -28,15 +33,68 @@ export class SignupComponent implements OnInit {
   }
   
 
-  appTitle = "Ionic 7 Template App"
-  constructor (public modalController: ModalController){}
-  ngOnInit() { }
 
-  async show() {
-      const modal = await this.modalController.create({
+  constructor(
+    public modalController: ModalController
+
+  ) { 
+
+    this.matching_passwords_group = new FormGroup({
+      'password': new FormControl('', Validators.compose([
+        Validators.minLength(5),
+        Validators.required
+      ])),
+      'confirm_password': new FormControl('', Validators.required)
+    }, (formGroup: AbstractControl) =>  {
+      return SignupComponent.areNotEqual(formGroup);
+    });
+
+    this.signupForm = new FormGroup({
+      'email': new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])),
+      'matching_passwords': this.matching_passwords_group
+    });
+
+  }
+  appTitle = "Ionic 7 Template App"
+  ngOnInit() {}
+
+  static areNotEqual(formGroup: any) {
+    let val;
+    let valid = true;
+
+    for (const key in formGroup.controls) {
+      if (formGroup.controls.hasOwnProperty(key)) {
+        const control: FormControl = <FormControl>formGroup.controls[key];
+
+        if (val === undefined) {
+          val = control.value;
+        } else {
+          if (val !== control.value) {
+            valid = false;
+            break;
+          }
+        }
+      }
+    }
+
+    if (valid) {
+      return null;
+    }
+
+    return {
+      areNotEqual: true
+    };
+  }
+
+
+  async showPrivacyModal() {
+    const modal = await this.modalController.create({
       component: PrivacyPolicyComponent
     });
-    modal.present(); 
-    const {data, role} = await modal.onWillDismiss(); 
+    return await modal.present();
   }
+
 }

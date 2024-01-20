@@ -10,4 +10,14 @@
       <ion-title size="large">recipes</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-card *ngFor="let item of hitem">
+    <img alt="Silhouette of mountains" src={{item.picture}} />
+    <ion-card-header>
+      <ion-card-title>{{item.name}}</ion-card-title>
+      <ion-card-subtitle>{{item.description}}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>{{item.price}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

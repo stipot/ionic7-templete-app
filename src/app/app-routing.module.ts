@@ -61,10 +61,6 @@ const routes: Routes = [
     path: 'forms',
     component: FormsComponent
   },
-  {
-    path: 'profil',
-    loadChildren: () => import('./profil/profil.module').then(m => m.ProfilPageModule)
-  },
   {  
     path:'user',
     component: UserComponent
@@ -137,11 +133,6 @@ const routes: Routes = [
     path: '**',
   redirectTo: 'page-not-found'
   },
-  {
-    path: 'recipes',
-    loadChildren: () => import('./recipes/recipes.module').then( m => m.RecipesPageModule)
-  },
-
 ];
 
 @NgModule({

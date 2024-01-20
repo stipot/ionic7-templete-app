@@ -9,6 +9,7 @@ import {LoginPageModule } from "./login/login.module"
 import { FashionComponent } from './fashion/fashion.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
+import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
@@ -113,6 +114,9 @@ const routes: Routes = [
     path: 'rss-data',
     component: RssDataComponent
   },
+  { path: 'intro', 
+  component: IntroComponent 
+},
   {
     path: 'owerview',
     loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
@@ -131,6 +135,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
+  
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

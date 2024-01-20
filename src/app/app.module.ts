@@ -24,6 +24,9 @@ import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.componen
 import { SignupComponent } from './signup/signup.component';
 import { FashionComponent } from './fashion/fashion.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IntroComponent } from './intro/intro.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import {AppSharedComponentsModule} from './shared/common.module'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -34,7 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18s/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent],
+  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -58,7 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, TranslateService],
   bootstrap: [AppComponent],
-  exports: [TranslateModule], 
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
 

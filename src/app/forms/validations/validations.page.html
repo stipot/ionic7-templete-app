@@ -1,6 +1,11 @@
+<!-- validations.component.html -->
+
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Validations</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -100,6 +105,29 @@
           <span>{{ validation.message }}</span>
       </ng-container>
     </div>
+
+    <ion-item-divider>
+      <ion-label>Date & Time</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-input label="Date" type="date" labelPlacement="floating" fill="solid" color="secondary" value="" helperText="Enter a valid Data" errorText="Invalid Date"  ngModel date  required></ion-input>
+    </ion-item>
+
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.data">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-input label="Time" type="time" labelPlacement="floating" fill="solid" color="secondary" value="" helperText="Enter a valid Time" errorText="Invalid Time"  ngModel time  required></ion-input>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-label>Other</ion-label>
+    </ion-item-divider>
 
     <ion-item>
       <ion-checkbox>I accept terms and conditions</ion-checkbox>

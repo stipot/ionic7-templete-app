@@ -7,15 +7,18 @@ import { SettingsComponent } from "./settings/settings.component"
 import { TodoListComponent } from './todo-list/todo-list.component';
 import {LoginPageModule } from "./login/login.module"
 import { FashionComponent } from './fashion/fashion.component';
-import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
+import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component";
 import { SignupComponent } from './signup/signup.component';
 import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
-import {RecipesPageModule} from './recipes/recipes.module'
+import {RecipesPageModule} from './recipes/recipes.module';
 
 import {DealsComponent} from './deals/deals.component';
+
+import { Component } from '@angular/core';
+import {UserComponent} from "./user/user.component";
 
 
 const routes: Routes = [
@@ -60,6 +63,10 @@ const routes: Routes = [
   {
     path: 'profil',
     loadChildren: () => import('./profil/profil.module').then(m => m.ProfilPageModule)
+  },
+  {  
+    path:'user',
+    component: UserComponent
   },
   // Добавляем путь в роутинг для перемещения на страницу пометок
   {
@@ -129,6 +136,7 @@ const routes: Routes = [
     path: 'recipes',
     loadChildren: () => import('./recipes/recipes.module').then( m => m.RecipesPageModule)
   },
+
 ];
 
 @NgModule({

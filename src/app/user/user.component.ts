@@ -1,4 +1,16 @@
-{
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss'],
+})
+export class UserComponent  implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {}
+  userProfile = {
     "userImage": "src/assets/sample-images/notifications/diana.jpg",
     "name": "Бочкова Диана Ашотовна",
     "membership": "ПРО",
@@ -11,4 +23,6 @@
     "frnd1": "Майкл",
     "frnd2": "Тревор",
     "frnd3": "Франклин"
-}    
+}
+
+}

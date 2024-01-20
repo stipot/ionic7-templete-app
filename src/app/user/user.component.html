@@ -7,6 +7,42 @@
 </ion-header>
 
 <ion-content class="user-profile">
+  <div style = "width:50%; margin: 0px auto;">
+    <ion-avatar>
+      <img alt="Silhouette of a person's head" src="./assets/sample-images/notifications/diana.jpg" />
+    </ion-avatar>
+  </div>
+    <p> <b>Имя: </b> {{userProfile.name}}<br>
+      <b>Статус: </b>{{userProfile.membership}}<br>
+      <b>Профессия: </b>{{userProfile.job}}<br>
+      <b>Лайки: </b>{{userProfile.likes}}<br>
+      <b>Подписчики: </b>{{userProfile.followers}}<br>
+      <b>Подписки: </b>{{userProfile.following}}<br>
+      <b>Обо мне: </b> {{userProfile.about}}
+  </p> 
+    <p><b>{{userProfile.friends}}</b></p>
+    <p>
+      <ion-chip>
+        <ion-avatar>
+          <img alt="Silhouette of a person's head" src="./assets/sample-images/notifications/mike.jpg" />
+        </ion-avatar>
+        <ion-label>{{userProfile.frnd1}}</ion-label>
+      </ion-chip>
+      <ion-chip>
+        <ion-avatar>
+          <img alt="Silhouette of a person's head" src="./assets/sample-images/notifications/trevor.jpg" />
+        </ion-avatar>
+        <ion-label>{{userProfile.frnd2}}</ion-label>
+      </ion-chip>
+      <ion-chip>
+        <ion-avatar>
+          <img alt="Silhouette of a person's head" src="./assets/sample-images/notifications/fran.jpg" />
+        </ion-avatar>
+        <ion-label>{{userProfile.frnd3}}</ion-label>
+      </ion-chip>
+    </p>
 
+    
 </ion-content>
+
 

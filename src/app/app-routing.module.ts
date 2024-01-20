@@ -13,6 +13,7 @@ import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
+import {RecipesPageModule} from './recipes/recipes.module'
 
 import {DealsComponent} from './deals/deals.component';
 
@@ -66,6 +67,10 @@ const routes: Routes = [
     component: NotesComponent
   },
   {
+    path: 'recipes',
+    loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesPageModule)
+  },
+  {
     path: 'todo-list',
     component: TodoListComponent
   },
@@ -112,9 +117,17 @@ const routes: Routes = [
   { path: 'intro', 
   component: IntroComponent 
 },
+  {
+    path: 'owerview',
+    loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
+  },
   { 
     path: '**', 
   redirectTo: 'page-not-found' 
+  },
+  {
+    path: 'recipes',
+    loadChildren: () => import('./recipes/recipes.module').then( m => m.RecipesPageModule)
   },
 ];
 

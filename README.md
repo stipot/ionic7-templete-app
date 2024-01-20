@@ -184,13 +184,14 @@ In the window that opens, select the user environment variables table for %USER%
 Path parameter Path :%AppData%\npm "It is recommended to check the operation of the path through the line of the file explorer "
 Then click "ok" and !restart the computer! to save changes.
 
-#### Todo-list
+## Connecting the database
+- Registration on the Firebase website [Firebase](https://firebase.google.com/)
+- Creating a database on the site
+- Data from the Google website for connecting to the database, transferred to the file "environment.ts"
+- Initializing the database in the application in the file "app.module.ts"
+- In the file "user.service.ts" we create a method for receiving data (getData), for writing data (addData), for changing data (updateDocument) and for removing data (removeDocument) in the database
 
-  ng generate component todo-list
-  ng generate service todo-list
-
-TODO:
-- текстовое поля для ввода задачи как в weeek.ru
-- отображение блоков с задачами (название+описание)
-- данные хранить локально в (src/asserts/sample-data или создать папку в src/asserts/ в формате json)
-- reorder items https://ionicframework.jp/docs/v6/api/reorder/
+## Checking the database operation
+- creating the "notes" component
+- creating a link to a component
+- working with component functions (notes.component.ts) and its rendering on the site (notes.component.html, notes.component.scss)

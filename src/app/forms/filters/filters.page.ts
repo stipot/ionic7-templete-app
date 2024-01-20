@@ -10,6 +10,7 @@ export class FiltersPage {
   rangeForm: FormGroup;
   counterForm: any;
   checkboxForm: FormGroup;
+  toggled:Boolean;
   radioForm: FormGroup;
   typeOfRooms = [{ title_field: "Стандартный", value_fieled: "347" }, { title_field: "Люкс", value_fieled: "403" }, { title_field: "Полу-люкс", value_fieled: "555" }];
   typeOfRequirs = ["Уборка номеров", "Всё включено", "Обслуживание номеров"]
@@ -28,6 +29,7 @@ export class FiltersPage {
     this.radioForm = new FormGroup({
       selected_option: new FormControl(this.typeOfRooms[0])
     });
+    this.toggled = false
 
  
   }

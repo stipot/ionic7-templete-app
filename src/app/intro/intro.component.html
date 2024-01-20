@@ -1,10 +1,35 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-title>Intro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <swiper-container>
+    <swiper-slide>
+      <ion-row >
+        <ion-col class="illustration-col">
+          <div style="width:85% ; margin:0px auto;" class="swiper-slide">
+            
+            <ion-img src="./assets/sample-images/prikol2.jpg"></ion-img>
+            
+          </div>
+        </ion-col>
+        
+
+        <ion-col class="" class="info-col">
+          <div class="info-wrapper">
+            <h3 class="info-title">Это приложение создано с использованием Ionic 7.</h3>
+            <p class="info-paragraph">
+              Он был создан <b>IonicThemes</b> команда, которая поможет вам начать разработку приложения Ionic.
+            </p>
+            <p class="info-paragraph">
+              <b>Вам понравится Ionic 7, и если вы заблудитесь, помните, что у нас есть множество обучающих программ, которые помогут вам.</b>
+            </p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </swiper-slide>
     <swiper-slide>
       <ion-row >
         <ion-col class="illustration-col">
@@ -19,17 +44,44 @@
 
         <ion-col class="" class="info-col">
           <div class="info-wrapper">
-            <h3 class="info-title">This App is built with Ionic 5</h3>
+            <h3 class="info-title">Как использовать шаблон?</h3>
             <p class="info-paragraph">
-              It was created by the <b>IonicThemes</b> team to help you jump start your Ionic app development.
+              Мы хотим помочь вам создавать более качественные и быстрые приложения <b>Ionic</b>.
             </p>
             <p class="info-paragraph">
-              <b>You will love Ionic 5, and if you get lost, remember we have lots of tutorials to help you.</b>
+              Мы приложили много усилий для создания и стилизации каждого компонента этого шаблона.
+            </p>
+            <p class="info-paragraph">
+              Вы можете повторно использовать и изменять каждый компонент этого шаблона.
             </p>
           </div>
         </ion-col>
       </ion-row>
     </swiper-slide>
-    
+    <swiper-slide>
+      <ion-row >
+        <ion-col class="illustration-col">
+          <div style="width:80% ; margin:0px auto;">
+            <app-aspect-ratio [ratio]="{w:915, h:849}">
+              
+              <ion-img src="./assets/sample-images/prikol3.jpg"></ion-img>
+            </app-aspect-ratio>
+          </div>
+        </ion-col>
+        
+
+        <ion-col class="" class="info-col">
+          <div class="info-wrapper">
+            <h3 class="info-title">Какие компоненты доступны в этом <b>Ionic 7</b>.</h3>
+            <p class="info-paragraph">
+              Вкладки, Уведомления, Профиль, Боковое меню, Аутентификация, Начало работы, Прохождение, Формы и проверки, Категории и Путешествия.
+            </p>
+            <p class="info-paragraph">
+              Страница с описанием и подробностями о модной еде, предложениях недвижимости и многое другое!
+            </p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </swiper-slide>
   </swiper-container>
 </ion-content>

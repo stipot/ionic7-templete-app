@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class UserService {
+  private readonly ID = "qGgoKvgwaNBLU2ooS4eP"
   constructor(private firestore: Firestore) {}
   app = initializeApp(environment.firebase);
   db = getFirestore(this.app);
@@ -25,6 +26,18 @@ export class UserService {
   getData(collectionName: any) {
     const collectionRef = collection(this.firestore, collectionName);
     return collectionData(collectionRef);
+  }
+
+  // async getData(collectionName: any) {
+  //   const docRef = doc(this.firestore, collectionName, this.ID);
+  //   const docSnap = await getDoc(docRef);
+  //   console.log(docSnap, docSnap.data(), docSnap.get("data"))
+  //   return docSnap.get("data")
+  // }
+
+  async updateData(collectionName:any,items: any) {
+    const cityRef = doc(this.firestore, collectionName, this.ID);
+    await updateDoc(cityRef, { data: {items} });
   }
 
   /**
@@ -67,5 +80,10 @@ export class UserService {
   async removeDocument(collectionName: any, id: any) {
     const collectionRef = doc(this.db, collectionName, id);
     await deleteDoc(collectionRef);
+  }
+  
+  async removeData(data: any, collectionName: any) {
+    console.log(data, collectionName)
+    await deleteDoc(doc(this.firestore, collectionName, data));
   }
 }

@@ -1,4 +1,4 @@
-// Custom variables
+ // Custom variables
 // Note:  These ones were added by us and have nothing to do with Ionic CSS Custom Properties
 :host {
     --page-margin: var(--app-broad-margin);
@@ -47,7 +47,7 @@
     }
   
     .signup-btn {
-      margin: calc(var(--page-margin) / 2) 0px;
+      margin: calc(var(--page-margin) / 2) 10px;
     }
   
     .other-auth-options-row {
@@ -93,4 +93,7 @@
           }
       }
   }
-  
+
+a {
+  cursor: pointer;
+}

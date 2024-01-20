@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { UserService } from '../user.service';
 
 @Component({
@@ -14,7 +15,10 @@ export class NotesComponent implements OnInit {
     this.userService.getData('notes').subscribe((res) => {
       this.notes.length = 0;
       res.map((element: any) => {
-        this.notes.push(element);
+        if ("id" in element ){
+          this.notes.push(element);
+        }
+      console.log(res);
       });
     });
   }

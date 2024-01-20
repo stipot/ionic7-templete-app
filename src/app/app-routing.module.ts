@@ -108,6 +108,10 @@ const routes: Routes = [
     path: 'rss-data',
     component: RssDataComponent
   },
+  {
+    path: 'owerview',
+    loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
+  },
   { 
     path: '**', 
   redirectTo: 'page-not-found' 

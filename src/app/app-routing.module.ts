@@ -6,6 +6,7 @@ import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
 import { TodoListComponent } from './todo-list/todo-list.component';
 import {LoginPageModule } from "./login/login.module"
+import { FashionComponent } from './fashion/fashion.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -70,6 +71,10 @@ const routes: Routes = [
   {
     path: 'signup', 
     loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
+  },
+  {
+    path: 'fashion',
+    component: FashionComponent
   },
   {
     path: 'filters',

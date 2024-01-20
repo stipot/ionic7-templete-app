@@ -18,6 +18,7 @@ export class AppComponent {
     { title: 'spam', url: '/folder/spam', icon: 'предупреждения/спам' },
     // Добавляем поле для перехода на страницу пометок
     { title: 'notes', url: '/notes', icon: 'Пометки' },
+    { title: 'Fashion', url:'/fashion',icon: 'fashion'},
     { title: 'filters', url: '/filters', icon: 'reader-outline' },
     { title: 'validations', url: '/validations', icon: '' },
     { title: 'privacy-policy', url: '/privacy-policy', icon: 'battery-full-outline' },
@@ -36,7 +37,3 @@ export class AppComponent {
     this.translate.use(lang);
   }
 }
-
-
-
-

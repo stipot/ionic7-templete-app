@@ -9,18 +9,20 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsComponent } from './forms/forms.component';
 import { NgFor } from '@angular/common';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {SettingsComponent} from "./settings/settings.component";  
 
 import { environment } from '../environments/environment';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { NotesComponent } from './notes/notes.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
+import { FashionComponent } from './fashion/fashion.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import {AppSharedComponentsModule} from './shared/common.module'
@@ -32,7 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/I18s/', '.json');
 }
 @NgModule({
-  declarations: [AppComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent],
+  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

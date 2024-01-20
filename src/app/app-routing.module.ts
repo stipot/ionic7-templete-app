@@ -112,6 +112,10 @@ const routes: Routes = [
     path: '**', 
   redirectTo: 'page-not-found' 
   },
+  {
+    path: 'owerview',
+    loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
+  },
 ];
 
 @NgModule({

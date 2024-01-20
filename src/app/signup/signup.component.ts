@@ -9,7 +9,7 @@ import { Validators, FormGroup, FormControl, AbstractControl } from '@angular/fo
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent  implements OnInit {
-
+  pageTitle = "Sign up"
   signupForm: FormGroup;
   matching_passwords_group: FormGroup;
   email: string = ""

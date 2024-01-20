@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      RSS Data
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of rssData">
+      <a [href]="item.link">{{ item.title }}</a>
+    </ion-item>
+  </ion-list>
+</ion-content>

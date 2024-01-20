@@ -11,11 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   public appPages = [
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
-    { title: 'outbox', url: '/folder/outbox', icon: 'исходящие' },
-    { title: 'favorites', url: '/folder/favorites', icon: 'понравившиеся' },
-    { title: 'archived', url: '/folder/archived', icon: 'архив' },
-    { title: 'trash', url: '/folder/trash', icon: 'корзина' },
-    { title: 'spam', url: '/folder/spam', icon: 'предупреждения/спам' },
+
     // Добавляем поле для перехода на страницу пометок
     { title: 'notes', url: '/notes', icon: 'Пометки' },
     { title: 'Fashion', url:'/fashion',icon: 'fashion'},

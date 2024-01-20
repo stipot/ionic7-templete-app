@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, MenuController } from '@ionic/angular';
 import { Validators, FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 
 @Component({
   selector: 'app-signup',
@@ -30,9 +31,13 @@ export class SignupComponent  implements OnInit {
       { type: 'areNotEqual', message: 'Password mismatch' }
     ]
   }
+  
 
 
-  constructor() { 
+  constructor(
+    public modalController: ModalController
+
+  ) { 
 
     this.matching_passwords_group = new FormGroup({
       'password': new FormControl('', Validators.compose([
@@ -82,6 +87,14 @@ export class SignupComponent  implements OnInit {
     return {
       areNotEqual: true
     };
+  }
+
+
+  async showPrivacyModal() {
+    const modal = await this.modalController.create({
+      component: PrivacyPolicyComponent
+    });
+    return await modal.present();
   }
 
 }

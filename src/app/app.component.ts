@@ -27,4 +27,7 @@ export class AppComponent {
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
   constructor() { }
+  changeLanguage(lang: any){
+
+  }
 }

@@ -1,0 +1,91 @@
+div.main-body{
+    background: rgb(0, 0, 0);
+    color: black;
+    height: 100%;
+    overflow-y:scroll; 
+    position:relative;
+}
+
+.goods_list{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#dialog-prd {
+    align-items: center;
+}
+
+.product-card{
+    --ion-item-background: #ffffff;
+    background-color: #ffffff;
+    height: 360px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    word-wrap: break-all;
+    margin-right: 5px;
+    margin-left: 25px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+.product-name{
+    color: black;
+    white-space: nowrap;
+    font-size: 20px;
+    text-align: bottom;
+    padding: auto;
+    display: flex;
+    margin-top: 10px;
+}
+
+.ion-padding{
+    display: flex;
+    align-items: center;
+}
+
+.product-img{
+    height: 250px;
+    width: 250px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.btn-close{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 100%;
+}
+
+.prd-price{
+    color: rgb(0, 0, 0);
+    white-space: nowrap;
+    font-size: 20px;
+    text-align: bottom;
+    margin-top: 5px;
+    padding: auto;
+    display: flex;
+}
+
+.prd-quan{
+    color: rgb(0, 0, 0);
+    white-space: nowrap;
+    font-size: 20px;
+    text-align: bottom;
+    margin-top: 15px;
+    padding: auto;
+    display: flex;
+}
+
+div[scrollx=true],div[scrolly=true] {
+    position: relative;
+    overflow: scroll;
+}
+
+div[scrolly=true] {
+   overflow-y: scroll;
+}

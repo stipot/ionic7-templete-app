@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-//import {ContactCardModule} from '@angular/'  ДОДЕЛАТЬ
+import { ContactCard } from './contact-card.service/contact-card.model'
+import { ContactCardService } from './contact-card.service/contact-card.service';
 
 @Component({
   selector: 'app-contact-card',
@@ -7,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact-card.component.scss'],
 })
 export class ContactCardComponent  implements OnInit {
+  contact: ContactCard = {}
 
-  constructor() { }
-  ngOnInit() {}
-  //contact:  ДОДЕЛАТЬ
+  constructor(private data: ContactCardService) { }
+  ngOnInit() {
+  this.data.getData().subscribe((response) => {
+    this.contact = response
+  });
+  }
 }
+

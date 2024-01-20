@@ -1,0 +1,49 @@
+
+<ion-card>
+  <ion-card-header align="center">
+    <ion-toolbar color="secondary" style="border-radius: 15px;">
+      <ion-title><b>Fashion</b></ion-title>
+    </ion-toolbar>
+  </ion-card-header>
+
+  <div class="main-body" scrolly="true" style="max-height: auto">
+      <ion-list class="goods_list">
+        <div class="product-card" *ngFor="let item of products; index as i">
+          <ion-img class="product-img" [src]="item.picture"></ion-img>
+          <ion-label class="product-name"><b>{{item.name}}</b></ion-label>
+          <ion-label class="prd-price"><b>{{item.price}} ₽</b></ion-label>
+          <ion-button id="open-modal{{i}}" expand="block" (click)="open()">Подробнее</ion-button>
+          <ion-modal trigger="open-modal{{i}}" (willDismiss)="onWillDismiss($event)" #closex>
+            <ng-template>
+              <ion-header>
+                <ion-toolbar>
+                  <ion-buttons slot="start">
+                    <ion-title>{{item.name}}</ion-title>
+                    <div class="btn-close">
+                      <ion-button (click)="closex.dismiss()">✖</ion-button>
+                    </div>
+                  </ion-buttons>
+                  <ion-buttons slot="end">
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-header>
+              <ion-content class="ion-padding">
+                <div class="product-card">
+                  <ion-img class="product-img" [src]="item.picture"></ion-img>
+                  <ion-label class="product-name"><b>{{item.name}}</b></ion-label>
+                  <ion-label class="prd-price"><b>{{item.price}} ₽</b></ion-label>
+                  <ion-label class="prd-quan">В наличии: {{item.quantity}} шт.</ion-label>
+                </div>
+                <p>{{item.description}}</p>
+              </ion-content>
+            </ng-template>
+          </ion-modal>
+        </div>
+      </ion-list>
+  </div>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title>Fashion</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-card>

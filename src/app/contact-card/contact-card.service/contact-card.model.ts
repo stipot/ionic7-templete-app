@@ -8,5 +8,6 @@ export interface ContactCard{
     bday?: string
     address?: string
     marriage?: string
+    img?: string
     alife?: boolean
   }

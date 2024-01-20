@@ -7,5 +7,6 @@
     "bday": "06.06.1799",
     "address": "Санкт-Петербург",
     "marriage": "Все сложно",
+    "img": "./assets/sample-images/pushkin.jpg",
     "alife": false
 }

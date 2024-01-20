@@ -9,9 +9,11 @@ import {LoginPageModule } from "./login/login.module"
 import { FashionComponent } from './fashion/fashion.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component"
 import { SignupComponent } from './signup/signup.component';
+import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
+import {RecipesPageModule} from './recipes/recipes.module'
 
 import {DealsComponent} from './deals/deals.component';
 
@@ -65,6 +67,10 @@ const routes: Routes = [
     component: NotesComponent
   },
   {
+    path: 'recipes',
+    loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesPageModule)
+  },
+  {
     path: 'todo-list',
     component: TodoListComponent
   },
@@ -108,9 +114,20 @@ const routes: Routes = [
     path: 'rss-data',
     component: RssDataComponent
   },
+  { path: 'intro', 
+  component: IntroComponent 
+},
+  {
+    path: 'owerview',
+    loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
+  },
   { 
     path: '**', 
   redirectTo: 'page-not-found' 
+  },
+  {
+    path: 'recipes',
+    loadChildren: () => import('./recipes/recipes.module').then( m => m.RecipesPageModule)
   },
 ];
 
@@ -118,6 +135,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
+  
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

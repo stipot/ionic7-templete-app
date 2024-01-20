@@ -7,6 +7,7 @@ import { SignUpPageRoutingModule } from './signup.routing.module';
 import { SignupComponent } from './signup.component';
 import {AppSharedComponentsModule} from '../shared/common.module'
 
+
 @NgModule({
   imports: [
     CommonModule,

@@ -16,10 +16,38 @@
       <ion-label position="floating">Password</ion-label>
       <ion-input type="password" required></ion-input>
     </ion-item>
+    <div style="width:100%;display: flex; justify-content: center;">
+      <ion-button style="flex:1">
+        <ion-icon  type="submit" color="danger" expand="block-center">Sign In</ion-icon>
+        Sign In
+      </ion-button>
+      
+      <ion-button style="flex:1"  [routerLink]="['/forgot-password']" class="small-text">Sign Up
+        <ion-icon >Sign Up</ion-icon></ion-button>
+    </div>
+  
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="danger" expand="block">Sign In</ion-button>
+    
         <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>
+        <div class="ion-text-center">
+          <p aria-setsize="1">or</p>
+        </div>
+        <ion-button class="social-auth-btn vk-auth-btn" expand="block" shape="round">
+          <ion-icon name="logo-vk"></ion-icon>
+        </ion-button>
+        <ion-button class="social-auth-btn google-auth-btn"  expand="block" shape="round">
+          <ion-icon name="logo-google"></ion-icon>
+        </ion-button>
+        <ion-button class="social-auth-btn twitter-auth-btn"  expand="block" shape="round">
+          <ion-icon name="logo-apple"></ion-icon>
+        </ion-button>
+
+        <ion-grid >
+          <ion-row class="ion-justify-content-center">
+            By creating an account you agree to our &nbsp;<a (click)="showPrivacyModal()">Privacy Policy</a>&nbsp;and&nbsp;<a>Terms of use</a>.
+          </ion-row>
+        </ion-grid>
       </ion-col>
     </ion-row>
   </form>

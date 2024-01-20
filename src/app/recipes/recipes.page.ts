@@ -1,4 +1,19 @@
-[
+import { Component, OnInit } from '@angular/core';
+interface erw {
+name : string,
+description :string,
+price :number,
+picture :string,
+quantity :number
+
+}
+@Component({
+  selector: 'app-recipes',
+  templateUrl: './recipes.page.html',
+  styleUrls: ['./recipes.page.scss'],
+})
+export class RecipesPage implements OnInit {
+hitem: erw[] = [
     {
         "name": "Хлеб",
         "description" : "Мука, 250мл воды, масло растительное 2,5 ложки, дрожжи сухие 11гр, сахар одна столовая ложка, соль 1,5 ложки",
@@ -22,3 +37,10 @@
 
     }
 ]
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}

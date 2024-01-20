@@ -35,10 +35,11 @@ import {DealsComponent} from './deals/deals.component';
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18s/', '.json');
-}
+  return new TranslateHttpLoader(http, './assets/i18s/', '.json')};
+  import {UserComponent} from "./user/user.component";
+
 @NgModule({
-  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent, TermsOfServiceComponent],
+  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, UserComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent, TermsOfServiceComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

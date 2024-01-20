@@ -1,0 +1,11 @@
+.note-input {
+  font-size: 20px;
+}
+.remove-note-list {
+  display: flex;
+  flex-direction: column;
+}
+.remove-note {
+  display: flex;
+  justify-content: space-between;
+}

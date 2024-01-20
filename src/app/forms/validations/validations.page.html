@@ -1,0 +1,145 @@
+<!-- validations.component.html -->
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Validations</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="validations-content">
+
+
+  <ion-item-divider>
+    <ion-label>User</ion-label>
+  </ion-item-divider>
+  <ion-list class="inputs-list">
+
+
+    <ion-item class="input-item">
+      <ion-input label="Username" labelPlacement="floating" fill="solid" color="tertiary" placeholder="" helperText="Enter a valid Username" errorText="Invalid Username"  ngModel  required></ion-input>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.username">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
+
+    <ion-item class="input-item">
+      <ion-input label="Name" labelPlacement="floating" fill="solid" color="secondary" placeholder="" helperText="Enter a valid Name" errorText="Invalid Name"  ngModel  required></ion-input>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.name">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
+
+    <ion-item class="input-item">
+      <ion-input label="Last Name" labelPlacement="floating" fill="solid" color="secondary" placeholder="" helperText="Enter a valid Last Name" errorText="Invalid Last Name"  ngModel  required></ion-input>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.lastname">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
+    <ion-item class="input-item">
+      <ion-input label="Email" type="email"  fill="solid" color="secondary" labelPlacement="floating" placeholder="" helperText="Enter a valid email" errorText="Invalid email"  ngModel email  required></ion-input>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.email">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
+    <ion-item-divider>
+      <ion-label>Countrie & Phone</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-select label="Countrie" label-placement="floating">
+        <ion-select-option *ngFor="let countrie of countrie" [value]="countrie" >{{ countrie }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-input label="Phone" type="tel" labelPlacement="floating" fill="solid" color="secondary" placeholder="" helperText="Enter a valid Phone" errorText="Invalid Phone"  ngModel tel  required></ion-input>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-label>Gender</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-select label="Gender" label-placement="floating">
+        <ion-select-option *ngFor="let gender of genders" [value]="gender" >{{ gender }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item-divider>
+      <ion-label>Password</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-input label="Password" type="password" labelPlacement="floating" fill="solid" color="secondary" value="" helperText="Enter a valid Password" errorText="Invalid Password"  ngModel password  required></ion-input>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.password">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-input label="Confirm Password" type="password" labelPlacement="floating" fill="solid" color="secondary" value="" helperText="Enter a valid Password" errorText="Invalid Password"  ngModel password  required></ion-input>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.confirm_password">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
+    <ion-item-divider>
+      <ion-label>Date & Time</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-input label="Date" type="date" labelPlacement="floating" fill="solid" color="secondary" value="" helperText="Enter a valid Data" errorText="Invalid Date"  ngModel date  required></ion-input>
+    </ion-item>
+
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.data">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-input label="Time" type="time" labelPlacement="floating" fill="solid" color="secondary" value="" helperText="Enter a valid Time" errorText="Invalid Time"  ngModel time  required></ion-input>
+    </ion-item>
+
+    <ion-item-divider>
+      <ion-label>Other</ion-label>
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-checkbox>I accept terms and conditions</ion-checkbox>
+    </ion-item>
+    <div class="validations">
+      <ng-container *ngFor="let validation of validations.terms">
+        <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ validation.message }}</span>
+      </ng-container>
+    </div>
+  </ion-list>
+
+  <ion-button class="submit-btn" type="submit" expand="block" fill="outline">Submit</ion-button>
+
+</ion-content>

@@ -184,3 +184,15 @@ Open the System, search for "Changes" select: "Change the environment variables 
 In the window that opens, select the user environment variables table for %USER%, the Path variable Parameter "Change", "create" a new path
 Path parameter Path :%AppData%\npm "It is recommended to check the operation of the path through the line of the file explorer "
 Then click "ok" and !restart the computer! to save changes.
+
+## Connecting the database
+- Registration on the Firebase website [Firebase](https://firebase.google.com/)
+- Creating a database on the site
+- Data from the Google website for connecting to the database, transferred to the file "environment.ts"
+- Initializing the database in the application in the file "app.module.ts"
+- In the file "user.service.ts" we create a method for receiving data (getData), for writing data (addData), for changing data (updateDocument) and for removing data (removeDocument) in the database
+
+## Checking the database operation
+- creating the "notes" component
+- creating a link to a component
+- working with component functions (notes.component.ts) and its rendering on the site (notes.component.html, notes.component.scss)

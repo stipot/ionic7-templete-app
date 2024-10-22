@@ -1,6 +1,6 @@
 
 
-export class UserProfileModel extends ShellModel {
+interface UserProfileModel {
     userImage: string;
     name: string;
     membership: string;
@@ -9,32 +9,10 @@ export class UserProfileModel extends ShellModel {
     followers: string;
     following: string;
     about: string;
-    friends: Array<{image: string, name: string}> = [
+    friends: 
       {
-        image: '',
-        name: ''
-      },
-      {
-        image: '',
-        name: ''
-      },
-      {
-        image: '',
-        name: ''
-      },
-      {
-        image: '',
-        name: ''
-      }
-    ];
-    photos: Array<string> = [
-      '',
-      '',
-      '',
-      ''
-    ];
-  
-    constructor() {
-      super();
-    }
-  }
+        image: string,
+        name: string
+      };
+    photos: Array<string>
+}

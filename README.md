@@ -1,8 +1,10 @@
 # ionic7-full-starter-app
 
 The student project to build complete Mobile & PWA starter app template
+[Demo application](https://ionic7-templete-app-public.web.app/)
 
 # Documentation
+Full [Documentation](https://stipot.github.io/ionic7-templete-app/).
 ## Minimum requirements
 - [NodeJS 16.17](https://nodejs.org/en/blog/release/v16.17.0)
 ```
@@ -114,15 +116,15 @@ If the commit reverts a previous commit, it should begin with `revert: `, follow
 
 Must be one of the following:
 
-* **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
-* **ci**: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
-* **doc**: Documentation only changes
-* **feat**: A new feature
-* **fix**: A bug fix
-* **perf**: A code change that improves performance
-* **ref**: A code change that neither fixes a bug nor adds a feature
-* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-* **test**: Adding missing tests or correcting existing tests
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci**: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+- **doc**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **ref**: A code change that neither fixes a bug nor adds a feature
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- **test**: Adding missing tests or correcting existing tests
 
 #### Scope
 
@@ -174,7 +176,6 @@ This is useful to track compilation ERRORS
 - To find the installed version of a specific package run `npm list package_name` (ex: `npm list @ionic/core`)
 - To find out which packages need to be updated, you can use `npm outdated -g --depth=0`
 - In particular, run `ng version` to output Angular CLI version and all Angular related installed packages and versions
-
 ## Windows Environment Variables error
 - setting environment variables, if an error occurs in the parameters of the ionic serve command(Error command not found)
 Solution:
@@ -182,3 +183,15 @@ Open the System, search for "Changes" select: "Change the environment variables 
 In the window that opens, select the user environment variables table for %USER%, the Path variable Parameter "Change", "create" a new path
 Path parameter Path :%AppData%\npm "It is recommended to check the operation of the path through the line of the file explorer "
 Then click "ok" and !restart the computer! to save changes.
+
+## Connecting the database
+- Registration on the Firebase website [Firebase](https://firebase.google.com/)
+- Creating a database on the site
+- Data from the Google website for connecting to the database, transferred to the file "environment.ts"
+- Initializing the database in the application in the file "app.module.ts"
+- In the file "user.service.ts" we create a method for receiving data (getData), for writing data (addData), for changing data (updateDocument) and for removing data (removeDocument) in the database
+
+## Checking the database operation
+- creating the "notes" component
+- creating a link to a component
+- working with component functions (notes.component.ts) and its rendering on the site (notes.component.html, notes.component.scss)

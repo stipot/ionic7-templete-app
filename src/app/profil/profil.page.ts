@@ -11,5 +11,16 @@ export class ProfilPage implements OnInit {
 
   ngOnInit() {
   }
+  profile = {
+    "userImage": "/",
+    "name": "?",
+    "job": "|",
+    "membership": "!",
+    "likes": "#",
+    "followers": "a",
+    "following": "b",
+    "about": "c",
+    "friends": "d"
 
+  }
 }

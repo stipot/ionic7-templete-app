@@ -8,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class SettingsComponent  implements OnInit {
 
   constructor() { }
-  
+  selectedtheme:string = 'Dark';
+  language:string = '';
+  font:string = '';
+
   ngOnInit() {}
 
 }

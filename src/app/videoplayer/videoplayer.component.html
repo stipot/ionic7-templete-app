@@ -1,11 +1,6 @@
-<div class="video-player">
-    <video #videoPlayer controls>
-      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <div class="controls">
-      <button (click)="toggleVideo()">Play/Pause</button>
-      <button (click)="stopVideo()">Stop</button>
-      <!-- <input type="range" min="0" max="1" step="0.1" (input)="setVolume($event.target.value)">  -->
-    </div>
-  </div>
+<ion-content>
+  <video #videoPlayer controls width="100%" height="auto">
+    <source src="/assets/videos/kanye.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</ion-content>

@@ -16,6 +16,8 @@ import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.compone
 import {RecipesPageModule} from './recipes/recipes.module'
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 
+import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
+
 import {DealsComponent} from './deals/deals.component';
 
 import { Component } from '@angular/core';
@@ -129,6 +131,10 @@ const routes: Routes = [
     path: 'owerview',
     loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
   },
+  { path: 'videoplayer',
+    component: VideoPlayerComponent
+  },
+
   {
     path: '**',
   redirectTo: 'page-not-found'

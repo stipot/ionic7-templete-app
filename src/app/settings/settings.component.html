@@ -21,9 +21,9 @@
   </ion-list>
 
   <ion-select label="Language" label-placement="floating" fill="outline"
-    placeholder="Language" [(ngModel)]="language">
-    <ion-select-option value="Russian">Русский</ion-select-option>
-    <ion-select-option value="English">English</ion-select-option>
+    placeholder="Language" [(ngModel)]="language" >
+    <ion-select-option value="ru">Русский</ion-select-option>
+    <ion-select-option value="en">English</ion-select-option>
     <ion-select-option value="France">Français</ion-select-option>
     <ion-select-option value="Italian">Italiano</ion-select-option>
   </ion-select>
@@ -39,10 +39,9 @@
       </ion-select>
     </ion-item>
   </ion-list>
-  <ion-button expand="Назад">Назад</ion-button>
+  <ion-button expand="Назад" (click)="changeLanguage()">Назад</ion-button>
 
 {{selectedtheme}}
 {{language}}
 {{font}}
-
 </ion-content>

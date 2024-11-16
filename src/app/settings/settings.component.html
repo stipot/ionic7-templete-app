@@ -19,13 +19,13 @@
       </ion-select>
     </ion-item>
   </ion-list>
-
+  
   <ion-select label="Language" label-placement="floating" fill="outline"
     placeholder="Language" [(ngModel)]="language" >
     <ion-select-option value="ru">Русский</ion-select-option>
     <ion-select-option value="en">English</ion-select-option>
-    <ion-select-option value="France">Français</ion-select-option>
-    <ion-select-option value="Italian">Italiano</ion-select-option>
+    <ion-select-option value="fr">Français</ion-select-option>
+    <ion-select-option value="it">Italiano</ion-select-option>
   </ion-select>
 
   <ion-list>
@@ -38,10 +38,24 @@
         <ion-select-option value="Block">Block</ion-select-option> 
       </ion-select>
     </ion-item>
+    <ion-item>
+      <ion-checkbox>Notifications</ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-radio-group value="regular">
+        <ion-radio value="Regular user">Regular user</ion-radio><br />
+        <ion-radio value="Anonymous user">Anonymous user</ion-radio><br />
+      </ion-radio-group>
+    </ion-item>
+    <ion-item>
+      <ion-range aria-label="Temperature">
+        <ion-icon slot="start" name="snow-outline"></ion-icon>
+        <ion-icon slot="end" name="sunny-outline"></ion-icon>
+      </ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-button fill="clear">Clear cache</ion-button>
+    </ion-item>
   </ion-list>
-  <ion-button expand="Назад" (click)="changeLanguage()">Назад</ion-button>
-
-{{selectedtheme}}
-{{language}}
-{{font}}
+  <ion-button expand="Ready" (click)="changeLanguage()">Ready</ion-button>
 </ion-content>

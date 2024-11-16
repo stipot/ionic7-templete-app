@@ -18,5 +18,10 @@ export class SettingsComponent  implements OnInit {
   changeLanguage() {
     this.translate.use(this.language);
   }
+
+  appPages = [
+    { lang:'Русский', langname:'ru' },
+    { lang:'English', langname:'en' },
+  ]
 }
 

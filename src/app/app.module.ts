@@ -30,6 +30,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import {AppSharedComponentsModule} from './shared/common.module'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RecipesComponent } from './recipes/recipes.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {DealsComponent} from './deals/deals.component';
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"

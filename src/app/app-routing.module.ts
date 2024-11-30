@@ -11,9 +11,9 @@ import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.componen
 import { SignupComponent } from './signup/signup.component';
 import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RecipesComponent } from './recipes/recipes.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
-import {RecipesPageModule} from './recipes/recipes.module'
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 
 import {DealsComponent} from './deals/deals.component';
@@ -71,10 +71,6 @@ const routes: Routes = [
     component: NotesComponent
   },
   {
-    path: 'recipes',
-    loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesPageModule)
-  },
-  {
     path: 'todo-list',
     component: TodoListComponent
   },
@@ -117,6 +113,10 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
+  },
+  {
+    path: 'recipes',
+    component: RecipesComponent
   },
   {
     path: 'rss-data',

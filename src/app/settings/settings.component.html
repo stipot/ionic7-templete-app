@@ -8,54 +8,66 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item>
-      <ion-select class="always-flip" toggleIcon="caret-down-sharp" interface="popover" label="Selected Theme"
-        placeholder="Theme" [(ngModel)]="selectedtheme">
-        <ion-select-option value="Dark">Dark</ion-select-option>
-        <ion-select-option value="White">White</ion-select-option>
-        <ion-select-option value="Black">Black</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
-  
-  <ion-select label="Language" label-placement="floating" fill="outline"
-    placeholder="Language" [(ngModel)]="language" >
-    <ion-select-option value="ru">Русский</ion-select-option>
-    <ion-select-option value="en">English</ion-select-option>
-    <ion-select-option value="fr">Français</ion-select-option>
-    <ion-select-option value="it">Italiano</ion-select-option>
-  </ion-select>
 
-  <ion-list>
-    <ion-item>
-      <ion-select class="always-flip" toggleIcon="caret-down-sharp" interface="popover" label="Fonts"
-        placeholder="Font" [(ngModel)]="font">
-        <ion-select-option value="TimesNewRoman">TimesNewRoman</ion-select-option>
-        <ion-select-option value="Calibri">Calibri</ion-select-option>
-        <ion-select-option value="Arial">Arial</ion-select-option>
-        <ion-select-option value="Block">Block</ion-select-option> 
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox>Notifications</ion-checkbox>
-    </ion-item>
-    <ion-item>
-      <ion-radio-group value="regular">
-        <ion-radio value="Regular user">Regular user</ion-radio><br />
-        <ion-radio value="Anonymous user">Anonymous user</ion-radio><br />
-      </ion-radio-group>
-    </ion-item>
-    <ion-item>
-      <ion-range aria-label="Temperature">
-        <ion-icon slot="start" name="snow-outline"></ion-icon>
-        <ion-icon slot="end" name="sunny-outline"></ion-icon>
-      </ion-range>
-    </ion-item>
-    <ion-item>
-      <ion-button fill="clear">Clear cache</ion-button>
-    </ion-item>
-  </ion-list>
-  <ion-button expand="Ready" (click)="changeLanguage()">Ready</ion-button>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="0" size-md="2" size-lg="4"></ion-col>
+      <ion-col size-sm="12" size-md="8" size-lg="4">
+        <ion-list>
+          <ion-item>
+            <ion-select class="always-flip" toggleIcon="caret-down-sharp" interface="popover" label="Selected Theme"
+              placeholder="Theme" [(ngModel)]="selectedtheme">
+              <ion-select-option value="Dark">Dark</ion-select-option>
+              <ion-select-option value="White">White</ion-select-option>
+              <ion-select-option value="Black">Black</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        
+        <ion-select label="Language" label-placement="floating" fill="outline"
+          placeholder="Language" [(ngModel)]="language" >
+          <ion-select-option value="ru">Русский</ion-select-option>
+          <ion-select-option value="en">English</ion-select-option>
+          <ion-select-option value="fr">Français</ion-select-option>
+          <ion-select-option value="it">Italiano</ion-select-option>
+        </ion-select>
+      
+        <ion-list>
+          <ion-item>
+            <ion-select class="always-flip" toggleIcon="caret-down-sharp" interface="popover" label="Fonts"
+              placeholder="Font" [(ngModel)]="font">
+              <ion-select-option value="TimesNewRoman">TimesNewRoman</ion-select-option>
+              <ion-select-option value="Calibri">Calibri</ion-select-option>
+              <ion-select-option value="Arial">Arial</ion-select-option>
+              <ion-select-option value="Block">Block</ion-select-option> 
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox>Notifications</ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-radio-group value="regular">
+              <ion-radio value="Regular user">Regular user</ion-radio><br />
+              <ion-radio value="Anonymous user">Anonymous user</ion-radio><br />
+            </ion-radio-group>
+          </ion-item>
+          <ion-item>
+            <ion-range aria-label="Temperature">
+              <ion-icon slot="start" name="snow-outline"></ion-icon>
+              <ion-icon slot="end" name="sunny-outline"></ion-icon>
+            </ion-range>
+          </ion-item>
+          <ion-item>
+            <ion-button fill="clear">Clear cache</ion-button>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="Ready" (click)="changeLanguage()">Ready</ion-button>
+        
+      </ion-col>
+      <ion-col size-sm="0" size-md="2" size-lg="4"></ion-col>
+    </ion-row>
+  </ion-grid>
+ 
 </ion-content>

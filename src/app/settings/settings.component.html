@@ -8,8 +8,6 @@
   </ion-toolbar>
 </ion-header>
 
-
-
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
@@ -19,9 +17,8 @@
           <ion-item>
             <ion-select class="always-flip" toggleIcon="caret-down-sharp" interface="popover" label="Selected Theme"
               placeholder="Theme" [(ngModel)]="selectedtheme">
-              <ion-select-option value="Dark">Dark</ion-select-option>
-              <ion-select-option value="White">White</ion-select-option>
-              <ion-select-option value="Black">Black</ion-select-option>
+              <ion-select-option value="light">Light</ion-select-option>
+              <ion-select-option value="dark">Dark</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>

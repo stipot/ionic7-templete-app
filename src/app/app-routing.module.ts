@@ -20,7 +20,7 @@ import {DealsComponent} from './deals/deals.component';
 
 import { Component } from '@angular/core';
 import {UserComponent} from "./user/user.component";
-
+import { FileViewerComponent } from './file-viewer/file-viewer.component';
 
 const routes: Routes = [
   {
@@ -31,6 +31,9 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
+  },
+  {    path: 'file-viewer',
+    component: FileViewerComponent
   },
   {
     path: 'page-not-found',

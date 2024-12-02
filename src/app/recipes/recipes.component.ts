@@ -1,14 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.scss'],
 })
-export class RecipesComponent  implements OnInit {
+export class RecipesComponent {
+  selectedRecipe: any = null;
 
-  constructor() { }
+  recipes = [
+    {
+      name: 'Паста с соусом',
+      description: 'Вкусная паста с томатным соусом',
+      image: 'https://via.placeholder.com/300x150',
+      details: 'Этот рецепт пасты с соусом прост в приготовлении, и он идеально подходит для обеда или ужина. Используйте свежие ингредиенты для лучшего вкуса.',
+    },
+    {
+      name: 'Салат Цезарь',
+      description: 'Свежий салат с курицей и соусом Цезарь',
+      image: 'https://via.placeholder.com/300x150',
+      details: 'Салат Цезарь — это классика, которая никогда не выходит из моды. Этот салат с хрустящими гренками и курицей идеально подойдет к любому основному блюду.',
+    },
+    {
+      name: 'Борщ',
+      description: 'Традиционный украинский борщ с мясом',
+      image: 'https://avatars.mds.yandex.net/get-entity_search/2347736/1009655397/S600xU_2x   ',
+      details: 'Этот борщ варится долго, но результат стоит того! Он обладает насыщенным вкусом и идеально подходит для холодной зимы.',
+    },
+  ];
 
-  ngOnInit() {}
+  selectRecipe(recipe: any) {
+    this.selectedRecipe = recipe;
+  }
 
+  deselectRecipe() {
+    this.selectedRecipe = null;
+  }
 }

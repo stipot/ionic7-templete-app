@@ -40,7 +40,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   import {UserComponent} from "./user/user.component";
 
 @NgModule({
-  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, UserComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent, TermsOfServiceComponent],
+  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, UserComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent, RecipesComponent, RssDataComponent, IntroComponent, TermsOfServiceComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

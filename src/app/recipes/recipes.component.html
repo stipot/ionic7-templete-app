@@ -2,12 +2,18 @@
 
 <ion-content class="scrollable-content">
   <header>
-  <h1 class="large-text">Рецепты</h1>
-</header>
+    <h1 class="large-text">Рецепты</h1>
+  </header>
 
-<ion-searchbar></ion-searchbar>
+  <div class="search-container">
+    <ion-searchbar [(ngModel)]="searchText" debounce="500" placeholder="Поиск"></ion-searchbar>
+    <button class="search-toggle-button" (click)="toggleSearchType()">
+      {{ searchType === 'name' ? 'Поиск по ингредиентам' : 'Поиск по названию' }}
+    </button>
+  </div>
+
   <div class="recipes-container">
-    <ion-card *ngFor="let recipe of recipes">
+    <ion-card *ngFor="let recipe of filteredRecipes">
       <img [src]="recipe.image" alt="recipe image">
       <ion-card-header>
         <ion-card-title>{{ recipe.name }}</ion-card-title>
@@ -17,11 +23,10 @@
     </ion-card>
   </div>
 
-  <!-- Модальное окно с деталями рецепта -->
   <div *ngIf="selectedRecipe" class="recipe-details-modal" (click)="deselectRecipe()">
     <div class="modal-card" (click)="$event.stopPropagation()">
       <button class="close-button" (click)="deselectRecipe()">
-        <span class="close-text">X</span>
+        <span class="close-text">Закрыть</span>
       </button>
       <div class="modal-content">
         <div class="modal-left">
@@ -36,6 +41,7 @@
     </div>
   </div>
 </ion-content>
+
 
 <style>
   .custom-button {

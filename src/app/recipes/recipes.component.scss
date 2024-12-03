@@ -77,21 +77,22 @@ ion-card-title {
 }
 
 .modal-card {
-  background-color: #add8e6; /* Голубой фон */
+  background-color: #add8e6;
   width: 90%;
-  max-width: 700px; /* Увеличена ширина для нового макета */
+  max-width: 700px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   animation: fadeIn 0.5s;
   position: relative;
-  padding: 20px;
+  padding: 40px;
+  box-sizing: border-box;
 
 }
 
 .modal-content {
   display: flex;
-  flex-direction: column;
+    flex-direction: column;
   align-items: center;
   text-align: center;
   color: #000;
@@ -110,36 +111,63 @@ ion-card-title {
   margin-bottom: 10px;
 }
 
-button {
+.custom-button {
   position: fixed;
-  left: 100px;
+  left: 50px;
   bottom: 10px;
-  right: 100px;
+  right: 50px;
 }
 
 .close-button {
   position: absolute;
   top: 0px;
-  right: 0px;
+  left: 250px;
+  right: 250px;
   background: none;
   border: none;
+  height: 40px;
   font-size: 1.5rem;
   color: #333;
   cursor: pointer;
-  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 49%;
+  background-color: rgba(255, 255, 255, 0.8);
 }
+
+
+
 
 .close-button:hover {
   color: #000;
-    position: absolute;
-  top: 0px;
-  right: 0px;
+  background-color: rgba(200, 0, 0, 1);
 }
 
 .close-text {
+  margin: 0;
   position: absolute;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.search-toggle-button {
+  background-color: #3880ff;
+  color: white;
+  border: none;
   top: 0px;
-  right: 0px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.search-toggle-button:hover {
+  background-color: #3171e0;
 }
 
 
@@ -152,6 +180,7 @@ button {
     opacity: 1;
     transform: scale(1);
   }
+
 
 
 }

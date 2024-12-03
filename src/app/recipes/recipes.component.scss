@@ -1,128 +1,157 @@
-/* Color variables */
-$primary-color: #4caf50;
-
-/* General styles */
-body {
-  background-color: #f2f2f2;
-}
-
-/* Recipes container */
-.recipes-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  padding: 16px;
-  max-height: calc(100vh - 60px);
-  overflow-y: auto;
-}
-
-/* Card styling */
-ion-card {
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-
-  &:active {
-    transform: scale(0.98);
-  }
-}
-
-ion-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-ion-card-header {
-  padding: 16px;
-  background: linear-gradient(to bottom, rgba(21, 23, 26, 0.8), rgba(21, 23, 26, 0.2)); /* Gradient background */
-  color: #fff;
+:host {
+  display: block;
+  font-family: 'Arial', sans-serif;
+  color: #000;
+  background-color: #f7f7f7;
 }
 
 header {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://sun9-75.userapi.com/c840521/v840521249/588e9/x-nQBtYcBnQ.jpg');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    padding: 135px 20px;
-    text-align: center;
+  background-image: url('https://blog.suvie.com/wp-content/uploads/2020/02/Bergamot-pizza.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 50px 20px;
+  text-align: center;
+  color: white;
+  text-top: 0px;
 }
 
-h1 {
-    font-size: 3em;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+ion-searchbar {
+  ion-background-color: #add8e6;
+  background: transparent;
 }
 
-ion-card-title {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #fff;
+.recipes-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+ion-card {
+  width: 340px;
+  height: 350px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  background: #add8e6;
+}
+
+ion-card:hover {
+  transform: scale(1.05);
+}
+
+img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+ion-card-header {
+  padding: 10px;
+  text-align: center;
 }
 
 ion-card-subtitle {
-  font-size: 0.9em;
-  color: #fff;
+  font-size: 0.9rem;
+  color: #000;
 }
 
-ion-card-content {
-  padding: 16px;
-  font-size: 0.9em;
-  color: #666;
+ion-card-title {
+  font-size: 1.4rem;
+  color: #000;
 }
 
-/* Modal styling */
 .recipe-details-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .modal-card {
-  position: relative;
-  background-color: #15171a;
-  border-radius: 8px;
+  background-color: #add8e6; /* Голубой фон */
+  width: 90%;
+  max-width: 700px; /* Увеличена ширина для нового макета */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  max-width: 90vw;
-  width: 800px;
-  padding: 0; /* Remove padding from modal-card */
-}
+  animation: fadeIn 0.5s;
+  position: relative;
+  padding: 20px;
 
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1;
-  background-color: transparent;
-  border: none;
-  font-size: 1.5em;
-  cursor: pointer;
-  color: $primary-color;
 }
 
 .modal-content {
-  padding: 24px; /* Add padding for content */
-  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #000;
 }
 
 .recipe-detail-img {
   width: 100%;
-  border-radius: 8px;
-  margin-top: 0; /* Remove margin */
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
 
-/* Optional: Transition effect for modal */
-.recipe-details-modal {
-  transition: opacity 0.3s ease;
+.recipe-detail-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+button {
+  position: fixed;
+  left: 100px;
+  bottom: 10px;
+  right: 100px;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+  z-index: 1050;
+}
+
+.close-button:hover {
+  color: #000;
+    position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.close-text {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+
 }

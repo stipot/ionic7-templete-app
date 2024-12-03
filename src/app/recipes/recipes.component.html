@@ -1,20 +1,21 @@
-<header>
+
+
+<ion-content class="scrollable-content">
+  <header>
+  <h1 class="large-text">Рецепты</h1>
 </header>
 
 <ion-searchbar></ion-searchbar>
-
-<ion-content>
   <div class="recipes-container">
-    <ion-card *ngFor="let recipe of recipes" (click)="selectRecipe(recipe)">
+    <ion-card *ngFor="let recipe of recipes">
       <img [src]="recipe.image" alt="recipe image">
       <ion-card-header>
-        <ion-card-subtitle>{{ recipe.description }}</ion-card-subtitle>
         <ion-card-title>{{ recipe.name }}</ion-card-title>
+        <ion-card-subtitle>{{ recipe.description }}</ion-card-subtitle>
+        <button class="custom-button" (click)="selectRecipe(recipe)">Рецепт</button>
       </ion-card-header>
-
     </ion-card>
   </div>
-
 
   <!-- Модальное окно с деталями рецепта -->
   <div *ngIf="selectedRecipe" class="recipe-details-modal" (click)="deselectRecipe()">
@@ -23,10 +24,52 @@
         <span class="close-text">X</span>
       </button>
       <div class="modal-content">
-        <img [src]="selectedRecipe.image" alt="recipe image" class="recipe-detail-img">
-        <h2>{{ selectedRecipe.name }}</h2>
-        <p>{{ selectedRecipe.details }}</p>
+        <div class="modal-left">
+          <img [src]="selectedRecipe.image" alt="recipe image" class="recipe-detail-img">
+          <h2>{{ selectedRecipe.name }}</h2>
+          <ion-card-ingridients [innerHTML]="convertNewlinesToBreaks(selectedRecipe.ingridients)"></ion-card-ingridients>
+        </div>
+        <div class="modal-right">
+          <p>{{ selectedRecipe.details }}</p>
+        </div>
       </div>
     </div>
   </div>
 </ion-content>
+
+<style>
+  .custom-button {
+    background-color: pink;
+    border: 2px solid black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .large-text {
+    font-size: 60px;
+    text-align: right;
+    margin-top: 0;
+    margin-left: 0;
+    color: black;
+    font-family: Courier New;
+  }
+  ion-content {
+    height: 100%;
+    overflow: auto;  /* Включаем прокрутку для всего содержимого */
+  }
+  .scrollable-content {
+    padding: 10px;
+  }
+  .recipes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  ion-card {
+    margin: 10px;
+    width: 30%;
+  }
+</style>

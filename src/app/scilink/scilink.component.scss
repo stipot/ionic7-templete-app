@@ -1,0 +1,14 @@
+.input-container {
+    display: flex;
+    align-items: center; /* Центрирует элементы по вертикали */
+  }
+  
+  .full-width-input {
+    flex: 1; /* Позволяет инпуту занимать все доступное пространство */
+    margin-right: 1000px; /* Отступ между инпутом и кнопкой */
+  }
+  
+  .full-width-textarea {
+    width: 100%; /* Задает ширину текстовой области на 100% */
+  }
+  

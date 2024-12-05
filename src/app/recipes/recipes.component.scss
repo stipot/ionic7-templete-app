@@ -121,8 +121,7 @@ ion-card-title {
 .close-button {
   position: absolute;
   top: 0px;
-  left: 250px;
-  right: 250px;
+  right: 20px;
   background: none;
   border: none;
   height: 40px;
@@ -132,7 +131,7 @@ ion-card-title {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 49%;
+  border-radius: 15%;
   background-color: rgba(255, 255, 255, 0.8);
 }
 

@@ -31,6 +31,7 @@ import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.com
 import { AppSharedComponentsModule } from './shared/common.module';
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
+import { RecipesComponent } from './recipes/recipes.component';
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -55,7 +56,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     IntroComponent,
     TermsOfServiceComponent,
     VideoPlayerComponent,
-    FrontLayoutComponent
+    FrontLayoutComponent,
+    RecipesComponent
   ],
   imports: [
     BrowserModule,

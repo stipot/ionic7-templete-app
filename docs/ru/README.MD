@@ -22,6 +22,6 @@
 
 5. Компоновка компонента приложения в apk файл
 
-Добавили файл capacitor.settings.gradle и capacitor.build.gradle вручную
+Сгенирировали файл capacitor.settings.gradle и capacitor.build.gradle 
 
 Изменили 

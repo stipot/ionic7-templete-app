@@ -17,6 +17,11 @@
   
   </div> <!-- Закрывает контейнер для ввода -->
 
+  <ion-item> <!-- Новый контейнер для отображения результата запроса -->
+    <ion-label position="floating">Результат запроса</ion-label> <!-- Метка для текстовой области, плавающая над ней -->
+    <ion-textarea class="full-width-textarea" readonly></ion-textarea> <!-- Текстовая область для отображения результата, доступная только для чтения -->
+  </ion-item> <!-- Закрывает контейнер элемента формы -->
+
   <ion-card *ngFor="let a of articles_cards">
     <ion-card-header>
       <ion-card-title><a href="{{a.doi}}">{{a.a_name}}</a></ion-card-title>
@@ -30,9 +35,6 @@
 
 
 
-  <ion-item> <!-- Новый контейнер для отображения результата запроса -->
-    <ion-label position="floating">Результат запроса</ion-label> <!-- Метка для текстовой области, плавающая над ней -->
-    <ion-textarea class="full-width-textarea" readonly></ion-textarea> <!-- Текстовая область для отображения результата, доступная только для чтения -->
-  </ion-item> <!-- Закрывает контейнер элемента формы -->
+
 
 </ion-content> <!-- Закрывает основное содержимое страницы -->

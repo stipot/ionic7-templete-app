@@ -15,21 +15,39 @@
 
 <ion-card>
   <ion-card-header>
-    <ion-card-title>Music Ttitle</ion-card-title>
-    <ion-card-subtitle>Author Name</ion-card-subtitle>
-    <div style="position: absolute; left: 50%; top: 0; transform: translateX(-50%);">
-      <ion-button shape="round">
-        <ion-icon slot="icon-only" name="heart"></ion-icon>
-      </ion-button>
-      <ion-button shape="round">
-        <ion-icon slot="icon-only" name="heart"></ion-icon>
-      </ion-button>
-      <ion-button shape="round">
-        <ion-icon slot="icon-only" name="heart"></ion-icon>
-      </ion-button>
+    <!-- <ion-img
+        src="img/musical-note.png"
+        alt="music_image"
+      ></ion-img> -->
+    <div style="display: flex; justify-content: start;">
+      <div style="width: 50px; height: 50px;">
+        <ion-icon slot="icon-only" name="musical-notes" style="width: 100%; height: 100%;"></ion-icon>
+      </div>
+      <div>
+        <ion-card-title>Music Ttitle</ion-card-title>
+        <ion-card-subtitle>Author Name</ion-card-subtitle>
+      </div>
     </div>
+    
+
+    <div style="width: 100%;">
+      <div style="display: flex; justify-content: center; width: 100%;">
+        <ion-button shape="round" (click)="prev_track()">
+          <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+        </ion-button>
+        <ion-button shape="round" (click)="change_status()">
+          <ion-icon slot="icon-only" [name]="player_status"></ion-icon>
+        </ion-button>
+        <ion-button shape="round" (click)="next_track()">
+          <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
   </ion-card-header>
-  <ion-progress-bar [value]="progress"></ion-progress-bar>
+  <div style="width: 100%; display: flex; justify-content: center;">
+    <ion-progress-bar [value]="progress" style="width: 90%;"></ion-progress-bar>
+  </div>
   <ion-card-content>
     
   </ion-card-content>

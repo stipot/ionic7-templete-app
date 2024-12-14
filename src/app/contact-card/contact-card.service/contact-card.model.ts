@@ -10,4 +10,5 @@ export interface ContactCard{
     marriage?: string
     img?: string
     alife?: boolean
+    phone?: string
   }

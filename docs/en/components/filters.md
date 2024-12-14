@@ -7,3 +7,6 @@ Filter "Type of room". This filter helps you select the type of room in the hote
 Filter "Requirments" can help filter hotel room requirements.
 Filter "Price" sort hotels by price
 In filter "Number of guests" we can indicate the number of people who will be staying at the hotel.
+## TO DO
+-Add a button to change values
+-Improve "Current values"

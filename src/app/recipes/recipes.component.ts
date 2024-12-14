@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-recipes',
@@ -124,7 +125,10 @@ export class RecipesComponent {
     "ingridients": "Лосось 340 гр. филе лосося, разрезанного на 4 куска Соль среднего помола Свежемолотый черный перец Ореховый соус с зеленью, рецепт см. ниже Запеченная тыква, для подачи (по желанию) Ореховый соус с петрушкой 1 головка лука-шалота 1 ст. л. красного винного уксуса 2 ст. л. каперсов (промыть) 1 ст. свежей петрушки 1/2 ст. обжаренного миндаля Оливковое масло extra-virgin",
     "details": "Разогрейте духовку до 230°С. Посолите и поперчите рыбу. Положите куски лосося кожицей вниз на противень. Запекайте до готовности, примерно 12-15 мин. По желанию подавайте рыбу с ореховым соусом с петрушкой. Ореховый соус с петрушкой к рыбе Измельчите лук-шалот и положите в маленькую миску. Полейте винным уксусом и добавьте щепотку соли. Дайте постоять в течение 30 мин. Крупно нарежьте каперсы, петрушку и миндаль и добавьте к луку-шалоту. Полейте оливковым маслом, посолите и поперчите по вкусу."
   }
+  
 ];
+
+
 
   get filteredRecipes() {
     if (this.searchType === 'name') {
@@ -138,6 +142,10 @@ export class RecipesComponent {
       );
     }
     return this.recipes;
+  }
+  constructor(private translate: TranslateService) {
+    this.translate.setDefaultLang('ru');
+    this.translate.use('ru');
   }
 
   selectRecipe(recipe: any) {
@@ -155,5 +163,7 @@ export class RecipesComponent {
   toggleSearchType() {
     this.searchType = this.searchType === 'name' ? 'ingredients' : 'name';
   }
-
+  changeLanguage(lang: string) {
+    this.translate.use(lang);
+  }
 }

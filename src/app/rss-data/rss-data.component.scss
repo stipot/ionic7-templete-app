@@ -1,0 +1,10 @@
+.news-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Создает две колонки равной ширины */
+    gap: 16px; /* Расстояние между карточками */
+  }
+  
+  .news-card {
+    width: 100%; /* Убедитесь, что карточки занимают всю ширину колонки */
+    box-sizing: border-box; /* Учитывает padding и border в общей ширине */
+  }

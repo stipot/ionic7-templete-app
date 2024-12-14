@@ -20,7 +20,7 @@ import {DealsComponent} from './deals/deals.component';
 
 import { Component } from '@angular/core';
 import {UserComponent} from "./user/user.component";
-
+import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
 
 const routes: Routes = [
   {
@@ -65,7 +65,10 @@ const routes: Routes = [
     path:'user',
     component: UserComponent
   },
-  // Добавляем путь в роутинг для перемещения на страницу пометок
+  {  
+    path:'cryptorates',
+    component: CryptoRatesComponent
+  },
   {
     path: 'notes',
     component: NotesComponent
@@ -132,7 +135,7 @@ const routes: Routes = [
   {
     path: '**',
   redirectTo: 'page-not-found'
-  },
+  }
 ];
 
 @NgModule({

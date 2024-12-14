@@ -1,4 +1,4 @@
-# Компонент Contact Card
+# Contact Card Component
 > Contact Card Component is a personal profile, like in social networks. It contains information about the profile owner and his avatar.
 To see this page you need to follow the link: "http://localhost:8100/contact-card"
 

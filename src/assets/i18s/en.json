@@ -31,6 +31,12 @@
     "Password": "Password",
     "password": "password",
     "ToDo list": "ToDo list",
-    "barcode-scanner": "Barcode Scanner"
-    
+    "barcode-scanner": "Barcode Scanner",
+    "Contact card": "Contact card",
+    "Status": "Status",
+    "Following": "Following",
+    "Followers": "Followers",
+    "Birthday": "Birthday",
+    "Address": "Address",
+    "Marriage": "Marriage"
   }

@@ -31,5 +31,12 @@
     "Password": "Пароль",
     "password": "пароль",
     "ToDo list": "Список дел",
-    "barcode-scanner": "Сканер штрихкодов"
+    "barcode-scanner": "Сканер штрихкодов",
+    "Contact card": "Контактная карта",
+    "Status": "Статус",
+    "Following": "Подписки",
+    "Followers": "Подписчики",
+    "Birthday": "День рождения",
+    "Address": "Адрес",
+    "Marriage": "Семейное положение"
   }

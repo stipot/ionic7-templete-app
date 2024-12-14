@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Пометки</ion-title>
+    <ion-title>Заметки</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content class="notes-validations-content">
@@ -36,11 +36,12 @@
         >x</ion-button
       >
       <ion-button
-        (click)="updateDocument(note.id )"
-        slot="end"
-        class="remove-note"
-        >edit</ion-button
-      >
+      (click)="setEditMode(note.data, note.id)"
+      slot="end"
+      class="remove-note"
+    >edit</ion-button>    
+
+
     </ion-item>
   </ion-list>
   <ion-label> </ion-label>

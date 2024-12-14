@@ -30,7 +30,7 @@ export class AppComponent {
     { title: 'Overview', url: '/owerview', icon: '' },
     { title: 'Fashion', url: '/fashion', icon: '' },
     { title: 'Forgot password', url: '/forgot-password', icon: '' },
-    { title: 'RSS data', url: '/rss-data', icon: '' },
+    { title: 'News', url: '/rss-data', icon: '' },
     { title: 'ToDo list', url: '/todo-list', icon: 'todo-list' },
     { title: 'Forms', url: '/forms', icon: '' },
     { title: 'filters', url:'/filters',icon: 'reader-outline'},

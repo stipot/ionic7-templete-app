@@ -1,15 +1,20 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      RSS Data
-    </ion-title>
+    <ion-title>Новостная лента</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of rssData">
-      <a [href]="item.link">{{ item.title }}</a>
-    </ion-item>
-  </ion-list>
+  <div class="news-container">
+    <ion-card *ngFor="let item of newsItems" class="news-card">
+      <img [src]="item.image" [alt]="item.title" />
+      <ion-card-header>
+        <ion-card-title>{{ item.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ item.description }}</p>
+        <ion-button fill="clear" [href]="item.link" target="_blank">Подробнее</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

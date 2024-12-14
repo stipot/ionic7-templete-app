@@ -27,6 +27,7 @@ import { DealsComponent } from './deals/deals.component';
 import { BarcodeScannerComponent } from './barcode-scanner/barcode-scanner.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import { IntroComponent } from './intro/intro.component';
+import { CameraComponent } from './camera/camera.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AppSharedComponentsModule } from './shared/common.module';
 
@@ -51,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BarcodeScannerComponent,
     RssDataComponent,
     IntroComponent,
+    CameraComponent,
     TermsOfServiceComponent
   ],
   imports: [

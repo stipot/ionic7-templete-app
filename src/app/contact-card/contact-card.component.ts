@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactCard } from './contact-card.service/contact-card.model'
 import { ContactCardService } from './contact-card.service/contact-card.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact-card',
@@ -10,7 +11,7 @@ import { ContactCardService } from './contact-card.service/contact-card.service'
 export class ContactCardComponent  implements OnInit {
   contact: ContactCard = {}
 
-  constructor(private data: ContactCardService) { }
+  constructor(private data: ContactCardService, private translate: TranslateService) { }
   ngOnInit() {
   this.data.getData().subscribe((response) => {
     this.contact = response

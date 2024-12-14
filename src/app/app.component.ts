@@ -36,6 +36,7 @@ export class AppComponent {
     { title: 'filters', url:'/filters',icon: 'reader-outline'},
     { title: 'Validations', url: '/validations', icon: '' },
     { title: 'barcode-scanner', url: '/barcode-scanner', icon: '' },
+    { title: 'cryptorates', url: '/cryptorates', icon: '' },
     { title: 'VideoPlayer', url: '/videoplayer', icon: '' },
 
   ];

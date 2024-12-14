@@ -9,6 +9,9 @@ export class MplayerComponent  implements OnInit {
   public progress = 0;
   public player_status = 'play';
 
+  public track_title = 'Music Ttitle';
+  public track_author = 'Author Name';
+
   constructor() {
     setInterval(() => {
       if (this.player_status == 'pause') {
@@ -20,6 +23,11 @@ export class MplayerComponent  implements OnInit {
 
       }
     }, 100);
+  }
+
+  set_track(title:string, author:string) {
+    this.track_title = title;
+    this.track_author = author;
   }
 
   set_zero_bar() {
@@ -36,6 +44,7 @@ export class MplayerComponent  implements OnInit {
 
   next_track() {
     this.set_zero_bar();
+    // this.set_track('NEbula', 'OG Budda');
   }
 
   prev_track() {

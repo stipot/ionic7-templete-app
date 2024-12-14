@@ -20,12 +20,12 @@
         alt="music_image"
       ></ion-img> -->
     <div style="display: flex; justify-content: start;">
-      <div style="width: 50px; height: 50px;">
+      <div style="width: 50px; height: 50px; margin-right: 2vh;">
         <ion-icon slot="icon-only" name="musical-notes" style="width: 100%; height: 100%;"></ion-icon>
       </div>
       <div>
-        <ion-card-title>Music Ttitle</ion-card-title>
-        <ion-card-subtitle>Author Name</ion-card-subtitle>
+        <ion-card-title>{{ track_title }}</ion-card-title>
+        <ion-card-subtitle>{{ track_author }}</ion-card-subtitle>
       </div>
     </div>
     
@@ -46,7 +46,7 @@
 
   </ion-card-header>
   <div style="width: 100%; display: flex; justify-content: center;">
-    <ion-progress-bar [value]="progress" style="width: 90%;"></ion-progress-bar>
+    <ion-progress-bar id="musicProgress" [value]="progress" style="width: 90%;"></ion-progress-bar>
   </div>
   <ion-card-content>
     

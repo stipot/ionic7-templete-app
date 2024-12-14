@@ -1,40 +1,39 @@
-<ion-header> <!-- Создает заголовок для страницы приложения -->
-  <ion-toolbar> <!-- Контейнер для элементов заголовка, таких как кнопки и заголовки -->
-    <ion-title>Научное цитирование</ion-title> <!-- Заголовок страницы, отображающий текст "Научное цитирование" -->
-  </ion-toolbar> <!-- Закрывает контейнер заголовка -->
-</ion-header> <!-- Закрывает заголовок страницы -->
+<ion-header>
+  <ion-toolbar> 
+    <ion-title>Научное цитирование</ion-title> 
+  </ion-toolbar>
+</ion-header>
 
-<ion-content> <!-- Определяет основное содержимое страницы -->
+<ion-content>
   
-  <div class="input-container"> <!-- Контейнер для группировки элементов ввода и кнопки -->
+  <div class="input-container">
     
-    <ion-item> <!-- Контейнер для элементов формы, таких как метки и поля ввода -->
-      <ion-label position="floating">Введите текст</ion-label> <!-- Метка для поля ввода, плавающая над ним -->
-      <ion-input class="full-width-input"></ion-input> <!-- Поле ввода текста для ввода данных пользователем -->
-    </ion-item> <!-- Закрывает контейнер элемента формы -->
+    <ion-item> 
+      <ion-label position="floating">Введите текст</ion-label> 
+      <ion-input class="full-width-input"></ion-input>
+    </ion-item>
     
-    <ion-button class="center-button" fill="solid" (click)="search_btn()">Поиск</ion-button> <!-- Кнопка для отправки введенных данных, заполненная (solid) -->
+    <ion-button class="center-button" fill="solid" (click)="search_btn()">Поиск</ion-button> 
   
-  </div> <!-- Закрывает контейнер для ввода -->
+  </div> 
 
-  <ion-item> <!-- Новый контейнер для отображения результата запроса -->
-    <ion-label position="floating">Результат запроса</ion-label> <!-- Метка для текстовой области, плавающая над ней -->
-    <ion-textarea class="full-width-textarea" readonly></ion-textarea> <!-- Текстовая область для отображения результата, доступная только для чтения -->
-  </ion-item> <!-- Закрывает контейнер элемента формы -->
+  <ion-item> 
+    <ion-label position="floating">Результат запроса</ion-label> 
+    <ion-textarea class="full-width-textarea" readonly></ion-textarea> 
+  </ion-item> 
 
-  <ion-card *ngFor="let a of articles_cards">
-    <ion-card-header>
-      <ion-card-title><a href="{{a.doi}}">{{a.a_name}}</a></ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-    </ion-card-header>
+  <div class="cards-container">
+    <ion-card *ngFor="let a of articles_cards" class="article-card">
+      <ion-img [src]="a.img_name" alt="{{a.a_name}}" class="logo"></ion-img>
+      <ion-card-header>
+        <ion-card-title>
+          <a href="{{a.doi}}">{{a.a_name}}</a>
+        </ion-card-title>
+        <ion-card-subtitle> {{a.abstract}}</ion-card-subtitle>
+          {{a.a_authors}} 
+      </ion-card-header>
+    </ion-card>
+  </div>
   
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
-  </ion-card>
 
-
-
-
-
-</ion-content> <!-- Закрывает основное содержимое страницы -->
+</ion-content> 

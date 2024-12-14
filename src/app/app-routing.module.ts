@@ -17,11 +17,13 @@ import {RecipesPageModule} from './recipes/recipes.module'
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 
+import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
+
 import {DealsComponent} from './deals/deals.component';
 
 import { Component } from '@angular/core';
 import {UserComponent} from "./user/user.component";
-
+import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
 
 const routes: Routes = [
   {
@@ -66,7 +68,10 @@ const routes: Routes = [
     path:'user',
     component: UserComponent
   },
-  // Добавляем путь в роутинг для перемещения на страницу пометок
+  {  
+    path:'cryptorates',
+    component: CryptoRatesComponent
+  },
   {
     path: 'notes',
     component: NotesComponent
@@ -130,6 +135,10 @@ const routes: Routes = [
     path: 'owerview',
     loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
   },
+  { path: 'videoplayer',
+    component: VideoPlayerComponent
+  },
+
   {
     path: 'front-layout',
   component: FrontLayoutComponent
@@ -137,7 +146,7 @@ const routes: Routes = [
   {
     path: '**',
   redirectTo: 'page-not-found'
-  },
+  }
 ];
 
 @NgModule({

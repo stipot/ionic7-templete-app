@@ -37,6 +37,7 @@ export class AppComponent {
     { title: 'Validations', url: '/validations', icon: '' },
     { title: 'barcode-scanner', url: '/barcode-scanner', icon: '' },
     { title: 'cryptorates', url: '/cryptorates', icon: '' },
+    { title: 'VideoPlayer', url: '/videoplayer', icon: '' },
 
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];

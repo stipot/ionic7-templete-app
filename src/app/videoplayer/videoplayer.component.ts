@@ -118,27 +118,48 @@ export class VideoPlayerComponent implements OnInit {
   hideControls(): void {
     this.controlsVisible = false; // Скрываем панель управления
   }
-
-  // Генерация миниатюры для видео
+  
   generateThumbnail(videoUrl: string): Promise<string> {
     return new Promise((resolve) => {
-      const videoElement = document.createElement('video'); // Создаем элемент видео
-      const canvas = document.createElement('canvas'); // Создаем холст для рисования
-      const context = canvas.getContext('2d'); // Получаем контекст для рисования
-
-      videoElement.src = videoUrl; // Устанавливаем ссылку на видео
-      videoElement.currentTime = 5; // Выбираем кадр на 5-й секунде
-
-      videoElement.addEventListener('loadeddata', () => {
-        canvas.width = videoElement.videoWidth; // Устанавливаем ширину холста
-        canvas.height = videoElement.videoHeight; // Устанавливаем высоту холста
-        context?.drawImage(videoElement, 0, 0, canvas.width, canvas.height); // Рисуем кадр на холсте
-        const thumbnailUrl = canvas.toDataURL('image/jpeg'); // Преобразуем холст в картинку
-        resolve(thumbnailUrl); // Возвращаем ссылку на миниатюру
+      const videoElement = document.createElement('video');
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+  
+      videoElement.src = videoUrl;
+      videoElement.muted = true; // Mute the video to comply with autoplay policies
+      videoElement.autoplay = true; // Start playback automatically
+  
+      // Wait for the video metadata to load
+      videoElement.addEventListener('loadedmetadata', () => {
+        // Ensure the video duration is sufficient
+        if (videoElement.duration >= 5) {
+          videoElement.currentTime = 5; // Seek to the 5th second
+        } else {
+          videoElement.currentTime = videoElement.duration / 2; // Seek to the middle if shorter than 5 seconds
+        }
+  
+        // Use 'seeked' event to ensure the browser has completed seeking
+        videoElement.addEventListener('seeked', () => {
+          // Draw the video frame to the canvas
+          canvas.width = videoElement.videoWidth;
+          canvas.height = videoElement.videoHeight;
+          context?.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+  
+          // Generate the data URL of the thumbnail
+          const thumbnailUrl = canvas.toDataURL('image/jpeg');
+          resolve(thumbnailUrl);
+        });
+  
+        // Handle seek errors
+        videoElement.addEventListener('seekerror', () => {
+          resolve('path/to/default-thumbnail.jpg');
+        });
       });
-
-      videoElement.addEventListener('error', () => {
-        resolve('path/to/default-thumbnail.jpg'); // Если ошибка, возвращаем стандартную картинку
+  
+      // Handle video load errors
+      videoElement.addEventListener('error', (event) => {
+        console.error('Video load error:', event);
+        resolve('path/to/default-thumbnail.jpg');
       });
     });
   }

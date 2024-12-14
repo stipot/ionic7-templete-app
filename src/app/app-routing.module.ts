@@ -15,6 +15,7 @@ import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import {RecipesPageModule} from './recipes/recipes.module'
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
+import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 
@@ -138,6 +139,10 @@ const routes: Routes = [
     component: VideoPlayerComponent
   },
 
+  {
+    path: 'front-layout',
+  component: FrontLayoutComponent
+  },
   {
     path: '**',
   redirectTo: 'page-not-found'

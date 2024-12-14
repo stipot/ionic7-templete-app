@@ -30,6 +30,7 @@ import { IntroComponent } from './intro/intro.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AppSharedComponentsModule } from './shared/common.module';
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
+import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -53,7 +54,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     RssDataComponent,
     IntroComponent,
     TermsOfServiceComponent,
-    VideoPlayerComponent
+    VideoPlayerComponent,
+    FrontLayoutComponent
   ],
   imports: [
     BrowserModule,

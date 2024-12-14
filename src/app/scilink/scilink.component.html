@@ -13,9 +13,22 @@
       <ion-input class="full-width-input"></ion-input> <!-- Поле ввода текста для ввода данных пользователем -->
     </ion-item> <!-- Закрывает контейнер элемента формы -->
     
-    <ion-button class="center-button" fill="solid">Поиск</ion-button> <!-- Кнопка для отправки введенных данных, заполненная (solid) -->
+    <ion-button class="center-button" fill="solid" (click)="search_btn()">Поиск</ion-button> <!-- Кнопка для отправки введенных данных, заполненная (solid) -->
   
   </div> <!-- Закрывает контейнер для ввода -->
+
+  <ion-card *ngFor="let a of articles_cards">
+    <ion-card-header>
+      <ion-card-title><a href="{{a.doi}}">{{a.a_name}}</a></ion-card-title>
+      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Here's a small text description for the card content. Nothing more, nothing less.
+    </ion-card-content>
+  </ion-card>
+
+
 
   <ion-item> <!-- Новый контейнер для отображения результата запроса -->
     <ion-label position="floating">Результат запроса</ion-label> <!-- Метка для текстовой области, плавающая над ней -->

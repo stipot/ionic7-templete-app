@@ -33,13 +33,14 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {DealsComponent} from './deals/deals.component';
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
+import {MplayerComponent} from "./mplayer/mplayer.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18s/', '.json')};
   import {UserComponent} from "./user/user.component";
 
 @NgModule({
-  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, UserComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent, TermsOfServiceComponent],
+  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, UserComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent, TermsOfServiceComponent, MplayerComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

@@ -36,6 +36,7 @@ export class AppComponent {
     { title: 'filters', url:'/filters',icon: 'reader-outline'},
     { title: 'Validations', url: '/validations', icon: '' },
     { title: 'barcode-scanner', url: '/barcode-scanner', icon: '' },
+    { title: 'front-layout', url: '/front-layout', icon: 'front-layout' },
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];
   constructor(private translate: TranslateService) {

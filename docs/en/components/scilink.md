@@ -1,20 +1,56 @@
-Development of the "scilink (scientific articles)" component
+Documentation for ScilinkComponent
+1. General Information
+Component Name: ScilinkComponent
+Description: This component is responsible for retrieving and displaying a list of scientific articles. Users can enter text to search for articles, and the component will filter the results based on the entered text.
+2. Imported Modules
+HttpClient: Used to perform HTTP requests to an API and retrieve article data.
+IonicModule: The Ionic module necessary for using Ionic components.
+CommonModule: Angular's common module that provides common directives and pipes.
+DataService: A custom service that provides a method for retrieving article data.
+3. Article Interface
+TypeScript
+копия
+interface Article {
+  doi: string;        // DOI of the article
+  a_name: string;    // Title of the article
+  a_authors: string; // Authors of the article
+  abstract: string;  // Abstract of the article
+  img_name: string;  // URL of the article image
+}
+4. Component Structure
+@Component Decorator:
+standalone: true: Indicates that the component is standalone and does not require a parent module.
+selector: 'app-scilink': Used to include the component in templates.
+templateUrl: Path to the component's HTML template.
+styleUrls: Path to the component's styles.
+5. Class Properties
+articles_cards:
 
-This component was developed to display scientific article cards. The cards contain information about the article title, authors, abstract, and image. The data for the articles is loaded from the server when the component is initialized.
+An array of objects of type Article that stores all the loaded articles.
+filtered_articles:
 
-The following ionic methods were used to implement this component:
+An array of objects of type Article that stores filtered articles based on user input.
+searchText:
 
-ion-card is used to create cards. The card contains the following elements:
-ion-img is used to display the article image. It contains the following attributes:
-src is used to specify the path to the image.
-alt is used to add alternative text.
-class is used to apply CSS styles.
-ion-card-header is used to create the card header. It contains:
-ion-card-title is used to display the article title, abstract, and authors, a is used to create links to the article and display the abstract and authors text.
-ion-card-subtitle is used to add a card subtitle.
+A string that holds the text entered by the user for searching.
+Result:
 
-The component also uses the following Angular and Ionic modules:
+A string that displays a search message based on user input.
+6. Class Methods
+constructor(private http: HttpClient, private data: DataService):
 
-HttpClient is used to make HTTP requests to the server and retrieve data.
-IonicModule and CommonModule are used for integration with Ionic and Angular.
-Thus, this component allows you to display scientific article cards using various Ionic and Angular elements, providing ease of working with data and its visualization.
+The class constructor that initializes HttpClient and DataService.
+ngOnInit():
+
+An Angular lifecycle method that is called when the component is initialized. It loads article data through DataService and saves it to articles_cards and filtered_articles.
+search_btn():
+
+Description: A method that is called when the search button is clicked or the Enter key is pressed. It processes the entered text, updates the Result variable, and filters articles.
+Logic:
+Retrieves the value from the input field (ion-input).
+If a value is entered, it filters the articles_cards array by the article title (a_name), ignoring case.
+Updates filtered_articles and Result with the search text.
+If no value is entered, it resets searchText, restores all articles, and updates Result with a message prompting for input.
+7. Notes
+Ensure that DataService implements the getData() method that returns an Observable with article data.
+The component should be integrated into a parent component or module to correctly display data and handle events.

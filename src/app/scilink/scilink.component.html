@@ -7,33 +7,34 @@
 <ion-content>
   
   <div class="input-container">
-    
     <ion-item> 
       <ion-label position="floating">Введите текст</ion-label> 
-      <ion-input class="full-width-input"></ion-input>
+      <ion-input class="full-width-input" (keyup.enter)="search_btn()"></ion-input> 
     </ion-item>
     
     <ion-button class="center-button" fill="solid" (click)="search_btn()">Поиск</ion-button> 
-  
   </div> 
 
   <ion-item> 
-    <ion-label position="floating">Результат запроса</ion-label> 
-    <ion-textarea class="full-width-textarea" readonly></ion-textarea> 
+    <ion-label position="floating"></ion-label> 
+    <ion-textarea class="full-width-textarea" readonly>{{Result}}</ion-textarea> 
   </ion-item> 
 
-  <div class="cards-container">
-    <ion-card *ngFor="let a of articles_cards" class="article-card">
+  <div class="cards-container" *ngIf="filtered_articles.length > 0; else noResults">
+    <ion-card *ngFor="let a of filtered_articles" class="article-card">
       <ion-img [src]="a.img_name" alt="{{a.a_name}}" class="logo"></ion-img>
       <ion-card-header>
         <ion-card-title>
           <a href="{{a.doi}}">{{a.a_name}}</a>
         </ion-card-title>
-        <ion-card-subtitle> {{a.abstract}}</ion-card-subtitle>
-          {{a.a_authors}} 
+        <ion-card-subtitle>{{a.abstract}}</ion-card-subtitle>
+        {{a.a_authors}} 
       </ion-card-header>
     </ion-card>
   </div>
-  
 
-</ion-content> 
+  <ng-template #noResults>
+    <div class="no-results-message">Результаты не найдены.</div>
+  </ng-template>
+  
+</ion-content>

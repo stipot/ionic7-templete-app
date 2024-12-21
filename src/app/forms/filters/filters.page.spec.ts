@@ -5,12 +5,6 @@ describe('FiltersPage', () => {
   let component: FiltersPage;
   let fixture: ComponentFixture<FiltersPage>;
 
-  beforeEach(async(() => {
-    fixture = TestBed.createComponent(FiltersPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
-
   it('should create', () => {
     expect(component).toBeTruthy();
   });

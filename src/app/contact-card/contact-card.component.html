@@ -1,53 +1,72 @@
-<ion-header>
-  <ion-toolbar color='Danger'>
+<ion-header [translucent]="true">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>CONTACT CARD</ion-title>
+    <ion-title>{{"Contact card" | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
   <ion-row>
+  <ion-col size-xs="0" size-sm="0" size-md="1" size-lg="1" size-xl="1"></ion-col>
+  <ion-col size-xs="12" size-sm="12" size-md="10" size-lg="10" size-xl="10">
     <ion-col size="2">
       <ion-avatar size="10">
         <ion-img [src]="contact.img"></ion-img>
       </ion-avatar>
     </ion-col>
 
-    <ion-col size="10">
-      <h5>{{contact.name}}</h5>
-      <h6>{{contact.nickname}}</h6>
-    </ion-col>
-
     <ion-col size="6">
-      <span>Подписки: </span>
-      <span>{{contact.following}}</span>
-    </ion-col>
-    <ion-col size="6">
-      <span>Подписчики: </span>
-      <span>{{contact.followers}}</span>
+      <h2>{{contact.name}}</h2>
+      <h4>{{contact.nickname}}</h4>
     </ion-col>
 
-    <ion-col size="12">
-      <p>{{contact.status}}</p>
-    </ion-col>
-  </ion-row>
+    <ion-row>
+      <ion-col size="10">
+        <h4>{{"Status" | translate}}</h4>
+        <p>{{contact.status}}</p>
+      </ion-col>
+    </ion-row>
 
-  <ion-row>
-    <ion-col size="12">
-      <h4>Номер:</h4>
-      <p>+7 (911) 303-51-13</p>
-    </ion-col>
 
-    <ion-col size="12">
-      <h4>День рождения:</h4>
-      <p>{{contact.bday}}</p>
-    </ion-col>
+    
+    <ion-row>
+      <ion-col size="6">
+        <h3>{{"Following" | translate}}</h3>
+        <p>{{contact.following}}</p>
+      </ion-col>
 
-    <ion-col size="12">
-      <h4>Адресс:</h4>
-      <p>{{contact.address}}</p>
-    </ion-col>
-  </ion-row>
-</ion-content>
+      <ion-col size="6">
+        <h3>{{"Followers" | translate}}</h3>
+        <p>{{contact.followers}}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <h4>{{"Phone" | translate}}</h4>
+        <p>{{contact.phone}}</p>
+      </ion-col>
+
+      <ion-col size="6">
+        <h4>{{"Birthday" | translate}}</h4>
+        <p>{{contact.bday}}</p>
+      </ion-col>
+
+      <ion-col size="6">
+        <h4>{{"Address" | translate}}</h4>
+        <p>{{contact.address}}</p>
+      </ion-col>
+
+      <ion-col size="6">
+      <h4>{{"Marriage" | translate}}</h4>
+      <p>{{contact.marriage}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+  <ion-col size-xs="0" size-sm="0" size-md="1" size-lg="1" size-xl="1"></ion-col>
+</ion-row>
+</ion-grid>
+  </ion-content>

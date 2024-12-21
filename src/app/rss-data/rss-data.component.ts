@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-rss-data',
@@ -8,13 +9,18 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
   styleUrls: ['./rss-data.component.scss']
 })
 export class RssDataComponent implements OnInit {
+  pageTitle = "Новостная лента!"
   private rssUrl = 'https://news.un.org/feed/subscribe/ru/news/topic/law-and-crime-prevention/feed/rss.xml';
   public newsItems: any[] = [];
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer,  private translate: TranslateService) {}
 
   ngOnInit(): void {
     this.fetchRss();
+    // Component name
+    this.translate.get('News').subscribe((translated: string) => {
+      this.pageTitle = translated;
+    });
   }
 
   fetchRss(): void {

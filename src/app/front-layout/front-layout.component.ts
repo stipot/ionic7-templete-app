@@ -29,7 +29,6 @@ export class FrontLayoutComponent implements OnInit {
     {c_name: "policy-privacy", c_desc: "Политика конфиденциальности ",link:"/privacy-policy"},
     {c_name: "Deals", c_desc: "Новости, Акции",link:"/deals"},
     {c_name: "Recipes", c_desc: "Рецепты",link:"/recipes"}, 
-    {c_name: "Owerview", c_desc: "Обзоры",link:"/owerview"}, 
     {c_name: "Fashion", c_desc: "Меню",link:"/fashion"}, 
     {c_name: "Forgot Password", c_desc: "Please, enter your email and we'll send you an email to reset your password",link:"/forgot-password"}, 
     {c_name: "RSS Data", c_desc: "Данный компонент разработан для получения и отображения данных ленты RSS в приложении Angular. Он обеспечивает корректное получение и разбор элементов ленты RSS для отображения.",link:"/rss-data"}, 

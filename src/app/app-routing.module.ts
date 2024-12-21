@@ -28,7 +28,7 @@ import { CryptoRatesComponent } from './cryptorates/cryptorates.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/',
+    redirectTo: 'front-layout',
     pathMatch: 'full'
   },
   {
@@ -131,10 +131,6 @@ const routes: Routes = [
   { path: 'intro',
   component: IntroComponent
 },
-  {
-    path: 'owerview',
-    loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
-  },
   { path: 'videoplayer',
     component: VideoPlayerComponent
   },

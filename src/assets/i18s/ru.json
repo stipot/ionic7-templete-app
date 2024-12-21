@@ -6,7 +6,7 @@
     "archived": "Архив", 
     "trash": "Корзина",
     "spam": "Спам", 
-    "notes": "Пометки", 
+    "notes": "Заметки", 
     "Recipes": "Рецепты",
     "filters": "Фильтры", 
     "validations": "подтверждения", 
@@ -39,5 +39,6 @@
     "Followers": "Подписчики",
     "Birthday": "День рождения",
     "Address": "Адрес",
-    "Marriage": "Семейное положение"
+    "Marriage": "Семейное положение",
+    "Components overview": "Обзор компонентов"
   }

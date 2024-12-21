@@ -28,7 +28,6 @@ export class FolderPage implements OnInit {
     {c_name: "policy-privacy", c_desc: "Политика конфиденциальности "},
     {c_name: "Deals", c_desc: "Новости, Акции"},
     {c_name: "Recipes", c_desc: "Рецепты"}, 
-    {c_name: "Owerview", c_desc: "Обзоры"}, 
     {c_name: "Fashion", c_desc: "Меню"}, 
     {c_name: "Forgot Password", c_desc: "Please, enter your email and we'll send you an email to reset your password"}, 
     {c_name: "RSS Data", c_desc: "Данный компонент разработан для получения и отображения данных ленты RSS в приложении Angular. Он обеспечивает корректное получение и разбор элементов ленты RSS для отображения."}, 

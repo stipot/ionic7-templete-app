@@ -25,7 +25,7 @@ export class AppComponent {
     { title: 'Recipes', url: '/recipes', icon: '' },
     { title: 'cryptorates', url: '/cryptorates', icon: '' },
     { title: 'News', url: '/rss-data', icon: '' },
-    { title: 'notes', url: '/notes', icon: 'Пометки' },
+    { title: 'Notes', url: '/notes', icon: 'Пометки' },
     { title: 'ToDo list', url: '/todo-list', icon: 'todo-list' },
     { title: 'Forms', url: '/forms', icon: '' },
     { title: 'VideoPlayer', url: '/videoplayer', icon: '' },

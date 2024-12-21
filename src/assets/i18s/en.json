@@ -6,7 +6,7 @@
     "archived": "Archive", 
     "trash":"TrashBox",
     "spam":"Spam", 
-    "notes":"Notes", 
+    "Notes":"Notes", 
     "filters":"Filtres", 
     "validations": "validations", 
     "privacy-policy": "Ptivacy",
@@ -42,5 +42,5 @@
     "Recipes": "Recipes",
     "Components overview": "Components overview",
     "News": "News",
-    "Save": "Сохранить"
+    "Save": "Save"
   }

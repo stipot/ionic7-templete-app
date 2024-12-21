@@ -12,7 +12,7 @@ register ();
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Components overview', url: '/front-layout', icon: 'front-layout' },
+    { title: 'FrontPage', url: '/front-layout', icon: 'front-layout' },
     { title: 'Settings', url: '/settings', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },
     { title: 'Terms of service', url: '/terms-of-service', icon: '' },

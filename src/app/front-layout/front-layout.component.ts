@@ -1,6 +1,7 @@
 import { UserService } from './../user.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 interface Component_Item {
   c_name: string
@@ -14,6 +15,7 @@ interface Component_Item {
 })
 export class FrontLayoutComponent implements OnInit {
   public Front!: string;
+  pageTitle = "FrontPage"
   private activatedRoute = inject(ActivatedRoute);
   comp_list: Component_Item[] = [
     {c_name: "Входящие", c_desc: "inbox",link:"/folder/inbox" }, 
@@ -40,11 +42,15 @@ export class FrontLayoutComponent implements OnInit {
 
   ]
   
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,  private translate: TranslateService) {
 
   }
 
   ngOnInit() {
     this.Front = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    // Component name
+    this.translate.get('FrontPage').subscribe((translated: string) => {
+      this.pageTitle = translated;
+    });
   }
 }

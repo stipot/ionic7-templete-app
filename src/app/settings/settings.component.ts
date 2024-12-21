@@ -14,7 +14,9 @@ export class SettingsComponent  implements OnInit {
   language:string = '';
   font:string = '';
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.language = this.translate.currentLang
+  }
 
   changeLanguage() {
     this.translate.use(this.language);

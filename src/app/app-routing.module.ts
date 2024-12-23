@@ -25,6 +25,8 @@ import { Component } from '@angular/core';
 import {UserComponent} from "./user/user.component";
 import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
 
+import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -135,6 +137,13 @@ const routes: Routes = [
     component: VideoPlayerComponent
   },
 
+
+  {
+    path: 'water-tracker',
+    component: WaterTrackerComponent
+  },
+
+
   {
     path: 'front-layout',
   component: FrontLayoutComponent
@@ -142,7 +151,7 @@ const routes: Routes = [
   {
     path: '**',
   redirectTo: 'page-not-found'
-  }
+  },
 ];
 
 @NgModule({

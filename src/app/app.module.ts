@@ -33,8 +33,6 @@ import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 import { RecipesComponent } from './recipes/recipes.component';
 
-import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
-
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18s/', '.json');
@@ -59,8 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TermsOfServiceComponent,
     VideoPlayerComponent,
     FrontLayoutComponent,
-    RecipesComponent,
-    WaterTrackerComponent
+    RecipesComponent
   ],
   imports: [
     BrowserModule,

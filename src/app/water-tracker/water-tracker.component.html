@@ -1,3 +1,21 @@
-<p>
-  water-tracker works!
-</p>
+<ion-tabs>
+  <ion-router-outlet></ion-router-outlet>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="main" routerLink="/water-tracker/main">
+      <ion-icon name="water"></ion-icon>
+      <ion-label>Главная</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="statistics" routerLink="/water-tracker/statistics">
+      <ion-icon name="stats-chart"></ion-icon>
+      <ion-label>Статистика</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="settings" routerLink="/water-tracker/settings">
+      <ion-icon name="settings"></ion-icon>
+      <ion-label>Настройки</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="profile" routerLink="/water-tracker/profile">
+      <ion-icon name="person"></ion-icon>
+      <ion-label>Профиль</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

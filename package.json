@@ -34,6 +34,7 @@
     "@ionic/angular": "^7.0.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "chart.js": "^4.4.7",
     "firebase": "^10.6.0",
     "ionic": "^5.4.16",
     "ionicons": "^7.0.0",

@@ -140,7 +140,7 @@ const routes: Routes = [
 
   {
     path: 'water-tracker',
-    component: WaterTrackerComponent
+    loadChildren: () => import('./water-tracker/water-tracker.module').then(m => m.WaterTrackerModule)
   },
 
 

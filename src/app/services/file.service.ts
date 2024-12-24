@@ -6,6 +6,17 @@ import { Filesystem, Directory, Encoding, ReadFileResult, ReaddirResult } from '
 })
 export class FileService {
 
+  /**
+   * [ ] 1. getDataDir(): Promise<Directory>
+   * [ ] 2. readDataDir(directory: Directory): Promise<string[]>
+   * [ ] 3. createEmptyFile(filename: string, directory: Directory): Promise<void>
+   * [ ] 4. writeFile(filename: string, data_base64: string, directory: Directory): Promise<void>
+   * [ ] 5. readFile(filename: string, directory: Directory): Promise<string>
+   * [ ] 6. deleteFile(filename: string, directory: Directory): Promise<void>
+   * [ ] 7. getFileType(filename: string, directory: Directory): Promise<string>
+   * [ ] 8. chooseExternalFile(): Promise<string>
+   */
+
   constructor() { }
 
   /**

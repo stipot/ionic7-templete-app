@@ -5,47 +5,23 @@
 </ion-header>
 
 <ion-content>
-  <!-- Кнопки для загрузки и выгрузки файлов -->
-  <ion-row class="ion-justify-content-center ion-margin-bottom">
-    <ion-button (click)="uploadFiles()">Upload Files</ion-button>
-    <ion-button (click)="readDefDir()">ardg ery</ion-button> 
-    <ion-button (click)="downloadFiles()">Download Files</ion-button>
-    <ion-button (click)="saveTextFileDBG()">LOAD</ion-button>
-  </ion-row>
-
   <ion-list>
     <ion-list-header>Text Files</ion-list-header>
-    <ion-item *ngFor="let file of allFiles">
+    <ion-item *ngFor="let file of textFiles" (click)="readTextFile(file)">
       <ion-label>{{ file }}</ion-label>
-      <ion-button slot="end" color="primary" (click)="readTextFile(file)">Open</ion-button>
-      <ion-button slot="end" color="danger" (click)="deleteFile(file)">Delete</ion-button>
     </ion-item>
   </ion-list>
 
-  <!-- Список текстовых файлов -->
-  <ion-list>
-    <ion-list-header>Text Files</ion-list-header>
-    <ion-item *ngFor="let file of textFiles">
-      <ion-label>{{ file }}</ion-label>
-      <ion-button slot="end" color="primary" (click)="readTextFile(file)">Open</ion-button>
-      <ion-button slot="end" color="danger" (click)="deleteFile(file)">Delete</ion-button>
-    </ion-item>
-  </ion-list>
-
-  <!-- Список изображений -->
   <ion-list>
     <ion-list-header>Image Files</ion-list-header>
     <ion-item *ngFor="let file of imageFiles">
       <ion-thumbnail slot="start">
-        <img [src]="getImageUrl(file)" alt="Image">
+        <img [src]="'/data/data/com.example.app/files/image-files/' + file" alt="Image">
       </ion-thumbnail>
       <ion-label>{{ file }}</ion-label>
-      <ion-button slot="end" color="primary" (click)="openImageFile(file)">Open</ion-button>
-      <ion-button slot="end" color="danger" (click)="deleteFile(file)">Delete</ion-button>
     </ion-item>
   </ion-list>
 
-  <!-- Отображение содержимого выбранного файла -->
   <ion-card *ngIf="selectedFileContent">
     <ion-card-header>
       <ion-card-title>File Content</ion-card-title>
@@ -54,6 +30,4 @@
       <pre>{{ selectedFileContent }}</pre>
     </ion-card-content>
   </ion-card>
-
-  <!-- <app-file-viewer></app-file-viewer> -->
 </ion-content>

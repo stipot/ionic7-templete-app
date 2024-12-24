@@ -37,9 +37,27 @@ export class FileViewerComponent implements OnInit {
     }
   }
 
-  async openImageFile(fileName: string) {
+  async function openImageFile(filename: string, directory: Directory): Promise<void> {
     try {
-      const imageUrl = await this.fileService.getFileUrl(`image-files/${fileName}`, Directory.Data);
+      // Проверяем, существует ли файл
+      const files = await readDataDir(directory);
+      if (!files.includes(filename)) {
+        throw new Error(`File "${filename}" does not exist in the directory.`);
+      }
+  
+      // Получаем тип файла
+      const fileType = await getFileType(filename, directory);
+      if (!fileType.startsWith('image/')) {
+        throw new Error(`File "${filename}" is not an image file.`);
+      }
+  
+      // Читаем содержимое файла
+      const fileContent = await readFile(filename, directory);
+  
+      // Преобразуем содержимое файла в URL для отображения
+      const imageUrl = `data:${fileType};base64,${fileContent}`;
+  
+      // Открываем изображение (например, в новом окне или с использованием Ionic компонентов)
       console.log('Image URL:', imageUrl);
       // Здесь можно добавить логику для отображения изображения
     } catch (error) {

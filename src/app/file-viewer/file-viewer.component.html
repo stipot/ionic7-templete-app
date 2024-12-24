@@ -41,7 +41,7 @@
       </ion-thumbnail>
       <ion-label>{{ file }}</ion-label>
       <ion-button slot="end" color="primary" (click)="openImageFile(file)">Open</ion-button>
-      <ion-button slot="end" color="danger" (click)="deleteFile(file)">Delete</ion-button>
+      <ion-button slot="end" color="danger" (click)="deleteFile(file, 'image-files')">Delete</ion-button>
     </ion-item>
   </ion-list>
 
@@ -55,5 +55,14 @@
     </ion-card-content>
   </ion-card>
 
-  <!-- <app-file-viewer></app-file-viewer> -->
+  <!-- Отображение открытого изображения -->
+  <ion-card *ngIf="selectedImageUrl">
+    <ion-card-header>
+      <ion-card-title>Selected Image</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <img [src]="selectedImageUrl" alt="Selected Image" style="max-width: 100%; height: auto;">
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

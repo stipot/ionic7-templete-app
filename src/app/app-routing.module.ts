@@ -13,7 +13,7 @@ import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
-import {CameraComponent} from './camera/camera.component';
+
 import {RecipesPageModule} from './recipes/recipes.module'
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 
@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
+  },
+  {
+    path: 'camera',
+    loadChildren: () => import('./camera/camera-routing.module').then( m => m.CameraPageRoutingModule)
   },
   {
     path: 'page-not-found',
@@ -129,10 +133,7 @@ const routes: Routes = [
   { path: 'intro',
   component: IntroComponent
 },
-{
-  path: 'camera',
-  component: CameraComponent
-},
+
   {
     path: 'owerview',
     loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)

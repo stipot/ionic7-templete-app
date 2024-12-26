@@ -2,18 +2,18 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CameraPageRoutingModule } from './camera-routing.module';
+import { CameraComponent } from './camera.component';
 
-import { TabsPageRoutingModule } from './tabs-routing.module';
 
-import { TabsPage } from './tabs.page';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    TabsPageRoutingModule
+    CameraPageRoutingModule
   ],
-  declarations: [TabsPage]
+  declarations: [CameraComponent]
 })
-export class TabsPageModule {}
+export class CameraPageModule {}

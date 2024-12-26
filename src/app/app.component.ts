@@ -15,6 +15,7 @@ export class AppComponent {
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
 
     // Добавляем поле для перехода на страницу пометок
+    { title: 'camera', url: '/camera', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
     { title: 'User', url: '/user', icon: '' },

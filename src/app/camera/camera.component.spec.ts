@@ -1,16 +1,24 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IonicModule } from '@ionic/angular';
 
-import { PhotoService } from './photo.service';
+import { CameraComponent } from './camera.component';
 
-describe('PhotoService', () => {
-  let service: PhotoService;
+describe('CameraComponent', () => {
+  let component: CameraComponent;
+  let fixture: ComponentFixture<CameraComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(PhotoService);
-  });
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ CameraComponent ],
+      imports: [IonicModule.forRoot()]
+    }).compileComponents();
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+    fixture = TestBed.createComponent(CameraComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  }));
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 });

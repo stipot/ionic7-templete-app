@@ -27,6 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IntroComponent } from './intro/intro.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import { MoodCalendarComponent } from './mood-calendar/mood-calendar.component';
+
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import {AppSharedComponentsModule} from './shared/common.module'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -39,7 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   import {UserComponent} from "./user/user.component";
 
 @NgModule({
-  declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, UserComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent, TermsOfServiceComponent],
+  declarations: [AppComponent, MoodCalendarComponent,FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, UserComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent, TermsOfServiceComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),

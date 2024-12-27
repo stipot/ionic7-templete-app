@@ -4,8 +4,13 @@
 //     background: red;
 // }
 
+ion-item {
+    transition: transform .3s;
+}
+
 .selected {
     color: lightseagreen;
+    transform: scale(1.01);
 }
 
 .music_title {

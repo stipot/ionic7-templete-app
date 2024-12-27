@@ -8,6 +8,14 @@
   <ion-toolbar>
     <ion-searchbar></ion-searchbar>
   </ion-toolbar>
+  <ion-list>
+    <ion-item *ngFor="let item of track_list; let index" [class]="item[4]">
+      <div style="width: 40px; height: 40px; margin-right: 2vh;">
+        <ion-icon slot="icon-only" name="musical-notes" style="width: 100%; height: 100%;"></ion-icon>
+      </div>
+      <ion-label><span class="music_title">{{ item[1] }}</span> - <span class="author_name">{{ item[2] }}</span></ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-header>
 
@@ -45,6 +53,7 @@
     </div>
 
   </ion-card-header>
+  <!-- <audio src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" id="audio_test"></audio> -->
   <div style="width: 100%; display: flex; justify-content: center;">
     <ion-progress-bar id="musicProgress" [value]="progress" style="width: 90%;"></ion-progress-bar>
   </div>

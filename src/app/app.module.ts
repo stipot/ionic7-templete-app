@@ -8,6 +8,8 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { DragDropModule } from '@angular/cdk/drag-drop'; // Add Angular CDK module
+import { CommonModule } from '@angular/common'; // Required for NgFor
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +34,7 @@ import { AppSharedComponentsModule } from './shared/common.module';
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 import { RecipesComponent } from './recipes/recipes.component';
+import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -57,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TermsOfServiceComponent,
     VideoPlayerComponent,
     FrontLayoutComponent,
-    RecipesComponent
+    RecipesComponent,
+    DragAndDropComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +71,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     FormsModule,
     AppSharedComponentsModule,
+    CommonModule,
+    DragDropModule,
     // Инициализация базы данных
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

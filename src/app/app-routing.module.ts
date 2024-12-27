@@ -23,7 +23,8 @@ import {DealsComponent} from './deals/deals.component';
 
 import { Component } from '@angular/core';
 import {UserComponent} from "./user/user.component";
-import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
+import { CryptoRatesComponent } from './cryptorates/cryptorates.component';
+import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
 const routes: Routes = [
   {
@@ -64,11 +65,11 @@ const routes: Routes = [
     path: 'forms',
     component: FormsComponent
   },
-  {  
+  {
     path:'user',
     component: UserComponent
   },
-  {  
+  {
     path:'cryptorates',
     component: CryptoRatesComponent
   },
@@ -138,6 +139,10 @@ const routes: Routes = [
   {
     path: 'front-layout',
   component: FrontLayoutComponent
+  },
+  {
+    path: 'drag-and-drop',
+  component: DragAndDropComponent
   },
   {
     path: '**',

@@ -34,6 +34,7 @@ export class AppComponent {
     { title: 'barcode-scanner', url: '/barcode-scanner', icon: '' },
     { title: 'Компоненты в стадии разработки:', url: '/front-layout', icon: '' },
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
+    { title: 'drag and drop', url: '/drag-and-drop', icon: '' },
     // Добавляем поле для перехода на страницу пометок
     { title: 'Deals', url: '/deals', icon: '' },
     { title: 'Fashion', url: '/fashion', icon: '' },

@@ -18,10 +18,10 @@ export class FrontLayoutComponent implements OnInit {
   pageTitle = "FrontPage"
   private activatedRoute = inject(ActivatedRoute);
   comp_list: Component_Item[] = [
-    {c_name: "Входящие", c_desc: "inbox",link:"/folder/inbox" }, 
+    {c_name: "Входящие", c_desc: "inbox",link:"/folder/inbox" },
     {c_name: "Intro", c_desc: "мы хотим помочь вам создавать более качественные и быстрые приложения Ionic",link:"/intro"},
     {c_name: "Profile", c_desc: "Профиль?",link:"/profil"},
-    {c_name: "User", c_desc: "Бочкова Диана Ашотовна",link:"/user"}, 
+    {c_name: "User", c_desc: "Бочкова Диана Ашотовна",link:"/user"},
     {c_name: "Settings", c_desc: "Настройки шрифта",link:"/settings"},
     {c_name: "contact card", c_desc: "Александр Сергеевич Пушкин",link:"/contact-card"},
     {c_name: "Пометки", c_desc: "сохранять текст",link:"/notes"},
@@ -30,18 +30,18 @@ export class FrontLayoutComponent implements OnInit {
     {c_name: "Terms of service", c_desc: "AGREEMENT TO TERMS, INTELLECTUAL PROPERTY RIGHTS",link:"/terms-of-service"},
     {c_name: "policy-privacy", c_desc: "Политика конфиденциальности ",link:"/privacy-policy"},
     {c_name: "Deals", c_desc: "Новости, Акции",link:"/deals"},
-    {c_name: "Recipes", c_desc: "Рецепты",link:"/recipes"}, 
-    {c_name: "Fashion", c_desc: "Меню",link:"/fashion"}, 
-    {c_name: "Forgot Password", c_desc: "Please, enter your email and we'll send you an email to reset your password",link:"/forgot-password"}, 
-    {c_name: "RSS Data", c_desc: "Данный компонент разработан для получения и отображения данных ленты RSS в приложении Angular. Он обеспечивает корректное получение и разбор элементов ленты RSS для отображения.",link:"/rss-data"}, 
-    {c_name: "Список дел", c_desc: "Компонент нужен для записи задач",link:"/todo-list"}, 
-    {c_name: "Forms", c_desc: "Этот компонент разрабатывается для проверки данных пользователя",link:"/forms"}, 
-    {c_name: "Filters", c_desc: "Этот компонент поможет разработчикам легко реализовать фильтры поиска в своих приложениях",link:"/filters"}, 
-    {c_name: "Validations", c_desc: "Этот компонент разрабатывается для проверки данных пользователя",link:"/validations"}, 
-    {c_name: "QR-сканер", c_desc: "Barcode Scanner",link:"/barcode-scanner"}, 
-
+    {c_name: "Recipes", c_desc: "Рецепты",link:"/recipes"},
+    {c_name: "Fashion", c_desc: "Меню",link:"/fashion"},
+    {c_name: "Forgot Password", c_desc: "Please, enter your email and we'll send you an email to reset your password",link:"/forgot-password"},
+    {c_name: "RSS Data", c_desc: "Данный компонент разработан для получения и отображения данных ленты RSS в приложении Angular. Он обеспечивает корректное получение и разбор элементов ленты RSS для отображения.",link:"/rss-data"},
+    {c_name: "Список дел", c_desc: "Компонент нужен для записи задач",link:"/todo-list"},
+    {c_name: "Forms", c_desc: "Этот компонент разрабатывается для проверки данных пользователя",link:"/forms"},
+    {c_name: "Filters", c_desc: "Этот компонент поможет разработчикам легко реализовать фильтры поиска в своих приложениях",link:"/filters"},
+    {c_name: "Validations", c_desc: "Этот компонент разрабатывается для проверки данных пользователя",link:"/validations"},
+    {c_name: "QR-сканер", c_desc: "Barcode Scanner",link:"/barcode-scanner"},
+    {c_name: "drag and drop", c_desc: "drag and drop shit around ig idk",link:"/drag-and-drop"},
   ]
-  
+
   constructor(private userService: UserService,  private translate: TranslateService) {
 
   }

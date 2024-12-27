@@ -14,11 +14,11 @@ export class MplayerComponent  implements OnInit {
 
   // public track_list = ['https://opengameart.org/sites/default/files/audio_preview/awesomeness.wav.ogg', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3']
   public track_list = [
-    ['https://opengameart.org/sites/default/files/audio_preview/awesomeness.wav.ogg', 'Menu Music', 'Adventure', '0', 'selected'],
-    ['https://opengameart.org/sites/default/files/audio_preview/seashore.mp3.ogg', 'Fight Music', 'Adventure', '1', ''],
-    ['https://opengameart.org/sites/default/files/audio_preview/yesterbreeze.mp3.ogg', 'Strong Start', 'RPG Music', '2', ''],
-    ['https://opengameart.org/sites/default/files/audio_preview/game_2.mp3.ogg', 'Intro Music', 'Factory', '3', ''],
-    ['https://opengameart.org/sites/default/files/audio_preview/jkjkke%20-%20dream_0.mp3.ogg', 'Menu Music', 'Low Light', '4', '']
+    ['https://opengameart.org/sites/default/files/audio_preview/awesomeness.wav.ogg', 'Menu Music', 'Adventure', '0', 'selected', '48'],
+    ['https://opengameart.org/sites/default/files/audio_preview/seashore.mp3.ogg', 'Fight Music', 'Adventure', '1', '', '173'],
+    ['https://opengameart.org/sites/default/files/audio_preview/yesterbreeze.mp3.ogg', 'Strong Start', 'RPG Music', '2', '', '85'],
+    ['https://opengameart.org/sites/default/files/audio_preview/game_2.mp3.ogg', 'Intro Music', 'Factory', '3', '', '82'],
+    ['https://opengameart.org/sites/default/files/audio_preview/jkjkke%20-%20dream_0.mp3.ogg', 'Menu Music', 'Low Light', '4', '', '159']
   ]
 
   // public track_element = document.getElementById('audio_test');
@@ -27,24 +27,26 @@ export class MplayerComponent  implements OnInit {
   public track = new Audio(this.track_list[this.track_count][0]);
   public track_duration = this.track.duration;
 
-  public default_speed_track = 0.001
-  public speed_track = this.default_speed_track
+  public default_speed_track = 0.01
+  public speed_track = 1 / Number(this.track_list[this.track_count][5])
   
 
   constructor() {
     this.track_title = this.track_list[this.track_count][1];
     this.track_author = this.track_list[this.track_count][2];
+    this.speed_track = 1 / Number(this.track_list[this.track_count][5])
 
     setInterval(() => {
       if (this.player_status == 'pause') {
-          this.progress += this.speed_track;
+        this.speed_track = 1 / Number(this.track_list[this.track_count][5])
+        this.progress += this.speed_track;
         if (this.progress > 1) {
           this.set_zero_bar();
         }
       } else {
 
       }
-    }, 100);
+  }, 1000);
   }
 
   set_track(title:string, author:string) {
@@ -54,6 +56,7 @@ export class MplayerComponent  implements OnInit {
 
   set_zero_bar() {
     this.progress = 0;
+    this.player_status = 'play';
   }
 
   change_status() {
@@ -82,8 +85,9 @@ export class MplayerComponent  implements OnInit {
     this.track = new Audio(this.track_list[this.track_count][0]);
     this.set_track(this.track_list[this.track_count][1], this.track_list[this.track_count][2]);
     this.track_list[this.track_count][4] = 'selected';
+    this.speed_track = 100 / Number(this.track_list[this.track_count][5])
 
-    this.set_zero_bar();
+    this.progress = 0;
     if (this.player_status == 'pause') {
       this.track.play();
     }
@@ -105,8 +109,9 @@ export class MplayerComponent  implements OnInit {
     this.track = new Audio(this.track_list[this.track_count][0]);
     this.set_track(this.track_list[this.track_count][1], this.track_list[this.track_count][2]);
     this.track_list[this.track_count][4] = 'selected';
+    this.speed_track = 100 / Number(this.track_list[this.track_count][5])
 
-    this.set_zero_bar();
+    this.progress = 0;
     if (this.player_status == 'pause') {
       this.track.play();
     }

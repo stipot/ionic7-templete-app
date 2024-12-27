@@ -18,6 +18,7 @@ import { FashionComponent } from './fashion/fashion.component';
 import { FormsComponent } from './forms/forms.component';
 import { NotesComponent } from './notes/notes.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { KanbanComponent } from './kanban/kanban.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UserComponent } from './user/user.component';
@@ -45,6 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsComponent,
     NotesComponent,
     TodoListComponent,
+    KanbanComponent,
     ContactCardComponent,
     SettingsComponent,
     UserComponent,

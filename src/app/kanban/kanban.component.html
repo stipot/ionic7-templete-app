@@ -1,0 +1,25 @@
+<div class="kanban">
+  <div *ngFor="let column of columns" class="kanban-column" 
+       (drop)="onDrop($event, column)" 
+       (dragover)="$event.preventDefault()">
+    <h3>{{ column.title }}</h3>
+    
+    <!-- Список задач в колонке -->
+    <div *ngFor="let task of column.tasks" class="kanban-task"
+         draggable="true"
+         (dragstart)="onDragStart($event, task)"
+         (dblclick)="editTask(task)">
+      
+      <!-- Условие для показа input или текста -->
+      <div *ngIf="!task.isEditing" (click)="stopEditing()">
+        {{ task.text }}
+      </div>
+      
+      <input *ngIf="task.isEditing" [(ngModel)]="task.text"
+             (blur)="stopEditing(task)"
+             (keyup.enter)="stopEditing(task)"
+             type="text" />
+    </div>
+    <button (click)="addTask(column)">Добавить задачу</button>
+  </div>
+</div>

@@ -39,6 +39,7 @@ export class FrontLayoutComponent implements OnInit {
     {c_name: "Filters", c_desc: "Этот компонент поможет разработчикам легко реализовать фильтры поиска в своих приложениях",link:"/filters"}, 
     {c_name: "Validations", c_desc: "Этот компонент разрабатывается для проверки данных пользователя",link:"/validations"}, 
     {c_name: "QR-сканер", c_desc: "Barcode Scanner",link:"/barcode-scanner"}, 
+    {c_name: "Kanban-доска", c_desc: "Kanban-доска с возможностью перетаскивать задачи между столбцами.",link:"/kanban"}, 
 
   ]
   

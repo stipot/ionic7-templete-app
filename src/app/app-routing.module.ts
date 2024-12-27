@@ -24,6 +24,7 @@ import {DealsComponent} from './deals/deals.component';
 import { Component } from '@angular/core';
 import {UserComponent} from "./user/user.component";
 import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
+import { KanbanComponent } from './kanban/kanban.component';
 
 const routes: Routes = [
   {
@@ -134,7 +135,9 @@ const routes: Routes = [
   { path: 'videoplayer',
     component: VideoPlayerComponent
   },
-
+  { path: 'kanban',
+    component: KanbanComponent
+  },
   {
     path: 'front-layout',
   component: FrontLayoutComponent

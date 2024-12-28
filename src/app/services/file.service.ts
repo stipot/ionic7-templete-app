@@ -8,14 +8,15 @@ import { PickFilesOptions, FilePicker } from '@capawesome/capacitor-file-picker'
 export class FileService {
 
   /**
-   * [ ] 1. getDataDir(): Promise<Directory>
-   * [ ] 2. readDataDir(directory: Directory): Promise<string[]>
-   * [ ] 3. createEmptyFile(filename: string, directory: Directory): Promise<void>
-   * [ ] 4. writeFile(filename: string, data_base64: string, directory: Directory): Promise<void>
-   * [ ] 5. readFile(filename: string, directory: Directory): Promise<string>
-   * [ ] 6. deleteFile(filename: string, directory: Directory): Promise<void>
-   * [ ] 7. getFileType(filename: string, directory: Directory): Promise<string>
-   * [ ] 8. chooseExternalFile(): Promise<string>
+   * [x] 1. getDataDir(): Promise<Directory>
+   * [x] 2. readDataDir(directory: Directory): Promise<string[]>
+   * [x] 3. createEmptyFile(filename: string, directory: Directory): Promise<void>
+   * [x] 4. writeFile(filename: string, data_base64: string, directory: Directory): Promise<void>
+   * [x] 5. readFile(filename: string, directory: Directory): Promise<string>
+   * [x] 6. deleteFile(filename: string, directory: Directory): Promise<void>
+   * [x] 7. getFileType(filename: string, directory: Directory): Promise<string>
+   * [x] 8. chooseExternalFile(): Promise<string>
+   * [x] 9. copyExternalFile(path_ext: string, filename: string, directory: Directory): Promise<void>
    */
 
   constructor() { }
@@ -72,7 +73,7 @@ export class FileService {
    * @param data_base64 Данные в формате base64
    * @param directory Директория (по умолчанию Directory.Data)
    */
-  async writeFileBase64(filename: string, data_base64: string, directory: Directory = Directory.Data): Promise<void> {
+  async writeFile(filename: string, data_base64: string, directory: Directory = Directory.Data): Promise<void> {
     try {
       await Filesystem.writeFile({
         path: filename,
@@ -178,6 +179,36 @@ export class FileService {
   }
 
   /**
+   * Копирование внешнего файла в директорию данных приложения
+   * @param path_ext Внешний путь к файлу
+   * @param filename Имя файла, под которым он будет сохранен
+   * @param directory Директория (по умолчанию Directory.Data)
+   */
+  async copyExternalFile(path_ext: string, filename: string, directory: Directory = Directory.Data): Promise<void> {
+    try {
+      // Чтение содержимого внешнего файла
+      const externalFileContent = await Filesystem.readFile({
+        path: path_ext,
+        directory: Directory.External
+      });
+
+      // Запись содержимого в новый файл в указанной директории
+      await Filesystem.writeFile({
+        path: filename,
+        data: externalFileContent.data,
+        directory,
+        encoding: Encoding.UTF8,
+        recursive: true
+      });
+
+      console.log(`File copied successfully to ${directory}/${filename}`);
+    } catch (error) {
+      console.error('Error copying external file:', error);
+      throw new Error('Failed to copy external file');
+    }
+  }
+
+  /**
    * Получение URL файла для отображения
    * @param path Путь к файлу
    * @param directory Директория (по умолчанию Directory.Data)
@@ -207,9 +238,9 @@ export class FileService {
       }
 
       return true;
-  } catch (error) {
-    console.error('Error accessing file picker:', error);
-    return false; // Permissions are denied or an error occurred
+    } catch (error) {
+      console.error('Error accessing file picker:', error);
+      return false; // Permissions are denied or an error occurred
+    }
   }
-}
 }

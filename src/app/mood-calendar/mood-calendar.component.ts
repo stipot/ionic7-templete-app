@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MoodCalendarService } from './mood.service';
 import { MoodEntry, MoodType, MOODS } from './mood.interface';
 import { AlertController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-mood-calendar',
@@ -23,7 +24,8 @@ export class MoodCalendarComponent implements OnInit {
 
   constructor(
     private moodService: MoodCalendarService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -130,31 +132,33 @@ export class MoodCalendarComponent implements OnInit {
   }
 
   async showMoodSelector() {
-    const moodButtons = Object.values(this.moods).map(mood => ({
-      text: `${mood.icon} ${mood.label}`,
-      cssClass: 'mood-select-button',
-      handler: () => {
-        this.saveMoodEntry(mood.type);
-        return true;
-      }
-    }));
-
+    const header = await this.translate.get('CALENDAR.HOW_ARE_YOU').toPromise();
+    const cancel = await this.translate.get('CALENDAR.CANCEL').toPromise();
+  
+    const moodButtons = await Promise.all(
+      Object.values(this.moods).map(async mood => ({
+        text: `${mood.icon} ${await this.translate.get(mood.translationKey).toPromise()}`,
+        cssClass: 'mood-select-button',
+        handler: () => {
+          this.saveMoodEntry(mood.type);
+          return true;
+        }
+      }))
+    );
+  
     const alert = await this.alertController.create({
-      header: 'Как вы себя чувствуете сегодня?',
+      header: header,
       buttons: [
         ...moodButtons,
         {
-          text: 'Отмена',
-          cssClass: 'mood-cancel-button',
-          handler: () => {
-            return true;
-          },
-          role: 'cancel'
+          text: cancel,
+          role: 'cancel',
+          handler: () => true
         }
       ],
       cssClass: 'mood-selector-alert'
     });
-
+  
     await alert.present();
   }
 

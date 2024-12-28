@@ -16,7 +16,7 @@ export class AppComponent {
 
     // Добавляем поле для перехода на страницу пометок
     { title: 'Intro', url: '/intro', icon: '' },
-    { title: 'Календарь настроений', url: '/mood-calendar', icon: '' },
+    { title: 'Mood calendar', url: '/mood-calendar', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
     { title: 'User', url: '/user', icon: '' },
     { title: 'Settings', url: '/settings', icon: '' },

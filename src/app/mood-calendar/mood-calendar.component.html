@@ -2,7 +2,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Календарь настроения
+      {{"Mood calendar" | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -65,7 +65,7 @@
         <!-- Статистика настроений -->
         <ion-card>
           <ion-card-header>
-            <ion-card-title>Статистика за месяц</ion-card-title>
+            <ion-card-title>{{"Mood Statistic" | translate}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <ion-grid>
@@ -75,7 +75,7 @@
                     <div class="mood-icon" [style.background-color]="mood.value.color">
                       {{ mood.value.icon }}
                     </div>
-                    <div class="mood-label">{{ mood.value.label }}</div>
+                    <div class="mood-label">{{ mood.value.translationKey | translate }}</div>
                     <div class="mood-count">{{ monthlyStats[mood.value.type] }}</div>
                   </div>
                 </ion-col>

@@ -39,9 +39,33 @@
     "Birthday": "Birthday",
     "Address": "Address",
     "Marriage": "Marriage",
+    "Курсы криптовалют": "Cypto rates",
+    "Время": "Time",
+    "Цена": "Pice",
+    "Загрузка": "Loading",
+
+    
     "Recipes": "Recipes",
     "News": "News",
     "Save": "Save",
     "FrontPage": "All components",
-    "DragAndDrop": "Drag and drop"
-  }
+
+    "Mood calendar": "Mood Calendar",
+    "Mood Statistic": "Mood Statistic",
+    
+    "MPlayer": "MPlayer",
+    "DragAndDrop": "Drag and drop",
+
+
+    "MOOD": {
+    "HAPPY": "Happy",
+    "RELAXED": "Relaxed",
+    "GRATEFUL": "Grateful",
+    "TIRED": "Tired",
+    "UNSURE": "Unsure",
+    "BORED": "Bored",
+    "ANGRY": "Angry",
+    "STRESSED": "Stressed",
+    "SAD": "Sad"
+    }
+}

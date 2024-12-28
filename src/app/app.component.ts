@@ -15,6 +15,8 @@ export class AppComponent {
     { title: 'FrontPage', url: '/front-layout', icon: 'front-layout' },
     { title: 'Settings', url: '/settings', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },
+    { title: 'Kanban', url: '/kanban', icon: '' },
+    { title: 'Mood calendar', url: '/mood-calendar', icon: '' },
     { title: 'Terms of service', url: '/terms-of-service', icon: '' },
     { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
     { title: 'Signup', url: '/signup', icon: '' },
@@ -32,13 +34,17 @@ export class AppComponent {
     { title: 'filters', url:'/filters',icon: 'reader-outline'},
     { title: 'Validations', url: '/validations', icon: '' },
     { title: 'barcode-scanner', url: '/barcode-scanner', icon: '' },
+    { title: 'scilink', url: '/scilink', icon: '' },
     { title: 'Компоненты в стадии разработки:', url: '/front-layout', icon: '' },
+    { title: 'cryptorates', url: '/cryptorates', icon: '' },
+    { title: 'camera', url: '/camera', icon: '' },
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
     { title: 'DragAndDrop', url: '/drag-and-drop', icon: '' },
     // Добавляем поле для перехода на страницу пометок
     { title: 'Deals', url: '/deals', icon: '' },
     { title: 'Fashion', url: '/fashion', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
+    { title: 'mplayer', url: '/mplayer', icon: '' },
 
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];

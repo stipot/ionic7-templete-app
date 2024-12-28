@@ -9,6 +9,9 @@ export class MplayerComponent implements OnInit {
   public progress = 0;
   public player_status = 'play';
 
+  public track_pg = 0;
+  public track_pg_step = 0.1;
+
   public track_title = 'Music Title';
   public track_author = 'Author Name';
 
@@ -38,6 +41,7 @@ export class MplayerComponent implements OnInit {
     // Обновляем прогресс и текущее время каждую секунду
     setInterval(() => {
       if (this.player_status === 'pause') {
+        this.track_pg = this.track.currentTime / this.track_duration;
         this.progress = this.track.currentTime / this.track_duration;
         if (this.progress >= 1) {
           this.set_zero_bar();
@@ -73,6 +77,10 @@ changeVolume(event: any) {
 }
 
 public filtered_track_list = this.track_list;
+
+changeSeek(event: any) {
+  this.track.currentTime = event.detail.value * this.track_duration;
+}
 
 
 change_status() {

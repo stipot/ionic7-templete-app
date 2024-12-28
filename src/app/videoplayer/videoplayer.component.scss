@@ -1,0 +1,317 @@
+// Глобальные переменные цветов
+$dark-bg: #121212;
+$dark-secondary: #1e1e1e;
+$text-color: #c0c0c0;
+$accent-color: #2575fc;
+$hover-color: rgba(50,50,50,0.7);
+
+
+.file-input-container {
+  position: relative;
+  display: inline-block;
+
+  // Hidden input
+  input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+  }
+
+  // Custom button style
+  .file-input-label {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #6a11cb, $accent-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      background: linear-gradient(45deg, #ff0015, $accent-color);
+    }
+  }
+}
+
+
+.video-player {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: $dark-bg;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+  
+  // Навигация и контейнер видео
+  .video-navigation {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    
+    // Кнопки навигации между видео
+    .nav-button {
+      background: $hover-color;
+      border: none;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: rgba(80,80,80,0.9);
+        transform: scale(1.1);
+      }
+    }
+    
+    // Контейнер видео
+    .video-container {
+      flex-grow: 1;
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      
+      // Видео
+      video {
+        width: 100%;
+        display: block;
+        transition: filter 0.3s ease;
+        
+        &:hover {
+          filter: brightness(1.1);
+        }
+      }
+      
+      // Блок управления
+      .controls {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5));
+        padding: 15px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        // Основные элементы управления
+        .primary-controls {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          
+          // Кнопка Play/Pause
+          .play-pause {
+            background: linear-gradient(45deg, #6a11cb, $accent-color);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            
+            &:hover {
+              transform: scale(1.05);
+            }
+          }
+          
+          // Контейнер таймлайна
+          .timeline-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            
+            // Слайдер прогресса
+            .progress-slider {
+              width: 100%;
+              -webkit-appearance: none;
+              height: 8px;
+              background: #333;
+              border-radius: 5px;
+              outline: none;
+              
+              &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 16px;
+                height: 16px;
+                background: $accent-color;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+                
+                &:hover {
+                  transform: scale(1.2);
+                }
+              }
+            }
+            
+            // Метки времени
+            .time-labels {
+              color: $text-color;
+              font-size: 14px;
+              text-align: right;
+            }
+          }
+        }
+        
+        // Вторичные элементы управления
+        .secondary-controls {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          
+          // Кнопки управления громкостью и режимами
+          button {
+            background: $hover-color;
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            &:hover {
+              background: rgba(80,80,80,0.9);
+            }
+          }
+          
+          // Контроль скорости
+          .speed-controls {
+            position: relative;
+            
+            .speed-options {
+display: none;
+              position: absolute;
+              bottom: 100%;
+              left: 0;
+              background: $dark-secondary;
+              border-radius: 10px;
+              padding: 10px;
+              box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+              z-index: 10;
+              
+              button {
+                display: block;
+                width: 100%;
+                text-align: left;
+                margin: 5px 0;
+                background: transparent;
+                
+                &:hover {
+                  background: rgba(70,70,70,0.7);
+                }
+              }
+            }
+            
+            &:hover .speed-options {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Слайдер видео
+  .video-slider {
+    margin-top: 20px;
+    background: linear-gradient(45deg, $dark-secondary, #2a2a2a);
+    border-radius: 15px;
+    padding: 15px;
+    
+    // Навигация слайдера
+    .slider-navigation {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      
+      // Кнопки навигации
+      .slider-prev, 
+      .slider-next {
+        background: $hover-color;
+        border: none;
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: rgba(80,80,80,0.9);
+          transform: scale(1.1);
+        }
+      }
+      
+      // Список видео
+      .video-list {
+        display: flex;
+        gap: 15px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        
+        .video-item {
+          flex: 0 0 auto;
+          text-align: center;
+          cursor: pointer;
+          transition: transform 0.3s ease;
+          padding: 10px;
+          border-radius: 10px;
+          background: rgba(40,40,40,0.5);
+          
+          &:hover {
+            transform: scale(1.05);
+            background: rgba(50,50,50,0.7);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+          }
+          
+          img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+          }
+          
+          p {
+            margin-top: 10px;
+            color: $text-color;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+          }
+        }
+      }
+    }
+  }
+}

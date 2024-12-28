@@ -32,6 +32,7 @@ import { CryptoRatesComponent } from './cryptorates/cryptorates.component';
 import {MplayerComponent} from "./mplayer/mplayer.component";
 import { KanbanComponent } from './kanban/kanban.component';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
+import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component'
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 
 const routes: Routes = [
@@ -80,7 +81,7 @@ const routes: Routes = [
     path: 'forms',
     component: FormsComponent
   },
-  {  
+  {
     path:'user',
     component: UserComponent
   },
@@ -173,6 +174,10 @@ const routes: Routes = [
   {
     path: 'front-layout',
   component: FrontLayoutComponent
+  },
+  {
+    path: 'drag-and-drop',
+  component: DragAndDropComponent
   },
   {
     path: '**',

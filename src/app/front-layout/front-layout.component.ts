@@ -39,9 +39,10 @@ export class FrontLayoutComponent implements OnInit {
     {c_name: "Сканер штрихкодов", c_desc: "Компонент разрабатывается для проверки данных пользователя.",link:"/barcode-scanner"}, 
     {c_name: "scilink", c_desc: "Компонент позволяет пользователю вводить текст для поиска научных статей.",link:"/scilink"}, 
     {c_name: "Kanban-доска", c_desc: "Kanban-доска с возможностью перетаскивать задачи между столбцами.",link:"/kanban"}, 
-    {c_name: "Water Trackerr", c_desc: "water trackerr",link:"/water-tracker"},
+{c_name: "Drag and drop", c_desc: "Drag and drop feature example",link:"/drag-and-drop"},   
+{c_name: "Water Trackerr", c_desc: "water trackerr",link:"/water-tracker"},
   ]
-  
+
   constructor(private userService: UserService,  private translate: TranslateService) {
 
   }

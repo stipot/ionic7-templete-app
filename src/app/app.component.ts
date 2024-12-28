@@ -39,6 +39,7 @@ export class AppComponent {
     { title: 'cryptorates', url: '/cryptorates', icon: '' },
     { title: 'camera', url: '/camera', icon: '' },
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
+    { title: 'DragAndDrop', url: '/drag-and-drop', icon: '' },
     // Добавляем поле для перехода на страницу пометок
     { title: 'Deals', url: '/deals', icon: '' },
     { title: 'Fashion', url: '/fashion', icon: '' },

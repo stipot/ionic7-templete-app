@@ -31,6 +31,34 @@
     "Password": "Пароль",
     "password": "пароль",
     "ToDo list": "Список дел",
-    "barcode-scanner": "QR-сканер"
+    "barcode-scanner": "Сканер штрихкодов",
+    "Contact card": "Контактная карта",
+    "Status": "Статус",
+    "Following": "Подписки",
+    "Followers": "Подписчики",
+    "Birthday": "День рождения",
+    "Address": "Адрес",
+    "Marriage": "Семейное положение",
+    "News": "Новости",
+    "Save": "Сохранить",
+    "FrontPage": "Все компаненты",
+
+    "Mood calendar": "Календарь настроения",
+    "Mood Statistic": "Статистика настроения",
+
+    "MPlayer": "МПлеер",
+    "DragAndDrop": "Перетаскивание",
+
+
+    "MOOD": {
+      "HAPPY": "Счастливый",
+      "RELAXED": "Расслабленный",
+      "GRATEFUL": "Благодарный",
+      "TIRED": "Уставший",
+      "UNSURE": "Неуверенный",
+      "BORED": "Скучающий",
+      "ANGRY": "Злой",
+      "STRESSED": "В стрессе",
+      "SAD": "Грустный"
   }
 

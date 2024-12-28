@@ -136,4 +136,43 @@ export class FileViewerComponent implements OnInit {
       console.error('Error saving text file:', error);
     }
   }
+
+  async fileOpen2(filename: string): Promise<void> {
+    try {
+      const dataDir = await this.fileService.getDataDir();
+      const fileContent = await this.fileService.readFile(filename, dataDir);
+      
+      // Проверяем, является ли файл изображением
+      if (this.isImageFile(filename)) {
+        const mimeType = this.getMimeType(filename);
+        
+        if (mimeType === 'application/octet-stream') {
+          console.warn('Неподдерживаемый формат изображения');
+          this.selectedImageUrl = null;
+          return;
+        }
+        
+        // Устанавливаем URL изображения
+        this.selectedImageUrl = data:${mimeType};base64,${fileContent};
+        // Сбрасываем контент текстового файла
+        this.selectedFileContent = '';
+      } else {
+        // Если это текстовый файл
+        this.selectedFileContent = fileContent;
+        // Сбрасываем URL изображения
+        this.selectedImageUrl = null;
+      }
+    } catch (error) {
+      console.error('Ошибка при открытии файла:', error);
+      this.selectedFileContent = 'Не удалось загрузить содержимое файла.';
+      this.selectedImageUrl = null;
+    }
+  }
+
+  /**
+   * 1. listAllFiles()
+   * 2. fileOpen(filename: string): Promise<void>
+   * 3. fileUpload(directory: Directory): Promise<void>
+   * 4. -- fileDownload()
+   */
 }

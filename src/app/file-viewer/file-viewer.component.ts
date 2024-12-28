@@ -102,4 +102,18 @@ export class FileViewerComponent implements OnInit {
       console.error('Error saving text file:', error);
     }
   }
+
+  async openFile3(filename: string): Promise<void> {
+    try {
+      const dataDir = await this.fileService.getDataDir(); // Name of the file to be saved
+      const fileContent = 'This is a successfully written text file'; // Content of the file
+
+      const contentText = await this.fileService.readFile(filename, dataDir);
+      this.selectedFileContent = atob(contentText);
+
+      console.log('Text file must be opened successfully!');
+    } catch (error) {
+      console.error('Error opening text file:', error);
+    }
+  }
 }

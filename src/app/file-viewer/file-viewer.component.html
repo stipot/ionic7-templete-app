@@ -4,7 +4,7 @@
     <h3>Text Files</h3>
     <ul>
       <li *ngFor="let file of textFiles">
-        <button (click)="readTextFile(file)">{{ file }}</button>
+        <button (click)="openFile3(file)">{{ file }}</button>
         <button (click)="deleteFile(file)">Delete</button>
       </li>
     </ul>

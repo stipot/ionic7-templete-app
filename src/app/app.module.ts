@@ -34,6 +34,8 @@ import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 import { RecipesComponent } from './recipes/recipes.component';
 
+import { MoodCalendarComponent } from './mood-calendar/mood-calendar.component';
+
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18s/', '.json');
@@ -59,7 +61,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CryptoRatesComponent,
     VideoPlayerComponent,
     FrontLayoutComponent,
-    RecipesComponent
+    RecipesComponent,
+    MoodCalendarComponent
   ],
   imports: [
     BrowserModule,

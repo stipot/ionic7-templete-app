@@ -15,12 +15,13 @@ export class AppComponent {
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
 
     // Добавляем поле для перехода на страницу пометок
+    
     { title: 'Intro', url: '/intro', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
     { title: 'User', url: '/user', icon: '' },
     { title: 'Settings', url: '/settings', icon: '' },
     { title: 'Contact card', url: '/contact-card', icon: '' },
-    { title: 'notes', url: '/notes', icon: 'Пометки' },
+    { title: 'notes', url: '/notes', icon: 'Заметки' },
     { title: 'Login', url: '/login', icon: '' },
     { title: 'Signup', url: '/signup', icon: '' },
     { title: 'Terms of service', url: '/terms-of-service', icon: '' },

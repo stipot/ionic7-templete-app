@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core'
 })
 export class NotesComponent implements OnInit {
   noteData = '';
+  pageTitle = "Notes"
   notes: any = [];
   editingNoteId: string | null = null; 
   constructor(private userService: UserService, private translate: TranslateService) {
@@ -23,6 +24,12 @@ export class NotesComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+    // Component name
+    this.translate.get('Notes').subscribe((translated: string) => {
+      this.pageTitle = translated;
+    });
+}
   saveData() {
     if (this.noteData) {
       if (this.editingNoteId) {

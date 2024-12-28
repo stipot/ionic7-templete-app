@@ -16,6 +16,7 @@ export class AppComponent {
     { title: 'Settings', url: '/settings', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },
     { title: 'Kanban', url: '/kanban', icon: '' },
+    { title: 'Mood calendar', url: '/mood-calendar', icon: '' },
     { title: 'Terms of service', url: '/terms-of-service', icon: '' },
     { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
     { title: 'Signup', url: '/signup', icon: '' },
@@ -40,6 +41,7 @@ export class AppComponent {
     { title: 'Deals', url: '/deals', icon: '' },
     { title: 'Fashion', url: '/fashion', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
+    { title: 'mplayer', url: '/mplayer', icon: '' },
 
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];

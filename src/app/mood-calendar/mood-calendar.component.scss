@@ -1,0 +1,99 @@
+/* mood-calendar.component.scss */
+:host {
+  .calendar-grid {
+    ion-col {
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #ddd;
+      position: relative;
+      cursor: pointer;
+
+      &.today {
+        background-color: var(--ion-color-primary-tint);
+      }
+
+      &.selected {
+        background-color: var(--ion-color-light);
+      }
+
+      &.has-mood {
+        font-weight: bold;
+      }
+
+      .date-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .mood-indicator {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .mood-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    gap: 4px;
+
+    .mood-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .mood-label {
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .mood-count {
+      font-weight: bold;
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+/* Стили для модального окна выбора настроения */
+.mood-selector-alert {
+  --min-width: 300px;
+  
+  .alert-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    margin: 4px 0;
+    font-size: 16px;
+    
+    &.mood-select-button {
+      color: var(--ion-color-dark);
+      
+      &:hover {
+        background-color: var(--ion-color-light);
+      }
+    }
+    
+    &.mood-cancel-button {
+      color: var(--ion-color-medium);
+    }
+  }
+  
+  .alert-button-inner {
+    justify-content: center;
+  }
+}

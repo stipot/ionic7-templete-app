@@ -28,6 +28,7 @@ import { DealsComponent } from './deals/deals.component';
 import { BarcodeScannerComponent } from './barcode-scanner/barcode-scanner.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import { IntroComponent } from './intro/intro.component';
+import { CameraComponent } from './camera/camera.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AppSharedComponentsModule } from './shared/common.module';
 import{CryptoRatesComponent} from "./cryptorates/cryptorates.component";
@@ -66,7 +67,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FrontLayoutComponent,
     RecipesComponent,
     MoodCalendarComponent,
-    MplayerComponent
+    MplayerComponent,
+    CameraComponent,
   ],
   imports: [
     BrowserModule,

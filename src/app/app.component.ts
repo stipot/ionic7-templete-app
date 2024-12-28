@@ -36,6 +36,8 @@ export class AppComponent {
     { title: 'barcode-scanner', url: '/barcode-scanner', icon: '' },
     { title: 'scilink', url: '/scilink', icon: '' },
     { title: 'Компоненты в стадии разработки:', url: '/front-layout', icon: '' },
+    { title: 'cryptorates', url: '/cryptorates', icon: '' },
+    { title: 'camera', url: '/camera', icon: '' },
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
     // Добавляем поле для перехода на страницу пометок
     { title: 'Deals', url: '/deals', icon: '' },

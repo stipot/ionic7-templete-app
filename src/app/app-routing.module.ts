@@ -16,6 +16,7 @@ import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
+import {CameraComponent} from './camera/camera.component';
 
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 
@@ -154,6 +155,10 @@ const routes: Routes = [
   },
   { path: 'kanban',
     component: KanbanComponent
+  },
+  {
+    path: 'camera',
+    loadChildren: () => import('./camera/camera-routing.module').then( m => m.CameraPageRoutingModule)
   },
   {
     path: 'front-layout',

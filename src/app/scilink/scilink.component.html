@@ -1,0 +1,37 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Поиск статей</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-input [(ngModel)]="searchText" placeholder="Введите текст"></ion-input>
+  </ion-item>
+
+  <ion-button fill="solid" (click)="search_btn()" [disabled]="searchText.length < 3">Поиск</ion-button>
+
+  <div *ngIf="Result">{{ Result }}</div>
+
+  <ion-item> 
+    <ion-label position="floating"></ion-label> 
+    <ion-textarea class="full-width-textarea" readonly>{{Result}}</ion-textarea> 
+  </ion-item> 
+
+  <div class="cards-container" *ngIf="filtered_articles.length > 0; else noResults">
+    <ion-card *ngFor="let a of filtered_articles" class="article-card">
+      <ion-img [src]="a.img_name" alt="{{a.a_name}}" class="logo"></ion-img>
+      <ion-card-header>
+        <ion-card-title>
+          <a href="{{a.doi}}">{{a.a_name}}</a>
+        </ion-card-title>
+        <ion-card-subtitle>{{a.abstract}}</ion-card-subtitle>
+        {{a.a_authors}} 
+      </ion-card-header>
+    </ion-card>
+  </div>
+
+  <ng-template #noResults>
+    <div class="no-results-message">Результаты не найдены.</div>
+  </ng-template>
+</ion-content>

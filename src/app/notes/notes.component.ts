@@ -50,6 +50,4 @@ export class NotesComponent implements OnInit {
     this.noteData = data; 
     this.editingNoteId = id; 
   }
-
-  ngOnInit() {}
 }

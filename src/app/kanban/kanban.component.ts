@@ -16,6 +16,7 @@ interface Column {
   styleUrls: ['./kanban.component.scss'],
 })
 export class KanbanComponent {
+  pageTitle: string = "Kanban"
   columns: Column[] = [
     {
       title: 'To Do',

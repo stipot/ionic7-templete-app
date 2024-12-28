@@ -1,25 +1,30 @@
-<div class="kanban">
-  <div *ngFor="let column of columns" class="kanban-column" 
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-header [pageTitle]="pageTitle"></app-header>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="kanban">
+  <ion-list *ngFor="let column of columns" class="kanban-column" 
        (drop)="onDrop($event, column)" 
        (dragover)="$event.preventDefault()">
     <h3>{{ column.title }}</h3>
     
     <!-- Список задач в колонке -->
-    <div *ngFor="let task of column.tasks" class="kanban-task"
+    <ion-list *ngFor="let task of column.tasks" class="kanban-task"
          draggable="true"
          (dragstart)="onDragStart($event, task)"
          (dblclick)="editTask(task)">
       
       <!-- Условие для показа input или текста -->
-      <div *ngIf="!task.isEditing" (click)="stopEditing()">
+      <ion-item *ngIf="!task.isEditing" (click)="stopEditing()">
         {{ task.text }}
-      </div>
+      </ion-item>
       
       <input *ngIf="task.isEditing" [(ngModel)]="task.text"
              (blur)="stopEditing(task)"
              (keyup.enter)="stopEditing(task)"
              type="text" />
-    </div>
+    </ion-list>
     <button (click)="addTask(column)">Добавить задачу</button>
-  </div>
-</div>
+  </ion-list>
+</ion-content>

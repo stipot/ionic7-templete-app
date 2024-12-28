@@ -31,7 +31,7 @@ import {ScilinkComponent} from "./scilink/scilink.component";
 import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
 import {MplayerComponent} from "./mplayer/mplayer.component";
 import { KanbanComponent } from './kanban/kanban.component';
-
+import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 
 const routes: Routes = [
@@ -43,6 +43,9 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
+  },
+  {    path: 'file-viewer',
+    component: FileViewerComponent
   },
   {
     path: 'page-not-found',

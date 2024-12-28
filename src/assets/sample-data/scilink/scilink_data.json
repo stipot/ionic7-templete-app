@@ -1,0 +1,24 @@
+[
+    {
+    "doi": "https://www.mdpi.com/2227-7080/12/12/261",
+    "a_name": "EEG-Based Mobile Robot Control Using Deep Learning and ROS Integration",
+    "a_authors": "by Andreea Zamfirescu",
+    "abstract": "Efficient BCIs (Brain-Computer Interfaces) harnessing EEG (Electroencephalography) have shown potential in controlling mobile robots, also presenting new possibilities for assistive technologies. This study explores the integration of advanced deep learning models—ASTGCN, EEGNetv4, and a combined CNN-LSTM architecture—with ROS (Robot Operating System)",
+    "img_name": "https://www.mdpi.com/polymers/polymers-16-03489/article_deploy/html/images/polymers-16-03489-g002-550.jpg"
+
+}, {
+    "doi": "https://www.mdpi.com/2227-7080/12/12/259",
+    "a_name": "Real-Time Scheduling with Independent Evaluators: Explainable Multi-Agent Approach",
+    "a_authors": "by Alexander Boukhanovsky",
+    "abstract": "This study introduces a multi-agent reinforcement learning approach to address the challenges of real-time scheduling in dynamic environments, with a specific focus on healthcare operations. The proposed system integrates the Human-in-the-Loop (HITL) paradigm, providing continuous feedback from human evaluators",
+    "img_name": "https://www.mdpi.com/polymers/polymers-16-03489/article_deploy/html/images/polymers-16-03489-g001-550.jpg"
+
+}, {
+    "doi": "https://www.mdpi.com/2073-4360/16/24/3489",
+    "a_name": "Advancing the Physicochemical Properties and Therapeutic Potential of Plant Extracts Through Amorphous Solid Dispersion Systems",
+    "a_authors": "by Arif Budiman, Nur Parida Mahdhani Hafidz, Raden Siti Salma Azzahra, Salma Amaliah, Feggy Yustika Sitinjak, Agus Rusdin, Laila Subra and Diah Lia Aulifa",
+    "abstract": "Plant extracts demonstrate significant potential as a rich source of active pharmaceutical ingredients, exhibiting diverse biological activities and minimal toxicity. However, the low aqueous solubility of extracts and their gastrointestinal permeability, as well as their poor oral bioavailability",
+    "img_name": "https://www.mdpi.com/marinedrugs/marinedrugs-22-00559/article_deploy/html/images/marinedrugs-22-00559-g001-550.jpg"
+
+}
+]

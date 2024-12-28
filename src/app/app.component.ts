@@ -32,6 +32,7 @@ export class AppComponent {
     { title: 'filters', url:'/filters',icon: 'reader-outline'},
     { title: 'Validations', url: '/validations', icon: '' },
     { title: 'barcode-scanner', url: '/barcode-scanner', icon: '' },
+    { title: 'scilink', url: '/scilink', icon: '' },
     { title: 'Компоненты в стадии разработки:', url: '/front-layout', icon: '' },
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
     // Добавляем поле для перехода на страницу пометок

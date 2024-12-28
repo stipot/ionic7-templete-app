@@ -23,8 +23,9 @@ export class FileViewerComponent implements OnInit {
   async loadFiles() {
     try {
       const dataDir = await this.fileService.getDataDir();
-      this.textFiles = await this.fileService.readDataDir(dataDir);
-      this.imageFiles = await this.fileService.readDataDir(dataDir); // Assuming image files are in the same directory
+      //this.textFiles = await this.fileService.readDataDir(dataDir);
+      //this.imageFiles = await this.fileService.readDataDir(dataDir); // Assuming image files are in the same directory
+      this.allFiles = await this.fileService.readDataDir(dataDir);
     } catch (error) {
       console.error('Error loading files:', error);
     }
@@ -83,7 +84,7 @@ export class FileViewerComponent implements OnInit {
     return mimeType.startsWith('image/');
   }
 
-  async deleteFile(fileName: string) {
+  async deleteSelectedFile(fileName: string) {
     try {
       const dataDir = await this.fileService.getDataDir();
       await this.fileService.deleteFile(fileName, dataDir);

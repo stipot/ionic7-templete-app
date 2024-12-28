@@ -32,6 +32,8 @@ import { CryptoRatesComponent } from './cryptorates/cryptorates.component';
 import {MplayerComponent} from "./mplayer/mplayer.component";
 import { KanbanComponent } from './kanban/kanban.component';
 
+import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -159,6 +161,11 @@ const routes: Routes = [
   {
     path: 'camera',
     loadChildren: () => import('./camera/camera-routing.module').then( m => m.CameraPageRoutingModule)
+    
+  },
+  {
+    path: 'water-tracker',
+    loadChildren: () => import('./water-tracker/water-tracker.module').then(m => m.WaterTrackerModule)
   },
   {
     path: 'front-layout',
@@ -167,7 +174,7 @@ const routes: Routes = [
   {
     path: '**',
   redirectTo: 'page-not-found'
-  }
+  },
 ];
 
 @NgModule({

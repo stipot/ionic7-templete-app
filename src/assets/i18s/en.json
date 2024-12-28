@@ -32,6 +32,19 @@
     "Password": "Password",
     "password": "password",
     "ToDo list": "ToDo list",
-    "barcode-scanner": "Barcode Scanner"
-    
-  }
+    "barcode-scanner": "Barcode Scanner",
+    "Mood calendar": "Mood Calendar",
+    "Mood Statistic": "Mood Statistic",
+
+    "MOOD": {
+    "HAPPY": "Happy",
+    "RELAXED": "Relaxed",
+    "GRATEFUL": "Grateful",
+    "TIRED": "Tired",
+    "UNSURE": "Unsure",
+    "BORED": "Bored",
+    "ANGRY": "Angry",
+    "STRESSED": "Stressed",
+    "SAD": "Sad"
+    }
+}

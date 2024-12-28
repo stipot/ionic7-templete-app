@@ -29,6 +29,7 @@ import {ScilinkComponent} from "./scilink/scilink.component";
 
 import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
 import {MplayerComponent} from "./mplayer/mplayer.component";
+import { KanbanComponent } from './kanban/kanban.component';
 
 const routes: Routes = [
   {
@@ -151,7 +152,9 @@ const routes: Routes = [
   { path: 'videoplayer',
     component: VideoPlayerComponent
   },
-
+  { path: 'kanban',
+    component: KanbanComponent
+  },
   {
     path: 'front-layout',
   component: FrontLayoutComponent

@@ -38,9 +38,8 @@ export class FrontLayoutComponent implements OnInit {
     {c_name: "Подтверждения", c_desc: "Компонент разрабатывается для проверки данных пользователя",link:"/validations"}, 
     {c_name: "Сканер штрихкодов", c_desc: "Компонент разрабатывается для проверки данных пользователя.",link:"/barcode-scanner"}, 
     {c_name: "scilink", c_desc: "Компонент позволяет пользователю вводить текст для поиска научных статей.",link:"/scilink"}, 
+    {c_name: "Kanban-доска", c_desc: "Kanban-доска с возможностью перетаскивать задачи между столбцами.",link:"/kanban"}, 
    
-
-
   ]
   
   constructor(private userService: UserService,  private translate: TranslateService) {

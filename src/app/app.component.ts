@@ -15,6 +15,7 @@ export class AppComponent {
     { title: 'FrontPage', url: '/front-layout', icon: 'front-layout' },
     { title: 'Settings', url: '/settings', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },
+    { title: 'Kanban', url: '/kanban', icon: '' },
     { title: 'Mood calendar', url: '/mood-calendar', icon: '' },
     { title: 'Terms of service', url: '/terms-of-service', icon: '' },
     { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },

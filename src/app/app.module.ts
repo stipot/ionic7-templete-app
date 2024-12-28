@@ -29,6 +29,7 @@ import { RssDataComponent } from './rss-data/rss-data.component';
 import { IntroComponent } from './intro/intro.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AppSharedComponentsModule } from './shared/common.module';
+import{CryptoRatesComponent} from "./cryptorates/cryptorates.component"
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -51,7 +52,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     BarcodeScannerComponent,
     RssDataComponent,
     IntroComponent,
-    TermsOfServiceComponent
+    TermsOfServiceComponent,
+    CryptoRatesComponent
   ],
   imports: [
     BrowserModule,

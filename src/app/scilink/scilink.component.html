@@ -1,19 +1,17 @@
-<ion-header>
-  <ion-toolbar> 
-    <ion-title>Научное цитирование</ion-title> 
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  
-  <div class="input-container">
-    <ion-item> 
-      <ion-label position="floating">Введите текст</ion-label> 
-      <ion-input class="full-width-input" (keyup.enter)="search_btn()"></ion-input> 
-    </ion-item>
-    
-    <ion-button class="center-button" fill="solid" (click)="search_btn()">Поиск</ion-button> 
-  </div> 
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Поиск статей</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item>
+    <ion-input [(ngModel)]="searchText" placeholder="Введите текст"></ion-input>
+  </ion-item>
+
+  <ion-button fill="solid" (click)="search_btn()" [disabled]="searchText.length < 3">Поиск</ion-button>
+
+  <div *ngIf="Result">{{ Result }}</div>
 
   <ion-item> 
     <ion-label position="floating"></ion-label> 
@@ -36,5 +34,4 @@
   <ng-template #noResults>
     <div class="no-results-message">Результаты не найдены.</div>
   </ng-template>
-  
 </ion-content>

@@ -12,7 +12,7 @@
     </ion-list-header>
     <ion-item *ngFor="let file of allFiles">
       <ion-label (click)="fileOpen2(file)">{{ file }}</ion-label>
-      <ion-button fill="clear" (click)="deleteFile(file)">
+      <ion-button fill="clear" (click)="deleteSelectedFile(file)">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>

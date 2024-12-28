@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>File Viewer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Секция для отображения текстовых файлов -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Text Files</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let file of allFiles">
+      <ion-label (click)="fileOpen2(file)">{{ file }}</ion-label>
+      <ion-button fill="clear" (click)="deleteSelectedFile(file)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- Секция для отображения содержимого выбранного файла -->
+  <ion-card *ngIf="selectedFileContent">
+    <ion-card-header>
+      <ion-card-title>Selected File Content</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <pre>{{ selectedFileContent }}</pre>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Секция для отображения выбранного изображения -->
+  <ion-card *ngIf="selectedImageUrl">
+    <ion-card-header>
+      <ion-card-title>Selected Image</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <img [src]="selectedImageUrl" alt="Selected Image" />
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Секция для отладки -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Debug</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-button (click)="readDefDir()">Read Default Directory</ion-button>
+      <ion-button (click)="saveTextFileDBG()">Save Test File</ion-button>
+      <ion-button (click)="uploadFromStorage()">Upload from storage</ion-button>
+    </ion-item>
+    <ion-item *ngFor="let file of allFiles">
+      <ion-label>{{ file }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

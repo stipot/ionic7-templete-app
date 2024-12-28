@@ -38,7 +38,7 @@ import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 import {FrontLayoutComponent} from "./front-layout/front-layout.component";
 import { RecipesComponent } from './recipes/recipes.component';
 import {MplayerComponent} from "./mplayer/mplayer.component";
-
+import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { MoodCalendarComponent } from './mood-calendar/mood-calendar.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 
@@ -72,6 +72,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MoodCalendarComponent,
     MplayerComponent,
     CameraComponent,
+    FileViewerComponent,
     DragAndDropComponent
   ],
   imports: [
@@ -103,3 +104,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
+s

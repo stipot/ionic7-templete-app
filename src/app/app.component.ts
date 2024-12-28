@@ -46,6 +46,7 @@ export class AppComponent {
     { title: 'Profile', url: '/profil', icon: '' },
     { title: 'mplayer', url: '/mplayer', icon: '' },
     { title: 'notes', url: '/notes', icon: 'Заметки' },
+    { title: 'File-viewer', url: '/file-viewer', icon: '' },
 
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];

@@ -19,7 +19,9 @@ import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 
+
 import {DealsComponent} from './deals/deals.component';
+import {MoodCalendarComponent} from './mood-calendar/mood-calendar.component';
 
 import { Component } from '@angular/core';
 import {UserComponent} from "./user/user.component";
@@ -46,6 +48,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'mood-calendar',
+    component: MoodCalendarComponent
   },
   {
     path: 'contact-card',

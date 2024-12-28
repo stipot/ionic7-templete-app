@@ -49,5 +49,20 @@
     "News": "News",
     "Save": "Save",
     "FrontPage": "All components",
+
+    "Mood calendar": "Mood Calendar",
+    "Mood Statistic": "Mood Statistic",
+
+    "MOOD": {
+    "HAPPY": "Happy",
+    "RELAXED": "Relaxed",
+    "GRATEFUL": "Grateful",
+    "TIRED": "Tired",
+    "UNSURE": "Unsure",
+    "BORED": "Bored",
+    "ANGRY": "Angry",
+    "STRESSED": "Stressed",
+    "SAD": "Sad",
     "MPlayer": "MPlayer"
-  }
+    }
+}

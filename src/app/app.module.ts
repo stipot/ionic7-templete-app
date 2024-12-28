@@ -35,6 +35,8 @@ import {FrontLayoutComponent} from "./front-layout/front-layout.component";
 import { RecipesComponent } from './recipes/recipes.component';
 import {MplayerComponent} from "./mplayer/mplayer.component";
 
+import { MoodCalendarComponent } from './mood-calendar/mood-calendar.component';
+
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18s/', '.json');
@@ -61,6 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     VideoPlayerComponent,
     FrontLayoutComponent,
     RecipesComponent,
+    MoodCalendarComponent,
     MplayerComponent
   ],
   imports: [

@@ -30,6 +30,7 @@ import { RssDataComponent } from './rss-data/rss-data.component';
 import { IntroComponent } from './intro/intro.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AppSharedComponentsModule } from './shared/common.module';
+import{CryptoRatesComponent} from "./cryptorates/cryptorates.component"
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 import { RecipesComponent } from './recipes/recipes.component';
@@ -57,6 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RssDataComponent,
     IntroComponent,
     TermsOfServiceComponent,
+    CryptoRatesComponent,
     VideoPlayerComponent,
     FrontLayoutComponent,
     RecipesComponent

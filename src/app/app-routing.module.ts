@@ -11,10 +11,13 @@ import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.componen
 import { SignupComponent } from './signup/signup.component';
 import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RecipesComponent } from './recipes/recipes.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
-import {RecipesPageModule} from './recipes/recipes.module'
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
+import {FrontLayoutComponent} from "./front-layout/front-layout.component"
+
+import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 
 import {DealsComponent} from './deals/deals.component';
 
@@ -22,11 +25,12 @@ import { Component } from '@angular/core';
 import {UserComponent} from "./user/user.component";
 import {ScilinkComponent} from "./scilink/scilink.component";
 
+import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/',
+    redirectTo: 'front-layout',
     pathMatch: 'full'
   },
   {
@@ -70,14 +74,13 @@ const routes: Routes = [
   {  
     path:'scilink',
     component: ScilinkComponent
+  },{  
+    path:'cryptorates',
+    component: CryptoRatesComponent
   },
   {
     path: 'notes',
     component: NotesComponent
-  },
-  {
-    path: 'recipes',
-    loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesPageModule)
   },
   {
     path: 'todo-list',
@@ -124,20 +127,28 @@ const routes: Routes = [
     loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
   },
   {
+    path: 'recipes',
+    component: RecipesComponent
+  },
+  {
     path: 'rss-data',
     component: RssDataComponent
   },
   { path: 'intro',
   component: IntroComponent
 },
+  { path: 'videoplayer',
+    component: VideoPlayerComponent
+  },
+
   {
-    path: 'owerview',
-    loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
+    path: 'front-layout',
+  component: FrontLayoutComponent
   },
   {
     path: '**',
   redirectTo: 'page-not-found'
-  },
+  }
 ];
 
 @NgModule({

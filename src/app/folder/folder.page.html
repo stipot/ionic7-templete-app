@@ -18,4 +18,35 @@
     <strong class="capitalize">{{ folder }}</strong>
     <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div>
+
+  
+  <h2 class="components-title">Компоненты</h2>
+
+  <div class="card-container">
+    <ion-card *ngFor="let c of comp_list" class="card-item">
+      <ion-card-header>
+        <ion-card-title>{{c.c_name}}</ion-card-title>
+        <ion-card-subtitle>{{c.c_desc}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
 </ion-content>
+
+<style>
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card-item {
+  flex: 0 1 30%; 
+  margin-bottom: 20px; 
+}
+
+.components-title {
+  margin: 20px; 
+  font-size: 24px; 
+  font-weight: bold; 
+}
+</style>

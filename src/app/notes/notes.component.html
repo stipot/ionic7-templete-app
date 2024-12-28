@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <app-header [pageTitle]="pageTitle"></app-header>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'Notes' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -24,22 +27,18 @@
       class="remove-note"
       style="margin-top: 10px"
       *ngFor="let note of notes"
-
     >
       <p id="{{ note.id }}">{{ note.data }}</p>
       <ion-button
-        (click)="removeDocument(note.id )"
+        (click)="removeDocument(note.id)"
         slot="end"
         class="remove-note"
-        >x</ion-button
-      >
+      >x</ion-button>
       <ion-button
-        (click)="updateDocument(note.id )"
+        (click)="setEditMode(note.data, note.id)"
         slot="end"
         class="remove-note"
-        >edit</ion-button
-      >
+      >edit</ion-button>    
     </ion-item>
   </ion-list>
-  <ion-label> </ion-label>
 </ion-content>

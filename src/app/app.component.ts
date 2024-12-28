@@ -45,6 +45,7 @@ export class AppComponent {
     { title: 'Fashion', url: '/fashion', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
     { title: 'mplayer', url: '/mplayer', icon: '' },
+    { title: 'notes', url: '/notes', icon: 'Заметки' },
 
   ];
   public labels = ['Семья', 'Друзья', 'Заметки', 'Работа', 'Путешествия', 'Напоминания'];

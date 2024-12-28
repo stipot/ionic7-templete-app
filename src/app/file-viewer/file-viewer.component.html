@@ -45,9 +45,8 @@
     </ion-list-header>
     <ion-item>
       <ion-button (click)="readDefDir()">Read Default Directory</ion-button>
-    </ion-item>
-    <ion-item>
       <ion-button (click)="saveTextFileDBG()">Save Test File</ion-button>
+      <ion-button (click)="uploadFromStorage()">Upload from storage</ion-button>
     </ion-item>
     <ion-item *ngFor="let file of allFiles">
       <ion-label>{{ file }}</ion-label>

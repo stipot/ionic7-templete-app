@@ -94,13 +94,22 @@ export class FileViewerComponent implements OnInit {
     }
   }
 
-  async uploadFiles() {
+  async uploadFromStorage() {
     try {
       const externalFilePath = await this.fileService.chooseExternalFile();
       if (!externalFilePath) {
         throw new Error ('File not selected');
       }
       console.log('Uploading file:', externalFilePath);
+      const extFilePath = await this.fileService.chooseExternalFile();
+
+      if (extFilePath === undefined || !extFilePath) {
+        throw new Error('Could not select file');
+      }
+
+      const localFilename = extFilePath!.split('\\')!.pop()!.split('/').pop()!;
+      this.fileService.copyExternalFile(extFilePath, localFilename);
+
     } catch (error) {
       console.error('Error uploading files:', error);
     }

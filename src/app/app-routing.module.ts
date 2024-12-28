@@ -23,6 +23,8 @@ import {DealsComponent} from './deals/deals.component';
 
 import { Component } from '@angular/core';
 import {UserComponent} from "./user/user.component";
+import {ScilinkComponent} from "./scilink/scilink.component";
+
 import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
 
 const routes: Routes = [
@@ -68,7 +70,11 @@ const routes: Routes = [
     path:'user',
     component: UserComponent
   },
+  // Добавляем путь в роутинг для перемещения на страницу пометок
   {  
+    path:'scilink',
+    component: ScilinkComponent
+  },{  
     path:'cryptorates',
     component: CryptoRatesComponent
   },

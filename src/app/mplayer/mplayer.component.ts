@@ -5,51 +5,56 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './mplayer.component.html',
   styleUrls: ['./mplayer.component.scss'],
 })
-export class MplayerComponent  implements OnInit {
+export class MplayerComponent implements OnInit {
   public progress = 0;
   public player_status = 'play';
 
-  public track_title = 'Music Ttitle';
+  public track_title = 'Music Title';
   public track_author = 'Author Name';
 
-  // public track_list = ['https://opengameart.org/sites/default/files/audio_preview/awesomeness.wav.ogg', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3']
   public track_list = [
     ['https://opengameart.org/sites/default/files/audio_preview/awesomeness.wav.ogg', 'Menu Music', 'Adventure', '0', 'selected', '48'],
     ['https://opengameart.org/sites/default/files/audio_preview/seashore.mp3.ogg', 'Fight Music', 'Adventure', '1', '', '173'],
     ['https://opengameart.org/sites/default/files/audio_preview/yesterbreeze.mp3.ogg', 'Strong Start', 'RPG Music', '2', '', '85'],
     ['https://opengameart.org/sites/default/files/audio_preview/game_2.mp3.ogg', 'Intro Music', 'Factory', '3', '', '82'],
     ['https://opengameart.org/sites/default/files/audio_preview/jkjkke%20-%20dream_0.mp3.ogg', 'Menu Music', 'Low Light', '4', '', '159']
-  ]
+  ];
 
-  // public track_element = document.getElementById('audio_test');
-
-  public track_count = 0
+  public track_count = 0;
   public track = new Audio(this.track_list[this.track_count][0]);
-  public track_duration = this.track.duration;
-
-  public default_speed_track = 0.01
-  public speed_track = 1 / Number(this.track_list[this.track_count][5])
-  
+  public track_duration = 0;
 
   constructor() {
     this.track_title = this.track_list[this.track_count][1];
     this.track_author = this.track_list[this.track_count][2];
-    this.speed_track = 1 / Number(this.track_list[this.track_count][5])
 
+    // Ожидаем загрузки метаданных трека для получения длительности
+    this.track.addEventListener('loadedmetadata', () => {
+      this.track_duration = this.track.duration;
+    });
+
+    
+
+    // Обновляем прогресс и текущее время каждую секунду
     setInterval(() => {
-      if (this.player_status == 'pause') {
-        this.speed_track = 1 / Number(this.track_list[this.track_count][5])
-        this.progress += this.speed_track;
-        if (this.progress > 1) {
+      if (this.player_status === 'pause') {
+        this.progress = this.track.currentTime / this.track_duration;
+        if (this.progress >= 1) {
           this.set_zero_bar();
         }
-      } else {
-
       }
-  }, 1000);
+    }, 1000);
   }
 
-  set_track(title:string, author:string) {
+  // Метод для форматирования времени в mm:ss
+  formatTime(time: number): string {
+    if (isNaN(time) || time === 0) return '00:00';
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  }
+
+  set_track(title: string, author: string) {
     this.track_title = title;
     this.track_author = author;
   }
@@ -57,17 +62,26 @@ export class MplayerComponent  implements OnInit {
   set_zero_bar() {
     this.progress = 0;
     this.player_status = 'play';
+    this.track.pause();
+    this.track.currentTime = 0;
   }
+public volume = 0.5; 
 
-  change_status() {
-    if (this.player_status == 'pause') {
+changeVolume(event: any) {
+  this.volume = event.detail.value;
+  this.track.volume = this.volume;
+}
+
+public filtered_track_list = this.track_list;
+
+
+change_status() {
+    if (this.player_status === 'pause') {
       this.player_status = 'play';
-      this.track.pause()
+      this.track.pause();
     } else {
       this.player_status = 'pause';
-      this.track.play()
-      console.log(this.track_duration);
-      // console.log(this.track_element.duration);
+      this.track.play();
     }
   }
 
@@ -79,20 +93,21 @@ export class MplayerComponent  implements OnInit {
     if (this.track_count < this.track_list.length - 1) {
       this.track_count += 1;
     } else {
-      this.track_count = 0
+      this.track_count = 0;
     }
 
     this.track = new Audio(this.track_list[this.track_count][0]);
     this.set_track(this.track_list[this.track_count][1], this.track_list[this.track_count][2]);
     this.track_list[this.track_count][4] = 'selected';
-    this.speed_track = 100 / Number(this.track_list[this.track_count][5])
+
+    this.track.addEventListener('loadedmetadata', () => {
+      this.track_duration = this.track.duration;
+    });
 
     this.progress = 0;
-    if (this.player_status == 'pause') {
+    if (this.player_status === 'pause') {
       this.track.play();
     }
-    console.log
-    // this.set_track('NEbula', 'OG Budda');
   }
 
   prev_track() {
@@ -109,14 +124,23 @@ export class MplayerComponent  implements OnInit {
     this.track = new Audio(this.track_list[this.track_count][0]);
     this.set_track(this.track_list[this.track_count][1], this.track_list[this.track_count][2]);
     this.track_list[this.track_count][4] = 'selected';
-    this.speed_track = 100 / Number(this.track_list[this.track_count][5])
+
+    this.track.addEventListener('loadedmetadata', () => {
+      this.track_duration = this.track.duration;
+    });
 
     this.progress = 0;
-    if (this.player_status == 'pause') {
+    if (this.player_status === 'pause') {
       this.track.play();
     }
   }
 
-  ngOnInit() {}
+  searchTracks(event: any) {
+    const query = event.target.value.toLowerCase();
+    this.filtered_track_list = this.track_list.filter(
+      (item) => item[1].toLowerCase().includes(query)
+    );
+  }
 
+  ngOnInit() {}
 }

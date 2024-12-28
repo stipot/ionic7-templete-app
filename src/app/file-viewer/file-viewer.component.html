@@ -3,14 +3,14 @@
   <div class="file-section">
     <h3>Text Files</h3>
     <ul>
-      <li *ngFor="let file of textFiles">
-        <button (click)="openFile3(file)">{{ file }}</button>
+      <li *ngFor="let file of allFiles">
+        <button (click)="fileOpen2(file)">{{ file }}</button>
         <button (click)="deleteFile(file)">Delete</button>
       </li>
     </ul>
   </div>
 
-  <!-- Секция для отображения изображений -->
+  <!-- Секция для отображения изображений
   <div class="file-section">
     <h3>Image Files</h3>
     <ul>
@@ -19,7 +19,7 @@
         <button (click)="deleteFile(file)">Delete</button>
       </li>
     </ul>
-  </div>
+  </div> -->
 
   <!-- Секция для отображения содержимого выбранного файла -->
   <div class="file-content" *ngIf="selectedFileContent">
@@ -31,12 +31,6 @@
   <div class="image-preview" *ngIf="selectedImageUrl">
     <h3>Selected Image</h3>
     <img [src]="selectedImageUrl" alt="Selected Image" />
-  </div>
-
-  <!-- Кнопки для загрузки и выгрузки файлов -->
-  <div class="actions">
-    <button (click)="uploadFiles()">Upload Files</button>
-    <button (click)="downloadFiles()">Download Files</button>
   </div>
 
   <!-- Секция для отладки -->

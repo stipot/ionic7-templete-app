@@ -40,16 +40,47 @@ export class FileViewerComponent implements OnInit {
     }
   }
 
+  private getMimeType(fileName: string): string {
+    const extension = fileName.split('.').pop()?.toLowerCase() || '';
+      const mimeTypes: { [key: string]: string } = {
+        'jpg': 'image/jpeg',
+        'jpeg': 'image/jpeg',
+        'png': 'image/png',
+        'gif': 'image/gif',
+        'bmp': 'image/bmp',
+        'webp': 'image/webp',
+        'svg': 'image/svg+xml',
+        'tiff': 'image/tiff',
+        'ico': 'image/x-icon',
+        'heic': 'image/heic',
+        'avif': 'image/avif'
+      };
+    
+      return mimeTypes[extension] || 'application/octet-stream';
+    }
+
   async openImage(fileName: string) {
     try {
       const dataDir = await this.fileService.getDataDir();
       const fileContent = await this.fileService.readFile(fileName, dataDir);
-      const fileType = await this.fileService.getFileType(fileName, dataDir);
-      this.selectedImageUrl = `data:${fileType};base64,${fileContent}`;
+      const mimeType = this.getMimeType(fileName);
+  
+      if (mimeType === 'application/octet-stream') {
+        console.warn('Unsupported image format');
+        this.selectedImageUrl = null;
+        return;
+      }
+  
+      this.selectedImageUrl = `data:${mimeType};base64,${fileContent}`;
     } catch (error) {
       console.error('Error opening image file:', error);
       this.selectedImageUrl = null;
     }
+  }
+
+  isImageFile(fileName: string): boolean {
+    const mimeType = this.getMimeType(fileName);
+    return mimeType.startsWith('image/');
   }
 
   async deleteFile(fileName: string) {
@@ -65,6 +96,9 @@ export class FileViewerComponent implements OnInit {
   async uploadFiles() {
     try {
       const externalFilePath = await this.fileService.chooseExternalFile();
+      if (!externalFilePath) {
+        throw new Error ('File not selected');
+      }
       console.log('Uploading file:', externalFilePath);
     } catch (error) {
       console.error('Error uploading files:', error);
@@ -116,4 +150,43 @@ export class FileViewerComponent implements OnInit {
       console.error('Error opening text file:', error);
     }
   }
+
+  async fileOpen2(filename: string): Promise<void> {
+    try {
+      const dataDir = await this.fileService.getDataDir();
+      const fileContent = await this.fileService.readFile(filename, dataDir);
+      
+      // Проверяем, является ли файл изображением
+      if (this.isImageFile(filename)) {
+        const mimeType = this.getMimeType(filename);
+        
+        if (mimeType === 'application/octet-stream') {
+          console.warn('Неподдерживаемый формат изображения');
+          this.selectedImageUrl = null;
+          return;
+        }
+        
+        // Устанавливаем URL изображения
+        this.selectedImageUrl = data:${mimeType};base64,${fileContent};
+        // Сбрасываем контент текстового файла
+        this.selectedFileContent = '';
+      } else {
+        // Если это текстовый файл
+        this.selectedFileContent = fileContent;
+        // Сбрасываем URL изображения
+        this.selectedImageUrl = null;
+      }
+    } catch (error) {
+      console.error('Ошибка при открытии файла:', error);
+      this.selectedFileContent = 'Не удалось загрузить содержимое файла.';
+      this.selectedImageUrl = null;
+    }
+  }
+
+  /**
+   * 1. listAllFiles()
+   * 2. fileOpen(filename: string): Promise<void>
+   * 3. fileUpload(directory: Directory): Promise<void>
+   * 4. -- fileDownload()
+   */
 }

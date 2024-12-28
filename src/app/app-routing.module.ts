@@ -28,6 +28,7 @@ import {UserComponent} from "./user/user.component";
 import {ScilinkComponent} from "./scilink/scilink.component";
 
 import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
+import {MplayerComponent} from "./mplayer/mplayer.component";
 
 const routes: Routes = [
   {
@@ -115,6 +116,10 @@ const routes: Routes = [
   {
     path: 'terms-of-service',
     component: TermsOfServiceComponent
+  },
+  {
+    path: 'mplayer',
+    component: MplayerComponent
   },
   {
     path: 'barcode-scanner',

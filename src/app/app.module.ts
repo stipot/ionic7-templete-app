@@ -29,10 +29,11 @@ import { RssDataComponent } from './rss-data/rss-data.component';
 import { IntroComponent } from './intro/intro.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AppSharedComponentsModule } from './shared/common.module';
-import{CryptoRatesComponent} from "./cryptorates/cryptorates.component"
+import{CryptoRatesComponent} from "./cryptorates/cryptorates.component";
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
-import {FrontLayoutComponent} from "./front-layout/front-layout.component"
+import {FrontLayoutComponent} from "./front-layout/front-layout.component";
 import { RecipesComponent } from './recipes/recipes.component';
+import {MplayerComponent} from "./mplayer/mplayer.component";
 
 import { MoodCalendarComponent } from './mood-calendar/mood-calendar.component';
 
@@ -62,7 +63,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     VideoPlayerComponent,
     FrontLayoutComponent,
     RecipesComponent,
-    MoodCalendarComponent
+    MoodCalendarComponent,
+    MplayerComponent
   ],
   imports: [
     BrowserModule,

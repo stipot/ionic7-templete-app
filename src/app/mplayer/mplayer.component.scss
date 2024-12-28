@@ -1,0 +1,22 @@
+// #musicProgress::part(progress) {
+//     width: 10px;
+//     height: 10px;
+//     background: red;
+// }
+
+ion-item {
+    transition: transform .3s;
+}
+
+.selected {
+    color: lightseagreen;
+    transform: scale(1.01);
+}
+
+.music_title {
+    font-weight: bold;
+}
+
+.author_name {
+    filter: opacity(0.4);
+}

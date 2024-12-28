@@ -1,0 +1,190 @@
+:host {
+  display: block;
+  font-family: 'Arial', sans-serif;
+  color: #000;
+  background-color: #f7f7f7;
+}
+
+header {
+  background-image: url('https://blog.suvie.com/wp-content/uploads/2020/02/Bergamot-pizza.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 50px 20px;
+  text-align: center;
+  color: white;
+  text-top: 0px;
+}
+
+ion-searchbar {
+  ion-background-color: #add8e6;
+  background: transparent;
+}
+
+.recipes-container {
+  display: flex;
+  justify-content: flex-start;
+        border-width: 15px;
+
+        margin-left: 10%;
+        flex-direction: row;
+        flex-wrap: wrap;
+}
+
+ion-card {
+  width: 340px;
+  height: 450px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  background: #d8dade;
+  margin: 10px;
+  
+}
+
+ion-card:hover {
+  transform: scale(1.05);
+}
+
+img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+ion-card-header {
+  padding: 10px;
+  text-align: center;
+}
+
+ion-card-subtitle {
+  font-size: 0.9rem;
+  color: #000;
+}
+
+ion-card-title {
+  font-size: 1.4rem;
+  color: #000;
+}
+
+.recipe-details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-card {
+  background-color: #add8e6;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: fadeIn 0.5s;
+  position: relative;
+  padding: 40px;
+  box-sizing: border-box;
+
+}
+
+.modal-content {
+  display: flex;
+    flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #000;
+}
+
+.recipe-detail-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.recipe-detail-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.custom-button {
+  position: fixed;
+  left: 50px;
+  bottom: 10px;
+  right: 50px;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  background: none;
+  border: none;
+  height: 40px;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15%;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+
+
+
+.close-button:hover {
+  color: #000;
+  background-color: rgba(200, 0, 0, 1);
+}
+
+.close-text {
+  margin: 0;
+  position: absolute;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  
+}
+
+.search-toggle-button {
+  background-color: #3880ff;
+  color: white;
+  border: none;
+  top: 0px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.search-toggle-button:hover {
+  background-color: #3171e0;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+
+
+}

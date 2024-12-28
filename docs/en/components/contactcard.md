@@ -1,10 +1,10 @@
-# Компонент Contact Card
-> Компонент Contact Card представляет собой личный профиль, как в социальных сетях. На ней представленны данные о владельце профиля и его аватар.
-Чтобы увидеть данную страничку нужно перейти по ссылке: "http://localhost:8100/contact-card"
+# Contact Card Component
+> Contact Card Component is a personal profile, like in social networks. It contains information about the profile owner and his avatar.
+To see this page you need to follow the link: "http://localhost:8100/contact-card"
 
-## Используемые данные
-Используемые данные находятся в "assets/sample-data/contact-card.json".
-Модель находится в "src/app/contact-card/contact-card.service/contact-card.model.ts"
+## Used data
+The data used is in "assets/sample-data/contact-card.json".
+The model is in "src/app/contact-card/contact-card.service/contact-card.model.ts"
 ```
 export interface ContactCard{
     name?: string

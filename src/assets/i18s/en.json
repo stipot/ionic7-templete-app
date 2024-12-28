@@ -6,7 +6,7 @@
     "archived": "Archive", 
     "trash":"TrashBox",
     "spam":"Spam", 
-    "notes":"Notes", 
+    "Notes":"Notes", 
     "filters":"Filtres", 
     "validations": "validations", 
     "privacy-policy": "Ptivacy",
@@ -42,7 +42,11 @@
     "Курсы криптовалют": "Cypto rates",
     "Время": "Time",
     "Цена": "Pice",
-    "Загрузка": "Loading"
+    "Загрузка": "Loading",
 
     
+    "Recipes": "Recipes",
+    "News": "News",
+    "Save": "Save",
+    "FrontPage": "All components"
   }

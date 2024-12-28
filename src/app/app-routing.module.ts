@@ -11,21 +11,33 @@ import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.componen
 import { SignupComponent } from './signup/signup.component';
 import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RecipesComponent } from './recipes/recipes.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
-import {RecipesPageModule} from './recipes/recipes.module'
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
+import {FrontLayoutComponent} from "./front-layout/front-layout.component"
+import {CameraComponent} from './camera/camera.component';
+
+import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
+
 
 import {DealsComponent} from './deals/deals.component';
+import {MoodCalendarComponent} from './mood-calendar/mood-calendar.component';
 
 import { Component } from '@angular/core';
 import {UserComponent} from "./user/user.component";
+import {ScilinkComponent} from "./scilink/scilink.component";
+
+import { CryptoRatesComponent } from './cryptorates/cryptorates.component'; 
+import {MplayerComponent} from "./mplayer/mplayer.component";
+import { KanbanComponent } from './kanban/kanban.component';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
+import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/',
+    redirectTo: 'front-layout',
     pathMatch: 'full'
   },
   {
@@ -43,6 +55,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'mood-calendar',
+    component: MoodCalendarComponent
   },
   {
     path: 'contact-card',
@@ -69,13 +85,16 @@ const routes: Routes = [
     component: UserComponent
   },
   // Добавляем путь в роутинг для перемещения на страницу пометок
+  {  
+    path:'scilink',
+    component: ScilinkComponent
+  },{  
+    path:'cryptorates',
+    component: CryptoRatesComponent
+  },
   {
     path: 'notes',
     component: NotesComponent
-  },
-  {
-    path: 'recipes',
-    loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesPageModule)
   },
   {
     path: 'todo-list',
@@ -106,6 +125,10 @@ const routes: Routes = [
     component: TermsOfServiceComponent
   },
   {
+    path: 'mplayer',
+    component: MplayerComponent
+  },
+  {
     path: 'barcode-scanner',
     component: BarcodeScannerComponent
   },
@@ -122,15 +145,34 @@ const routes: Routes = [
     loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
   },
   {
+    path: 'recipes',
+    component: RecipesComponent
+  },
+  {
     path: 'rss-data',
     component: RssDataComponent
   },
   { path: 'intro',
   component: IntroComponent
 },
+  { path: 'videoplayer',
+    component: VideoPlayerComponent
+  },
+  { path: 'kanban',
+    component: KanbanComponent
+  },
   {
-    path: 'owerview',
-    loadChildren: () => import('./owerview/owerview.module').then( m => m.OwerviewPageModule)
+    path: 'camera',
+    loadChildren: () => import('./camera/camera-routing.module').then( m => m.CameraPageRoutingModule)
+    
+  },
+  {
+    path: 'water-tracker',
+    loadChildren: () => import('./water-tracker/water-tracker.module').then(m => m.WaterTrackerModule)
+  },
+  {
+    path: 'front-layout',
+  component: FrontLayoutComponent
   },
   {
     path: '**',

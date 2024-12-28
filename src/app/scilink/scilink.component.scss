@@ -1,0 +1,36 @@
+.input-container {
+    display: flex;
+    align-items: center; /* Центрирует элементы по вертикали */
+  }
+  
+  .full-width-input {
+    flex: 1; /* Позволяет инпуту занимать все доступное пространство */
+    margin-right: 1000px; /* Отступ между инпутом и кнопкой */
+  }
+  
+  .full-width-textarea {
+    width: 100%; /* Задает ширину текстовой области на 100% */
+  }
+
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Расстояние между карточками */
+  }
+  
+  .article-card {
+    flex: 1 1 calc(33.333% - 16px); /* Три карточки в строку */
+    box-sizing: border-box;
+  }
+  
+  .logo {
+    width: 100%;
+    height: 200px; /* Фиксированная высота для изображений */
+    object-fit: cover; /* Изображение будет обрезано по размеру контейнера */
+  }
+  .search-result {
+    margin-top: 20px; /* Увеличьте значение, если нужно больше отступа */
+    font-size: 1.2em; /* Измените размер шрифта, если нужно */
+    color: #333; /* Цвет текста */
+  }
+  

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-header [pageTitle]="pageTitle"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-text color="warning">
+    <h1>Explore <a href="https://ionic7-templete-app-public.web.app" target="_blank">Demo application</a>, <a href="https://stipot.github.io/ionic7-templete-app" target="_blank">App documentation</a>, <a href="https://github.com/stipot/ionic7-templete-app" target="_blank">App github</a>, <a href="https://test-bc740.web.app" target="_blank">Ionic documentation</a></h1>
+  </ion-text>
+  <div class="card-container">
+      <ion-card *ngFor="let c of comp_list" class="card-item">
+        <ion-card-header>
+          <ion-card-title>
+            <a [routerLink]="c.link">{{c.c_name}}</a> <!-- Используем routerLink для перехода по ссылке -->
+          </ion-card-title>
+          <ion-card-subtitle>{{c.c_desc}}</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </div>
+  </ion-content>
+  

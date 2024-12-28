@@ -1,0 +1,16 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .card-item {
+    flex: 0 1 30%; 
+    margin-bottom: 20px; 
+  }
+  
+  .components-title {
+    margin: 20px; 
+    font-size: 24px; 
+    font-weight: bold; 
+  }

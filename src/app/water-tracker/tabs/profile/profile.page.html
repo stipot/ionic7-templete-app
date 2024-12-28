@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Профиль</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-avatar>
+        <img src="../../../../assets/sample-images/default-avatar.png" alt="Avatar">
+      </ion-avatar>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>{{ displayName || 'Ваше имя' }}</h2>
+      <p>{{ userEmail }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item>
+    <ion-label position="floating">Обновить имя</ion-label>
+    <ion-input [(ngModel)]="displayName"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="updateProfile()">Сохранить изменения</ion-button>
+
+  <ion-button expand="block" color="secondary" (click)="resetPassword()">Сбросить пароль</ion-button>
+
+  <ion-button expand="block" color="danger" (click)="logout()">Выйти</ion-button>
+</ion-content>

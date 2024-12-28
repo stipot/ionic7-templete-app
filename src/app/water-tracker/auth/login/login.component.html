@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Вход</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-input type="email" label="Email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-input type="password" label="Пароль" [(ngModel)]="password"></ion-input>
+  </ion-item>  
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Вход</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-button expand="block" (click)="login()">Войти</ion-button>
+  <ion-button expand="block" fill="outline" (click)="goToRegister()">Регистрация</ion-button>
+</ion-content>

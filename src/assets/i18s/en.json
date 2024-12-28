@@ -6,7 +6,7 @@
     "archived": "Archive", 
     "trash":"TrashBox",
     "spam":"Spam", 
-    "notes":"Notes", 
+    "Notes":"Notes", 
     "filters":"Filtres", 
     "validations": "validations", 
     "privacy-policy": "Ptivacy",
@@ -38,5 +38,33 @@
     "Followers": "Followers",
     "Birthday": "Birthday",
     "Address": "Address",
-    "Marriage": "Marriage"
-  }
+    "Marriage": "Marriage",
+    "Курсы криптовалют": "Cypto rates",
+    "Время": "Time",
+    "Цена": "Pice",
+    "Загрузка": "Loading",
+
+    
+    "Recipes": "Recipes",
+    "News": "News",
+    "Save": "Save",
+    "FrontPage": "All components",
+
+    "Mood calendar": "Mood Calendar",
+    "Mood Statistic": "Mood Statistic",
+    
+    "MPlayer": "MPlayer",
+
+
+    "MOOD": {
+    "HAPPY": "Happy",
+    "RELAXED": "Relaxed",
+    "GRATEFUL": "Grateful",
+    "TIRED": "Tired",
+    "UNSURE": "Unsure",
+    "BORED": "Bored",
+    "ANGRY": "Angry",
+    "STRESSED": "Stressed",
+    "SAD": "Sad"
+    }
+}

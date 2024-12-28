@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 interface Crypto {
   id: string;
@@ -11,8 +12,6 @@ interface Crypto {
 }
 
 @Component({
-  standalone: true,
-  imports: [IonicModule, CommonModule],
   selector: 'app-cryptorates',
   templateUrl: './cryptorates.component.html',
   styleUrls: ['./cryptorates.component.scss'],
@@ -36,7 +35,7 @@ export class CryptoRatesComponent implements OnInit {
     { id: 'uniswap', name: 'Uniswap', price: null, logo: 'https://cryptologos.cc/logos/uniswap-uni-logo.svg' },
   ];
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private translate: TranslateService) {}
 
   ngOnInit() {
     this.getCryptoPrices();

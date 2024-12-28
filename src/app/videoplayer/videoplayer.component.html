@@ -1,0 +1,134 @@
+<div class="video-player">
+  <!-- Основной контейнер видеоплеера -->
+  
+  <div class="video-navigation">
+    <!-- Навигация между видео -->
+    
+    <button class="nav-button prev-video">
+      <!-- Кнопка для перехода к предыдущему видео -->
+      <i class="icon-left-arrow"></i>
+    </button>
+    
+    <div class="video-container" (mouseenter)="showControls()" (mouseleave)="hideControls()">
+      <!-- Контейнер для видео с событиями показа/скрытия панели управления -->
+      
+      <video #videoPlayer width="100%" height="auto">
+        <!-- Видеоэлемент -->
+        <source src="/assets/videos/Unreal Engine 5  - Blast (Chaos with niagara fluids).mp4" type="video/mp4">
+        <!-- Источник видео -->
+        Your browser does not support the video tag.
+        <!-- Сообщение для браузеров, не поддерживающих видео -->
+      </video>
+      
+      <div class="controls" [class.hidden]="!controlsVisible">
+        <!-- Панель управления видео. Скрывается, если переменная controlsVisible = false -->
+        
+        <div class="primary-controls">
+          <!-- Основные элементы управления -->
+          
+          <button #playPauseBtn class="play-pause">
+            <!-- Кнопка воспроизведения/паузы -->
+            <i class="icon-play"></i>
+          </button>
+          
+          <div class="timeline-container">
+            <!-- Контейнер для шкалы прогресса -->
+            
+            <input type="range" #progressBar min="0" max="100" value="0" class="progress-slider">
+            <!-- Ползунок для перемотки видео -->
+            
+            <div class="time-labels">
+              <!-- Метки времени -->
+              <span class="current-time">00:00</span> / 
+              <span class="total-time">00:00</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="secondary-controls">
+          <!-- Второстепенные элементы управления -->
+          
+          <button #muteBtn class="mute-toggle">
+            <!-- Кнопка включения/выключения звука -->
+            <i class="icon-volume"></i>
+          </button>
+          
+          <div class="volume-control">
+            <!-- Контейнер для управления громкостью -->
+            <input
+              type="range" 
+              class="volume-slider" 
+              min="0" 
+              max="100" 
+              value="25" 
+              aria-label="Volume control">
+            <!-- Ползунок громкости -->
+          </div>
+          
+          <div class="speed-controls">
+            <!-- Контейнер для управления скоростью воспроизведения -->
+            
+            <button #speedBtn class="speed-current">x1</button>
+            <!-- Кнопка отображения текущей скорости -->
+            
+            <div class="speed-options">
+              <!-- Выпадающий список вариантов скоростей -->
+              <button (click)="setSpeed(0.5)">x0.5</button>
+              <button (click)="setSpeed(1)">x1</button>
+              <button (click)="setSpeed(1.5)">x1.5</button>
+              <button (click)="setSpeed(2)">x2</button>
+            </div>
+          </div>
+          
+          <button #fullScreenBtn class="fullscreen-toggle">
+            <!-- Кнопка переключения полноэкранного режима -->
+            <i class="icon-fullscreen"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <button class="nav-button next-video">
+      <!-- Кнопка для перехода к следующему видео -->
+      <i class="icon-right-arrow"></i>
+    </button>
+  </div>
+  
+  <div class="video-slider">
+    <!-- Контейнер для списка видео (слайдера) -->
+    
+    <div class="slider-navigation">
+      <!-- Навигация по слайдеру -->
+      
+      <button class="slider-prev">
+        <!-- Кнопка для перехода к предыдущим видео в списке -->
+        <i class="icon-chevron-left"></i>
+      </button>
+      
+      <div class="video-list">
+        <!-- Список видео -->
+        <div class="video-item" *ngFor="let video of videos" (click)="changeVideo(video)">
+          <!-- Каждый элемент списка -->
+          <img [src]="video.thumbnail" alt="Video Thumbnail">
+          <!-- Миниатюра видео -->
+          <p>{{ video.title }}</p>
+          <!-- Название видео -->
+        </div>
+      </div>
+      
+      <button class="slider-next">
+        <!-- Кнопка для перехода к следующим видео в списке -->
+        <i class="icon-chevron-right"></i>
+      </button>
+      
+      <div class="file-input-container">
+        <!-- Контейнер для загрузки папки с видео -->
+        <label class="file-input-label">
+          Загрузить папку
+          <input type="file" webkitdirectory (change)="handleFolderSelection($event)" />
+          <!-- Поле ввода для выбора папки -->
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

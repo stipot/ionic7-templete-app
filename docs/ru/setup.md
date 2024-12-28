@@ -42,4 +42,8 @@ $ ionic serve
 pip install mkdocs-material
 # Просмотр
 mkdocs serve
+# Обновление Github pages
+cd wwwdocs
+mkdocs gh-deploy --config-file ../mkdocs.yml --remote-branch docs
+# commit & push
 ```

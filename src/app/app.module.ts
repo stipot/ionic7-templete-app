@@ -104,4 +104,3 @@ export function HttpLoaderFactory(http: HttpClient) {
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
-s

@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="changeDate(-1)">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ formattedDate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="changeDate(1)">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Прогресс</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="progress-container">
+        <div 
+          class="progress-bar" 
+          [ngStyle]="{ 'height.%': progress * 100, 'background-color': progressColor }">
+        </div>
+        <div class="progress-label">{{ currentWater }} мл</div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  
+  
+  <!-- Прогресс-бар -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ежедневная цель</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Ваша цель: {{ dailyGoal }} мл</p>
+      <p>Выпито: {{ currentWater }} мл</p>
+    </ion-card-content>
+  </ion-card>  
+
+  <!-- Кнопки для добавления воды -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-button expand="block" (click)="addWater(100)">+100 мл</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="block" (click)="addWater(250)">+250 мл</ion-button>
+      </ion-col>
+      <ion-col size="4">
+        <ion-button expand="block" (click)="addWater(500)">+500 мл</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Поле для ручного ввода -->
+  <ion-item>
+    <ion-label position="floating">Добавить объём (мл)</ion-label>
+    <ion-input type="number" [(ngModel)]="customAmount"></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="addCustomWater()">Добавить</ion-button>
+
+  <!-- История -->
+  <ion-card>
+    <ion-card-header>
+      <ion-title>История</ion-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let entry of history; let i = index">
+          <ion-label>{{ entry.time }}: +{{ entry.amount }} мл</ion-label>
+          <ion-button fill="clear" color="danger" slot="end" (click)="deleteHistoryItem(i)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>  
+
+
+  <!-- Сброс дня -->
+  <ion-button color="danger" expand="block" (click)="resetDay()">Сбросить день</ion-button>
+</ion-content>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Filesystem, Directory, Encoding, ReadFileResult, ReaddirResult } from '@capacitor/filesystem';
-import { FilePicker } from '@capawesome/capacitor-file-picker';
+import { PickFilesOptions, FilePicker } from '@capawesome/capacitor-file-picker';
 
 @Injectable({
   providedIn: 'root'
@@ -147,12 +147,15 @@ export class FileService {
    * Выбор внешнего файла
    * @returns Путь к выбранному файлу
    */
-  async chooseExternalFile(): Promise<string> {
+  async chooseExternalFile(): Promise<string | undefined> {
     try {
-      const result = await FilePicker.pickFiles({
-        types: ['*/*'],
-        multiple: false
-      });
+      const can_read_ext = this.checkFilePickerAccess();
+      if (!can_read_ext) {
+        throw new Error('Failed to get correct file permissions');
+      }
+      const result = await FilePicker.pickFiles();
+  
+      // Return the path of the selected file
       return result.files[0].path;
     } catch (error) {
       console.error('Error choosing external file:', error);
@@ -192,4 +195,21 @@ export class FileService {
       throw new Error('Failed to get file URL');
     }
   }
+
+  async checkFilePickerAccess(): Promise<boolean> {
+    try {
+      const perm = await FilePicker.checkPermissions();
+      if (perm.readExternalStorage != 'granted') {
+        const perm_r = await FilePicker.requestPermissions();
+        if (perm_r.readExternalStorage != 'granted') {
+          return false;
+        }
+      }
+
+      return true;
+  } catch (error) {
+    console.error('Error accessing file picker:', error);
+    return false; // Permissions are denied or an error occurred
+  }
+}
 }

@@ -104,6 +104,8 @@ change_status() {
       this.track_duration = this.track.duration;
     });
 
+    this.track.volume = this.volume;
+
     this.progress = 0;
     if (this.player_status === 'pause') {
       this.track.play();
@@ -128,6 +130,8 @@ change_status() {
     this.track.addEventListener('loadedmetadata', () => {
       this.track_duration = this.track.duration;
     });
+
+    this.track.volume = this.volume;
 
     this.progress = 0;
     if (this.player_status === 'pause') {

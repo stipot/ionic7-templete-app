@@ -10,8 +10,8 @@
   overflow: hidden;
 }
 
-// Example Box - Item Styling
-.example-box {
+// dragable Box - Item Styling
+.dragable-box {
   padding: 20px 10px;
   border-bottom: 1px solid var(--ion-border-color, #ccc);
   color: var(--ion-color-medium-shade, rgba(0, 0, 0, 0.87)); // Text color variable for medium contrast
@@ -51,8 +51,8 @@
 }
 
 // Dragging State for List
-.example-list.cdk-drop-list-dragging {
-  .example-box:not(.cdk-drag-placeholder) {
+.dragable-list.cdk-drop-list-dragging {
+  .dragable-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
 }

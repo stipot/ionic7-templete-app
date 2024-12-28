@@ -9,7 +9,7 @@ import { NgFor } from '@angular/common';
 })
 export class DragAndDropComponent implements OnInit {
 
-  movies = [
+  list = [
     "(＾ワ＾) DRAG ME NOW!",
     "ヽ(・∀・)ﾉ DROP ME ANYWHERE!",
     "＼(^o^)／ I CAN BE DRAGGED!",
@@ -43,7 +43,7 @@ export class DragAndDropComponent implements OnInit {
   ];
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.list, event.previousIndex, event.currentIndex);
   }
 
   constructor() { }

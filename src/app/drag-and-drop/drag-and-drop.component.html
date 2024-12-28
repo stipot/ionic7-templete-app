@@ -11,7 +11,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding" size="6">
-  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
+  <div cdkDropList class="dragable-list" (cdkDropListDropped)="drop($event)">
+    <div class="dragable-box" *ngFor="let i of list" cdkDrag>{{i}}</div>
   </div>
 </ion-content>

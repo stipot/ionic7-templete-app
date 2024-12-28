@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-mplayer',
@@ -27,7 +28,7 @@ export class MplayerComponent implements OnInit {
   public track = new Audio(this.track_list[this.track_count][0]);
   public track_duration = 0;
 
-  constructor() {
+  constructor(private translate: TranslateService) {
     this.track_title = this.track_list[this.track_count][1];
     this.track_author = this.track_list[this.track_count][2];
 

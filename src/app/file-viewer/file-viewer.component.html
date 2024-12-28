@@ -1,45 +1,56 @@
-<div class="file-viewer">
-  <!-- Секция для отображения текстовых файлов -->
-  <div class="file-section">
-    <h3>Text Files</h3>
-    <ul>
-      <li *ngFor="let file of allFiles">
-        <button (click)="fileOpen2(file)">{{ file }}</button>
-        <button (click)="deleteFile(file)">Delete</button>
-      </li>
-    </ul>
-  </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>File Viewer</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <!-- Секция для отображения изображений
-  <div class="file-section">
-    <h3>Image Files</h3>
-    <ul>
-      <li *ngFor="let file of imageFiles">
-        <button (click)="openImage(file)">{{ file }}</button>
-        <button (click)="deleteFile(file)">Delete</button>
-      </li>
-    </ul>
-  </div> -->
+<ion-content>
+  <!-- Секция для отображения текстовых файлов -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Text Files</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let file of allFiles">
+      <ion-label (click)="fileOpen2(file)">{{ file }}</ion-label>
+      <ion-button fill="clear" (click)="deleteFile(file)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
 
   <!-- Секция для отображения содержимого выбранного файла -->
-  <div class="file-content" *ngIf="selectedFileContent">
-    <h3>Selected File Content</h3>
-    <pre>{{ selectedFileContent }}</pre>
-  </div>
+  <ion-card *ngIf="selectedFileContent">
+    <ion-card-header>
+      <ion-card-title>Selected File Content</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <pre>{{ selectedFileContent }}</pre>
+    </ion-card-content>
+  </ion-card>
 
   <!-- Секция для отображения выбранного изображения -->
-  <div class="image-preview" *ngIf="selectedImageUrl">
-    <h3>Selected Image</h3>
-    <img [src]="selectedImageUrl" alt="Selected Image" />
-  </div>
+  <ion-card *ngIf="selectedImageUrl">
+    <ion-card-header>
+      <ion-card-title>Selected Image</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <img [src]="selectedImageUrl" alt="Selected Image" />
+    </ion-card-content>
+  </ion-card>
 
   <!-- Секция для отладки -->
-  <div class="debug-section">
-    <h3>Debug</h3>
-    <button (click)="readDefDir()">Read Default Directory</button>
-    <button (click)="saveTextFileDBG()">Save Test File</button>
-    <ul>
-      <li *ngFor="let file of allFiles">{{ file }}</li>
-    </ul>
-  </div>
-</div>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Debug</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-button (click)="readDefDir()">Read Default Directory</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="saveTextFileDBG()">Save Test File</ion-button>
+    </ion-item>
+    <ion-item *ngFor="let file of allFiles">
+      <ion-label>{{ file }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

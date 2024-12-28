@@ -167,12 +167,12 @@ export class FileViewerComponent implements OnInit {
         }
         
         // Устанавливаем URL изображения
-        this.selectedImageUrl = data:${mimeType};base64,${fileContent};
+        this.selectedImageUrl = 'data:${mimeType};base64,${fileContent}';
         // Сбрасываем контент текстового файла
         this.selectedFileContent = '';
       } else {
         // Если это текстовый файл
-        this.selectedFileContent = fileContent;
+        this.selectedFileContent = atob(fileContent);
         // Сбрасываем URL изображения
         this.selectedImageUrl = null;
       }

@@ -18,6 +18,7 @@ interface Crypto {
 })
 
 export class CryptoRatesComponent implements OnInit {
+  loc: any = {}
   date: Date = new Date();
   formattedDate = this.date.toLocaleString();
 
@@ -34,20 +35,24 @@ export class CryptoRatesComponent implements OnInit {
     { id: 'bitcoin-cash', name: 'Bitcoin Cash', price: null, logo: 'https://cryptologos.cc/logos/bitcoin-cash-bch-logo.svg' },
     { id: 'uniswap', name: 'Uniswap', price: null, logo: 'https://cryptologos.cc/logos/uniswap-uni-logo.svg' },
   ];
-  
-  constructor(private http: HttpClient, private translate: TranslateService) {}
+
+  constructor(private http: HttpClient, private translate: TranslateService) { }
 
   ngOnInit() {
     this.getCryptoPrices();
   }
 
   getCryptoPrices() {
-    const ids = this.cryptocurrencies.map(crypto => crypto.id).join(',');
-    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`;
-    
+    const ids = this.cryptocurrencies.map(crypto => crypto.id).join(',')
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`
+
+    this.translate.get('CRYPTO_MODULE').subscribe((locale: any) => {
+      this.loc = locale
+      console.log(locale)
+    });
     this.http.get<any>(url).subscribe(data => {
       this.cryptocurrencies.forEach(crypto => {
-        crypto.price = data[crypto.id]?.usd || null;
+        crypto.price = data[crypto.id]?.usd || null
       });
     });
   }

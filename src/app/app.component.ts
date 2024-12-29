@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { TranslateService } from '@ngx-translate/core';
 
-register ();
+register();
 
 
 @Component({
@@ -25,18 +25,17 @@ export class AppComponent {
     { title: 'User', url: '/user', icon: '' },
     { title: 'Contact card', url: '/contact-card', icon: '' },
     { title: 'Recipes', url: '/recipes', icon: '' },
-    { title: 'cryptorates', url: '/cryptorates', icon: '' },
+    { title: 'CRYPTO_MODULE.COMPONENT_TITLE', url: '/cryptorates', icon: '' },
     { title: 'News', url: '/rss-data', icon: '' },
     { title: 'Notes', url: '/notes', icon: 'Пометки' },
     { title: 'ToDo list', url: '/todo-list', icon: 'todo-list' },
     { title: 'Forms', url: '/forms', icon: '' },
     { title: 'VideoPlayer', url: '/videoplayer', icon: '' },
-    { title: 'filters', url:'/filters',icon: 'reader-outline'},
+    { title: 'filters', url: '/filters', icon: 'reader-outline' },
     { title: 'Validations', url: '/validations', icon: '' },
     { title: 'barcode-scanner', url: '/barcode-scanner', icon: '' },
     { title: 'scilink', url: '/scilink', icon: '' },
     { title: 'Компоненты в стадии разработки:', url: '/front-layout', icon: '' },
-    { title: 'cryptorates', url: '/cryptorates', icon: '' },
     { title: 'camera', url: '/camera', icon: '' },
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
     { title: 'DragAndDrop', url: '/drag-and-drop', icon: '' },

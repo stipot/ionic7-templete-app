@@ -39,20 +39,12 @@
                 </ion-col>
               </ion-row>
               <ion-row *ngFor="let week of calendarDays">
-                <ion-col 
-                  *ngFor="let day of week" 
-                  [class.today]="day.isToday"
-                  [class.selected]="day.isSelected"
-                  [class.has-mood]="day.moodEntry"
-                  (click)="selectDate(day.date)"
-                >
+                <ion-col *ngFor="let day of week" [class.today]="day.isToday" [class.selected]="day.isSelected"
+                  [class.has-mood]="day.moodEntry" (click)="selectDate(day.date)">
                   <div class="date-container">
                     {{ day.date | date:'d' }}
-                    <div 
-                      *ngIf="day.moodEntry" 
-                      class="mood-indicator"
-                      [style.background-color]="getMoodColor(day.moodEntry)"
-                    >
+                    <div *ngIf="day.moodEntry" class="mood-indicator"
+                      [style.background-color]="getMoodColor(day.moodEntry)">
                       {{ getMoodIcon(day.moodEntry) }}
                     </div>
                   </div>

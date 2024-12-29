@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{"Курсы криптовалют" | translate}}</ion-title>
+    <ion-title>{{loc.COMPONENT_TITLE}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,13 +11,13 @@
 
         <ion-card-header>
           <ion-card-title>{{ crypto.name }}</ion-card-title>
-          <ion-card-subtitle>{{"Время" | translate}}: {{ formattedDate }} </ion-card-subtitle>
+          <ion-card-subtitle>{{"CRYPTO_MODULE.CRYPTO_TIME" | translate}}: {{ formattedDate }} </ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content>
           <img [src]="crypto.logo" alt="{{ crypto.name }} logo" class="crypto-logo">
-          <p *ngIf="crypto.price !== null">{{"Цена" | translate}}: ${{ crypto.price }} </p>
-          <p *ngIf="crypto.price === null">{{"Загрузка" | translate}}...</p>
+          <p *ngIf="crypto.price !== null">{{"CRYPTO_MODULE.CRYPTO_PRICE" | translate}}: ${{ crypto.price }} </p>
+          <p *ngIf="crypto.price === null">{{"CRYPTO_MODULE.CRYPTO_LOADING" | translate}}...</p>
         </ion-card-content>
 
       </ion-card>

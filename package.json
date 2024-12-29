@@ -1,8 +1,8 @@
 {
   "name": "ionic7-full-starter-app",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "MUIV students community",
+  "homepage": "https://www.muiv.ru/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

@@ -7,15 +7,13 @@ import { ModalController } from '@ionic/angular';
   templateUrl: './privacy-policy.component.html',
   styleUrls: ['./privacy-policy.component.scss'],
 })
-export class PrivacyPolicyComponent  implements OnInit {
-
-lang:string="ru"
-
+export class PrivacyPolicyComponent implements OnInit {
+  lang: string = "ru"
   constructor(private modalCtrl: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   dismiss(): void {
-     this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss();
   }
 
   handleChange(ev: any) {
@@ -23,4 +21,4 @@ lang:string="ru"
   }
 
 }
- 
+

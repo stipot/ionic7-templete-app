@@ -42,4 +42,8 @@ For documentation, we use [Materal for MkDocs](https://github.com/squidfunk/mkdo
 pip install mkdocs-material
 # View
 mkdocs serve
+# Update
+mkdocs build
+cd site
+mkdocs gh-deploy --config-file ../mkdocs.yml --remote-branch docs
 ```

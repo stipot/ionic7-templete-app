@@ -43,7 +43,8 @@ pip install mkdocs-material
 # Просмотр
 mkdocs serve
 # Обновление Github pages
-cd wwwdocs
+mkdocs build
+cd site
 mkdocs gh-deploy --config-file ../mkdocs.yml --remote-branch docs
 # commit & push
 ```

@@ -32,6 +32,20 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 Run `ionic serve` to start a live-reload dev server
 
+## IONIC 8 compatibility
+
+### Usage of http client
+>app.module.ts
+```typescript
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
+  bootstrap: [AppComponent],
+})
+```
+
 ## Development Workflow
 
 Run `ionic build` or `ionic build --prod` to build the project

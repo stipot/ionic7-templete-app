@@ -12,6 +12,7 @@ export class RssDataComponent implements OnInit {
   pageTitle = "Новостная лента!"
   private rssUrl = 'https://news.un.org/feed/subscribe/ru/news/topic/law-and-crime-prevention/feed/rss.xml';
   public newsItems: any[] = [];
+  public segment = 'news'; // Установите начальный сегмент на "news"
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer,  private translate: TranslateService) {}
 
@@ -34,7 +35,6 @@ export class RssDataComponent implements OnInit {
         const description = item.querySelector('description')?.textContent || 'Без описания';
         const link = item.querySelector('link')?.textContent || '#';
         const image = item.querySelector('enclosure')?.getAttribute('url') || 'https://via.placeholder.com/300x150';
-        console.log(description)
 
         this.newsItems.push({
           title,
@@ -43,27 +43,6 @@ export class RssDataComponent implements OnInit {
           image
         });
       });
-
-      this.renderNews();
     });
-  }
-
-  renderNews(): void {
-    const newsContainer = document.getElementById('news-container');
-    if (newsContainer) {
-      this.newsItems.forEach((item) => {
-        const newsCard = document.createElement('div');
-        newsCard.className = 'news-card';
-        newsCard.innerHTML = `
-          <img src="${item.image}" alt="${item.title}">
-          <div class="content">
-            <h2>${item.title}</h2>
-            <p>${item.description.substring(0, 100)}...</p>
-            <a href="${item.link}" target="_blank">Подробнее</a>
-          </div>
-        `;
-        newsContainer.appendChild(newsCard);
-      });
-    }
   }
 }

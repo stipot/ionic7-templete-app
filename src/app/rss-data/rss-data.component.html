@@ -5,16 +5,32 @@
 </ion-header>
 
 <ion-content>
-  <div class="news-container">
-    <ion-card *ngFor="let item of newsItems" class="news-card">
-      <img [src]="item.image" [alt]="item.title" />
-      <ion-card-header>
-        <ion-card-title>{{ item.title }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>{{ item.description }}</p>
-        <ion-button fill="clear" [href]="item.link" target="_blank">Подробнее</ion-button>
-      </ion-card-content>
-    </ion-card>
+  <ion-segment [(ngModel)]="segment" color="primary">
+    <ion-segment-button value="news">
+      <ion-label>Новости</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="feed">
+      <ion-label>Ленты</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="segment">
+    <div *ngSwitchCase="'news'">
+      <div class="news-container">
+        <ion-card *ngFor="let item of newsItems" class="news-card">
+          <img [src]="item.image" [alt]="item.title" />
+          <ion-card-header>
+            <ion-card-title>{{ item.title }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ item.description }}</p>
+            <ion-button fill="clear" [href]="item.link" target="_blank">Подробнее</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <div *ngSwitchCase="'feed'">
+      <p>Это страница ленты.</p>
+    </div>
   </div>
 </ion-content>

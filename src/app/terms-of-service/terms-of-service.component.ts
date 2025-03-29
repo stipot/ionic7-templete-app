@@ -7,7 +7,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./terms-of-service.component.scss'],
 })
 export class TermsOfServiceComponent  implements OnInit {
-
+  lang: string = "ru"
   constructor(private modalCtrl: ModalController) { }
 
   
@@ -16,4 +16,9 @@ export class TermsOfServiceComponent  implements OnInit {
   dismiss(): void {
     this.modalCtrl.dismiss();
  }
+
+ handleChange(ev: any) {
+    console.log('Current value:', JSON.stringify(ev.target.value));
+ }
+
 }

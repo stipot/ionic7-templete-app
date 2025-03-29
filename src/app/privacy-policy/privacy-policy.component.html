@@ -18,7 +18,7 @@
     </ion-title>
     <ion-list>
       <ion-item>
-        <ion-select aria-label="Fruit" interface="popover" placeholder="Select languages">
+        <ion-select aria-label="Fruit" interface="popover" placeholder="Select languages" [(ngModel)]="lang">
           <ion-select-option value="ru">Русский</ion-select-option>
           <ion-select-option value="en">English</ion-select-option>
         </ion-select>
@@ -28,7 +28,7 @@
 </ion-header>
 
 <ion-content class="ion-padding" size="6">
-  <div *ngIf="lang==='ru' === false">
+  <div *ngIf="lang=='en'">
     <h3 class="legal-title">1. Introduction</h3>
     <p class="legal-text">
       We are responsible for mainta ining and protecting the Personal Information under our control. We have designated
@@ -51,7 +51,7 @@
       of a product or service, except as required to be able to supply the product or service.
     </p>
   </div>
-  <div *ngIf="lang==='ru' === true">
+  <div *ngIf="lang=='ru'">
     <h3 class="legal-title">1. Вступление</h3>
     <p class="legal-text">
       Мы несем ответственность за хранение и защиту личной информации, находящейся под нашим контролем. Мы назначили

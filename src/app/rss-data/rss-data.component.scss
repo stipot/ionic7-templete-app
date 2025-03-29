@@ -30,3 +30,15 @@
   display: block; /* Убираем лишние отступы под изображением */
   margin: 0 auto; /* Центрируем изображение внутри карточки */
 }
+
+.fixed-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  ion-button {
+    flex: 1; /* Равномерное распределение ширины */
+    min-width: 100px; /* Фиксированная минимальная ширина */
+    text-align: center; /* Выравнивание текста по центру */
+  }
+}

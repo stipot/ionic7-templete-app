@@ -36,17 +36,31 @@
           <ion-col size="12" size-sm="6" size-md="4" *ngFor="let item of feedItems">
             <ion-card>
               <ion-card-content>
-                <div *ngIf="!item.isEditing">
+                <div *ngIf="!item.isEditing" (dblclick)="startEditing(item)">
                   {{ item.description }}. GUID: {{ item.guid }}
-                  <ion-button fill="clear" (click)="startEditing(item)">Редактировать</ion-button>
                 </div>
                 <div *ngIf="item.isEditing">
                   <ion-textarea [(ngModel)]="editingDescription"></ion-textarea>
-                  <ion-button fill="clear" (click)="saveEditing(item)">Сохранить</ion-button>
-                  <ion-button fill="clear" (click)="cancelEditing(item)">Отмена</ion-button>
                 </div>
-                <ion-button fill="clear" [href]="item.url" target="_blank">Подробнее</ion-button>
               </ion-card-content>
+
+              <!-- Фиксированные кнопки -->
+              <ion-card-footer>
+                <ion-buttons class="fixed-buttons">
+                  <ion-button *ngIf="!item.isEditing" fill="clear" (click)="startEditing(item)">
+                    Редактировать
+                  </ion-button>
+                  <ion-button *ngIf="item.isEditing" fill="clear" (click)="saveEditing(item)">
+                    Сохранить
+                  </ion-button>
+                  <ion-button *ngIf="item.isEditing" fill="clear" (click)="cancelEditing(item)">
+                    Отмена
+                  </ion-button>
+                  <ion-button fill="clear" [href]="item.url" target="_blank">
+                    Подробнее
+                  </ion-button>
+                </ion-buttons>
+              </ion-card-footer>
             </ion-card>
           </ion-col>
         </ion-row>
@@ -54,5 +68,6 @@
     </div>
   </div>
 </ion-content>
+
 
 

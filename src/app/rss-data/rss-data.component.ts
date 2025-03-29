@@ -7,6 +7,7 @@ interface FeedItem {
   description: string;
   url: string;
   guid: string;
+  isEditing: boolean;
 }
 
 @Component({
@@ -20,6 +21,7 @@ export class RssDataComponent implements OnInit {
   public newsItems: any[] = [];
   public feedItems: FeedItem[] = [];
   public segment = 'news'; // Установите начальный сегмент на "news"
+  public editingDescription: string = '';
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer,  private translate: TranslateService) {}
 
@@ -60,19 +62,37 @@ export class RssDataComponent implements OnInit {
       {
         description: 'Краткое описание новости 1',
         url: 'https://example.com/news1',
-        guid: 'guid-12345'
+        guid: 'guid-12345',
+        isEditing: false
       },
       {
         description: 'Краткое описание новости 2',
         url: 'https://example.com/news2',
-        guid: 'guid-67890'
+        guid: 'guid-67890',
+        isEditing: false
       },
       {
         description: 'Краткое описание новости 3',
         url: 'https://example.com/news3',
-        guid: 'guid-11111'
+        guid: 'guid-11111',
+        isEditing: false
       }
     ];
   }
+
+  startEditing(item: FeedItem): void {
+    this.editingDescription = item.description;
+    item.isEditing = true;
+  }
+
+  saveEditing(item: FeedItem): void {
+    item.description = this.editingDescription;
+    item.isEditing = false;
+  }
+
+  cancelEditing(item: FeedItem): void {
+    item.isEditing = false;
+  }
 }
+
 

@@ -33,8 +33,16 @@
       <ion-list>
         <ion-item *ngFor="let item of feedItems">
           <ion-label>
-            <h2>{{ item.description }}</h2>
-            <p>GUID: {{ item.guid }}</p>
+            <div *ngIf="!item.isEditing">
+              <h2>{{ item.description }}</h2>
+              <p>GUID: {{ item.guid }}</p>
+              <ion-button fill="clear" (click)="startEditing(item)">Редактировать</ion-button>
+            </div>
+            <div *ngIf="item.isEditing">
+              <ion-textarea [(ngModel)]="editingDescription"></ion-textarea>
+              <ion-button fill="clear" (click)="saveEditing(item)">Сохранить</ion-button>
+              <ion-button fill="clear" (click)="cancelEditing(item)">Отмена</ion-button>
+            </div>
           </ion-label>
           <ion-button fill="clear" [href]="item.url" target="_blank">Подробнее</ion-button>
         </ion-item>
@@ -42,3 +50,4 @@
     </div>
   </div>
 </ion-content>
+

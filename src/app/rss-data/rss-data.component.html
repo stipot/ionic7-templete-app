@@ -31,6 +31,11 @@
     </div>
 
     <div *ngSwitchCase="'feed'">
+      <!-- Кнопка добавления записи -->
+      <ion-button expand="full" color="primary" (click)="addNewFeedItem()">
+        Добавить запись
+      </ion-button>
+
       <ion-grid>
         <ion-row>
           <ion-col size="12" size-sm="6" size-md="4" *ngFor="let item of feedItems">
@@ -57,7 +62,10 @@
                     Отмена
                   </ion-button>
                   <ion-button fill="clear" [href]="item.url" target="_blank">
-                    Подробнее
+                    Проверить
+                  </ion-button>
+                  <ion-button fill="clear" color="danger" (click)="deleteFeedItem(item)">
+                    Удалить
                   </ion-button>
                 </ion-buttons>
               </ion-card-footer>
@@ -68,6 +76,7 @@
     </div>
   </div>
 </ion-content>
+
 
 
 

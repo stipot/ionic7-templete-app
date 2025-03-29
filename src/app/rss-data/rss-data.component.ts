@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
 interface FeedItem {
@@ -16,14 +16,18 @@ interface FeedItem {
   styleUrls: ['./rss-data.component.scss']
 })
 export class RssDataComponent implements OnInit {
-  pageTitle = "Новостная лента!"
+  pageTitle = "Новостная лента!";
   private rssUrl = 'https://news.un.org/feed/subscribe/ru/news/topic/law-and-crime-prevention/feed/rss.xml';
   public newsItems: any[] = [];
   public feedItems: FeedItem[] = [];
   public segment = 'news'; // Установите начальный сегмент на "news"
   public editingDescription: string = '';
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer,  private translate: TranslateService) {}
+  constructor(
+    private http: HttpClient,
+    private sanitizer: DomSanitizer,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.fetchRss();
@@ -96,7 +100,25 @@ export class RssDataComponent implements OnInit {
     console.log('Отмена...');
     item.isEditing = false;
   }
+
+  // Добавление новой записи
+  addNewFeedItem(): void {
+    const newItem: FeedItem = {
+      description: 'Новая запись',
+      url: 'https://example.com/new',
+      guid: `guid-${Math.random().toString(36).substring(2, 9)}`,
+      isEditing: false
+    };
+    this.feedItems.unshift(newItem); // Добавляем в начало списка
+  }
+
+  // Удаление записи
+  deleteFeedItem(item: FeedItem): void {
+    this.feedItems = this.feedItems.filter((i) => i.guid !== item.guid);
+    console.log('Запись удалена:', item.guid);
+  }
 }
+
 
 
 

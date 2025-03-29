@@ -29,25 +29,30 @@
         </ion-card>
       </div>
     </div>
+
     <div *ngSwitchCase="'feed'">
-      <ion-list>
-        <ion-item *ngFor="let item of feedItems">
-          <ion-label>
-            <div *ngIf="!item.isEditing">
-              <h2>{{ item.description }}</h2>
-              <p>GUID: {{ item.guid }}</p>
-              <ion-button fill="clear" (click)="startEditing(item)">Редактировать</ion-button>
-            </div>
-            <div *ngIf="item.isEditing">
-              <ion-textarea [(ngModel)]="editingDescription"></ion-textarea>
-              <ion-button fill="clear" (click)="saveEditing(item)">Сохранить</ion-button>
-              <ion-button fill="clear" (click)="cancelEditing(item)">Отмена</ion-button>
-            </div>
-          </ion-label>
-          <ion-button fill="clear" [href]="item.url" target="_blank">Подробнее</ion-button>
-        </ion-item>
-      </ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-sm="6" size-md="4" *ngFor="let item of feedItems">
+            <ion-card>
+              <ion-card-content>
+                <div *ngIf="!item.isEditing">
+                  {{ item.description }}. GUID: {{ item.guid }}
+                  <ion-button fill="clear" (click)="startEditing(item)">Редактировать</ion-button>
+                </div>
+                <div *ngIf="item.isEditing">
+                  <ion-textarea [(ngModel)]="editingDescription"></ion-textarea>
+                  <ion-button fill="clear" (click)="saveEditing(item)">Сохранить</ion-button>
+                  <ion-button fill="clear" (click)="cancelEditing(item)">Отмена</ion-button>
+                </div>
+                <ion-button fill="clear" [href]="item.url" target="_blank">Подробнее</ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </div>
 </ion-content>
+
 

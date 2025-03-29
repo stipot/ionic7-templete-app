@@ -86,13 +86,17 @@ export class RssDataComponent implements OnInit {
   }
 
   saveEditing(item: FeedItem): void {
+    console.log('Сохранение...');
     item.description = this.editingDescription;
     item.isEditing = false;
+    console.log('Новое описание:', item.description);
   }
 
   cancelEditing(item: FeedItem): void {
+    console.log('Отмена...');
     item.isEditing = false;
   }
 }
+
 
 

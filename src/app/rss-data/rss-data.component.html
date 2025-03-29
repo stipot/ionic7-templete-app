@@ -30,7 +30,15 @@
       </div>
     </div>
     <div *ngSwitchCase="'feed'">
-      <p>Это страница ленты.</p>
+      <ion-list>
+        <ion-item *ngFor="let item of feedItems">
+          <ion-label>
+            <h2>{{ item.description }}</h2>
+            <p>GUID: {{ item.guid }}</p>
+          </ion-label>
+          <ion-button fill="clear" [href]="item.url" target="_blank">Подробнее</ion-button>
+        </ion-item>
+      </ion-list>
     </div>
   </div>
 </ion-content>

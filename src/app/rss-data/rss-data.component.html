@@ -16,9 +16,32 @@
 
   <div [ngSwitch]="segment">
     <div *ngSwitchCase="'news'">
-      <div class="news-container">
+      <!-- News Sources Selection -->
+      <div class="source-selector">
+        <div class="source-title">Источники новостей</div>
+        <div class="source-list">
+          <div *ngFor="let source of newsSources" class="source-item">
+            <ion-badge [color]="source.isActive ? 'primary' : 'medium'" class="source-badge">{{ source.guid }}</ion-badge>
+            <span class="source-name">{{ source.name }}</span>
+            <ion-toggle [(ngModel)]="source.isActive" (ionChange)="toggleNewsSource(source)"></ion-toggle>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading indicator -->
+      <div *ngIf="isLoading" class="loading-container">
+        <ion-spinner name="crescent"></ion-spinner>
+        <p>Загрузка новостей...</p>
+      </div>
+
+      <!-- News items -->
+      <div class="news-container" *ngIf="!isLoading">
         <ion-card *ngFor="let item of newsItems" class="news-card">
-          <img [src]="item.image" [alt]="item.title" />
+          <div class="image-container">
+            <img [src]="item.image" [alt]="item.title" (error)="handleImageError(item)" />
+            <!-- Source Badge -->
+            <ion-badge class="badge-overlay" [color]="'primary'">{{ item.source || 'Источник' }}</ion-badge>
+          </div>
           <ion-card-header>
             <ion-card-title>{{ item.title }}</ion-card-title>
           </ion-card-header>
@@ -28,6 +51,13 @@
           </ion-card-content>
         </ion-card>
       </div>
+      
+      <!-- No news message -->
+      <ion-item *ngIf="!isLoading && newsItems.length === 0" lines="none">
+        <ion-label class="ion-text-center">
+          Выберите хотя бы один источник новостей или проверьте подключение
+        </ion-label>
+      </ion-item>
     </div>
 
     <div *ngSwitchCase="'feed'">

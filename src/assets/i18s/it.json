@@ -1,0 +1,15 @@
+{
+    "FEED": {
+      "ADD_POST": "Aggiungi post",
+      "EDIT": "Modifica",
+      "SAVE": "Salva",
+      "CANCEL": "Annulla",
+      "CHECK": "Controlla",
+      "DELETE": "Elimina",
+      "LABEL_LANGUAGE": "Seleziona lingua",
+      "RUSSIAN": "Russo",
+      "ENGLISH": "Inglese",
+      "FRENCH": "Francese",
+      "ITALIAN": "Italiano"
+    }
+  }

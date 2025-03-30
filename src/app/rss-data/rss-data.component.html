@@ -61,10 +61,20 @@
     </div>
 
     <div *ngSwitchCase="'feed'">
-      <!-- Кнопка добавления записи -->
       <ion-button expand="full" color="primary" (click)="addNewFeedItem()">
-        Добавить запись
+        {{ 'FEED.ADD_POST' | translate }}
       </ion-button>
+
+      <!-- Секция выбора языка -->
+      <div class="language-selector">
+        <ion-label>{{ 'FEED.LABEL_LANGUAGE' | translate }}</ion-label>
+        <div class="language-list">
+          <div *ngFor="let lang of languages" class="language-item">
+            <span>{{ 'FEED.' + lang.label | translate }}</span>
+            <ion-toggle [checked]="lang.active" (ionChange)="toggleLanguage(lang.code)"></ion-toggle>
+          </div>
+        </div>
+      </div>
 
       <ion-grid>
         <ion-row>
@@ -79,23 +89,22 @@
                 </div>
               </ion-card-content>
 
-              <!-- Фиксированные кнопки -->
               <ion-card-footer>
                 <ion-buttons class="fixed-buttons">
                   <ion-button *ngIf="!item.isEditing" fill="clear" (click)="startEditing(item)">
-                    Редактировать
+                    {{ 'FEED.EDIT' | translate }}
                   </ion-button>
                   <ion-button *ngIf="item.isEditing" fill="clear" (click)="saveEditing(item)">
-                    Сохранить
+                    {{ 'FEED.SAVE' | translate }}
                   </ion-button>
                   <ion-button *ngIf="item.isEditing" fill="clear" (click)="cancelEditing(item)">
-                    Отмена
+                    {{ 'FEED.CANCEL' | translate }}
                   </ion-button>
                   <ion-button fill="clear" [href]="item.url" target="_blank">
-                    Проверить
+                    {{ 'FEED.CHECK' | translate }}
                   </ion-button>
                   <ion-button fill="clear" color="danger" (click)="deleteFeedItem(item)">
-                    Удалить
+                    {{ 'FEED.DELETE' | translate }}
                   </ion-button>
                 </ion-buttons>
               </ion-card-footer>

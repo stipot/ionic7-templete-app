@@ -8,6 +8,7 @@ interface FeedItem {
   url: string;
   guid: string;
   isEditing: boolean;
+  originalDescription?: string; // Для хранения оригинального текста
 }
 
 interface NewsSource {
@@ -64,13 +65,25 @@ export class RssDataComponent implements OnInit {
   public segment = 'news'; // Установите начальный сегмент на "news"
   public editingDescription: string = '';
   public isLoading: boolean = false;
-  public sourceLoadingStatus: {[key: string]: boolean} = {};
+  public sourceLoadingStatus: { [key: string]: boolean } = {};
+
+  // Логика локализации
+  languages = [
+    { code: 'ru', label: 'RUSSIAN', active: true },
+    { code: 'en', label: 'ENGLISH', active: false },
+    { code: 'fr', label: 'FRENCH', active: false },
+    { code: 'it', label: 'ITALIAN', active: false }
+  ];
+  currentLang = 'ru';
 
   constructor(
     private http: HttpClient,
     private sanitizer: DomSanitizer,
     private translate: TranslateService
-  ) {}
+  ) {
+    this.translate.setDefaultLang('ru');
+    this.translate.use('ru');
+  }
 
   ngOnInit(): void {
     this.fetchRssFromAllActiveSources();
@@ -232,28 +245,45 @@ export class RssDataComponent implements OnInit {
     });
   }
 
+  // Переключение языка
+  toggleLanguage(langCode: string): void {
+    this.languages.forEach(lang => {
+      lang.active = lang.code === langCode;
+    });
+    this.currentLang = langCode;
+    this.translate.use(langCode);
+
+    // Переводим описания feedItems
+    this.feedItems.forEach(item => {
+      this.translateDescription(item);
+    });
+  }
+
+  // Перевод описания
+  async translateDescription(item: FeedItem): Promise<void> {
+    if (!item.originalDescription) {
+      item.originalDescription = item.description; // Сохраняем оригинал
+    }
+    
+    const textToTranslate = item.originalDescription;
+    if (this.currentLang === 'ru') {
+      item.description = textToTranslate;
+    } else {
+      // Здесь можно использовать API перевода, например Google Translate,
+      // но для простоты покажем заглушку
+      item.description = `${textToTranslate} (translated to ${this.currentLang})`;
+      // Реальный перевод через API можно добавить позже
+    }
+  }
+
+  // Инициализация feedItems
   initFeedItems(): void {
-    // Примерные данные для ленты
     this.feedItems = [
-      {
-        description: 'Краткое описание новости 1',
-        url: 'https://example.com/news1',
-        guid: 'guid-12345',
-        isEditing: false
-      },
-      {
-        description: 'Краткое описание новости 2',
-        url: 'https://example.com/news2',
-        guid: 'guid-67890',
-        isEditing: false
-      },
-      {
-        description: 'Краткое описание новости 3',
-        url: 'https://example.com/news3',
-        guid: 'guid-11111',
-        isEditing: false
-      }
+      { description: 'Краткое описание новости 1', url: 'https://example.com/news1', guid: 'guid-12345', isEditing: false },
+      { description: 'Краткое описание новости 2', url: 'https://example.com/news2', guid: 'guid-67890', isEditing: false },
+      { description: 'Краткое описание новости 3', url: 'https://example.com/news3', guid: 'guid-11111', isEditing: false }
     ];
+    this.feedItems.forEach(item => item.originalDescription = item.description);
   }
 
   toggleNewsSource(source: NewsSource): void {
@@ -269,7 +299,9 @@ export class RssDataComponent implements OnInit {
   saveEditing(item: FeedItem): void {
     console.log('Сохранение...');
     item.description = this.editingDescription;
+    item.originalDescription = this.currentLang === 'ru' ? this.editingDescription : item.originalDescription;
     item.isEditing = false;
+    this.translateDescription(item);
     console.log('Новое описание:', item.description);
   }
 
@@ -284,9 +316,11 @@ export class RssDataComponent implements OnInit {
       description: 'Новая запись',
       url: 'https://example.com/new',
       guid: `guid-${Math.random().toString(36).substring(2, 9)}`,
-      isEditing: false
+      isEditing: false,
+      originalDescription: 'Новая запись'
     };
     this.feedItems.unshift(newItem); // Добавляем в начало списка
+    this.translateDescription(newItem);
   }
 
   // Удаление записи

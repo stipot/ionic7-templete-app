@@ -79,7 +79,10 @@
     "RUSSIAN": "Русский",
     "ENGLISH": "Английский",
     "FRENCH": "Французский",
-    "ITALIAN": "Итальянский"
+    "ITALIAN": "Итальянский",
+    "ACTIVE": "Активный",
+    "LANGUAGE_REMINDER": "Смена языка",
+    "GOTO_SETTINGS": "Перейти в настройки"
   }
 
 }

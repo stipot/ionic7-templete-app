@@ -1,4 +1,74 @@
 {
+
+    "1": "Benvenuto",
+    "Inbox": "In arrivo",
+    "outbox": "Outbox",
+    "favorites": "Favorito",
+    "archived": "Archivio",
+    "trash": "Cesto",
+    "spam": "Spam",
+    "notes": "Note",
+    "filters": "Filtri",
+    "validations": "Conferma",
+    "privacy-policy": "Politica",
+    "login": "Nome utente",
+    "Семья": "Famiglia",
+    "Друзья": "Amici",
+    "Notes": "Note",
+    "Работа": "Lavoro",
+    "Путешествия": "Giramondo",
+    "Напоминания": "Promemoria",
+    "Validations": "Conferma",
+    "Username": "Nome utente",
+    "Enter text": "Inserisci il tuo testo",
+    "Name": "Nome",
+    "Email input": "Inserimento della posta",
+    "email@domain.com": "email@domain.com",
+    "Phone": "Telefono",
+    "888-888-8888": "888-888-8888",
+    "Gender": "Pavimento",
+    "female": "femmina",
+    "male": "maschio",
+    "Password": "Parola d’ordine",
+    "password": "Parola d’ordine",
+    "ToDo list": "Elenco delle cose da fare",
+    "barcode-scanner": "Scanner di codici a barre",
+    "Contact card": "Scheda contatto",
+    "Status": "Stato",
+    "Following": "Abbonamento",
+    "Followers": "Abbonati",
+    "Birthday": "Compleanno",
+    "Address": "Indirizzo",
+    "Marriage": "Stato civile",
+    "News": "Notizie",
+    "Save": "Salvare",
+    "FrontPage": "Tutti i componenti",
+
+    "Mood calendar": "Calendario dell'umore",
+    "Mood Statistic": "Statistiche sull'umore",
+
+    "MPlayer": "Lettore MPler",
+    "DragAndDrop": "Trascinare",
+    "CRYPTO_MODULE": {
+      "COMPONENT_TITLE": "Tassi di criptovaluta",
+      "CRYPTO_TIME": "Aggiornato",
+      "CRYPTO_PRICE": "Prezzo",
+      "CRYPTO_NAME": "Criptovaluta",
+      "CRYPTO_LOADING": "Caricamento..."
+    },
+
+    "MOOD": {
+      "HAPPY": "Felice",
+      "RELAXED": "Rilassato",
+      "GRATEFUL": "Grato",
+      "TIRED": "Stanco",
+      "UNSURE": "Incerto",
+      "BORED": "Annoiato",
+      "ANGRY": "Cattivo",
+      "STRESSED": "Stressato",
+      "SAD": "Triste"
+    },
+
     "FEED": {
       "ADD_POST": "Aggiungi post",
       "EDIT": "Modifica",
@@ -10,6 +80,9 @@
       "RUSSIAN": "Russo",
       "ENGLISH": "Inglese",
       "FRENCH": "Francese",
-      "ITALIAN": "Italiano"
+      "ITALIAN": "Italiano",
+      "ACTIVE": "Attivo",
+      "LANGUAGE_REMINDER": "Modifica della lingua",
+      "GOTO_SETTINGS": "Vai alle impostazioni"
     }
   }

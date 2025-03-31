@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
+import { SettingsService } from '../services/settings.service'; // Предполагаемый путь к сервису настроек
 
 interface FeedItem {
   description: string;
@@ -67,28 +68,63 @@ export class RssDataComponent implements OnInit {
   public isLoading: boolean = false;
   public sourceLoadingStatus: { [key: string]: boolean } = {};
 
-  // Логика локализации
+  // Логика локализации - используем только для отображения, не для настройки
   languages = [
-    { code: 'ru', label: 'RUSSIAN', active: true },
+    { code: 'ru', label: 'RUSSIAN', active: false },
     { code: 'en', label: 'ENGLISH', active: false },
     { code: 'fr', label: 'FRENCH', active: false },
     { code: 'it', label: 'ITALIAN', active: false }
   ];
-  currentLang = 'ru';
+  currentLang = '';
 
   constructor(
     private http: HttpClient,
     private sanitizer: DomSanitizer,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private settingsService: SettingsService // Сервис для доступа к глобальным настройкам
   ) {
-    this.translate.setDefaultLang('ru');
-    this.translate.use('ru');
+    // Не устанавливаем язык здесь, используем текущий язык приложения
   }
 
   ngOnInit(): void {
+    // Получаем текущий язык из глобальных настроек
+    this.currentLang = this.translate.currentLang || this.translate.defaultLang;
+    
+    // Синхронизируем наш UI с текущим языком
+    this.syncLanguageUI();
+
+    // Подписываемся на изменения языка в приложении
+    this.translate.onLangChange.subscribe(event => {
+      this.currentLang = event.lang;
+      this.syncLanguageUI();
+      // Обновляем переводы для наших данных
+      this.updateTranslations();
+    });
+    
     this.fetchRssFromAllActiveSources();
     this.initFeedItems();
-    // Component name
+    
+    // Получаем перевод заголовка страницы
+    this.translate.get('News').subscribe((translated: string) => {
+      this.pageTitle = translated;
+    });
+  }
+
+  // Синхронизируем UI с текущим языком
+  syncLanguageUI(): void {
+    // Обновляем состояние активного языка для UI
+    this.languages.forEach(lang => {
+      lang.active = lang.code === this.currentLang;
+    });
+  }
+  
+  // Обновляем переводы для всех элементов
+  updateTranslations(): void {
+    this.feedItems.forEach(item => {
+      this.translateDescription(item);
+    });
+    
+    // Обновляем заголовок
     this.translate.get('News').subscribe((translated: string) => {
       this.pageTitle = translated;
     });
@@ -245,21 +281,15 @@ export class RssDataComponent implements OnInit {
     });
   }
 
-  // Переключение языка
+  // Вместо переключения языка - уведомляем сервис настроек
   toggleLanguage(langCode: string): void {
-    this.languages.forEach(lang => {
-      lang.active = lang.code === langCode;
-    });
-    this.currentLang = langCode;
-    this.translate.use(langCode);
-
-    // Переводим описания feedItems
-    this.feedItems.forEach(item => {
-      this.translateDescription(item);
-    });
+    // Изменяем язык через глобальный сервис настроек
+    this.settingsService.changeLanguage(langCode);
+    // После этого будет вызван onLangChange в TranslateService, 
+    // который мы отслеживаем в ngOnInit
   }
 
-  // Перевод описания
+  // Перевод описания используя текущий язык приложения
   async translateDescription(item: FeedItem): Promise<void> {
     if (!item.originalDescription) {
       item.originalDescription = item.description; // Сохраняем оригинал
@@ -283,7 +313,10 @@ export class RssDataComponent implements OnInit {
       { description: 'Краткое описание новости 2', url: 'https://example.com/news2', guid: 'guid-67890', isEditing: false },
       { description: 'Краткое описание новости 3', url: 'https://example.com/news3', guid: 'guid-11111', isEditing: false }
     ];
-    this.feedItems.forEach(item => item.originalDescription = item.description);
+    this.feedItems.forEach(item => {
+      item.originalDescription = item.description;
+      this.translateDescription(item);
+    });
   }
 
   toggleNewsSource(source: NewsSource): void {
@@ -299,6 +332,7 @@ export class RssDataComponent implements OnInit {
   saveEditing(item: FeedItem): void {
     console.log('Сохранение...');
     item.description = this.editingDescription;
+    // Сохраняем оригинал только если текущий язык русский
     item.originalDescription = this.currentLang === 'ru' ? this.editingDescription : item.originalDescription;
     item.isEditing = false;
     this.translateDescription(item);

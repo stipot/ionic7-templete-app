@@ -72,14 +72,23 @@
         {{ 'FEED.ADD_POST' | translate }}
       </ion-button>
 
-      <!-- Секция выбора языка -->
+      <!-- Секция выбора языка (только отображение текущего языка, без переключения) -->
       <div class="language-selector">
         <ion-label>{{ 'FEED.LABEL_LANGUAGE' | translate }}</ion-label>
         <div class="language-list">
+          <!-- Для отображения текущего языка приложения -->
           <div *ngFor="let lang of languages" class="language-item">
             <span>{{ 'FEED.' + lang.label | translate }}</span>
-            <ion-toggle [checked]="lang.active" (ionChange)="toggleLanguage(lang.code)"></ion-toggle>
+            <!-- Здесь показываем только активный язык, но не позволяем менять его в этом компоненте -->
+            <ion-badge color="primary" *ngIf="lang.active">{{ 'FEED.ACTIVE' | translate }}</ion-badge>
           </div>
+        </div>
+        <!-- Перенаправление пользователя на настройки -->
+        <div class="language-reminder">
+          <small>{{ 'FEED.LANGUAGE_REMINDER' | translate }}</small>
+          <ion-button size="small" routerLink="/settings">
+            {{ 'FEED.GOTO_SETTINGS' | translate }}
+          </ion-button>
         </div>
       </div>
 

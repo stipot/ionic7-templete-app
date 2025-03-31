@@ -84,7 +84,10 @@
     "RUSSIAN": "Russian",
     "ENGLISH": "English",
     "FRENCH": "French",
-    "ITALIAN": "Italian"
+    "ITALIAN": "Italian",
+    "ACTIVE": "Active",
+    "LANGUAGE_REMINDER": "Changing the language",
+    "GOTO_SETTINGS": "Go to settings"
   }
 
 

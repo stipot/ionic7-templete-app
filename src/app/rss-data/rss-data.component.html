@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-segment [(ngModel)]="segment" color="primary">
-    <ion-segment-button value="news">
+  <ion-segment [(ngModel)]="segment" color="primary" class="ion-padding">
+    <ion-segment-button value="news" class="equal-segment">
       <ion-label>Новости</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="feed">
+    <ion-segment-button value="feed" class="equal-segment">
       <ion-label>Ленты</ion-label>
     </ion-segment-button>
   </ion-segment>
@@ -17,12 +17,14 @@
   <div [ngSwitch]="segment">
     <div *ngSwitchCase="'news'">
       <!-- News Sources Selection -->
-      <div class="source-selector">
+      <div class="source-selector ion-padding">
         <div class="source-title">Источники новостей</div>
         <div class="source-list">
           <div *ngFor="let source of newsSources" class="source-item">
-            <ion-badge [color]="source.isActive ? 'primary' : 'medium'" class="source-badge">{{ source.guid }}</ion-badge>
-            <span class="source-name">{{ source.name }}</span>
+            <div class="source-info">
+              <ion-badge [color]="source.isActive ? 'primary' : 'medium'" class="source-badge">{{ source.guid }}</ion-badge>
+              <span class="source-name">{{ source.name }}</span>
+            </div>
             <ion-toggle [(ngModel)]="source.isActive" (ionChange)="toggleNewsSource(source)"></ion-toggle>
           </div>
         </div>
@@ -36,20 +38,25 @@
 
       <!-- News items -->
       <div class="news-container" *ngIf="!isLoading">
-        <ion-card *ngFor="let item of newsItems" class="news-card">
-          <div class="image-container">
-            <img [src]="item.image" [alt]="item.title" (error)="handleImageError(item)" />
-            <!-- Source Badge -->
-            <ion-badge class="badge-overlay" [color]="'primary'">{{ item.source || 'Источник' }}</ion-badge>
-          </div>
-          <ion-card-header>
-            <ion-card-title>{{ item.title }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>{{ item.description }}</p>
-            <ion-button fill="clear" [href]="item.link" target="_blank">Подробнее</ion-button>
-          </ion-card-content>
-        </ion-card>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" size-md="6" size-lg="4" *ngFor="let item of newsItems">
+              <ion-card class="news-card">
+                <div class="image-container">
+                  <img [src]="item.image" [alt]="item.title" (error)="handleImageError(item)" />
+                  <ion-badge class="badge-overlay" [color]="'primary'">{{ item.source || 'Источник' }}</ion-badge>
+                </div>
+                <ion-card-header>
+                  <ion-card-title class="news-title">{{ item.title }}</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <p class="news-description">{{ item.description }}</p>
+                  <ion-button fill="clear" [href]="item.link" target="_blank">Подробнее</ion-button>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
       
       <!-- No news message -->
@@ -61,7 +68,7 @@
     </div>
 
     <div *ngSwitchCase="'feed'">
-      <ion-button expand="full" color="primary" (click)="addNewFeedItem()">
+      <ion-button expand="full" color="primary" class="ion-margin" (click)="addNewFeedItem()">
         {{ 'FEED.ADD_POST' | translate }}
       </ion-button>
 
@@ -90,22 +97,26 @@
               </ion-card-content>
 
               <ion-card-footer>
-                <ion-buttons class="fixed-buttons">
-                  <ion-button *ngIf="!item.isEditing" fill="clear" (click)="startEditing(item)">
-                    {{ 'FEED.EDIT' | translate }}
-                  </ion-button>
-                  <ion-button *ngIf="item.isEditing" fill="clear" (click)="saveEditing(item)">
-                    {{ 'FEED.SAVE' | translate }}
-                  </ion-button>
-                  <ion-button *ngIf="item.isEditing" fill="clear" (click)="cancelEditing(item)">
-                    {{ 'FEED.CANCEL' | translate }}
-                  </ion-button>
-                  <ion-button fill="clear" [href]="item.url" target="_blank">
-                    {{ 'FEED.CHECK' | translate }}
-                  </ion-button>
-                  <ion-button fill="clear" color="danger" (click)="deleteFeedItem(item)">
-                    {{ 'FEED.DELETE' | translate }}
-                  </ion-button>
+                <ion-buttons class="ion-justify-content-between">
+                  <div>
+                    <ion-button *ngIf="!item.isEditing" fill="clear" (click)="startEditing(item)">
+                      {{ 'FEED.EDIT' | translate }}
+                    </ion-button>
+                    <ion-button *ngIf="item.isEditing" fill="clear" (click)="saveEditing(item)">
+                      {{ 'FEED.SAVE' | translate }}
+                    </ion-button>
+                    <ion-button *ngIf="item.isEditing" fill="clear" (click)="cancelEditing(item)">
+                      {{ 'FEED.CANCEL' | translate }}
+                    </ion-button>
+                  </div>
+                  <div>
+                    <ion-button fill="clear" [href]="item.url" target="_blank">
+                      {{ 'FEED.CHECK' | translate }}
+                    </ion-button>
+                    <ion-button fill="clear" color="danger" (click)="deleteFeedItem(item)">
+                      {{ 'FEED.DELETE' | translate }}
+                    </ion-button>
+                  </div>
                 </ion-buttons>
               </ion-card-footer>
             </ion-card>

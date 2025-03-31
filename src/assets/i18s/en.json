@@ -71,5 +71,21 @@
     "ANGRY": "Angry",
     "STRESSED": "Stressed",
     "SAD": "Sad"
+  },
+
+  "FEED": {
+    "ADD_POST": "Add post",
+    "EDIT": "Edit",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "CHECK": "Check",
+    "DELETE": "Delete",
+    "LABEL_LANGUAGE": "Select language",
+    "RUSSIAN": "Russian",
+    "ENGLISH": "English",
+    "FRENCH": "French",
+    "ITALIAN": "Italian"
   }
+
+
 }

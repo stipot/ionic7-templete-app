@@ -72,18 +72,15 @@
         {{ 'FEED.ADD_POST' | translate }}
       </ion-button>
 
-      <!-- Секция выбора языка (только отображение текущего языка, без переключения) -->
+      <!-- Секция выбора языка -->
       <div class="language-selector">
         <ion-label>{{ 'FEED.LABEL_LANGUAGE' | translate }}</ion-label>
         <div class="language-list">
-          <!-- Для отображения текущего языка приложения -->
           <div *ngFor="let lang of languages" class="language-item">
             <span>{{ 'FEED.' + lang.label | translate }}</span>
-            <!-- Здесь показываем только активный язык, но не позволяем менять его в этом компоненте -->
             <ion-badge color="primary" *ngIf="lang.active">{{ 'FEED.ACTIVE' | translate }}</ion-badge>
           </div>
         </div>
-        <!-- Перенаправление пользователя на настройки -->
         <div class="language-reminder">
           <small>{{ 'FEED.LANGUAGE_REMINDER' | translate }}</small>
           <ion-button size="small" routerLink="/settings">
@@ -101,7 +98,31 @@
                   {{ item.description }}. GUID: {{ item.guid }}
                 </div>
                 <div *ngIf="item.isEditing">
-                  <ion-textarea [(ngModel)]="editingDescription"></ion-textarea>
+                  <form [formGroup]="feedForm" (ngSubmit)="saveEditing(item)">
+                    <ion-item>
+                      <ion-label position="floating">Описание</ion-label>
+                      <ion-textarea
+                        formControlName="description"
+                        maxlength="64"
+                        placeholder="Введите описание (макс 64 символа)"
+                      ></ion-textarea>
+                    </ion-item>
+                    <ion-note *ngIf="feedForm.get('description')?.touched && feedForm.get('description')?.errors?.['maxlength']">
+                      Описание не должно превышать 64 символа
+                    </ion-note>
+
+                    <ion-item>
+                      <ion-label position="floating">URL</ion-label>
+                      <ion-input
+                        formControlName="url"
+                        type="url"
+                        placeholder="Введите URL (http:// или https://)"
+                      ></ion-input>
+                    </ion-item>
+                    <ion-note *ngIf="feedForm.get('url')?.touched && feedForm.get('url')?.errors?.['pattern']">
+                      URL должен начинаться с http:// или https://
+                    </ion-note>
+                  </form>
                 </div>
               </ion-card-content>
 
@@ -111,7 +132,7 @@
                     <ion-button *ngIf="!item.isEditing" fill="clear" (click)="startEditing(item)">
                       {{ 'FEED.EDIT' | translate }}
                     </ion-button>
-                    <ion-button *ngIf="item.isEditing" fill="clear" (click)="saveEditing(item)">
+                    <ion-button *ngIf="item.isEditing" fill="clear" (click)="saveEditing(item)" [disabled]="feedForm.invalid">
                       {{ 'FEED.SAVE' | translate }}
                     </ion-button>
                     <ion-button *ngIf="item.isEditing" fill="clear" (click)="cancelEditing(item)">

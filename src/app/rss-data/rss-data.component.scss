@@ -28,3 +28,19 @@
   border-top: 1px solid #ddd;
   padding-top: 10px;
 }
+
+
+ion-note {
+  color: var(--ion-color-danger);
+  font-size: 0.8rem;
+  padding-left: 16px;
+}
+
+ion-item.ion-invalid.ion-touched {
+  --border-color: var(--ion-color-danger);
+}
+
+.error-container {
+  padding: 8px 16px;
+  color: var(--ion-color-danger);
+}

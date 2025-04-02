@@ -1,10 +1,12 @@
+// rss-data.component.ts
+// rss-data.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { SettingsService } from '../services/settings.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Guid } from './guid'; // Импортируем новый класс Guid
+import { Guid } from './guid';
 
 interface FeedItem {
   description: string;
@@ -28,6 +30,8 @@ interface NewsSource {
 })
 export class RssDataComponent implements OnInit {
   pageTitle = "Новостная лента!";
+  selectedSource: string = 'all';
+  
   public newsSources: NewsSource[] = [
     {
       guid: 'un-news',
@@ -64,7 +68,6 @@ export class RssDataComponent implements OnInit {
   public newsItems: any[] = [];
   public feedItems: FeedItem[] = [];
   public segment = 'news';
-  public editingDescription: string = '';
   public isLoading: boolean = false;
   public sourceLoadingStatus: { [key: string]: boolean } = {};
   public feedForm!: FormGroup;
@@ -132,111 +135,97 @@ export class RssDataComponent implements OnInit {
     this.isLoading = true;
     this.newsItems = [];
     
-    const activeSources = this.newsSources.filter(source => source.isActive);
+    const activeSources = this.newsSources.filter(source => 
+      source.isActive && (this.selectedSource === 'all' || source.guid === this.selectedSource)
+    );
+    
     if (activeSources.length === 0) {
       this.isLoading = false;
       return;
     }
     
     this.sourceLoadingStatus = {};
-    activeSources.forEach(source => {
+    const fetchPromises = activeSources.map(source => {
       this.sourceLoadingStatus[source.guid] = true;
-    });
-    
-    activeSources.forEach(source => {
-      this.fetchRssFromSource(source);
-    });
-  }
-
-  fetchRssFromSource(source: NewsSource): void {
-    const proxyUrl = 'https://api.allorigins.win/get?url=';
-    const encodedUrl = encodeURIComponent(source.url);
-    const requestUrl = proxyUrl + encodedUrl;
-    
-    const headers = new HttpHeaders({
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
+      return this.fetchRssFromSource(source);
     });
 
-    this.http.get(requestUrl, { headers })
-      .subscribe({
-        next: (response: any) => {
-          if (response && response.contents) {
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(response.contents, 'application/xml');
-            const items = xmlDoc.querySelectorAll('item');
-
-            console.log(`Loaded ${items.length} items from ${source.name}`);
-
-            items.forEach((item) => {
-              const title = item.querySelector('title')?.textContent || 'Без заголовка';
-              const description = item.querySelector('description')?.textContent || 'Без описания';
-              const link = item.querySelector('link')?.textContent || '#';
-              const pubDate = item.querySelector('pubDate')?.textContent || '';
-              
-              let image = '';
-              const enclosure = item.querySelector('enclosure');
-              const mediaContent = item.querySelector('media\\:content, content');
-              const imageTag = item.querySelector('image');
-              
-              if (enclosure && enclosure.getAttribute('url')) {
-                image = enclosure.getAttribute('url') || '';
-              } else if (mediaContent && mediaContent.getAttribute('url')) {
-                image = mediaContent.getAttribute('url') || '';
-              } else if (imageTag) {
-                image = imageTag.querySelector('url')?.textContent || '';
-              } else {
-                const div = document.createElement('div');
-                div.innerHTML = description;
-                const firstImg = div.querySelector('img');
-                image = firstImg ? (firstImg.getAttribute('src') || '') : '';
-              }
-
-              if (image && !image.startsWith('http')) {
-                if (image.startsWith('/')) {
-                  try {
-                    const sourceUrl = new URL(source.url);
-                    image = `${sourceUrl.protocol}//${sourceUrl.hostname}${image}`;
-                  } catch {
-                    image = '';
-                  }
-                } else {
-                  image = '';
-                }
-              }
-              
-              if (!image) {
-                image = `https://via.placeholder.com/300x150?text=${encodeURIComponent(source.name)}`;
-              }
-
-              this.newsItems.push({
-                title,
-                description: this.stripHtml(description),
-                link,
-                image,
-                pubDate,
-                source: source.name,
-                sourceGuid: source.guid
-              });
-            });
-          } else {
-            console.error(`Invalid response format from ${source.name}`);
-          }
-        },
-        error: (error) => {
-          console.error(`Error fetching RSS from ${source.name}:`, error);
-        },
-        complete: () => {
-          this.sourceLoadingStatus[source.guid] = false;
-          const allLoaded = Object.values(this.sourceLoadingStatus).every(status => status === false);
-          if (allLoaded) {
-            this.isLoading = false;
-            this.sortNewsByDate();
-          }
-        }
+    // Заменяем Promise.allSettled на Promise.all с обработкой ошибок
+    Promise.all(fetchPromises.map(p => p.catch(e => e)))
+      .then(() => {
+        this.isLoading = false;
+        this.sortNewsByDate();
       });
   }
-  
+
+  fetchRssFromSource(source: NewsSource): Promise<void> {
+    return new Promise((resolve) => {
+      const proxyUrl = 'https://api.allorigins.win/raw?url=';
+      const requestUrl = proxyUrl + encodeURIComponent(source.url);
+      
+      const headers = new HttpHeaders({
+        'Accept': 'application/xml, text/xml',
+        'Content-Type': 'application/xml'
+      });
+
+      console.log(`Начинаем загрузку ${source.name} с ${source.url}`);
+
+      this.http.get(requestUrl, { headers, responseType: 'text' })
+        .subscribe({
+          next: (response: string) => {
+            try {
+              const parser = new DOMParser();
+              const xmlDoc = parser.parseFromString(response, 'application/xml');
+              const items = xmlDoc.querySelectorAll('item');
+              
+              items.forEach((item) => {
+                const newsItem = {
+                  title: item.querySelector('title')?.textContent || 'Без заголовка',
+                  description: this.stripHtml(item.querySelector('description')?.textContent || 'Без описания'),
+                  link: item.querySelector('link')?.textContent || '#',
+                  image: this.getImageFromItem(item, source),
+                  pubDate: item.querySelector('pubDate')?.textContent || '',
+                  source: source.name,
+                  sourceGuid: source.guid
+                };
+                
+                if (!this.newsItems.some(existing => existing.link === newsItem.link)) {
+                  this.newsItems.push(newsItem);
+                }
+              });
+            } catch (error) {
+              console.error(`Ошибка парсинга XML от ${source.name}:`, error);
+            }
+          },
+          error: (error) => {
+            console.error(`Ошибка загрузки ${source.name}:`, {
+              status: error.status,
+              message: error.message,
+              url: source.url
+            });
+          },
+          complete: () => {
+            this.sourceLoadingStatus[source.guid] = false;
+            resolve();
+          }
+        });
+    });
+  }
+
+  private getImageFromItem(item: Element, source: NewsSource): string {
+    let image = '';
+    const enclosure = item.querySelector('enclosure');
+    const mediaContent = item.querySelector('media\\:content, content');
+    
+    if (enclosure?.getAttribute('url')) {
+      image = enclosure.getAttribute('url') || '';
+    } else if (mediaContent?.getAttribute('url')) {
+      image = mediaContent.getAttribute('url') || '';
+    }
+    
+    return image || `https://via.placeholder.com/300x150?text=${encodeURIComponent(source.name)}`;
+  }
+
   handleImageError(item: any): void {
     item.image = `https://via.placeholder.com/300x150?text=${encodeURIComponent(item.source || 'News')}`;
   }
@@ -254,6 +243,11 @@ export class RssDataComponent implements OnInit {
       }
       return 0;
     });
+  }
+
+  onSourceFilterChange(event: any): void {
+    this.selectedSource = event.detail.value;
+    this.fetchRssFromAllActiveSources();
   }
 
   toggleLanguage(langCode: string): void {
@@ -300,18 +294,15 @@ export class RssDataComponent implements OnInit {
 
   saveEditing(item: FeedItem): void {
     if (this.feedForm.valid) {
-      console.log('Сохранение...');
       item.description = this.feedForm.get('description')?.value;
       item.url = this.feedForm.get('url')?.value;
       item.originalDescription = this.currentLang === 'ru' ? item.description : item.originalDescription;
       item.isEditing = false;
       this.translateDescription(item);
-      console.log('Новое описание:', item.description);
     }
   }
 
   cancelEditing(item: FeedItem): void {
-    console.log('Отмена...');
     item.isEditing = false;
     this.feedForm.reset();
   }
@@ -320,7 +311,7 @@ export class RssDataComponent implements OnInit {
     const newItem: FeedItem = {
       description: 'Новая запись',
       url: 'https://example.com/new',
-      guid: Guid.newGuid(), // Используем новый GUID
+      guid: Guid.newGuid(),
       isEditing: true,
       originalDescription: 'Новая запись'
     };
@@ -330,7 +321,6 @@ export class RssDataComponent implements OnInit {
 
   deleteFeedItem(item: FeedItem): void {
     this.feedItems = this.feedItems.filter((i) => i.guid !== item.guid);
-    console.log('Запись удалена:', item.guid);
   }
 }
 

@@ -1,3 +1,4 @@
+<!-- rss-data.component.html -->
 <ion-header>
   <ion-toolbar color="primary">
     <app-header [pageTitle]="pageTitle"></app-header>
@@ -16,7 +17,20 @@
 
   <div [ngSwitch]="segment">
     <div *ngSwitchCase="'news'">
-      <!-- News Sources Selection -->
+      <ion-item class="ion-padding">
+        <ion-label>Источник</ion-label>
+        <ion-select 
+          [(ngModel)]="selectedSource" 
+          (ionChange)="onSourceFilterChange($event)"
+          interface="popover"
+        >
+          <ion-select-option value="all">Все источники</ion-select-option>
+          <ion-select-option *ngFor="let source of newsSources" [value]="source.guid">
+            {{ source.name }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <div class="source-selector ion-padding">
         <div class="source-title">Источники новостей</div>
         <div class="source-list">
@@ -30,13 +44,11 @@
         </div>
       </div>
 
-      <!-- Loading indicator -->
       <div *ngIf="isLoading" class="loading-container">
         <ion-spinner name="crescent"></ion-spinner>
         <p>Загрузка новостей...</p>
       </div>
 
-      <!-- News items -->
       <div class="news-container" *ngIf="!isLoading">
         <ion-grid>
           <ion-row>
@@ -59,7 +71,6 @@
         </ion-grid>
       </div>
       
-      <!-- No news message -->
       <ion-item *ngIf="!isLoading && newsItems.length === 0" lines="none">
         <ion-label class="ion-text-center">
           Выберите хотя бы один источник новостей или проверьте подключение
@@ -72,7 +83,6 @@
         {{ 'FEED.ADD_POST' | translate }}
       </ion-button>
 
-      <!-- Секция выбора языка -->
       <div class="language-selector">
         <ion-label>{{ 'FEED.LABEL_LANGUAGE' | translate }}</ion-label>
         <div class="language-list">

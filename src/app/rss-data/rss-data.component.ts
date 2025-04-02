@@ -1,5 +1,4 @@
 // rss-data.component.ts
-// rss-data.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -30,7 +29,7 @@ interface NewsSource {
 })
 export class RssDataComponent implements OnInit {
   pageTitle = "Новостная лента!";
-  selectedSource: string = 'all';
+  selectedSource: string = 'all'; // По умолчанию "Все источники"
   
   public newsSources: NewsSource[] = [
     {
@@ -150,7 +149,6 @@ export class RssDataComponent implements OnInit {
       return this.fetchRssFromSource(source);
     });
 
-    // Заменяем Promise.allSettled на Promise.all с обработкой ошибок
     Promise.all(fetchPromises.map(p => p.catch(e => e)))
       .then(() => {
         this.isLoading = false;
@@ -323,7 +321,6 @@ export class RssDataComponent implements OnInit {
     this.feedItems = this.feedItems.filter((i) => i.guid !== item.guid);
   }
 }
-
 
 
 

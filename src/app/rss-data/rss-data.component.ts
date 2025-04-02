@@ -13,6 +13,7 @@ interface FeedItem {
   guid: string;
   isEditing: boolean;
   originalDescription?: string;
+  sourceGuid?: string; // Добавляем для связи с источником
 }
 
 interface NewsSource {
@@ -29,7 +30,7 @@ interface NewsSource {
 })
 export class RssDataComponent implements OnInit {
   pageTitle = "Новостная лента!";
-  selectedSource: string = 'all'; // По умолчанию "Все источники"
+  selectedSource: string = 'all';
   
   public newsSources: NewsSource[] = [
     {
@@ -267,9 +268,9 @@ export class RssDataComponent implements OnInit {
 
   initFeedItems(): void {
     this.feedItems = [
-      { description: 'Краткое описание новости 1', url: 'https://example.com/news1', guid: Guid.newGuid(), isEditing: false },
-      { description: 'Краткое описание новости 2', url: 'https://example.com/news2', guid: Guid.newGuid(), isEditing: false },
-      { description: 'Краткое описание новости 3', url: 'https://example.com/news3', guid: Guid.newGuid(), isEditing: false }
+      { description: 'Краткое описание новости 1', url: 'https://example.com/news1', guid: Guid.newGuid(), isEditing: false, sourceGuid: 'un-news' },
+      { description: 'Краткое описание новости 2', url: 'https://example.com/news2', guid: Guid.newGuid(), isEditing: false, sourceGuid: 'tass-news' },
+      { description: 'Краткое описание новости 3', url: 'https://example.com/news3', guid: Guid.newGuid(), isEditing: false, sourceGuid: 'ria-news' }
     ];
     this.feedItems.forEach(item => {
       item.originalDescription = item.description;
@@ -311,7 +312,8 @@ export class RssDataComponent implements OnInit {
       url: 'https://example.com/new',
       guid: Guid.newGuid(),
       isEditing: true,
-      originalDescription: 'Новая запись'
+      originalDescription: 'Новая запись',
+      sourceGuid: 'un-news' // По умолчанию какой-то источник
     };
     this.feedItems.unshift(newItem);
     this.startEditing(newItem);
@@ -319,6 +321,14 @@ export class RssDataComponent implements OnInit {
 
   deleteFeedItem(item: FeedItem): void {
     this.feedItems = this.feedItems.filter((i) => i.guid !== item.guid);
+  }
+
+  checkFeedItem(item: FeedItem): void {
+    if (item.sourceGuid) {
+      this.selectedSource = item.sourceGuid;
+      this.segment = 'news';
+      this.fetchRssFromAllActiveSources();
+    }
   }
 }
 

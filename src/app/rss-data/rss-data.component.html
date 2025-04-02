@@ -17,7 +17,6 @@
 
   <div [ngSwitch]="segment">
     <div *ngSwitchCase="'news'">
-      <!-- Фильтр по источнику -->
       <ion-item class="ion-padding">
         <ion-label>Фильтр по источнику</ion-label>
         <ion-select 
@@ -33,7 +32,6 @@
         </ion-select>
       </ion-item>
 
-      <!-- Список источников с переключателями -->
       <div class="source-selector ion-padding">
         <div class="source-title">Источники новостей</div>
         <div class="source-list">
@@ -47,13 +45,11 @@
         </div>
       </div>
 
-      <!-- Индикатор загрузки -->
       <div *ngIf="isLoading" class="loading-container">
         <ion-spinner name="crescent"></ion-spinner>
         <p>Загрузка новостей...</p>
       </div>
 
-      <!-- Список новостей -->
       <div class="news-container" *ngIf="!isLoading">
         <ion-grid>
           <ion-row>
@@ -76,7 +72,6 @@
         </ion-grid>
       </div>
       
-      <!-- Сообщение об отсутствии новостей -->
       <ion-item *ngIf="!isLoading && newsItems.length === 0" lines="none">
         <ion-label class="ion-text-center">
           Выберите хотя бы один источник новостей или проверьте подключение
@@ -156,7 +151,7 @@
                     </ion-button>
                   </div>
                   <div>
-                    <ion-button fill="clear" [href]="item.url" target="_blank">
+                    <ion-button fill="clear" (click)="checkFeedItem(item)">
                       {{ 'FEED.CHECK' | translate }}
                     </ion-button>
                     <ion-button fill="clear" color="danger" (click)="deleteFeedItem(item)">

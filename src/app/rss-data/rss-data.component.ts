@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { SettingsService } from '../services/settings.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Убедитесь, что этот импорт присутствует
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Guid } from './guid'; // Импортируем новый класс Guid
 
 interface FeedItem {
   description: string;
@@ -66,7 +67,7 @@ export class RssDataComponent implements OnInit {
   public editingDescription: string = '';
   public isLoading: boolean = false;
   public sourceLoadingStatus: { [key: string]: boolean } = {};
-  public feedForm!: FormGroup; // Используем ! для указания, что переменная будет определена
+  public feedForm!: FormGroup;
 
   languages = [
     { code: 'ru', label: 'RUSSIAN', active: false },
@@ -81,9 +82,9 @@ export class RssDataComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private translate: TranslateService,
     private settingsService: SettingsService,
-    private fb: FormBuilder // Убедитесь, что FormBuilder внедрен
+    private fb: FormBuilder
   ) {
-    this.createForm(); // Инициализация формы в конструкторе
+    this.createForm();
   }
 
   createForm() {
@@ -274,9 +275,9 @@ export class RssDataComponent implements OnInit {
 
   initFeedItems(): void {
     this.feedItems = [
-      { description: 'Краткое описание новости 1', url: 'https://example.com/news1', guid: 'guid-12345', isEditing: false },
-      { description: 'Краткое описание новости 2', url: 'https://example.com/news2', guid: 'guid-67890', isEditing: false },
-      { description: 'Краткое описание новости 3', url: 'https://example.com/news3', guid: 'guid-11111', isEditing: false }
+      { description: 'Краткое описание новости 1', url: 'https://example.com/news1', guid: Guid.newGuid(), isEditing: false },
+      { description: 'Краткое описание новости 2', url: 'https://example.com/news2', guid: Guid.newGuid(), isEditing: false },
+      { description: 'Краткое описание новости 3', url: 'https://example.com/news3', guid: Guid.newGuid(), isEditing: false }
     ];
     this.feedItems.forEach(item => {
       item.originalDescription = item.description;
@@ -319,7 +320,7 @@ export class RssDataComponent implements OnInit {
     const newItem: FeedItem = {
       description: 'Новая запись',
       url: 'https://example.com/new',
-      guid: `guid-${Math.random().toString(36).substring(2, 9)}`,
+      guid: Guid.newGuid(), // Используем новый GUID
       isEditing: true,
       originalDescription: 'Новая запись'
     };

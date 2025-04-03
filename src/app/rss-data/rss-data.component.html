@@ -17,66 +17,106 @@
 
   <div [ngSwitch]="segment">
     <div *ngSwitchCase="'news'">
-      <ion-item class="ion-padding">
-        <ion-label>Фильтр по источнику</ion-label>
-        <ion-select 
-          [(ngModel)]="selectedSource" 
-          (ionChange)="onSourceFilterChange($event)"
-          interface="popover"
-          placeholder="Выберите источник"
-        >
-          <ion-select-option value="all">Все источники</ion-select-option>
-          <ion-select-option *ngFor="let source of newsSources" [value]="source.guid">
-            {{ source.name }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
+      <ion-grid>
+        <!-- Первая строка: тулбар с фильтром и toggler -->
+        <ion-row>
+          <ion-col size="12">
+            <ion-toolbar>
+              <ion-item slot="start" lines="none">
+                <ion-label>Фильтр по источнику</ion-label>
+                <ion-select 
+                  [(ngModel)]="selectedSource" 
+                  (ionChange)="onSourceFilterChange($event)"
+                  interface="popover"
+                  placeholder="Выберите источник"
+                >
+                  <ion-select-option value="all">Все источники</ion-select-option>
+                  <ion-select-option *ngFor="let source of newsSources" [value]="source.guid">
+                    {{ source.name }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item slot="end" lines="none">
+                <ion-label>Просмотр</ion-label>
+                <ion-toggle [(ngModel)]="previewMode" (ionChange)="togglePreviewMode($event)"></ion-toggle>
+              </ion-item>
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
 
-      <div class="source-selector ion-padding">
-        <div class="source-title">Источники новостей</div>
-        <div class="source-list">
-          <div *ngFor="let source of newsSources" class="source-item">
-            <div class="source-info">
-              <ion-badge [color]="source.isActive ? 'primary' : 'medium'" class="source-badge">{{ source.guid }}</ion-badge>
-              <span class="source-name">{{ source.name }}</span>
-            </div>
-            <ion-toggle [(ngModel)]="source.isActive" (ionChange)="toggleNewsSource(source)"></ion-toggle>
-          </div>
-        </div>
-      </div>
-
-      <div *ngIf="isLoading" class="loading-container">
-        <ion-spinner name="crescent"></ion-spinner>
-        <p>Загрузка новостей...</p>
-      </div>
-
-      <div class="news-container" *ngIf="!isLoading">
-        <ion-grid>
-          <ion-row>
-            <ion-col size="12" size-md="6" size-lg="4" *ngFor="let item of newsItems">
-              <ion-card class="news-card">
-                <div class="image-container">
-                  <img [src]="item.image" [alt]="item.title" (error)="handleImageError(item)" />
-                  <ion-badge class="badge-overlay" [color]="'primary'">{{ item.source || 'Источник' }}</ion-badge>
+        <!-- Вторая строка: новости и iframe -->
+        <ion-row>
+          <!-- Колонка с новостями -->
+          <ion-col [size]="previewMode ? '6' : '12'" size-md="6" size-lg="4">
+            <div class="source-selector ion-padding">
+              <div class="source-title">Источники новостей</div>
+              <div class="source-list">
+                <div *ngFor="let source of newsSources" class="source-item">
+                  <div class="source-info">
+                    <ion-badge [color]="source.isActive ? 'primary' : 'medium'" class="source-badge">{{ source.guid }}</ion-badge>
+                    <span class="source-name">{{ source.name }}</span>
+                  </div>
+                  <ion-toggle [(ngModel)]="source.isActive" (ionChange)="toggleNewsSource(source)"></ion-toggle>
                 </div>
-                <ion-card-header>
-                  <ion-card-title class="news-title">{{ item.title }}</ion-card-title>
-                </ion-card-header>
-                <ion-card-content>
-                  <p class="news-description">{{ item.description }}</p>
-                  <ion-button fill="clear" [href]="item.link" target="_blank">Подробнее</ion-button>
-                </ion-card-content>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-      
-      <ion-item *ngIf="!isLoading && newsItems.length === 0" lines="none">
-        <ion-label class="ion-text-center">
-          Выберите хотя бы один источник новостей или проверьте подключение
-        </ion-label>
-      </ion-item>
+              </div>
+            </div>
+
+            <div *ngIf="isLoading" class="loading-container">
+              <ion-spinner name="crescent"></ion-spinner>
+              <p>Загрузка новостей...</p>
+            </div>
+
+            <div class="news-container" *ngIf="!isLoading">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12" *ngFor="let item of newsItems">
+                    <ion-card class="news-card">
+                      <div class="image-container">
+                        <img [src]="item.image" [alt]="item.title" (error)="handleImageError(item)" />
+                        <ion-badge class="badge-overlay" [color]="'primary'">{{ item.source || 'Источник' }}</ion-badge>
+                      </div>
+                      <ion-card-header>
+                        <ion-card-title class="news-title">{{ item.title }}</ion-card-title>
+                      </ion-card-header>
+                      <ion-card-content>
+                        <p class="news-description">{{ item.description }}</p>
+                        <ion-button 
+                          fill="clear" 
+                          [href]="previewMode ? null : item.link" 
+                          [target]="previewMode ? null : '_blank'"
+                          (click)="previewMode ? openNews(item) : null"
+                        >
+                          Подробнее
+                        </ion-button>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+
+            <ion-item *ngIf="!isLoading && newsItems.length === 0" lines="none">
+              <ion-label class="ion-text-center">
+                Выберите хотя бы один источник новостей или проверьте подключение
+              </ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- Колонка с iframe (видна только при previewMode) -->
+          <ion-col size="6" *ngIf="previewMode">
+            <iframe 
+              *ngIf="selectedNewsUrl" 
+              [src]="selectedNewsUrl" 
+              width="100%" 
+              height="600px" 
+              frameborder="0"
+            ></iframe>
+            <div *ngIf="!selectedNewsUrl" class="preview-placeholder">
+              <p>Выберите новость для просмотра</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
 
     <div *ngSwitchCase="'feed'">

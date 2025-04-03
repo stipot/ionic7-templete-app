@@ -1,7 +1,7 @@
 // rss-data.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { SettingsService } from '../services/settings.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,7 +13,7 @@ interface FeedItem {
   guid: string;
   isEditing: boolean;
   originalDescription?: string;
-  sourceGuid?: string; // Добавляем для связи с источником
+  sourceGuid?: string;
 }
 
 interface NewsSource {
@@ -31,6 +31,8 @@ interface NewsSource {
 export class RssDataComponent implements OnInit {
   pageTitle = "Новостная лента!";
   selectedSource: string = 'all';
+  previewMode: boolean = false; // Состояние toggler для preview
+  selectedNewsUrl: SafeResourceUrl | null = null; // URL для iframe
   
   public newsSources: NewsSource[] = [
     {
@@ -249,6 +251,19 @@ export class RssDataComponent implements OnInit {
     this.fetchRssFromAllActiveSources();
   }
 
+  togglePreviewMode(event: any): void {
+    this.previewMode = event.detail.checked;
+    if (!this.previewMode) {
+      this.selectedNewsUrl = null; // Очищаем iframe при выключении preview
+    }
+  }
+
+  openNews(item: any): void {
+    if (this.previewMode) {
+      this.selectedNewsUrl = this.sanitizer.bypassSecurityTrustResourceUrl(item.link);
+    }
+  }
+
   toggleLanguage(langCode: string): void {
     this.settingsService.changeLanguage(langCode);
   }
@@ -313,7 +328,7 @@ export class RssDataComponent implements OnInit {
       guid: Guid.newGuid(),
       isEditing: true,
       originalDescription: 'Новая запись',
-      sourceGuid: 'un-news' // По умолчанию какой-то источник
+      sourceGuid: 'un-news'
     };
     this.feedItems.unshift(newItem);
     this.startEditing(newItem);

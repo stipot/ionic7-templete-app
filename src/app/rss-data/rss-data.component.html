@@ -22,8 +22,8 @@
         <ion-row>
           <ion-col size="12">
             <ion-toolbar>
-              <ion-item slot="start" lines="none">
-                <ion-label>Фильтр по источнику</ion-label>
+              <ion-item slot="start" lines="none" class="filter-item">
+                <ion-label>Фильтр</ion-label>
                 <ion-select 
                   [(ngModel)]="selectedSource" 
                   (ionChange)="onSourceFilterChange($event)"
@@ -48,19 +48,6 @@
         <ion-row>
           <!-- Колонка с новостями -->
           <ion-col [size]="previewMode ? '6' : '12'" size-md="6" size-lg="4">
-            <div class="source-selector ion-padding">
-              <div class="source-title">Источники новостей</div>
-              <div class="source-list">
-                <div *ngFor="let source of newsSources" class="source-item">
-                  <div class="source-info">
-                    <ion-badge [color]="source.isActive ? 'primary' : 'medium'" class="source-badge">{{ source.guid }}</ion-badge>
-                    <span class="source-name">{{ source.name }}</span>
-                  </div>
-                  <ion-toggle [(ngModel)]="source.isActive" (ionChange)="toggleNewsSource(source)"></ion-toggle>
-                </div>
-              </div>
-            </div>
-
             <div *ngIf="isLoading" class="loading-container">
               <ion-spinner name="crescent"></ion-spinner>
               <p>Загрузка новостей...</p>
@@ -97,22 +84,22 @@
 
             <ion-item *ngIf="!isLoading && newsItems.length === 0" lines="none">
               <ion-label class="ion-text-center">
-                Выберите хотя бы один источник новостей или проверьте подключение
+                Выберите источник новостей или проверьте подключение
               </ion-label>
             </ion-item>
           </ion-col>
 
-          <!-- Колонка с iframe (видна только при previewMode) -->
+          <!-- Колонка с iframe -->
           <ion-col size="6" *ngIf="previewMode">
-            <iframe 
-              *ngIf="selectedNewsUrl" 
-              [src]="selectedNewsUrl" 
-              width="100%" 
-              height="600px" 
-              frameborder="0"
-            ></iframe>
-            <div *ngIf="!selectedNewsUrl" class="preview-placeholder">
-              <p>Выберите новость для просмотра</p>
+            <div class="iframe-container">
+              <iframe 
+                *ngIf="selectedNewsUrl" 
+                [src]="selectedNewsUrl" 
+                frameborder="0"
+              ></iframe>
+              <div *ngIf="!selectedNewsUrl" class="preview-placeholder">
+                <p>Выберите новость для просмотра</p>
+              </div>
             </div>
           </ion-col>
         </ion-row>

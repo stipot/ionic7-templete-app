@@ -1,4 +1,4 @@
-// rss-data.component.ts
+// rss-data.component.ts (без изменений, оставляем как есть)
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -31,8 +31,8 @@ interface NewsSource {
 export class RssDataComponent implements OnInit {
   pageTitle = "Новостная лента!";
   selectedSource: string = 'all';
-  previewMode: boolean = false; // Состояние toggler для preview
-  selectedNewsUrl: SafeResourceUrl | null = null; // URL для iframe
+  previewMode: boolean = false;
+  selectedNewsUrl: SafeResourceUrl | null = null;
   
   public newsSources: NewsSource[] = [
     {
@@ -138,7 +138,7 @@ export class RssDataComponent implements OnInit {
     this.newsItems = [];
     
     const activeSources = this.newsSources.filter(source => 
-      source.isActive && (this.selectedSource === 'all' || source.guid === this.selectedSource)
+      this.selectedSource === 'all' || source.guid === this.selectedSource
     );
     
     if (activeSources.length === 0) {
@@ -254,7 +254,7 @@ export class RssDataComponent implements OnInit {
   togglePreviewMode(event: any): void {
     this.previewMode = event.detail.checked;
     if (!this.previewMode) {
-      this.selectedNewsUrl = null; // Очищаем iframe при выключении preview
+      this.selectedNewsUrl = null;
     }
   }
 
@@ -291,11 +291,6 @@ export class RssDataComponent implements OnInit {
       item.originalDescription = item.description;
       this.translateDescription(item);
     });
-  }
-
-  toggleNewsSource(source: NewsSource): void {
-    source.isActive = !source.isActive;
-    this.fetchRssFromAllActiveSources();
   }
 
   startEditing(item: FeedItem): void {

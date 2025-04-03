@@ -64,3 +64,18 @@ ion-textarea, ion-input {
   border: 1px dashed #ccc;
   color: #666;
 }
+
+.iframe-container {
+  width: 100%;
+  height: 100%;
+}
+
+.iframe-container iframe {
+  width: 100%;
+  height: 600px; /* Можно настроить высоту по вашему усмотрению */
+}
+
+/* Добавляем отступ между label и select */
+.filter-item ion-label {
+  margin-right: 10px; /* Отступ между "Фильтр по источнику" и выпадающим списком */
+}

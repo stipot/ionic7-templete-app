@@ -60,7 +60,10 @@
                     <ion-card class="news-card">
                       <div class="image-container">
                         <img [src]="item.image" [alt]="item.title" (error)="handleImageError(item)" />
-                        <ion-badge class="badge-overlay" [color]="'primary'">{{ item.source || 'Источник' }}</ion-badge>
+                        <ion-badge class="badge-overlay" [color]="'primary'">
+                          <img *ngIf="item.favicon" [src]="item.favicon" class="favicon" [alt]="item.source + ' favicon'" />
+                          {{ item.source || 'Источник' }}
+                        </ion-badge>
                       </div>
                       <ion-card-header>
                         <ion-card-title class="news-title">{{ item.title }}</ion-card-title>

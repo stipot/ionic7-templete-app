@@ -79,3 +79,16 @@ ion-textarea, ion-input {
 .filter-item ion-label {
   margin-right: 10px; /* Отступ между "Фильтр по источнику" и выпадающим списком */
 }
+
+/* Стили для favicon */
+.favicon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.badge-overlay {
+  display: flex;
+  align-items: center;
+}

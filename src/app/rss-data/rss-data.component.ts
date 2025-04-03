@@ -1,4 +1,4 @@
-// rss-data.component.ts (без изменений, оставляем как есть)
+// rss-data.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -21,6 +21,17 @@ interface NewsSource {
   url: string;
   name: string;
   isActive: boolean;
+}
+
+interface NewsItem {
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+  pubDate: string;
+  source: string;
+  sourceGuid: string;
+  favicon?: string; // Добавляем поле для favicon
 }
 
 @Component({
@@ -67,7 +78,7 @@ export class RssDataComponent implements OnInit {
     }
   ];
   
-  public newsItems: any[] = [];
+  public newsItems: NewsItem[] = [];
   public feedItems: FeedItem[] = [];
   public segment = 'news';
   public isLoading: boolean = false;
@@ -156,6 +167,7 @@ export class RssDataComponent implements OnInit {
       .then(() => {
         this.isLoading = false;
         this.sortNewsByDate();
+        this.fetchFavicons(); // Загружаем favicon после получения новостей
       });
   }
 
@@ -180,14 +192,15 @@ export class RssDataComponent implements OnInit {
               const items = xmlDoc.querySelectorAll('item');
               
               items.forEach((item) => {
-                const newsItem = {
+                const newsItem: NewsItem = {
                   title: item.querySelector('title')?.textContent || 'Без заголовка',
                   description: this.stripHtml(item.querySelector('description')?.textContent || 'Без описания'),
                   link: item.querySelector('link')?.textContent || '#',
                   image: this.getImageFromItem(item, source),
                   pubDate: item.querySelector('pubDate')?.textContent || '',
                   source: source.name,
-                  sourceGuid: source.guid
+                  sourceGuid: source.guid,
+                  favicon: '' // Инициализируем favicon как пустую строку
                 };
                 
                 if (!this.newsItems.some(existing => existing.link === newsItem.link)) {
@@ -210,6 +223,31 @@ export class RssDataComponent implements OnInit {
             resolve();
           }
         });
+    });
+  }
+
+  // Метод для загрузки favicon
+  fetchFavicons(): void {
+    this.newsItems.forEach(item => {
+      const source = this.newsSources.find(s => s.guid === item.sourceGuid);
+      if (source) {
+        // Извлекаем домен из URL источника
+        const url = new URL(source.url);
+        const domain = url.hostname;
+        const faviconUrl = `https://${domain}/favicon.ico`;
+
+        // Проверяем доступность favicon
+        this.http.head(faviconUrl, { observe: 'response' })
+          .subscribe({
+            next: () => {
+              item.favicon = faviconUrl; // Если favicon доступен, сохраняем URL
+            },
+            error: () => {
+              // Если favicon не найден, используем placeholder
+              item.favicon = `https://via.placeholder.com/16x16?text=${encodeURIComponent(item.source || 'News')}`;
+            }
+          });
+      }
     });
   }
 

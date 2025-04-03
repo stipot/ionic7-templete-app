@@ -23,7 +23,7 @@
           <ion-col size="12">
             <ion-toolbar>
               <ion-item slot="start" lines="none" class="filter-item">
-                <ion-label>Фильтр</ion-label>
+                <ion-label>Фильтр по источнику</ion-label>
                 <ion-select 
                   [(ngModel)]="selectedSource" 
                   (ionChange)="onSourceFilterChange($event)"
@@ -110,9 +110,23 @@
     </div>
 
     <div *ngSwitchCase="'feed'">
-      <ion-button expand="full" color="primary" class="ion-margin" (click)="addNewFeedItem()">
-        {{ 'FEED.ADD_POST' | translate }}
-      </ion-button>
+      <!-- Toolbar с кнопками Импорт и Экспорт -->
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="exportToOPML()">
+            Экспорт
+          </ion-button>
+          <ion-button>
+            <label for="import-opml" class="import-button">Импорт</label>
+            <input id="import-opml" type="file" accept=".opml, .xml" (change)="importFromOPML($event)" style="display: none;" />
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button expand="full" color="primary" (click)="addNewFeedItem()">
+            {{ 'FEED.ADD_POST' | translate }}
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
 
       <div class="language-selector">
         <ion-label>{{ 'FEED.LABEL_LANGUAGE' | translate }}</ion-label>

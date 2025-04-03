@@ -31,7 +31,7 @@ interface NewsItem {
   pubDate: string;
   source: string;
   sourceGuid: string;
-  favicon?: string; // Добавляем поле для favicon
+  favicon?: string;
 }
 
 @Component({
@@ -167,7 +167,7 @@ export class RssDataComponent implements OnInit {
       .then(() => {
         this.isLoading = false;
         this.sortNewsByDate();
-        this.fetchFavicons(); // Загружаем favicon после получения новостей
+        this.fetchFavicons();
       });
   }
 
@@ -200,7 +200,7 @@ export class RssDataComponent implements OnInit {
                   pubDate: item.querySelector('pubDate')?.textContent || '',
                   source: source.name,
                   sourceGuid: source.guid,
-                  favicon: '' // Инициализируем favicon как пустую строку
+                  favicon: ''
                 };
                 
                 if (!this.newsItems.some(existing => existing.link === newsItem.link)) {
@@ -226,24 +226,20 @@ export class RssDataComponent implements OnInit {
     });
   }
 
-  // Метод для загрузки favicon
   fetchFavicons(): void {
     this.newsItems.forEach(item => {
       const source = this.newsSources.find(s => s.guid === item.sourceGuid);
       if (source) {
-        // Извлекаем домен из URL источника
         const url = new URL(source.url);
         const domain = url.hostname;
         const faviconUrl = `https://${domain}/favicon.ico`;
 
-        // Проверяем доступность favicon
         this.http.head(faviconUrl, { observe: 'response' })
           .subscribe({
             next: () => {
-              item.favicon = faviconUrl; // Если favicon доступен, сохраняем URL
+              item.favicon = faviconUrl;
             },
             error: () => {
-              // Если favicon не найден, используем placeholder
               item.favicon = `https://via.placeholder.com/16x16?text=${encodeURIComponent(item.source || 'News')}`;
             }
           });
@@ -377,6 +373,90 @@ export class RssDataComponent implements OnInit {
       this.segment = 'news';
       this.fetchRssFromAllActiveSources();
     }
+  }
+
+  // Экспорт лент в OPML
+  exportToOPML(): void {
+    const opml = this.generateOPML();
+    const blob = new Blob([opml], { type: 'text/xml' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'feeds.opml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }
+
+  // Генерация OPML-файла
+  private generateOPML(): string {
+    const dateCreated = new Date().toISOString();
+    let opml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    opml += `<opml version="1.0">\n`;
+    opml += `  <head>\n`;
+    opml += `    <title>Feeder - RSS Feed Reader</title>\n`;
+    opml += `    <dateCreated>${dateCreated}</dateCreated>\n`;
+    opml += `  </head>\n`;
+    opml += `  <body>\n`;
+
+    this.feedItems.forEach(item => {
+      const domain = new URL(item.url).hostname;
+      const faviconUrl = `https://icons.feedercdn.com/${domain}`;
+      opml += `    <outline text="${item.description}" title="${item.description}" type="rss" xmlUrl="${item.url}" htmlUrl="${item.url}" rssfr-numPosts="0" rssfr-favicon="${faviconUrl}" rssfr-useNotifications="0" rssfr-updateInterval=""/>\n`;
+    });
+
+    opml += `  </body>\n`;
+    opml += `</opml>`;
+    return opml;
+  }
+
+  // Импорт лент из OPML
+  importFromOPML(event: any): void {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const text = e.target?.result as string;
+      this.parseOPML(text);
+    };
+    reader.readAsText(file);
+  }
+
+  // Парсинг OPML-файла
+  private parseOPML(opmlText: string): void {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(opmlText, 'application/xml');
+    const outlines = xmlDoc.querySelectorAll('outline');
+
+    const newFeedItems: FeedItem[] = [];
+    outlines.forEach(outline => {
+      const description = outline.getAttribute('text') || 'Без описания';
+      const url = outline.getAttribute('xmlUrl') || '';
+      if (url) {
+        const newItem: FeedItem = {
+          description,
+          url,
+          guid: Guid.newGuid(),
+          isEditing: false,
+          originalDescription: description,
+          sourceGuid: this.generateSourceGuid(description) // Генерируем sourceGuid
+        };
+        newFeedItems.push(newItem);
+      }
+    });
+
+    // Добавляем новые ленты в начало списка
+    this.feedItems = [...newFeedItems, ...this.feedItems];
+    this.feedItems.forEach(item => {
+      this.translateDescription(item);
+    });
+  }
+
+  // Генерация sourceGuid для импортированных лент
+  private generateSourceGuid(description: string): string {
+    return description.toLowerCase().replace(/\s+/g, '-') + '-' + new Date().getTime();
   }
 }
 

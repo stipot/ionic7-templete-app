@@ -1,4 +1,3 @@
-
 export interface Dress {
         name: string
         description: string

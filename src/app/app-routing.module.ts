@@ -7,6 +7,7 @@ import { SettingsComponent } from "./settings/settings.component"
 import { TodoListComponent } from './todo-list/todo-list.component';
 import {LoginPageModule } from "./login/login.module"
 import { FashionComponent } from './fashion/fashion.component';
+import { FashionDetailComponent } from './fashion-detail/fashion-detail.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component";
 import { SignupComponent } from './signup/signup.component';
 import { IntroComponent } from './intro/intro.component';
@@ -106,10 +107,6 @@ const routes: Routes = [
     loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
   },
   {
-    path: 'fashion',
-    component: FashionComponent
-  },
-  {
     path: 'filters',
     loadChildren: () => import('./forms/filters/filters.module').then(m => m.FiltersPageModule)
   },
@@ -181,7 +178,19 @@ const routes: Routes = [
   },
   {
     path: '**',
-  redirectTo: 'page-not-found'
+  redirectTo: '/fashion'
+  },
+
+  {
+    path: 'fashion', component: FashionComponent
+  },
+
+  {
+    path: 'fashion-detail', component: FashionDetailComponent
+  },
+
+  {
+    path: '', redirectTo: '/fashion', pathMatch: 'full'
   },
 ];
 

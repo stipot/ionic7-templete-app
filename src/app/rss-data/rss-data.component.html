@@ -20,7 +20,7 @@
       <ion-grid>
         <!-- Первая строка: тулбар с фильтром и toggler -->
         <ion-row>
-          <ion-col size="12">
+          <ion-col>
             <ion-toolbar>
               <ion-item slot="start" lines="none" class="filter-item">
                 <ion-label>Фильтр по источнику</ion-label>
@@ -47,7 +47,7 @@
         <!-- Вторая строка: новости и iframe -->
         <ion-row>
           <!-- Колонка с новостями -->
-          <ion-col [size]="previewMode ? '6' : '12'" size-md="6" size-lg="4">
+          <ion-col [size]="previewMode ? 4 : 12" >
             <div *ngIf="isLoading" class="loading-container">
               <ion-spinner name="crescent"></ion-spinner>
               <p>Загрузка новостей...</p>
@@ -56,7 +56,7 @@
             <div class="news-container" *ngIf="!isLoading">
               <ion-grid>
                 <ion-row>
-                  <ion-col size="12" *ngFor="let item of newsItems">
+                  <ion-col [size]="previewMode ? 12 : 4" *ngFor="let item of newsItems">
                     <ion-card class="news-card">
                       <div class="image-container">
                         <img [src]="item.image" [alt]="item.title" (error)="handleImageError(item)" />
@@ -93,7 +93,7 @@
           </ion-col>
 
           <!-- Колонка с iframe -->
-          <ion-col size="6" *ngIf="previewMode">
+          <ion-col size="8" *ngIf="previewMode">
             <div class="iframe-container">
               <iframe 
                 *ngIf="selectedNewsUrl" 

@@ -41,7 +41,7 @@ interface NewsItem {
 })
 export class RssDataComponent implements OnInit {
   pageTitle = "Новостная лента!";
-  selectedSource: string = 'all';
+  selectedSource: string = 'rt-news';
   previewMode: boolean = false;
   selectedNewsUrl: SafeResourceUrl | null = null;
   

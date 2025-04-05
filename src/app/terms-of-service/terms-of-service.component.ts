@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TranslateService, LangChangeEvent  } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-terms-of-service',
@@ -8,10 +9,15 @@ import { ModalController } from '@ionic/angular';
 })
 export class TermsOfServiceComponent  implements OnInit {
   lang: string = "ru"
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private translate: TranslateService) { }
 
   
-  ngOnInit() {}
+  ngOnInit() {
+    this.lang = this.translate.currentLang
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.lang = event.lang;
+    })
+  }
 
   dismiss(): void {
     this.modalCtrl.dismiss();

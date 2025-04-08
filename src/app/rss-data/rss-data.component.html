@@ -70,14 +70,19 @@
                       </ion-card-header>
                       <ion-card-content>
                         <p class="news-description">{{ item.description }}</p>
-                        <ion-button 
-                          fill="clear" 
-                          [href]="previewMode ? null : item.link" 
-                          [target]="previewMode ? null : '_blank'"
-                          (click)="previewMode ? openNews(item) : null"
-                        >
-                          Подробнее
-                        </ion-button>
+                        <div class="button-container">
+                          <ion-button 
+                            fill="clear" 
+                            [href]="previewMode ? null : item.link" 
+                            [target]="previewMode ? null : '_blank'"
+                            (click)="previewMode ? openNews(item) : null"
+                          >
+                            Подробнее
+                          </ion-button>
+                          <ion-button fill="clear" (click)="toggleFavorite(item)">
+                            <ion-icon slot="icon-only" [name]="isFavorite(item.guid) ? 'star' : 'star-outline'"></ion-icon>
+                          </ion-button>
+                        </div>
                       </ion-card-content>
                     </ion-card>
                   </ion-col>

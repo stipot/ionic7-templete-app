@@ -31,6 +31,7 @@ interface NewsItem {
   pubDate: string;
   source: string;
   sourceGuid: string;
+  guid: string; // Добавляем GUID для новости
   favicon?: string;
 }
 
@@ -84,6 +85,7 @@ export class RssDataComponent implements OnInit {
   public isLoading: boolean = false;
   public sourceLoadingStatus: { [key: string]: boolean } = {};
   public feedForm!: FormGroup;
+  public favorites: string[] = []; // Список GUID избранных новостей
 
   languages = [
     { code: 'ru', label: 'RUSSIAN', active: false },
@@ -113,6 +115,7 @@ export class RssDataComponent implements OnInit {
   ngOnInit(): void {
     this.currentLang = this.translate.currentLang || this.translate.defaultLang;
     this.syncLanguageUI();
+    this.loadFavorites(); // Загружаем фавориты при инициализации
 
     this.translate.onLangChange.subscribe(event => {
       this.currentLang = event.lang;
@@ -126,6 +129,32 @@ export class RssDataComponent implements OnInit {
     this.translate.get('News').subscribe((translated: string) => {
       this.pageTitle = translated;
     });
+  }
+
+  // Загрузка фаворитов из localStorage
+  loadFavorites(): void {
+    const savedFavorites = localStorage.getItem('favorites');
+    this.favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
+  }
+
+  // Сохранение фаворитов в localStorage
+  saveFavorites(): void {
+    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  }
+
+  // Проверка, находится ли новость в избранном
+  isFavorite(newsGuid: string): boolean {
+    return this.favorites.includes(newsGuid);
+  }
+
+  // Переключение статуса избранного
+  toggleFavorite(news: NewsItem): void {
+    if (this.isFavorite(news.guid)) {
+      this.favorites = this.favorites.filter(guid => guid !== news.guid);
+    } else {
+      this.favorites.push(news.guid);
+    }
+    this.saveFavorites();
   }
 
   syncLanguageUI(): void {
@@ -200,6 +229,7 @@ export class RssDataComponent implements OnInit {
                   pubDate: item.querySelector('pubDate')?.textContent || '',
                   source: source.name,
                   sourceGuid: source.guid,
+                  guid: Guid.newGuid(), // Генерируем уникальный GUID для новости
                   favicon: ''
                 };
                 
@@ -403,7 +433,7 @@ export class RssDataComponent implements OnInit {
     this.feedItems.forEach(item => {
       const domain = new URL(item.url).hostname;
       const faviconUrl = `https://icons.feedercdn.com/${domain}`;
-      opml += `    <outline text="${item.description}" title="${item.description}" type="rss" xmlUrl="${item.url}" htmlUrl="${item.url}" rssfr-numPosts="0" rssfr-favicon="${faviconUrl}" rssfr-useNotifications="0" rssfr-updateInterval=""/>\n`;
+      opml += `    <ion-icon name="${this.isFavorite(item.guid) ? 'star' : 'star-outline'}" (click)="toggleFavorite(item)"></ion-icon>\n`;
     });
 
     opml += `  </body>\n`;
@@ -441,20 +471,18 @@ export class RssDataComponent implements OnInit {
           guid: Guid.newGuid(),
           isEditing: false,
           originalDescription: description,
-          sourceGuid: this.generateSourceGuid(description) // Генерируем sourceGuid
+          sourceGuid: this.generateSourceGuid(description)
         };
         newFeedItems.push(newItem);
       }
     });
 
-    // Добавляем новые ленты в начало списка
     this.feedItems = [...newFeedItems, ...this.feedItems];
     this.feedItems.forEach(item => {
       this.translateDescription(item);
     });
   }
 
-  // Генерация sourceGuid для импортированных лент
   private generateSourceGuid(description: string): string {
     return description.toLowerCase().replace(/\s+/g, '-') + '-' + new Date().getTime();
   }

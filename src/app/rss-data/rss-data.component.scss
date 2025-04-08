@@ -99,3 +99,20 @@ ion-textarea, ion-input {
   padding: 0;
   cursor: pointer;
 }
+
+/* Стили для контейнера кнопок */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Стили для кнопки звездочки */
+ion-button[fill="clear"] ion-icon[name="star"] {
+  color: var(--ion-color-warning); /* Желтый цвет для заполненной звездочки */
+}
+
+ion-button[fill="clear"] ion-icon[name="star-outline"] {
+  color: var(--ion-color-medium); /* Серый цвет для пустой звездочки */
+}

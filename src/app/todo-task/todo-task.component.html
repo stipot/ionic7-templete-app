@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ 'ToDo task' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngFor="let task of tasks; let i = index">
+    <ion-text>{{ task.title }}</ion-text>
+    <ion-textarea placeholder="Добавьте задачу" [(ngModel)]="task.title"></ion-textarea>
+    <div *ngIf="task.subTasks.length > 0">
+      <ion-list lines="none">
+        <ion-item *ngFor="let subtask of task.subTasks; let j = index">
+          <!-- <ion-text (click)="changeStyle(subtask)" [style.textDecoration]="getDecoration(subtask.style)">{{ subtask.text }}</ion-text> -->
+          <ion-textarea (click)="changeStyle(subtask)" [style.textDecoration]="getDecoration(subtask.style)" placeholder="Добавьте подзадачу" [(ngModel)]="subtask.text">{{ subtask.text }}</ion-textarea>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+  <ion-button color="primary" (click)="addTask()">
+    <ion-icon name="add-circle"></ion-icon>
+    Добавить задачу
+  </ion-button>
+  <ion-button color="primary" (click)="addSubTask()">
+    <ion-icon name="add"></ion-icon>
+    Добавить подзадачу
+  </ion-button>
+</ion-content>

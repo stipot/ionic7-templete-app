@@ -5,6 +5,7 @@ import { NotesComponent } from './notes/notes.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoTaskComponent } from './todo-task/todo-task.component';
 import {LoginPageModule } from "./login/login.module"
 import { FashionComponent } from './fashion/fashion.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component";
@@ -100,6 +101,10 @@ const routes: Routes = [
   {
     path: 'todo-list',
     component: TodoListComponent
+  },
+  {
+    path: 'todo-task',
+    component: TodoTaskComponent
   },
   {
     path: 'signup',

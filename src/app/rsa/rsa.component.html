@@ -7,235 +7,123 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!--  
-  <ion-grid>
+  <ion-grid class="rsa-grid">
+    <!-- P и Q в одной строке -->
     <ion-row>
-      <ion-col>
+      <ion-col size="12" size-md="6">
         <ion-item>
-          <ion-icon src="assets/icon/question_white.svg" id="p-trigger"></ion-icon>
-          <ion-popover trigger="p-trigger" triggerAction="hover">
-            <ng-template>
-              <ion-content class="ion-padding">p - это часть функции</ion-content>
-            </ng-template>
-          </ion-popover>
+          <ion-icon slot="start" src="assets/icon/question_white.svg" id="p-trigger"></ion-icon>
           <ion-select label="P" label-placement="floating" [(ngModel)]="pNum" (ngModelChange)="updateLists()">
             <ion-select-option *ngFor="let res of pList" [value]="res">{{ res }}</ion-select-option>
           </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col>
-        <ion-item>
-          <ion-icon src="assets/icon/question_white.svg" id="q-trigger"></ion-icon>
-          <ion-popover trigger="q-trigger" triggerAction="hover">
-            <ng-template>
-              <ion-content class="ion-padding">q - это часть функции</ion-content>
-            </ng-template>
-          </ion-popover>
-          <ion-select label="Q" label-placement="floating" [(ngModel)]="qNum" (ngModelChange)="updateLists()">
-            <ion-select-option *ngFor="let res of qList" [value]="res">{{ res }}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-icon src="assets/icon/question_white.svg" id="e-trigger"></ion-icon>
-          <ion-popover trigger="e-trigger" triggerAction="hover">
-            <ng-template>
-              <ion-content class="ion-padding">e - это часть функции</ion-content>
-            </ng-template>
-          </ion-popover>
-          <ion-select label="E" label-placement="floating"[(ngModel)]="eNum" (ngModelChange)="updateLists()">
-            <ion-select-option *ngFor="let res of eList" [value]="res">{{ res }}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col>
-        <ion-item>
-          <ion-icon src="assets/icon/question_white.svg" id="d-trigger"></ion-icon>
-          <ion-popover trigger="d-trigger" triggerAction="hover">
-            <ng-template>
-              <ion-content class="ion-padding">d - это часть функции</ion-content>
-            </ng-template>
-          </ion-popover>
-          <ion-select label="D" label-placement="floating"[(ngModel)]="dNum" (ngModelChange)="updateLists()">
-            <ion-select-option *ngFor="let res of dList" [value]="res">{{ res }}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-input label="Открытый ключ" value="{{eNum}}, {{nNum}}" [readonly]="true"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-input label="Закрытый ключ" value="{{dNum}}, {{nNum}}"[readonly]="true"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title >Текст</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-textarea placeholder="Type something here" [(ngModel)]="toEncrypt" (ngModelChange)="updateDecription()"></ion-textarea>
-            </ion-card-content>
-          </ion-card>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Шифр</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-textarea placeholder="Type something here" [(ngModel)]="toDecrypt" (ngModelChange)="updateEncryption()"></ion-textarea>
-            </ion-card-content>
-          </ion-card>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  -->
-
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <ion-item>
-          <ion-icon src="assets/icon/question_white.svg" id="p-trigger"></ion-icon>
           <ion-popover trigger="p-trigger" triggerAction="hover">
             <ng-template>
-              <ion-content class="ion-padding">p - это часть функции</ion-content>
+              <ion-content class="ion-padding">P — простое число, используемое для генерации ключей</ion-content>
             </ng-template>
           </ion-popover>
-          <ion-select label="P" label-placement="floating" [(ngModel)]="pNum" (ngModelChange)="updateLists()">
-            <ion-select-option *ngFor="let res of pList" [value]="res">{{ res }}</ion-select-option>
-          </ion-select>
         </ion-item>
       </ion-col>
-    </ion-row>
-  
-    <ion-row>
-      <ion-col size="12">
+
+      <ion-col size="12" size-md="6">
         <ion-item>
-          <ion-icon src="assets/icon/question_white.svg" id="q-trigger"></ion-icon>
-          <ion-popover trigger="q-trigger" triggerAction="hover">
-            <ng-template>
-              <ion-content class="ion-padding">q - это часть функции</ion-content>
-            </ng-template>
-          </ion-popover>
+          <ion-icon slot="start" src="assets/icon/question_white.svg" id="q-trigger"></ion-icon>
           <ion-select label="Q" label-placement="floating" [(ngModel)]="qNum" (ngModelChange)="updateLists()">
             <ion-select-option *ngFor="let res of qList" [value]="res">{{ res }}</ion-select-option>
           </ion-select>
+          <ion-popover trigger="q-trigger" triggerAction="hover">
+            <ng-template>
+              <ion-content class="ion-padding">Q — простое число, используемое для генерации ключей</ion-content>
+            </ng-template>
+          </ion-popover>
         </ion-item>
       </ion-col>
     </ion-row>
-  
+
+    <!-- E и D в одной строке -->
     <ion-row>
-      <ion-col size="12">
+      <ion-col size="12" size-md="6">
         <ion-item>
-          <ion-icon src="assets/icon/question_white.svg" id="e-trigger"></ion-icon>
-          <ion-popover trigger="e-trigger" triggerAction="hover">
-            <ng-template>
-              <ion-content class="ion-padding">e - это часть функции</ion-content>
-            </ng-template>
-          </ion-popover>
+          <ion-icon slot="start" src="assets/icon/question_white.svg" id="e-trigger"></ion-icon>
           <ion-select label="E" label-placement="floating" [(ngModel)]="eNum" (ngModelChange)="updateLists()">
             <ion-select-option *ngFor="let res of eList" [value]="res">{{ res }}</ion-select-option>
           </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  
-    <ion-row>
-      <ion-col size="12">
-        <ion-item>
-          <ion-icon src="assets/icon/question_white.svg" id="d-trigger"></ion-icon>
-          <ion-popover trigger="d-trigger" triggerAction="hover">
+          <ion-popover trigger="e-trigger" triggerAction="hover">
             <ng-template>
-              <ion-content class="ion-padding">d - это часть функции</ion-content>
+              <ion-content class="ion-padding">E — открытая экспонента для шифрования</ion-content>
             </ng-template>
           </ion-popover>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" size-md="6">
+        <ion-item>
+          <ion-icon slot="start" src="assets/icon/question_white.svg" id="d-trigger"></ion-icon>
           <ion-select label="D" label-placement="floating" [(ngModel)]="dNum" (ngModelChange)="updateLists()">
             <ion-select-option *ngFor="let res of dList" [value]="res">{{ res }}</ion-select-option>
           </ion-select>
+          <ion-popover trigger="d-trigger" triggerAction="hover">
+            <ng-template>
+              <ion-content class="ion-padding">D — секретная экспонента для дешифрования</ion-content>
+            </ng-template>
+          </ion-popover>
         </ion-item>
       </ion-col>
     </ion-row>
-  
+
+    <!-- Открытый и закрытый ключ в одной строке -->
     <ion-row>
-      <ion-col size="12">
+      <ion-col size="12" size-md="6">
         <ion-item>
-          <ion-icon src="assets/icon/question_white.svg" id="open-trigger"></ion-icon>
+          <ion-icon slot="start" src="assets/icon/question_white.svg" id="open-trigger"></ion-icon>
+          <ion-input label="Открытый ключ" value="{{eNum}}, {{nNum}}" [readonly]="true"></ion-input>
           <ion-popover trigger="open-trigger" triggerAction="hover">
             <ng-template>
-              <ion-content class="ion-padding">Открытый</ion-content>
+              <ion-content class="ion-padding">Открытый ключ используется для шифрования, известен всем от кого вы хотите получать сообщения</ion-content>
             </ng-template>
           </ion-popover>
-          <ion-input label="Открытый ключ" value="{{eNum}}, {{nNum}}" [readonly]="true"></ion-input>
         </ion-item>
       </ion-col>
-    </ion-row>
-  
-    <ion-row>
-      <ion-col size="12">
+
+      <ion-col size="12" size-md="6">
         <ion-item>
-          <ion-icon src="assets/icon/question_white.svg" id="closed-trigger"></ion-icon>
+          <ion-icon slot="start" src="assets/icon/question_white.svg" id="closed-trigger"></ion-icon>
+          <ion-input label="Закрытый ключ" value="{{dNum}}, {{nNum}}" [readonly]="true"></ion-input>
           <ion-popover trigger="closed-trigger" triggerAction="hover">
             <ng-template>
-              <ion-content class="ion-padding">Закрытый</ion-content>
+              <ion-content class="ion-padding">Закрытый ключ используется для расшифровки, держится в тайне от всех</ion-content>
             </ng-template>
           </ion-popover>
-          <ion-input label="Закрытый ключ" value="{{dNum}}, {{nNum}}" [readonly]="true"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
-  
+
+    <!-- Текст (на всю ширину) -->
     <ion-row>
       <ion-col size="12">
-        <ion-item>
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Текст</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-textarea placeholder="Type something here" [(ngModel)]="toEncrypt" (ngModelChange)="updateDecription()"></ion-textarea>
-            </ion-card-content>
-          </ion-card>
-        </ion-item>
+        <ion-card class="full-width-card">
+          <ion-card-header>
+            <ion-card-title>Текст</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-textarea placeholder="Введите текст здесь" [(ngModel)]="toEncrypt" (ngModelChange)="updateDecription()"></ion-textarea>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
-  
+
+    <!-- Шифр (на всю ширину) -->
     <ion-row>
       <ion-col size="12">
-        <ion-item>
-          <ion-card>
-            <ion-card-header>
-              <ion-card-title>Шифр</ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-textarea placeholder="Type something here" [(ngModel)]="toDecrypt" (ngModelChange)="updateEncryption()"></ion-textarea>
-            </ion-card-content>
-          </ion-card>
-        </ion-item>
+        <ion-card class="full-width-card">
+          <ion-card-header>
+            <ion-card-title>Шифр</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-textarea placeholder="Зашифрованный текст появится здесь" [(ngModel)]="toDecrypt" (ngModelChange)="updateEncryption()"></ion-textarea>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-  
-
 </ion-content>
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { modPow } from 'bigint-crypto-utils';
 
 @Component({
   selector: 'app-rsa',
@@ -98,8 +99,8 @@ export class RsaComponent  implements OnInit {
 
     const cipher: bigint[] = [];
     for (const i of asciiText) {
-      console.log(i, BigInt(Math.pow(i, _key[0])))
-      cipher.push(BigInt(Math.pow(i, _key[0])) % BigInt(_key[2]));
+      console.log(i +'**'+ _key[0] +'%'+ _key[2]);
+      cipher.push(modPow(i,_key[0],_key[2]));
     }
     let res = "";
     for (let i = 0; i < cipher.length; i++) {
@@ -111,12 +112,12 @@ export class RsaComponent  implements OnInit {
 
   decryption(cipher: string, closedKey: number[]): string {
     const _key = closedKey;
+    
     const decipher: bigint[] = [];
-
     const cipherNumbers = cipher.split(' ').filter(Boolean).map(Number);
-
     for (const i of cipherNumbers) {
-      decipher.push(BigInt(Math.pow(i, _key[1])) % BigInt(_key[2]));
+      console.log(i +'**'+ _key[1] +'%'+ _key[2]);
+      decipher.push(modPow(i, _key[1],_key[2]));
     }
     
     console.log(decipher)

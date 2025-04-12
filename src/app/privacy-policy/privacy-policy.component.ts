@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 
 @Component({
@@ -9,9 +10,14 @@ import { ModalController } from '@ionic/angular';
 })
 export class PrivacyPolicyComponent implements OnInit {
   lang: string = "ru"
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private translate: TranslateService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.lang = this.translate.currentLang
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.lang = event.lang;
+    })
+   }
   dismiss(): void {
     this.modalCtrl.dismiss();
   }

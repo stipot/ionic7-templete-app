@@ -36,4 +36,10 @@ export class FirestoreService {
     const snapshot = await getDocs(colRef);
     return snapshot.docs.map(doc => doc.data());
   }
+
+  async checkUserExists(userId: string): Promise<boolean> {
+    const usersRef = collection(this.UserDB, 'users');
+    const snapshot = await getDocs(usersRef);
+    return snapshot.docs.some(doc => doc.id === userId);
+  }
 }

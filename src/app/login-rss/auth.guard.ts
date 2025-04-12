@@ -13,14 +13,16 @@ export class AuthGuard implements CanActivate {
     try {
       const user = await Parse.User.currentAsync();
       if (!user) {
-        this.router.navigate(['/login-rss']); // Перенаправление на страницу логина
+        this.router.navigate(['/login']); // Перенаправление на страницу логина
         return false;
       }
       return true;
     } catch (error) {
       console.error('Ошибка проверки авторизации:', error);
-      this.router.navigate(['/login-rss']); // Перенаправление на страницу логина
+      this.router.navigate(['/login']); // Перенаправление на страницу логина
       return false;
     }
   }
 }
+
+

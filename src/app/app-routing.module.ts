@@ -41,12 +41,25 @@ const routes: Routes = [
   {
     path: 'rss-data',
     loadChildren: () => import('./rss-data/rss-data.module').then(m => m.RssDataModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard] // Защита маршрута
   },
   {
-    path: 'login-rss',
-    loadChildren: () => import('./login-rss/login-rss.module').then(m => m.LoginRssPageModule)
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) // Существующая страница логина
   },
+  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
+  },
+
+  {
+    
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+    
+    
+  },
+
   {
     path: '',
     redirectTo: 'front-layout',

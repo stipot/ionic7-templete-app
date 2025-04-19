@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-import {FrontLayoutComponent } from './front-layout/front-layout.component'; 
+import {FrontLayoutComponent } from './front-layout.component'; 
 
 describe('FrontLayoutComponent', () => {
   let component: FrontLayoutComponent;

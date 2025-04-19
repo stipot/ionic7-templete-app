@@ -10,12 +10,13 @@ export class FirestoreService {
   auth: any
   UserDB:any
   private secondFirebaseConfig = {
-    apiKey: "AIzaSyBIAlgmzGbmcIRanMtnm7C5COqUC1jRzAM",
-    authDomain: "water-trackerr.firebaseapp.com",
-    projectId: "water-trackerr",
-    storageBucket: "water-trackerr.firebasestorage.app",
-    messagingSenderId: "32859637006",
-    appId: "1:32859637006:web:0a5e83dadf81630f10c35f"
+    apiKey: "AIzaSyAhyDd5SI8sFRPNkMH_kvgcsyjxe9AF_4Q",
+    authDomain: "ionic7-templete-app-public.firebaseapp.com",
+    projectId: "ionic7-templete-app-public",
+    storageBucket: "ionic7-templete-app-public.appspot.com",
+    messagingSenderId: "822636124132",
+    appId: "1:822636124132:web:a65c67da73bd8e03e099f1",
+    measurementId: "G-R13DHHMDRQ"
   };
   public userData = initializeApp(this.secondFirebaseConfig, 'userData');
   constructor() {
@@ -28,18 +29,27 @@ export class FirestoreService {
 
   async addData(collectionName: string, data: any): Promise<void> {
     const colRef = collection(this.UserDB, collectionName);
+    console.log(colRef, "colRef")
     await addDoc(colRef, data);
   }
 
-  async getAllData(collectionName: string): Promise<any[]> {
+  async getAllData(collectionName: string, userId: string): Promise<any[]> {
     const colRef = collection(this.UserDB, collectionName);
+    console.log(colRef, "colRef")
     const snapshot = await getDocs(colRef);
+    console.log(snapshot, "snapshot")
     return snapshot.docs.map(doc => doc.data());
   }
 
   async checkUserExists(userId: string): Promise<boolean> {
     const usersRef = collection(this.UserDB, 'users');
+    console.log(usersRef, "usersRef")
     const snapshot = await getDocs(usersRef);
+    console.log(userId, "userId")
+    console.log("snapshot.docs", snapshot.docs)
     return snapshot.docs.some(doc => doc.id === userId);
   }
+
+  
+
 }

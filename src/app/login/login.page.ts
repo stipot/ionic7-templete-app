@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';  // Импорт FormBuilder
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FirestoreService } from '../user/firestore.service';
-import { ModalController, MenuController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 
@@ -18,16 +18,18 @@ export class LoginPage implements OnInit {
   constructor(
     public modalController: ModalController,
     private router: Router,
-    private firestore: FirestoreService
+    private firestore: FirestoreService,
+    private fb: FormBuilder  // Внедряем FormBuilder
   ) {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      ])),
-      password: new FormControl('', Validators.required)
+    // Создаем форму с помощью FormBuilder
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
+
+  ngOnInit(): void {}
+
   async showTermsOfServiceModal() {
     const modal = await this.modalController.create({
       component: TermsOfServiceComponent
@@ -41,39 +43,29 @@ export class LoginPage implements OnInit {
     });
     return await modal.present();
   }
-  ngOnInit(): void {}
 
-  login() {
-    console.log('Начало выполнения метода login()');
-    
+  onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Форма валидна, продолжаем выполнение');
-      
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
-      console.log(`Полученные данные: email=${email}, password=${password}`);
-  
+      console.log(email, password, "email", "password")
       const db = this.firestore.userData;
-      console.log('Получен экземпляр Firestore:', db);
-  
+      console.log("db",db) 
+      
       const auth = getAuth(db);
-      console.log('Получен экземпляр Auth:', auth);
-  
+      console.log(auth)
+
       signInWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
-          console.log('Вход выполнен успешно:', userCredential);
-  
+          console.log(userCredential, "userCredential")
           const userId = userCredential.user.uid;
-          console.log(`UID пользователя: ${userId}`);
-  
+          console.log(userId, "userId")
+          const user_docs = await this.firestore.getAllData("profiles", userId);
+          console.log(user_docs, "user_docs")
           const userExists = await this.firestore.checkUserExists(userId);
-          console.log(`Результат проверки существования пользователя: ${userExists}`);
-  
           if (userExists) {
-            console.log('Пользователь существует, перенаправляем на главную страницу');
-            this.router.navigate(['/rss-data/tabs/main'], { replaceUrl: true });
+            this.router.navigate(['/rss-data'], { replaceUrl: true });
           } else {
-            console.log('Пользователь не существует, выполняем дополнительные действия');
             // Действия, если пользователь не существует
           }
         })
@@ -84,12 +76,10 @@ export class LoginPage implements OnInit {
       console.log('Форма не валидна');
     }
   }
-  
-  
-  
 
   goToRegister() {
     this.router.navigate(['/water-tracker/register']);
   }
 }
+
 

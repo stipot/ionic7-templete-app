@@ -14,6 +14,7 @@ export class AppComponent {
   public appPages = [
     { title: 'FrontPage', url: '/front-layout', icon: 'front-layout' },
     { title: 'Settings', url: '/settings', icon: '' },
+    { title: 'Miniblog', url: '/miniblog', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },
     { title: 'Kanban', url: '/kanban', icon: '' },
     { title: 'Mood calendar', url: '/mood-calendar', icon: '' },

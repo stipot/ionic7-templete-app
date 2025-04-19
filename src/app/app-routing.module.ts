@@ -33,7 +33,8 @@ import {MplayerComponent} from "./mplayer/mplayer.component";
 import { KanbanComponent } from './kanban/kanban.component';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component'
-import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
+import { WaterTrackerComponent } from './water-tracker/water-tracker.component'
+import { MiniblogComponent } from './miniblog/miniblog.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,10 @@ const routes: Routes = [
   {
     path: 'mood-calendar',
     component: MoodCalendarComponent
+  },
+  {
+    path: 'miniblog',
+    component: MiniblogComponent
   },
   {
     path: 'contact-card',

@@ -26,5 +26,9 @@ export class PrivacyPolicyComponent implements OnInit {
     console.log('Current value:', JSON.stringify(ev.target.value));
   }
 
+  change_lang(lang: string){
+    this.translate.use(lang);
+  }
+
 }
 

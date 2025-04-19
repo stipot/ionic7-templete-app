@@ -16,18 +16,23 @@
         Политика конфиденциальности
       </div>
     </ion-title>
-    <ion-list>
-      <ion-item>
-        <ion-select aria-label="Fruit" interface="popover" placeholder="Select languages" [(ngModel)]="lang">
-          <ion-select-option value="ru">Русский</ion-select-option>
-          <ion-select-option value="en">English</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding" size="6">
+  <ion-fab slot="fixed" horizontal="right" vertical="bottom">
+    <ion-fab-button> {{lang}}
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="change_lang('en')">
+        en
+      </ion-fab-button>
+      <ion-fab-button (click)="change_lang('ru')">
+        ru
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
   <div *ngIf="lang=='en'">
     <h3 class="legal-title">1. Introduction</h3>
     <p class="legal-text">

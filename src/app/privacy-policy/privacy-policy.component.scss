@@ -26,4 +26,6 @@
       text-align: justify;
     }
   }
-  
+  ion-fab {
+    margin-top: var(--ion-safe-area-left, 20);
+  }

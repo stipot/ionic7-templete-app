@@ -32,6 +32,13 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 Run `ionic serve` to start a live-reload dev server
 
+### Run tests
+On linux
+```
+export FIREFOX_BIN=/usr/bin/firefox
+ng test
+```
+
 ## IONIC 8 compatibility
 
 ### Usage of http client

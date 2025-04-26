@@ -1,0 +1,122 @@
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tab-button {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+  
+    &.active {
+      color: #3880ff;
+      border-bottom: 2px solid #3880ff;
+    }
+  }
+  
+  .list-container {
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      margin-bottom: 8px;
+      background: white;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+  
+      .item-content {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+  
+      .item-details {
+        display: flex;
+        flex-direction: column;
+      }
+  
+      .item-name {
+        font-weight: 500;
+      }
+  
+      .item-quantity {
+        font-size: 12px;
+        color: #666;
+      }
+  
+      .item-status {
+        select {
+          padding: 6px 12px;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 14px;
+          background: white;
+          cursor: pointer;
+        }
+      }
+  
+      .delete-button {
+        background: none;
+        border: none;
+        font-size: 20px;
+        color: #ff3d3d;
+        cursor: pointer;
+        padding: 0 8px;
+        margin-left: 12px;
+      }
+    }
+  
+    .empty-message {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+  }
+  
+  .add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+  
+      label {
+        font-size: 14px;
+        color: #555;
+      }
+  
+      input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+    }
+  
+    .add-button {
+      padding: 12px;
+      background-color: #3880ff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+  
+      &:disabled {
+        background-color: #aaa;
+        cursor: not-allowed;
+      }
+    }
+  }

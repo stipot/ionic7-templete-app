@@ -1,14 +1,74 @@
-<ion-header>
-<ion-toolbar color="primary">
-<app-header ></app-header>
-<ion-buttons slot="end">
-<ion-button>Close</ion-button>
-</ion-buttons>
-</ion-toolbar>
-</ion-header>
-<ion-content>
-<p>
-Компонент shopping-list, находится в разработке. 
-Ожидается релиз...(а может и нет)
-</p>
-</ion-content> 
+<div class="tabs">
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'list'"
+      (click)="switchTab('list')"
+    >
+      Список покупок
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'add'"
+      (click)="switchTab('add')"
+    >
+      Добавить товар
+    </button>
+  </div>
+  
+  <div *ngIf="activeTab === 'list'" class="list-container">
+    <div *ngFor="let item of items" class="item" [style.border-left]="'4px solid ' + getStatusColor(item.status)">
+      <div class="item-content">
+        <div class="item-details">
+          <span class="item-name">{{ item.name }}</span>
+          <span class="item-quantity">Кол-во: {{ item.quantity }}</span>
+        </div>
+        <div class="item-status">
+          <select 
+            [(ngModel)]="item.status" 
+            (change)="changeStatus(item.id, item.status)"
+            [style.color]="getStatusColor(item.status)"
+          >
+            <option *ngFor="let status of statusOptions" [value]="status.value" [style.color]="status.color">
+              {{ status.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <button class="delete-button" (click)="removeItem(item.id)">×</button>
+    </div>
+  
+    <div *ngIf="items.length === 0" class="empty-message">
+      Ваш список товаров пуст!
+    </div>
+  </div>
+  
+  <div *ngIf="activeTab === 'add'" class="add-form">
+    <div class="form-group">
+      <label for="itemName">Название товара</label>
+      <input 
+        type="text" 
+        id="itemName" 
+        [(ngModel)]="newItemName" 
+        placeholder="Введите название товара"
+      >
+    </div>
+  
+    <div class="form-group">
+      <label for="quantity">Количество</label>
+      <input 
+        type="number" 
+        id="quantity" 
+        [(ngModel)]="newItemQuantity" 
+        min="1" 
+        value="1"
+      >
+    </div>
+  
+    <button 
+      class="add-button" 
+      (click)="addItem()" 
+      [disabled]="!newItemName.trim()"
+    >
+      Добавить в список
+    </button>
+  </div>

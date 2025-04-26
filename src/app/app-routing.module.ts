@@ -35,14 +35,10 @@ import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component'
 import { WaterTrackerModule } from './water-tracker/water-tracker.module';
 
-import { AuthGuard } from './login-rss/auth.guard';
+
 
 const routes: Routes = [
-  {
-    path: 'rss-data',
-    loadChildren: () => import('./rss-data/rss-data.module').then(m => m.RssDataModule),
-    canActivate: [AuthGuard] // Защита маршрута
-  },
+  
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
@@ -207,10 +203,6 @@ const routes: Routes = [
   {
     path: '**',
   redirectTo: 'page-not-found'
-  },
-  {
-    path: 'login-rss',
-    loadChildren: () => import('./login-rss/login-rss.module').then( m => m.LoginRssPageModule)
   },
 ];
 

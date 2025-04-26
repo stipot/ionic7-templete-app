@@ -48,6 +48,7 @@ export class AppComponent {
   ];
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang('ru');
+    this.translate.addLangs(['en',"ru"])
     this.translate.use('ru');
   }
 

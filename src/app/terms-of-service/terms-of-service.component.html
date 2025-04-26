@@ -25,11 +25,8 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button (click)="change_lang('en')">
-        en
-      </ion-fab-button>
-      <ion-fab-button (click)="change_lang('ru')">
-        ru
+      <ion-fab-button *ngFor="let l of langs" (click)="change_lang(l)" >
+      {{l}}
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>

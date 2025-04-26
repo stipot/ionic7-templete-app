@@ -9,11 +9,13 @@ import { TranslateService, LangChangeEvent  } from '@ngx-translate/core';
 })
 export class TermsOfServiceComponent  implements OnInit {
   lang: string = "ru"
+  langs: string[]=[]
   constructor(private modalCtrl: ModalController, private translate: TranslateService) { }
 
   
   ngOnInit() {
     this.lang = this.translate.currentLang
+    this.langs = this.translate.getLangs()
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.lang = event.lang;
     })

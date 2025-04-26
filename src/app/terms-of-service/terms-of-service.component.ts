@@ -23,8 +23,12 @@ export class TermsOfServiceComponent  implements OnInit {
     this.modalCtrl.dismiss();
  }
 
- handleChange(ev: any) {
+  handleChange(ev: any) {
     console.log('Current value:', JSON.stringify(ev.target.value));
  }
+  
+  change_lang(lang: string){
+    this.translate.use(lang);
+  }
 
 }

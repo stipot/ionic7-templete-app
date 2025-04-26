@@ -75,7 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CameraComponent,
     FileViewerComponent,
     DragAndDropComponent,
-    RsaComponent
+    RsaComponent,
   ],
   imports: [
     BrowserModule,

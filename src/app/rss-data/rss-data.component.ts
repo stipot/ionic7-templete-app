@@ -133,6 +133,7 @@ export class RssDataComponent implements OnInit {
     });
   }
 
+  
   // Загрузка фаворитов из localStorage
   loadFavorites(): void {
     const savedFavorites = localStorage.getItem('favorites');

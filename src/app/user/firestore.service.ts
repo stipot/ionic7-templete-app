@@ -9,7 +9,7 @@ import { getAuth, browserLocalPersistence, setPersistence, onAuthStateChanged } 
 export class FirestoreService {
   auth: any;
   UserDB: any;
-  userId: string | null = null; // Изменяем тип и инициализируем
+  userId: string | null = null;
 
   private secondFirebaseConfig = {
     apiKey: "AIzaSyAhyDd5SI8sFRPNkMH_kvgcsyjxe9AF_4Q",
@@ -30,32 +30,35 @@ export class FirestoreService {
     });
     this.UserDB = getFirestore(this.userData);
 
-    // Подписываемся на изменения состояния аутентификации
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
-        this.userId = user.uid; // Устанавливаем userId при входе
+        this.userId = user.uid;
         console.log('User ID установлен:', this.userId);
       } else {
-        this.userId = null; // Сбрасываем userId при выходе
+        this.userId = null;
         console.log('User вышел, User ID сброшен');
       }
     });
   }
 
-  // Получить данные компонента из коллекции 'particles'
+  /**
+   * Получить данные компонента из коллекции 'profiles' по userId
+   * @param componentName - имя компонента (например, 'favorites')
+   * @returns данные компонента или null
+   */
   async getComponentData(componentName: string): Promise<any | null> {
     try {
       if (!this.userId) {
         console.log('User ID не установлен.');
         return null;
       }
-      const docRef = doc(this.UserDB, 'particles', this.userId);
+      const docRef = doc(this.UserDB, 'profiles', this.userId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
         return data[componentName] ?? null;
       } else {
-        console.log(`Документ particles пользователя ${this.userId} не найден.`);
+        console.log(`Документ profiles пользователя ${this.userId} не найден.`);
         return null;
       }
     } catch (error) {
@@ -64,7 +67,11 @@ export class FirestoreService {
     }
   }
 
-  // Сохранить данные компонента в коллекцию 'particles'
+  /**
+   * Сохранить данные компонента в коллекцию 'profiles' по userId
+   * @param componentName - имя компонента (например, 'favorites')
+   * @param data - данные для сохранения (например, массив избранных)
+   */
   async storeComponentData(componentName: string, data: any): Promise<void> {
     try {
       if (!this.userId) {
@@ -85,4 +92,5 @@ export class FirestoreService {
     }
   }
 }
+
 

@@ -71,7 +71,7 @@ export class FirestoreService {
         console.log('User ID не установлен.');
         return;
       }
-      const docRef = doc(this.UserDB, 'particles', this.userId);
+      const docRef = doc(this.UserDB, 'profiles', this.userId);
       const docSnap = await getDoc(docRef);
       let updatedData: Record<string, any> = {};
       if (docSnap.exists()) {

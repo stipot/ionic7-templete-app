@@ -35,7 +35,7 @@ export class SignupComponent  implements OnInit {
           waterConsumption: []
         });
 
-        this.router.navigate(['/water-tracker/login']);
+        this.router.navigate(['/login']);
       })
       .catch((error) => {
         console.error('Ошибка регистрации:', error.message);

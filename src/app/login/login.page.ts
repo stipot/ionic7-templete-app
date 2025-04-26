@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';  // Импорт FormBuilder
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { FirestoreService } from '../user/firestore.service';
 import { ModalController } from '@ionic/angular';
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 @Component({
   selector: 'app-login',
@@ -19,9 +20,8 @@ export class LoginPage implements OnInit {
     public modalController: ModalController,
     private router: Router,
     private firestore: FirestoreService,
-    private fb: FormBuilder  // Внедряем FormBuilder
+    private fb: FormBuilder
   ) {
-    // Создаем форму с помощью FormBuilder
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]]
@@ -44,42 +44,51 @@ export class LoginPage implements OnInit {
     return await modal.present();
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
-      console.log(email, password, "email", "password")
-      const db = this.firestore.userData;
-      console.log("db",db) 
-      
-      const auth = getAuth(db);
-      console.log(auth)
-
-      signInWithEmailAndPassword(auth, email, password)
-        .then(async (userCredential) => {
-          console.log(userCredential, "userCredential")
-          const userId = userCredential.user.uid;
-          console.log(userId, "userId")
-          const user_docs = await this.firestore.getAllData("profiles", userId);
-          console.log(user_docs, "user_docs")
-          const userExists = await this.firestore.checkUserExists(userId);
-          if (userExists) {
-            this.router.navigate(['/rss-data'], { replaceUrl: true });
-          } else {
-            // Действия, если пользователь не существует
-          }
-        })
-        .catch((error) => {
+  
+      const auth = getAuth(this.firestore.userData);
+      const db = this.firestore.UserDB;
+  
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userId = userCredential.user.uid;
+  
+        const userProfileRef = doc(db, 'profiles', userId);
+        const userProfileSnap = await getDoc(userProfileRef);
+  
+        if (!userProfileSnap.exists()) {
+          const initialProfileData = {
+            email: email,
+            createdAt: new Date().toISOString(),
+          };
+          await setDoc(userProfileRef, initialProfileData);
+          console.log('Профиль пользователя создан');
+        } else {
+          console.log('Профиль пользователя существует');
+        }
+  
+        this.router.navigate(['/rss-data'], { replaceUrl: true });
+  
+      } catch (error: unknown) {
+        if (error instanceof Error) {
           console.error('Ошибка входа:', error.message);
-        });
+        } else {
+          console.error('Неизвестная ошибка входа:', error);
+        }
+      }
     } else {
       console.log('Форма не валидна');
     }
   }
+  
 
   goToRegister() {
     this.router.navigate(['/water-tracker/register']);
   }
 }
+
 
 

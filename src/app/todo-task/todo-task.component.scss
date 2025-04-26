@@ -1,0 +1,31 @@
+ion-textarea {
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.task-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.subtask-container {
+  margin-left: 20px;
+  border-left: 3px solid #3880ff;
+  padding-left: 10px;
+}
+
+.style-0 { text-decoration: none !important; }
+.style-1 { text-decoration: underline !important; }
+.style-2 { text-decoration: line-through !important; }
+
+ion-textarea:hover {
+  background-color: rgba(56, 128, 255, 0.05);
+}
+
+ion-textarea:active {
+  transform: scale(0.98);
+  transition: transform 0.1s;
+}

@@ -1,28 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ 'ToDo task' | translate }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="addMainTask()">➕ Задача</ion-button>
+      <ion-button (click)="addSubtask()">➕ Подзадача</ion-button>
+    </ion-buttons>
+    
+    <ion-buttons slot="end">
+      <ion-button (click)="removeLastTask()" color="danger">➖ Задача</ion-button>
+      <ion-button (click)="removeLastSubtask()" color="danger">➖ Подзадача</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <div *ngFor="let task of tasks; let i = index">
-    <ion-text>{{ task.title }}</ion-text>
-    <ion-textarea placeholder="Добавьте задачу" [(ngModel)]="task.title"></ion-textarea>
-    <div *ngIf="task.subTasks.length > 0">
-      <ion-list lines="none">
-        <ion-item *ngFor="let subtask of task.subTasks; let j = index">
-          <!-- <ion-text (click)="changeStyle(subtask)" [style.textDecoration]="getDecoration(subtask.style)">{{ subtask.text }}</ion-text> -->
-          <ion-textarea (click)="changeStyle(subtask)" [style.textDecoration]="getDecoration(subtask.style)" placeholder="Добавьте подзадачу" [(ngModel)]="subtask.text">{{ subtask.text }}</ion-textarea>
-        </ion-item>
-      </ion-list>
-    </div>
+<ion-content>
+  <div *ngFor="let task of tasks" class="task-container">
+    <ion-item>
+      <ion-label position="stacked">Задача</ion-label>
+      <ion-textarea
+        [(ngModel)]="task.content"
+        placeholder="Введите основную задачу">
+      </ion-textarea>
+    <div *ngFor="let subtask of task.subtasks" class="subtask-container">
+        <ion-textarea
+          id="subtask-{{task.id}}-{{subtask.id}}"
+          [(ngModel)]="subtask.content"
+          (click)="handleSubtaskClick(task.id, subtask.id)"
+          [ngClass]="'style-' + subtask.styleIndex"
+          placeholder="Введите подзадачу">
+        </ion-textarea>
+    </div>    
+  </ion-item>
+
+
   </div>
-  <ion-button color="primary" (click)="addTask()">
-    <ion-icon name="add-circle"></ion-icon>
-    Добавить задачу
-  </ion-button>
-  <ion-button color="primary" (click)="addSubTask()">
-    <ion-icon name="add"></ion-icon>
-    Добавить подзадачу
-  </ion-button>
 </ion-content>

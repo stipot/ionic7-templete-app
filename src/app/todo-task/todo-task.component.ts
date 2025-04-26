@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-
-interface SubTask {
-  id: number;
-  text: string;
-  style: 'normal' | 'underline' | 'strikethrough';
-}
+import { Component, Renderer2 } from '@angular/core';
 
 interface Task {
   id: number;
-  title: string;
-  subTasks: SubTask[];
-  createdDate: Date;
+  content: string;
+  subtasks: Subtask[];
+  styleIndex?: number
+}
+
+interface Subtask {
+  id: string;
+  content: string;
+  styleIndex: number;
 }
 
 @Component({
@@ -18,74 +18,79 @@ interface Task {
   templateUrl: './todo-task.component.html',
   styleUrls: ['./todo-task.component.scss']
 })
-export class TodoTaskComponent implements OnInit {
-  public tasks: Task[] = [
-    {
-      id: 1,
-      title: '',
-      subTasks: [],
-      createdDate: new Date('2024-03-01')
-    }
-  ];
-  nextId: number = 2;
+export class TodoTaskComponent {
+  tasks: Task[] = [];
+  taskCounter = 0;
+  textStyles = ['normal', 'underline', 'line-through'];
 
-  constructor() {}
+  constructor(private renderer: Renderer2) {}
 
-  ngOnInit(): void {}
+  private generateTaskId(): number {
+    return ++this.taskCounter;
+  }
 
-  addTask(): void {
+  private generateSubtaskId(taskId: number): string {
+    return `${taskId}-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+  }
+
+  addMainTask() {
     const newTask: Task = {
-      id: this.nextId++,
-      title: '',
-      subTasks: [],
-      createdDate: new Date()
+      id: this.generateTaskId(),
+      content: '',
+      subtasks: []
     };
     this.tasks.push(newTask);
   }
 
-  addSubTask(): void {
+  addSubtask() {
     if (this.tasks.length > 0) {
       const lastTask = this.tasks[this.tasks.length - 1];
-      const newSubTask: SubTask = {
-        id: lastTask.subTasks.length + 1,
-        text: '',
-        style: 'normal'
+      const newSubtask: Subtask = {
+        id: this.generateSubtaskId(lastTask.id),
+        content: '',
+        styleIndex: 0
       };
-      lastTask.subTasks.push(newSubTask);
+      lastTask.subtasks.push(newSubtask);
     }
   }
 
-  
-  // deleteTask(index: number) {
-  //   this.tasks.splice(index, 1);
-  // }
-
-  // deleteSubTask(taskIndex: number, subtaskIndex: number) {
-  //   this.tasks[taskIndex].subTasks.splice(subtaskIndex, 1);
-  // }
-
-  changeStyle(subTask: SubTask): void {
-    switch (subTask.style) {
-      case 'normal':
-        subTask.style = 'underline';
-        break;
-      case 'underline':
-        subTask.style = 'strikethrough';
-        break;
-      case 'strikethrough':
-        subTask.style = 'normal';
-        break;
+  removeLastTask() {
+    if (this.tasks.length > 0) {
+      this.tasks.pop();
     }
   }
 
-  getDecoration(style: 'normal' | 'underline' | 'strikethrough'): string {
-    switch (style) {
-      case 'underline':
-        return 'underline';
-      case 'strikethrough':
-        return 'line-through';
-      default:
-        return 'none';
+  removeLastSubtask() {
+    if (this.tasks.length > 0) {
+      const lastTask = this.tasks[this.tasks.length - 1];
+      if (lastTask.subtasks.length > 0) {
+        lastTask.subtasks.pop();
+      }
+    }
+  }
+
+  handleSubtaskClick(taskId: number, subtaskId: string) {
+    const task = this.tasks.find(t => t.id === taskId);
+    if (task) {
+      const subtask = task.subtasks.find(s => s.id === subtaskId);
+      if (subtask) {
+        subtask.styleIndex = (subtask.styleIndex + 1) % this.textStyles.length;
+        this.updateSubtaskStyle(taskId, subtaskId);
+      }
+    }
+  }
+
+  private updateSubtaskStyle(taskId: number, subtaskId: string) {
+    const textarea = document.querySelector(`#subtask-${taskId}-${subtaskId} textarea`);
+    if (textarea) {
+      this.renderer.removeStyle(textarea, 'text-decoration');
+      
+      const task = this.tasks.find(t => t.id === taskId);
+      const style = this.textStyles[task?.subtasks.find(s => s.id === subtaskId)?.styleIndex ?? 0];
+      
+      if (style !== 'normal') {
+        this.renderer.setStyle(textarea, 'text-decoration', style);
+      }
     }
   }
 }

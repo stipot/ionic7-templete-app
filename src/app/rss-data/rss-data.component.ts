@@ -131,6 +131,7 @@ export class RssDataComponent implements OnInit {
     this.translate.get('News').subscribe((translated: string) => {
       this.pageTitle = translated;
     });
+    this.loadFavoritesFromFirestore()
   }
 
   

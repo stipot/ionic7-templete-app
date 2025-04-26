@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SettingsService } from '../services/settings.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Guid } from './guid';
+import { FirestoreService } from '../user/firestore.service';
 
 interface FeedItem {
   description: string;
@@ -100,7 +101,8 @@ export class RssDataComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private translate: TranslateService,
     private settingsService: SettingsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private firestore: FirestoreService,
   ) {
     this.createForm();
   }
@@ -137,9 +139,11 @@ export class RssDataComponent implements OnInit {
     this.favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
   }
 
-  // Сохранение фаворитов в localStorage
-  saveFavorites(): void {
+  // Сохранение фаворитов в localStorage и Firestore
+  async saveFavorites(): Promise<void> { // Убираем userId из аргументов
     localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    // Сохраняем в Firestore по пути particles -> userId -> 'favorites'
+    await this.firestore.storeComponentData('favorites', this.favorites);
   }
 
   // Проверка, находится ли новость в избранном
@@ -147,14 +151,25 @@ export class RssDataComponent implements OnInit {
     return this.favorites.includes(newsGuid);
   }
 
-  // Переключение статуса избранного
-  toggleFavorite(news: NewsItem): void {
+    // Переключение статуса избранного
+  async toggleFavorite(news: NewsItem): Promise<void> { // Убираем userId из аргументов
     if (this.isFavorite(news.guid)) {
       this.favorites = this.favorites.filter(guid => guid !== news.guid);
     } else {
       this.favorites.push(news.guid);
     }
-    this.saveFavorites();
+    await this.saveFavorites();
+  }
+
+    // Загрузка фаворитов из Firestore при инициализации
+  async loadFavoritesFromFirestore(): Promise<void> { // Убираем userId из аргументов
+    const favoritesFromDB = await this.firestore.getComponentData('favorites');
+    if (favoritesFromDB && Array.isArray(favoritesFromDB)) {
+      this.favorites = favoritesFromDB;
+      this.saveFavorites(); // Обновляем localStorage
+    } else {
+      this.loadFavorites(); // fallback на localStorage
+    }
   }
 
   syncLanguageUI(): void {

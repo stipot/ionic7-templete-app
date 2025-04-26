@@ -1,15 +1,7 @@
 import { Injectable } from "@angular/core";
-import { 
-  getFirestore, 
-  collection, 
-  addDoc, 
-  getDocs, 
-  doc, 
-  getDoc, 
-  setDoc 
-} from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { getAuth, browserLocalPersistence, setPersistence } from 'firebase/auth';
+import { getAuth, browserLocalPersistence, setPersistence, onAuthStateChanged } from 'firebase/auth';
 
 @Injectable({
   providedIn: "root",
@@ -17,6 +9,7 @@ import { getAuth, browserLocalPersistence, setPersistence } from 'firebase/auth'
 export class FirestoreService {
   auth: any;
   UserDB: any;
+  userId: string | null = null; // Изменяем тип и инициализируем
 
   private secondFirebaseConfig = {
     apiKey: "AIzaSyAhyDd5SI8sFRPNkMH_kvgcsyjxe9AF_4Q",
@@ -36,50 +29,33 @@ export class FirestoreService {
       console.log('Firebase persistence установлено');
     });
     this.UserDB = getFirestore(this.userData);
+
+    // Подписываемся на изменения состояния аутентификации
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.userId = user.uid; // Устанавливаем userId при входе
+        console.log('User ID установлен:', this.userId);
+      } else {
+        this.userId = null; // Сбрасываем userId при выходе
+        console.log('User вышел, User ID сброшен');
+      }
+    });
   }
 
-  // Старые методы
-
-  async addData(collectionName: string, data: any): Promise<void> {
-    const colRef = collection(this.UserDB, collectionName);
-    console.log(colRef, "colRef");
-    await addDoc(colRef, data);
-  }
-
-  async getAllData(collectionName: string, userId: string): Promise<any[]> {
-    const colRef = collection(this.UserDB, collectionName);
-    console.log(colRef, "colRef");
-    const snapshot = await getDocs(colRef);
-    console.log(snapshot, "snapshot");
-    return snapshot.docs.map(doc => doc.data());
-  }
-
-  async checkUserExists(userId: string): Promise<boolean> {
-    const usersRef = collection(this.UserDB, 'users');
-    console.log(usersRef, "usersRef");
-    const snapshot = await getDocs(usersRef);
-    console.log(userId, "userId");
-    console.log("snapshot.docs", snapshot.docs);
-    return snapshot.docs.some(doc => doc.id === userId);
-  }
-
-  // Новые методы
-
-  /**
-   * Получить данные компонента пользователя из коллекции profiles по userId
-   * @param userId - ID пользователя
-   * @param componentName - имя компонента (ключ поля в документе)
-   * @returns данные компонента или null
-   */
-  async getComponentData(userId: string, componentName: string): Promise<any | null> {
+  // Получить данные компонента из коллекции 'particles'
+  async getComponentData(componentName: string): Promise<any | null> {
     try {
-      const docRef = doc(this.UserDB, 'profiles', userId);
+      if (!this.userId) {
+        console.log('User ID не установлен.');
+        return null;
+      }
+      const docRef = doc(this.UserDB, 'particles', this.userId);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
         return data[componentName] ?? null;
       } else {
-        console.log(`Документ профиля пользователя ${userId} не найден.`);
+        console.log(`Документ particles пользователя ${this.userId} не найден.`);
         return null;
       }
     } catch (error) {
@@ -88,15 +64,14 @@ export class FirestoreService {
     }
   }
 
-  /**
-   * Сохранить данные компонента пользователя в коллекции profiles по userId
-   * @param userId - ID пользователя
-   * @param componentName - имя компонента (ключ поля)
-   * @param data - данные для сохранения (словарь)
-   */
-  async storeComponentData(userId: string, componentName: string, data: any): Promise<void> {
+  // Сохранить данные компонента в коллекцию 'particles'
+  async storeComponentData(componentName: string, data: any): Promise<void> {
     try {
-      const docRef = doc(this.UserDB, 'profiles', userId);
+      if (!this.userId) {
+        console.log('User ID не установлен.');
+        return;
+      }
+      const docRef = doc(this.UserDB, 'particles', this.userId);
       const docSnap = await getDoc(docRef);
       let updatedData: Record<string, any> = {};
       if (docSnap.exists()) {
@@ -104,9 +79,10 @@ export class FirestoreService {
       }
       updatedData[componentName] = data;
       await setDoc(docRef, updatedData);
-      console.log(`Данные компонента "${componentName}" успешно сохранены для пользователя ${userId}.`);
+      console.log(`Данные компонента "${componentName}" успешно сохранены для пользователя ${this.userId}.`);
     } catch (error) {
       console.error('Ошибка при сохранении данных компонента:', error);
     }
   }
 }
+

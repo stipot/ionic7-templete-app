@@ -1,8 +1,26 @@
-ion-img {
-    margin-top: 16px;
-    border-radius: 8px;
-    max-height: 680px;
-    object-fit: cover;
-    width: 30%;
-    aspect-ratio: 16/9;
-  }
+/*.head-container { */
+
+ion-toolbar.transparent-toolbar {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+}
+
+.header-image {
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.deal-image {
+  width: 250px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+  margin: 0 auto;
+}

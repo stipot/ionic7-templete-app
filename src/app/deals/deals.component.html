@@ -1,26 +1,31 @@
 <ion-header>
   <div class="header-container">
-    <ion-img src="https://березовая-метла.рф/upload/iblock/b80/o8oobwl6vi3cmghoeomp79m5jg41xy10.jpg" 
-             class="header-image"></ion-img>
+    <ion-img
+      src="https://березовая-метла.рф/upload/iblock/b80/o8oobwl6vi3cmghoeomp79m5jg41xy10.jpg"
+      class="header-image"
+    ></ion-img>
     <ion-toolbar class="transparent-toolbar">
       <ion-title size="large">Deals</ion-title>
     </ion-toolbar>
   </div>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
+  <ion-card *ngFor="let product of getProiducts()"  size="4">
+    <ion-card-content>
+      <ion-label
+        class="ion-margin-start"
+        [class.stroke]="product.checked"
+      >
+        <p>{{ product.name }}</p>
+        <h4>{{ product.desc }}</h4>
+      </ion-label>
+      <ion-img [src]="product.imageUrl" *ngIf="product.imageUrl" ></ion-img>
+    </ion-card-content>
+  </ion-card>
   <ion-card>
     <ion-card-header>
       <ion-card-title>deals</ion-card-title>
     </ion-card-header>
-    <ion-card *ngFor="let product of getProiducts()">
-      <ion-card-content>
-        <ion-label class="ion-margin-start" [class.stroke]="product.checked">
-          <p>{{ product.name }}</p> 
-          <h4>{{ product.desc }}</h4>
-        </ion-label>
-        <ion-img [src]="product.imageUrl" *ngIf="product.imageUrl"></ion-img>
-  </ion-card-content>
-</ion-card>
   </ion-card>
 </ion-content>

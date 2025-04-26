@@ -16,7 +16,8 @@
   <p>Цена: {{ item.price }} руб</p>
   <p>Описание: {{ item.description }}</p>
   <p>Количество: {{ item.quantity }}</p>
-  <img [src]="item.picture" alt="{{ item.name }}" style="max-width: 200px;" />
+  <ion-img 
+  src="./assets/sample-images/{{item.images}}" class="product-image"></ion-img>
   <ion-button (click)="goBack()">Назад в каталог</ion-button>
 </div>
 </ion-content>

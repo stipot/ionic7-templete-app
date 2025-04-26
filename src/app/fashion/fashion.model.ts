@@ -4,4 +4,5 @@ export interface Dress {
         price: number
         picture: string
         quantity: number
+        images: string
 }

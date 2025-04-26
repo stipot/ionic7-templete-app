@@ -19,6 +19,8 @@ import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.com
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 import {CameraComponent} from './camera/camera.component';
 
+
+
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 
 
@@ -176,11 +178,7 @@ const routes: Routes = [
     path: 'drag-and-drop',
   component: DragAndDropComponent
   },
-  {
-    path: '**',
-  redirectTo: '/fashion'
-  },
-
+  
   {
     path: 'fashion', component: FashionComponent
   },
@@ -189,16 +187,14 @@ const routes: Routes = [
     path: 'fashion-detail', component: FashionDetailComponent
   },
 
-  {
-    path: '', redirectTo: '/fashion', pathMatch: 'full'
-  },
+  
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

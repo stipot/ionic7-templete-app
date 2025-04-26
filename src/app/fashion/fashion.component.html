@@ -11,12 +11,14 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding" size="6">
-<div class="catalog">
+  
   <div *ngFor="let item of items" class="item">
     <h2>{{ item.name }}</h2>
     <p>Цена: {{ item.price }} руб</p>
     <p>Описание: {{ item.description }}</p>
     <ion-button (click)="goToItem(item)">Подробнее</ion-button>
   </div>
-</div>
+
+  
+
 </ion-content>

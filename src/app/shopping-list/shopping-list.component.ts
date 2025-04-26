@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 type ItemStatus = 'не куплен' | 'куплен' | 'нет';
 
@@ -7,6 +7,12 @@ interface ShoppingItem {
   name: string;
   quantity: number;
   status: ItemStatus;
+  categoryId: number;
+}
+
+interface Category {
+  id: number;
+  name: string;
 }
 
 @Component({
@@ -16,9 +22,12 @@ interface ShoppingItem {
 })
 export class ShoppingListComponent implements OnInit {
   items: ShoppingItem[] = [];
+  categories: Category[] = [];
   newItemName = '';
   newItemQuantity = 1;
-  activeTab: 'list' | 'add' = 'list';
+  newCategoryName = '';
+  selectedCategoryId: number | null = null;
+  activeTab: 'list' | 'add' | 'categories' = 'list';
 
   statusOptions = [
     { value: 'не куплен', label: 'Не куплен', color: '#ff3d3d' },
@@ -26,54 +35,97 @@ export class ShoppingListComponent implements OnInit {
     { value: 'нет', label: 'Нет в наличии', color: '#10dc60' }
   ];
 
-  private readonly STORAGE_KEY = 'shopping_list_items';
+  private readonly STORAGE_KEY = 'shopping_list_data';
+
+  constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.loadItems();
+    this.loadData();
   }
 
-  private loadItems() {
-    const savedItems = localStorage.getItem(this.STORAGE_KEY);
-    if (savedItems) {
+  private loadData() {
+    const savedData = localStorage.getItem(this.STORAGE_KEY);
+    if (savedData) {
       try {
-        this.items = JSON.parse(savedItems);
+        const data = JSON.parse(savedData);
+        this.items = data.items || [];
+        this.categories = data.categories || [];
+        
+        console.log('Загруженные данные:', {
+          items: this.items,
+          categories: this.categories
+        });
       } catch (e) {
-        console.error('Ошибка загрузки списка:', e);
-        this.items = [];
+        console.error('Ошибка загрузки данных:', e);
       }
     }
   }
 
-  private saveItems() {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.items));
+  private saveData() {
+    const data = {
+      items: this.items,
+      categories: this.categories
+    };
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
+    console.log('Данные сохранены:', data);
   }
 
   addItem() {
-    if (this.newItemName.trim()) {
-      this.items = [{
+    if (this.newItemName.trim() && this.selectedCategoryId) {
+      const newItem: ShoppingItem = {
         id: Date.now(),
         name: this.newItemName.trim(),
         quantity: this.newItemQuantity || 1,
-        status: 'не куплен'
-      }, ...this.items];
+        status: 'не куплен',
+        categoryId: this.selectedCategoryId
+      };
+      
+      console.log('Добавляем товар:', newItem);
+      this.items = [newItem, ...this.items];
+      console.log('Обновленный список товаров:', this.items);
       
       this.newItemName = '';
       this.newItemQuantity = 1;
-      this.activeTab = 'list';
-      this.saveItems();
+      this.saveData();
+      this.cdRef.detectChanges(); // Принудительное обновление представления
+    }
+  }
+
+  addCategory() {
+    if (this.newCategoryName.trim()) {
+      const newCategory: Category = {
+        id: Date.now(),
+        name: this.newCategoryName.trim()
+      };
+      
+      this.categories = [newCategory, ...this.categories];
+      this.newCategoryName = '';
+      this.saveData();
     }
   }
 
   removeItem(id: number) {
     this.items = this.items.filter(item => item.id !== id);
-    this.saveItems();
+    this.saveData();
+  }
+
+  removeCategory(id: number) {
+    this.categories = this.categories.filter(cat => cat.id !== id);
+    this.items = this.items.filter(item => item.categoryId !== id);
+    this.saveData();
   }
 
   changeStatus(id: number, newStatus: ItemStatus) {
     this.items = this.items.map(item => 
       item.id === id ? {...item, status: newStatus} : item
     );
-    this.saveItems();
+    this.saveData();
+  }
+
+  getItemsByCategory(categoryId: number): ShoppingItem[] {
+    const filteredItems = this.items.filter(item => item.categoryId === categoryId);
+    console.log(`Товары для категории ${categoryId}:`, filteredItems);
+    return filteredItems;
   }
 
   getStatusColor(status: ItemStatus): string {
@@ -84,7 +136,7 @@ export class ShoppingListComponent implements OnInit {
     return this.statusOptions.find(opt => opt.value === status)?.label || 'Неизвестно';
   }
 
-  switchTab(tab: 'list' | 'add') {
+  switchTab(tab: 'list' | 'add' | 'categories') {
     this.activeTab = tab;
   }
 }

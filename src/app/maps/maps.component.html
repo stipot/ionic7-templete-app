@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-header [pageTitle]="pageTitle"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="text-section">
+    <h2>Интерактивная карта</h2>
+    <p>Эта карта позволяет вам перемещаться, увеличивать и уменьшать масштаб. Ниже вы можете взаимодействовать с ней.</p>
+  </div>
+
+  <div class="map-wrapper">
+    <div #mapContainer id="mapContainer"></div>
+  </div>
+</ion-content>

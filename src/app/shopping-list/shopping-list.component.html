@@ -1,3 +1,11 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Shopping cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
 <div class="tabs">
   <button 
     class="tab-button" 
@@ -94,8 +102,8 @@
       [(ngModel)]="selectedCategoryId" 
       class="category-select"
     >
-      <option [value]="null" disabled selected>Выберите категорию</option>
-      <option *ngFor="let category of categories" [value]="category.id">
+      <option [ngValue]="null" disabled selected>Выберите категорию</option>
+      <option *ngFor="let category of categories" [ngValue]="category.id">
         {{ category.name }}
       </option>
     </select>
@@ -144,3 +152,4 @@
     </div>
   </div>
 </div>
+</ion-content>

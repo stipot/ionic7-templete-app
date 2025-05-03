@@ -72,22 +72,22 @@ export class ShoppingListComponent implements OnInit {
 
   addItem() {
     if (this.newItemName.trim() && this.selectedCategoryId) {
+      console.log('Selected Category ID:', this.selectedCategoryId, typeof this.selectedCategoryId);
+      
       const newItem: ShoppingItem = {
         id: Date.now(),
         name: this.newItemName.trim(),
         quantity: this.newItemQuantity || 1,
         status: 'не куплен',
-        categoryId: this.selectedCategoryId
+        categoryId: this.selectedCategoryId // Теперь это точно число
       };
       
-      console.log('Добавляем товар:', newItem);
       this.items = [newItem, ...this.items];
-      console.log('Обновленный список товаров:', this.items);
+      this.saveData();
+      this.cdRef.detectChanges();
       
       this.newItemName = '';
       this.newItemQuantity = 1;
-      this.saveData();
-      this.cdRef.detectChanges(); // Принудительное обновление представления
     }
   }
 

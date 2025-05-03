@@ -6,16 +6,7 @@
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()"*ngIf="isModal==true">Close</ion-button>
     </ion-buttons>
-    <ion-title>
-      <div *ngIf="lang=='en'">
-        Terms of service
-      </div>
-    </ion-title>
-    <ion-title>
-      <div *ngIf="lang=='ru'">
-        Условия обслуживания
-      </div>
-    </ion-title>
+    <ion-title> {{"TERMS_TITLE" | translate}}  </ion-title>
   </ion-toolbar>
 </ion-header>
 

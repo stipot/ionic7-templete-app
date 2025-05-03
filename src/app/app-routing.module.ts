@@ -34,8 +34,8 @@ import { KanbanComponent } from './kanban/kanban.component';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component'
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RsaComponent } from './rsa/rsa.component';
-
 import { MapsComponent } from './maps/maps.component';
 
 const routes: Routes = [
@@ -69,6 +69,9 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
+  },
+  {    path: 'shopping',
+    component: ShoppingListComponent
   },
   {    path: 'file-viewer',
     component: FileViewerComponent

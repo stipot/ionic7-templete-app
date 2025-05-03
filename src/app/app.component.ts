@@ -40,6 +40,7 @@ export class AppComponent {
     { title: 'DragAndDrop', url: '/drag-and-drop', icon: '' },
     { title: 'mplayer', url: '/mplayer', icon: '' },
     { title: 'File-viewer', url: '/file-viewer', icon: '' },
+    { title: 'Shopping', url: '/shopping', icon: '' },
     // Добавляем поле для перехода на страницу пометок
     { title: 'Компоненты в стадии разработки:', url: '/front-layout', icon: '' },
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },

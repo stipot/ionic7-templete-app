@@ -1,0 +1,213 @@
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  
+  .tab-button {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    
+    &.active {
+      color: #3880ff;
+      border-bottom: 2px solid #3880ff;
+    }
+  }
+}
+
+.list-container {
+  .category-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    
+    .category-title {
+      margin: 0 0 15px 0;
+      padding: 8px 12px;
+      background: #eef2ff;
+      border-radius: 6px;
+      font-size: 16px;
+      color: #3f51b5;
+    }
+    
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+      
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      }
+      
+      .item-content {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .item-details {
+        display: flex;
+        flex-direction: column;
+        
+        .item-name {
+          font-weight: 500;
+          font-size: 15px;
+        }
+        
+        .item-quantity {
+          font-size: 13px;
+          color: #666;
+        }
+      }
+      
+      .item-status select {
+        padding: 6px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        background: white;
+        cursor: pointer;
+        min-width: 120px;
+      }
+      
+      .delete-button {
+        background: none;
+        border: none;
+        font-size: 22px;
+        color: #ff3d3d;
+        cursor: pointer;
+        padding: 0 10px;
+        transition: color 0.2s;
+        
+        &:hover {
+          color: #ff0000;
+        }
+      }
+    }
+    
+    .no-items {
+      color: #888;
+      font-style: italic;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+  
+  .empty-message {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-size: 16px;
+  }
+}
+
+.add-form, .categories-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    label {
+      font-size: 14px;
+      color: #555;
+      font-weight: 500;
+    }
+    
+    input, select {
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 15px;
+      transition: border 0.2s;
+      
+      &:focus {
+        outline: none;
+        border-color: #3880ff;
+      }
+    }
+    
+    .category-select {
+      width: 100%;
+    }
+  }
+  
+  .add-button {
+    padding: 12px;
+    background-color: #3880ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    
+    &:hover {
+      background-color: #2668d8;
+    }
+    
+    &:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.categories-list {
+  margin-top: 30px;
+  
+  h3 {
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+    color: #444;
+  }
+  
+  .category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    
+    .delete-button {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #ff3d3d;
+      cursor: pointer;
+      padding: 0 8px;
+      
+      &:disabled {
+        color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

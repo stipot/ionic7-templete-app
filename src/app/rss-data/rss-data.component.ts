@@ -83,6 +83,7 @@ export class RssDataComponent implements OnInit {
   
   public newsItems: NewsItem[] = [];
   public feedItems: FeedItem[] = [];
+  public favoriteNewsItems: NewsItem[] = [];
   public segment = 'news';
   public isLoading: boolean = false;
   public sourceLoadingStatus: { [key: string]: boolean } = {};
@@ -241,6 +242,7 @@ export class RssDataComponent implements OnInit {
               
               items.forEach((item) => {
                 const newsTitle = item.querySelector('title')?.textContent || '';
+                const newsGuid = md5(newsTitle);
                 const newsItem: NewsItem = {
                   title: item.querySelector('title')?.textContent || 'Без заголовка',
                   description: this.stripHtml(item.querySelector('description')?.textContent || 'Без описания'),
@@ -249,12 +251,15 @@ export class RssDataComponent implements OnInit {
                   pubDate: item.querySelector('pubDate')?.textContent || '',
                   source: source.name,
                   sourceGuid: source.guid,
-                  guid: md5(newsTitle), // Генерируем уникальный GUID для новости
+                  guid: newsGuid, // Генерируем уникальный GUID для новости
                   favicon: ''
                 };
                 
-                if (!this.newsItems.some(existing => existing.guid === newsItem.guid)) {
+                if (!this.newsItems.some(existing => existing.guid === newsGuid)) {
                   this.newsItems.push(newsItem);
+                }
+                if (this.favorites.includes(newsGuid)) {
+                  this.favoriteNewsItems = this.newsItems.filter(item => this.favorites.includes(item.guid));
                 }
               });
             } catch (error) {

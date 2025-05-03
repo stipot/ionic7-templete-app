@@ -241,7 +241,6 @@ export class RssDataComponent implements OnInit {
               
               items.forEach((item) => {
                 const newsTitle = item.querySelector('title')?.textContent || '';
-                const newsGuid = md5(newsTitle);
                 const newsItem: NewsItem = {
                   title: item.querySelector('title')?.textContent || 'Без заголовка',
                   description: this.stripHtml(item.querySelector('description')?.textContent || 'Без описания'),
@@ -250,11 +249,11 @@ export class RssDataComponent implements OnInit {
                   pubDate: item.querySelector('pubDate')?.textContent || '',
                   source: source.name,
                   sourceGuid: source.guid,
-                  guid: Guid.newGuid(), // Генерируем уникальный GUID для новости
+                  guid: md5(newsTitle), // Генерируем уникальный GUID для новости
                   favicon: ''
                 };
                 
-                if (!this.newsItems.some(existing => existing.link === newsItem.link)) {
+                if (!this.newsItems.some(existing => existing.guid === newsItem.guid)) {
                   this.newsItems.push(newsItem);
                 }
               });

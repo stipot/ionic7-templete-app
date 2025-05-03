@@ -1,4 +1,4 @@
-<ion-content class="scrollable-content"></ion-content>
+<ion-content class="scrollable-content">
   <header>
     <h1 class="large-text">Deals</h1>
   </header>
@@ -18,12 +18,12 @@
   </div>
 
   <div class="deal-container">
-    <ng-container *ngFor="let deal of products">
+    <ng-container *ngFor="let product of products">
       <ion-card class="deal-card">
 
         <ion-card-header>
-          <ion-card-title>{{ deal.name }}</ion-card-title>
-          <ion-card-subtitle>{{deal.desc}} </ion-card-subtitle>
+          <ion-card-title>{{ product.name }}</ion-card-title>
+          <ion-card-subtitle>{{product.desc}} </ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content>

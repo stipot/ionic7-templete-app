@@ -71,5 +71,11 @@
     "ANGRY": "Angry",
     "STRESSED": "Stressed",
     "SAD": "Sad"
+  },
+
+  "NOTES":{
+    "TEXT_NOTES": "Text of the note",
+    "NOTES_MISSING": "Notes are missing",
+    "DELETE_MARKED_NOTES": "Delete all marked notes"
   }
 }

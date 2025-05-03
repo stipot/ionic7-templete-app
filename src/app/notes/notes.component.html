@@ -7,39 +7,46 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="notes-validations-content">
-  <ion-list class="inputs-list" lines="full">
-    <ion-item class="input-item">
-      <b><ion-label position="floating">Текст</ion-label></b>
-      <ion-input
-        type="text"
-        clearInput
-        required
-        name="noteData"
-        [(ngModel)]="noteData"
-        class="note-input"
-      ></ion-input>
-    </ion-item>
-    <ion-button (click)="saveData()">{{"Save" | translate}}</ion-button>
-  </ion-list>
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <ion-item>
+          <ion-input #autofocus placeholder="{{'NOTES.TEXT_NOTES' | translate}}" (ionChange)="onChange()"
+            (keypress)="noteCompleted($event)" [(ngModel)]="name" (keyup.enter)="enterEvent()"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-button (click)="createNote()">+</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="data.length == 0" class="message">
+    <ion-label>{{'NOTES.NOTES_MISSING' | translate}}</ion-label>
+  </div>
   
-  <ion-list class="remove-note-list">
-    <ion-item
-      class="remove-note"
-      style="margin-top: 10px"
-      *ngFor="let note of notes"
-    >
-      <p id="{{ note.id }}">{{ note.data }}</p>
-      <ion-button
-        (click)="removeDocument(note.id)"
-        slot="end"
-        class="remove-note"
-      >x</ion-button>
-      <ion-button
-        (click)="setEditMode(note.data, note.id)"
-        slot="end"
-        class="remove-note"
-      >edit</ion-button>    
-    </ion-item>
+  <!-- list of notes -->
+  <ion-list>
+    <ion-reorder-group [disabled]="false" (ionItemReorder)="handleReorder($any($event))">
+      <ion-item *ngFor="let note of data; trackBy: trackByFn">
+        <ion-checkbox class="check" slot="start" [(ngModel)]="note.isActive" [ngClass]="{'done': note.isActive}" />
+        <ion-label (click)="onClick(note)" style="z-index:3" [ngClass]="{'done': note.isActive}">
+          <h2>{{ note.name }} </h2>
+        </ion-label>
+        <ion-button color="danger" (click)="deleteItem(note)" [ngClass]="{'button-active': !note.isActive}">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+
+        <ion-reorder slot="end" [ngClass]="{'done': note.isActive}"></ion-reorder>
+      </ion-item>
+
+    </ion-reorder-group>
   </ion-list>
 </ion-content>
+
+<!-- delete all completed -->
+<ion-footer>
+  <ion-button expand="block" color="warning" (click)="deleteAllCompletedItems()">
+    {{'NOTES.DELETE_MARKED_NOTES' | translate}}</ion-button>
+</ion-footer>

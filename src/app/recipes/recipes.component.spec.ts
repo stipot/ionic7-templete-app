@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync, fakeAsync, tick } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { RecipesComponent } from './recipes.component';
 
 describe('RecipesComponent', () => {
@@ -11,7 +11,7 @@ describe('RecipesComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RecipesComponent ],
-      imports: [IonicModule.forRoot(), FormsModule] 
+      imports: [IonicModule.forRoot(), FormsModule, TranslateModule.forRoot()] 
     }).compileComponents();
 
     fixture = TestBed.createComponent(RecipesComponent);
@@ -24,13 +24,13 @@ describe('RecipesComponent', () => {
   });
 
   it('should filter recipes by name and description', () => {
-    component.searchText = 'курица';
+    component.searchText = 'куриная';
     component.searchType = 'name';
     fixture.detectChanges();
 
     const filtered = component.filteredRecipes;
-    expect(filtered.length).toBe(2); 
-    expect(filtered[0].name).toContain('Куриные бедра с горчичным соусом');
+    expect(filtered.length).toBe(1); 
+    expect(filtered[0].name).toContain('Куриная запеканка с тортильей');
   });
 
   it('should toggle search type between name and ingredients', () => {

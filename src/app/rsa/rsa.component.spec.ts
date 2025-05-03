@@ -1,26 +1,24 @@
-
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import {BarcodeScannerComponent} from './barcode-scanner.component';
-/*
-describe('BarcodeScannerComponent', () => {
-  let component: BarcodeScannerComponent;
-  let fixture: ComponentFixture<BarcodeScannerComponent>;
+import { RsaComponent } from './rsa.component';
+
+describe('RsaComponent', () => {
+  let component: RsaComponent;
+  let fixture: ComponentFixture<RsaComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BarcodeScannerComponent ],
+      declarations: [ RsaComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(BarcodeScannerComponent);
+    fixture = TestBed.createComponent(RsaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
-  
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-}); */
-
+});

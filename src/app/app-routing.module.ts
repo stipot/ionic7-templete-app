@@ -33,9 +33,8 @@ import {MplayerComponent} from "./mplayer/mplayer.component";
 import { KanbanComponent } from './kanban/kanban.component';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component'
-import { WaterTrackerModule } from './water-tracker/water-tracker.module';
-
-
+import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
+import { RsaComponent } from './rsa/rsa.component';
 
 const routes: Routes = [
   
@@ -201,9 +200,15 @@ const routes: Routes = [
   component: DragAndDropComponent
   },
   {
+    path: 'rsa',
+    component: RsaComponent
+  },
+
+  {
     path: '**',
   redirectTo: 'page-not-found'
   },
+  
 ];
 
 @NgModule({

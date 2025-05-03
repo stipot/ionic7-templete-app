@@ -47,6 +47,8 @@
   "Mood calendar": "Календарь настроения",
   "Mood Statistic": "Статистика настроения",
 
+  "Water-tracker": "Водный баланс",  
+
   "MPlayer": "МПлеер",
   "DragAndDrop": "Перетаскивание",
   "CRYPTO_MODULE": {
@@ -67,5 +69,23 @@
     "ANGRY": "Злой",
     "STRESSED": "В стрессе",
     "SAD": "Грустный"
+  },
+
+  "FEED": {
+    "ADD_POST": "Добавить запись",
+    "EDIT": "Редактировать",
+    "SAVE": "Сохранить",
+    "CANCEL": "Отмена",
+    "CHECK": "Проверить",
+    "DELETE": "Удалить",
+    "LABEL_LANGUAGE": "Выбрать язык",
+    "RUSSIAN": "Русский",
+    "ENGLISH": "Английский",
+    "FRENCH": "Французский",
+    "ITALIAN": "Итальянский",
+    "ACTIVE": "Активный",
+    "LANGUAGE_REMINDER": "Смена языка",
+    "GOTO_SETTINGS": "Перейти в настройки"
   }
+
 }

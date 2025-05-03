@@ -28,7 +28,6 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DealsComponent } from './deals/deals.component';
 import { BarcodeScannerComponent } from './barcode-scanner/barcode-scanner.component';
-import { RssDataComponent } from './rss-data/rss-data.component';
 import { IntroComponent } from './intro/intro.component';
 import { CameraComponent } from './camera/camera.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
@@ -41,6 +40,7 @@ import {MplayerComponent} from "./mplayer/mplayer.component";
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { MoodCalendarComponent } from './mood-calendar/mood-calendar.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
+import { IonicStorageModule } from '@ionic/storage-angular';
 import { RsaComponent } from './rsa/rsa.component';
 
 // Фабрика для загрузчика переводов
@@ -63,7 +63,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ForgotPasswordComponent,
     DealsComponent,
     BarcodeScannerComponent,
-    RssDataComponent,
     IntroComponent,
     TermsOfServiceComponent,
     CryptoRatesComponent,
@@ -87,13 +86,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppSharedComponentsModule,
     CommonModule,
     DragDropModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     // Инициализация базы данных
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
         deps: [HttpClient]
       }
     })

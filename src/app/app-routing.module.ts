@@ -12,7 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RecipesComponent } from './recipes/recipes.component';
-import { RssDataComponent } from './rss-data/rss-data.component';
+import {RssDataModule} from "./rss-data/rss-data.module"
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
@@ -37,6 +37,24 @@ import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { RsaComponent } from './rsa/rsa.component';
 
 const routes: Routes = [
+  
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
+  },
+
+  {
+    
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+    
+    
+  },
+
   {
     path: '',
     redirectTo: 'front-layout',
@@ -139,10 +157,6 @@ const routes: Routes = [
     component: ContactCardComponent
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
-  {
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
   },
@@ -151,8 +165,13 @@ const routes: Routes = [
     component: RecipesComponent
   },
   {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
+  },  
+  {
     path: 'rss-data',
-    component: RssDataComponent
+    loadChildren: () => import('./rss-data/rss-data.module').then(m => m.RssDataModule)
+    //component: RssDataComponent
   },
   { path: 'intro',
   component: IntroComponent

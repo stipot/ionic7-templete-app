@@ -53,6 +53,8 @@
   "Mood calendar": "Mood Calendar",
   "Mood Statistic": "Mood Statistic",
 
+  "Water-tracker": "Water-tracker",
+
   "MPlayer": "MPlayer",
   "DragAndDrop": "Drag and drop",
   "CRYPTO_MODULE": {
@@ -72,5 +74,24 @@
     "ANGRY": "Angry",
     "STRESSED": "Stressed",
     "SAD": "Sad"
+  },
+
+  "FEED": {
+    "ADD_POST": "Add post",
+    "EDIT": "Edit",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "CHECK": "Check",
+    "DELETE": "Delete",
+    "LABEL_LANGUAGE": "Select language",
+    "RUSSIAN": "Russian",
+    "ENGLISH": "English",
+    "FRENCH": "French",
+    "ITALIAN": "Italian",
+    "ACTIVE": "Active",
+    "LANGUAGE_REMINDER": "Changing the language",
+    "GOTO_SETTINGS": "Go to settings"
   }
+
+
 }

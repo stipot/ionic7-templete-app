@@ -1,4 +1,4 @@
-<ion-content class="scrollable-content">
+<ion-content class="scrollable-content"></ion-content>
   <header>
     <h1 class="large-text">Deals</h1>
   </header>
@@ -23,33 +23,15 @@
 
         <ion-card-header>
           <ion-card-title>{{ deal.name }}</ion-card-title>
-          <ion-card-subtitle>{{"DEAL_MODULE.DEAL_TIME" | translate}}: {{ formattedDate }} </ion-card-subtitle>
+          <ion-card-subtitle>{{deal.desc}} </ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content>
-          <img [src]="deal.imageUrl" alt="{{ deal.name }} imageUrl" class="deal-imageUrl">
+          <img [src]="product.imageUrl" *ngIf="product.imageUrl" (click)="openLink(product.link)" style="cursor:pointer">
         </ion-card-content>
 
       </ion-card>
     </ng-container>
   </div>
-
-
-  <ion-card *ngFor="let product of getProducts()">
-    <ion-card-content>
-      <ion-label
-        class="ion-margin-start"
-        [class.stroke]="product.checked">
-        <p>{{ product.name }}</p>
-        <h4>{{ product.desc }}</h4>
-      </ion-label>
-      <ion-img
-        [src]="product.imageUrl" 
-        *ngIf="product.imageUrl" 
-        (click)="openLink(product.link)"
-        style="cursor:pointer">
-    </ion-img>
-    </ion-card-content>
-  </ion-card>
-
+  
 </ion-content>

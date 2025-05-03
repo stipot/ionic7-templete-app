@@ -12,7 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RecipesComponent } from './recipes/recipes.component';
-import { RssDataComponent } from './rss-data/rss-data.component';
+import {RssDataModule} from "./rss-data/rss-data.module"
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
@@ -35,12 +35,36 @@ import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component'
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { RsaComponent } from './rsa/rsa.component';
+import { MapsComponent } from './maps/maps.component';
 
 const routes: Routes = [
+  
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
+  },
+
+  {
+    
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+    
+    
+  },
+
   {
     path: '',
     redirectTo: 'front-layout',
     pathMatch: 'full'
+  },
+  {
+    path:'maps',
+    component: MapsComponent
   },
   {
     path: 'folder/:id',
@@ -142,10 +166,6 @@ const routes: Routes = [
     component: ContactCardComponent
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
-  {
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
   },
@@ -154,8 +174,13 @@ const routes: Routes = [
     component: RecipesComponent
   },
   {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
+  },  
+  {
     path: 'rss-data',
-    component: RssDataComponent
+    loadChildren: () => import('./rss-data/rss-data.module').then(m => m.RssDataModule)
+    //component: RssDataComponent
   },
   { path: 'intro',
   component: IntroComponent
@@ -184,9 +209,15 @@ const routes: Routes = [
   component: DragAndDropComponent
   },
   {
+    path: 'rsa',
+    component: RsaComponent
+  },
+
+  {
     path: '**',
   redirectTo: 'page-not-found'
   },
+  
 ];
 
 @NgModule({

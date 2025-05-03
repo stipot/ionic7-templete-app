@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { SettingsComponent } from './settings.component';
 
 describe('SettingsComponent', () => {
@@ -10,7 +10,7 @@ describe('SettingsComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SettingsComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(),  TranslateModule.forRoot() ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SettingsComponent);

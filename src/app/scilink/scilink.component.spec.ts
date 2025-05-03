@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { ScilinkComponent } from './scilink.component';
 
 describe('ScilinkComponent', () => {
@@ -9,8 +10,12 @@ describe('ScilinkComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScilinkComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [
+        IonicModule.forRoot(),
+        HttpClientTestingModule,
+        TranslateModule.forRoot(), 
+        ScilinkComponent
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ScilinkComponent);

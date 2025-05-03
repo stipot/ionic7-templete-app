@@ -11,6 +11,7 @@ import { md5 } from './md5.util';
 import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+import { environment } from '../../environments/environment';
 
 interface FeedItem {
   description: string;
@@ -84,16 +85,6 @@ export class RssDataComponent implements OnInit {
     }
   ];
 
-  private secondFirebaseConfig = {
-    apiKey: "AIzaSyAhyDd5SI8sFRPNkMH_kvgcsyjxe9AF_4Q",
-    authDomain: "ionic7-templete-app-public.firebaseapp.com",
-    projectId: "ionic7-templete-app-public",
-    storageBucket: "ionic7-templete-app-public.appspot.com",
-    messagingSenderId: "822636124132",
-    appId: "1:822636124132:web:a65c67da73bd8e03e099f1",
-    measurementId: "G-R13DHHMDRQ"
-  };
-
   public feeds: NewsSource[] = []; // Массив лент новостей
   public newsItems: NewsItem[] = [];
   public feedItems: FeedItem[] = [];
@@ -104,7 +95,7 @@ export class RssDataComponent implements OnInit {
   public feedForm!: FormGroup;
   public favorites: string[] = []; // Список GUID избранных новостей
 
-  public userData = initializeApp(this.secondFirebaseConfig, 'userData');
+  public userData = initializeApp(environment.firebase, 'userData');
   public auth = getAuth(this.userData);
   public UserDB = getFirestore(this.userData);
   public userId: string | null = null;

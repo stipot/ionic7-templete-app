@@ -12,13 +12,15 @@ register();
 })
 export class AppComponent {
   public appPages = [
+    {title: 'MAP.YANDEXMAPS', url: '/maps', icon: ''},
     { title: 'FrontPage', url: '/front-layout', icon: 'front-layout' },
     { title: 'Settings', url: '/settings', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },
+    { title: 'Water-tracker', url: '/water-tracker', icon: '' },
     { title: 'Kanban', url: '/kanban', icon: '' },
     { title: 'Mood calendar', url: '/mood-calendar', icon: '' },
-    { title: 'Terms of service', url: '/terms-of-service', icon: '' },
-    { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
+    { title: 'TERMS_TITLE', url: '/terms-of-service', icon: '' },
+    { title: 'PRIVACY_TITLE', url: '/privacy-policy', icon: 'battery-full-outline' },
     { title: 'Signup', url: '/signup', icon: '' },
     { title: 'Login', url: '/login', icon: '' },
     { title: 'Forgot password', url: '/forgot-password', icon: '' },
@@ -38,16 +40,18 @@ export class AppComponent {
     { title: 'DragAndDrop', url: '/drag-and-drop', icon: '' },
     { title: 'mplayer', url: '/mplayer', icon: '' },
     { title: 'File-viewer', url: '/file-viewer', icon: '' },
+    { title: 'Shopping', url: '/shopping', icon: '' },
     // Добавляем поле для перехода на страницу пометок
     { title: 'Компоненты в стадии разработки:', url: '/front-layout', icon: '' },
     { title: 'Inbox', url: '/folder/inbox', icon: 'входящие' },
     { title: 'Deals', url: '/deals', icon: '' },
     { title: 'Fashion', url: '/fashion', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
-
+    { title: 'RSA', url: '/rsa', icon: ''},
   ];
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang('ru');
+    this.translate.addLangs(['en',"ru"])
     this.translate.use('ru');
   }
 

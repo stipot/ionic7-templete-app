@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RssDataComponent } from './rss-data.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 describe('RssDataComponent', () => {
   let component: RssDataComponent;
@@ -7,7 +9,8 @@ describe('RssDataComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RssDataComponent ]
+      declarations: [ RssDataComponent ],
+      imports: [ HttpClientTestingModule,  TranslateModule.forRoot() ]
     })
     .compileComponents();
   });

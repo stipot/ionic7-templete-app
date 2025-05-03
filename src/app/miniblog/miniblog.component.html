@@ -7,18 +7,15 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card>
+  <ion-card *ngFor="let blog of blogs">
     <ion-card-header>
-      <ion-card-title>Обзор Анаксы</ion-card-title>
-      <ion-card-subtitle>Игры</ion-card-subtitle>
-      <ion-img
-  src="https://www.goha.ru/s/A:CO/aO/xY8wmWZwYM.jpg"
-  alt="The Wisconsin State Capitol building in Madison, WI at night"
-></ion-img>
+      <ion-card-title>{{blog.name}}</ion-card-title>
+      <ion-card-subtitle>{{blog.chapter}}</ion-card-subtitle>
+      <ion-img [src]="blog.src"></ion-img>
     </ion-card-header>
   
     <ion-card-content>
-      В Honkai: Star Rail недавно вышел новый персонаж пути ветряной эрудиции. В этой статье расскажу о своих впечатлениях об этом персонаже.
+      {{blog.text}}
     </ion-card-content>
   </ion-card>
   <ion-card>

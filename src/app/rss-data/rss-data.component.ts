@@ -8,6 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Guid } from './guid';
 import { FirestoreService } from '../user/firestore.service';
 import { md5 } from './md5.util';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
 
 interface FeedItem {
   description: string;
@@ -80,7 +83,17 @@ export class RssDataComponent implements OnInit {
       isActive: true
     }
   ];
-  
+
+  private secondFirebaseConfig = {
+    apiKey: "AIzaSyAhyDd5SI8sFRPNkMH_kvgcsyjxe9AF_4Q",
+    authDomain: "ionic7-templete-app-public.firebaseapp.com",
+    projectId: "ionic7-templete-app-public",
+    storageBucket: "ionic7-templete-app-public.appspot.com",
+    messagingSenderId: "822636124132",
+    appId: "1:822636124132:web:a65c67da73bd8e03e099f1",
+    measurementId: "G-R13DHHMDRQ"
+  };
+
   public feeds: NewsSource[] = []; // Массив лент новостей
   public newsItems: NewsItem[] = [];
   public feedItems: FeedItem[] = [];
@@ -90,6 +103,11 @@ export class RssDataComponent implements OnInit {
   public sourceLoadingStatus: { [key: string]: boolean } = {};
   public feedForm!: FormGroup;
   public favorites: string[] = []; // Список GUID избранных новостей
+
+  public userData = initializeApp(this.secondFirebaseConfig, 'userData');
+  public auth = getAuth(this.userData);
+  public UserDB = getFirestore(this.userData);
+  public userId: string | null = null;
 
   languages = [
     { code: 'ru', label: 'RUSSIAN', active: false },
@@ -541,6 +559,31 @@ export class RssDataComponent implements OnInit {
   private generateSourceGuid(description: string): string {
     return description.toLowerCase().replace(/\s+/g, '-') + '-' + new Date().getTime();
   }
+
+  async getFeeds(): Promise<any | null> {
+    if (!this.userId) return null;
+    const docRef = doc(this.UserDB, 'profiles', this.userId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      return data['feeds'] ?? null;
+    }
+    return null;
+  }
+  
+  async storeFeeds(feedsData: any): Promise<void> {
+    if (!this.userId) return;
+    const docRef = doc(this.UserDB, 'profiles', this.userId);
+    const docSnap = await getDoc(docRef);
+    let updatedData: Record<string, any> = {};
+    if (docSnap.exists()) {
+      updatedData = docSnap.data() as Record<string, any>;
+    }
+    updatedData['feeds'] = feedsData;
+    await setDoc(docRef, updatedData);
+  }
+  
+
 }
 
 

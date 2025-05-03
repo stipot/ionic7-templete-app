@@ -16,6 +16,7 @@ export class AppComponent {
     { title: 'FrontPage', url: '/front-layout', icon: 'front-layout' },
     { title: 'Settings', url: '/settings', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },
+    { title: 'Water-tracker', url: '/water-tracker', icon: '' },
     { title: 'Kanban', url: '/kanban', icon: '' },
     { title: 'Mood calendar', url: '/mood-calendar', icon: '' },
     { title: 'Terms of service', url: '/terms-of-service', icon: '' },
@@ -45,7 +46,7 @@ export class AppComponent {
     { title: 'Deals', url: '/deals', icon: '' },
     { title: 'Fashion', url: '/fashion', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
-
+    { title: 'RSA', url: '/rsa', icon: ''},
   ];
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang('ru');

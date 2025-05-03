@@ -43,6 +43,7 @@
   "Время": "Time",
   "Цена": "Pice",
   "Загрузка": "Loading",
+  "RSA": "RSA encription",
 
   "Recipes": "Recipes",
   "News": "News",
@@ -51,6 +52,8 @@
 
   "Mood calendar": "Mood Calendar",
   "Mood Statistic": "Mood Statistic",
+
+  "Water-tracker": "Water-tracker",
 
   "MPlayer": "MPlayer",
   "DragAndDrop": "Drag and drop",
@@ -72,12 +75,31 @@
     "STRESSED": "Stressed",
     "SAD": "Sad"
   },
+
+  "FEED": {
+    "ADD_POST": "Add post",
+    "EDIT": "Edit",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "CHECK": "Check",
+    "DELETE": "Delete",
+    "LABEL_LANGUAGE": "Select language",
+    "RUSSIAN": "Russian",
+    "ENGLISH": "English",
+    "FRENCH": "French",
+    "ITALIAN": "Italian",
+    "ACTIVE": "Active",
+    "LANGUAGE_REMINDER": "Changing the language",
+    "GOTO_SETTINGS": "Go to settings"
+  },
   "MAP": {
-"TOP_TITTLE": "YandexMap",
-"YANDEXMAPS": "YandexMap",
-"SIMPLE_MAP": "Simple map",
-"SIMPLE_MAP_TEXT": "This is the Yandex base map embedded in the Ionic component.",
-"MAP_WITH_POINT": "Map with a dot",
-"MAP_WITH_POINT_TEXT": "This is already a map with a label through the code and processing by the click coordinate."
+    "TOP_TITTLE": "YandexMap",
+    "YANDEXMAPS": "YandexMap",
+    "SIMPLE_MAP": "Simple map",
+    "SIMPLE_MAP_TEXT": "This is the Yandex base map embedded in the Ionic component.",
+    "MAP_WITH_POINT": "Map with a dot",
+    "MAP_WITH_POINT_TEXT": "This is already a map with a label through the code and processing by the click coordinate."
   }
+
+
 }

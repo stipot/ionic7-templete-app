@@ -14,14 +14,14 @@ export const environment = {
   //   appId: '1:159501970192:web:fab11f263e3c03d24d9395',
   // },
   firebase: {
-    apiKey: "AIzaSyBSk3kLarxk4vmaspzHJaxP8UjKlPmtev4",
-    authDomain: "ionic7-templete-app.firebaseapp.com",
-    projectId: "ionic7-templete-app",
-    storageBucket: "ionic7-templete-app.appspot.com",
-    messagingSenderId: "922815026080",
-    appId: "1:922815026080:web:f92c973104846606dc0ac5",
-    measurementId: "G-PD1HBJXM6M"
-  }
+    apiKey: "AIzaSyAhyDd5SI8sFRPNkMH_kvgcsyjxe9AF_4Q",
+    authDomain: "ionic7-templete-app-public.firebaseapp.com",
+    projectId: "ionic7-templete-app-public",
+    storageBucket: "ionic7-templete-app-public.appspot.com",
+    messagingSenderId: "822636124132",
+    appId: "1:822636124132:web:a65c67da73bd8e03e099f1",
+    measurementId: "G-R13DHHMDRQ"
+  },
 };
 
 /*

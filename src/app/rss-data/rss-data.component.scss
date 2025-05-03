@@ -1,32 +1,118 @@
-.news-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Две колонки на десктопе */
-  gap: 16px; /* Расстояние между карточками */
+.language-selector {
+  padding: 16px;
+  background-color: #f9f reigns9f9;
 }
 
-.news-card {
-  width: 100%; /* Убедитесь, что карточки занимают всю ширину колонки */
-  box-sizing: border-box; /* Учитывает padding и border в общей ширине */
+.language-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-/* Медиа-запрос для мобильных устройств */
-@media (max-width: 768px) {
-  .news-container {
-    grid-template-columns: 1fr; /* Одна колонка на мобильных устройствах */
-  }
-}
-.news-card {
-  width: 100%; /* Убедитесь, что карточка занимает всю ширину колонки */
-  box-sizing: border-box; /* Учитывает padding и border в общей ширине */
-  display: flex; /* Используем flexbox для выравнивания */
-  flex-direction: column; /* Фотография будет сверху, текст ниже */
-  align-items: center; /* Выравниваем по горизонтали */
-  justify-content: center; /* Выравниваем по вертикали */
+.language-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
 }
 
-.news-card img {
-  max-width: 100%; /* Фотография не будет выходить за пределы карточки */
-  height: auto; /* Сохраняем пропорции изображения */
-  display: block; /* Убираем лишние отступы под изображением */
-  margin: 0 auto; /* Центрируем изображение внутри карточки */
+.language-item span {
+  font-size: 16px;
+}
+
+.language-reminder {
+  margin-top: 16px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+ion-note {
+  color: var(--ion-color-danger);
+  font-size: 0.8rem;
+  padding-left: 16px;
+}
+
+ion-item.ion-invalid.ion-touched {
+  --border-color: var(--ion-color-danger);
+}
+
+.error-container {
+  padding: 8px 16px;
+  color: var(--ion-color-danger);
+}
+
+ion-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+ion-textarea, ion-input {
+  --background: #f8f8f8;
+  --border-radius: 4px;
+}
+
+/* rss-data.component.scss - добавим стили для preview */
+.preview-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #f8f8f8;
+  border: 1px dashed #ccc;
+  color: #666;
+}
+
+.iframe-container {
+  width: 100%;
+  height: 100%;
+}
+
+.iframe-container iframe {
+  width: 100%;
+  height: 600px; /* Можно настроить высоту по вашему усмотрению */
+}
+
+/* Добавляем отступ между label и select */
+.filter-item ion-label {
+  margin-right: 10px; /* Отступ между "Фильтр по источнику" и выпадающим списком */
+}
+
+/* Стили для favicon */
+.favicon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.badge-overlay {
+  display: flex;
+  align-items: center;
+}
+
+/* Стили для кнопки импорта */
+.import-button {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Стили для контейнера кнопок */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Стили для кнопки звездочки */
+ion-button[fill="clear"] ion-icon[name="star"] {
+  color: var(--ion-color-warning); /* Желтый цвет для заполненной звездочки */
+}
+
+ion-button[fill="clear"] ion-icon[name="star-outline"] {
+  color: var(--ion-color-medium); /* Серый цвет для пустой звездочки */
 }

@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="dismiss()">Close</ion-button>
+      <ion-button (click)="dismiss()" *ngIf="isModal==true">Close</ion-button>
     </ion-buttons>
     <ion-title>
       <div *ngIf="lang=='en'">

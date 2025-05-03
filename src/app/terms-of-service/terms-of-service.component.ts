@@ -10,6 +10,7 @@ import { TranslateService, LangChangeEvent  } from '@ngx-translate/core';
 export class TermsOfServiceComponent  implements OnInit {
   lang: string = "ru"
   langs: string[]=[]
+  isModal:boolean = false
   constructor(private modalCtrl: ModalController, private translate: TranslateService) { }
 
   

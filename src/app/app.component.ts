@@ -12,7 +12,7 @@ register();
 })
 export class AppComponent {
   public appPages = [
-    {title: 'YandexMaps', url: '/maps', icon: ''},
+    {title: 'MAP.YANDEXMAPS', url: '/maps', icon: ''},
     { title: 'FrontPage', url: '/front-layout', icon: 'front-layout' },
     { title: 'Settings', url: '/settings', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },

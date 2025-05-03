@@ -71,5 +71,13 @@
     "ANGRY": "Angry",
     "STRESSED": "Stressed",
     "SAD": "Sad"
+  },
+  "MAP": {
+"TOP_TITTLE": "YandexMap",
+"YANDEXMAPS": "YandexMap",
+"SIMPLE_MAP": "Simple map",
+"SIMPLE_MAP_TEXT": "This is the Yandex base map embedded in the Ionic component.",
+"MAP_WITH_POINT": "Map with a dot",
+"MAP_WITH_POINT_TEXT": "This is already a map with a label through the code and processing by the click coordinate."
   }
 }

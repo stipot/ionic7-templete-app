@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController, MenuController } from '@ionic/angular';
 import { Validators, FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
@@ -121,12 +122,17 @@ export class SignupComponent  implements OnInit {
     };
   }
 
+  async showModal(component: any) {
+    const modal = await this.modalController.create({ component:component, componentProps:{isModal: true}});
+    return await modal.present();
+  }
+
+  async showTermsOfServiceModal() {
+    return this.showModal(TermsOfServiceComponent);
+  }
 
   async showPrivacyModal() {
-    const modal = await this.modalController.create({
-      component: PrivacyPolicyComponent
-    });
-    return await modal.present();
+    return this.showModal(PrivacyPolicyComponent);
   }
 
 }

@@ -19,8 +19,8 @@ export class AppComponent {
     { title: 'Water-tracker', url: '/water-tracker', icon: '' },
     { title: 'Kanban', url: '/kanban', icon: '' },
     { title: 'Mood calendar', url: '/mood-calendar', icon: '' },
-    { title: 'Terms of service', url: '/terms-of-service', icon: '' },
-    { title: 'policy-privacy', url: '/privacy-policy', icon: 'battery-full-outline' },
+    { title: 'TERMS_TITLE', url: '/terms-of-service', icon: '' },
+    { title: 'PRIVACY_TITLE', url: '/privacy-policy', icon: 'battery-full-outline' },
     { title: 'Signup', url: '/signup', icon: '' },
     { title: 'Login', url: '/login', icon: '' },
     { title: 'Forgot password', url: '/forgot-password', icon: '' },
@@ -51,6 +51,7 @@ export class AppComponent {
   ];
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang('ru');
+    this.translate.addLangs(['en',"ru"])
     this.translate.use('ru');
   }
 

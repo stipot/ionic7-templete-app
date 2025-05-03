@@ -7,6 +7,7 @@ import { SettingsService } from '../services/settings.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Guid } from './guid';
 import { FirestoreService } from '../user/firestore.service';
+import { md5 } from './md5.util';
 
 interface FeedItem {
   description: string;
@@ -236,8 +237,11 @@ export class RssDataComponent implements OnInit {
               const parser = new DOMParser();
               const xmlDoc = parser.parseFromString(response, 'application/xml');
               const items = xmlDoc.querySelectorAll('item');
+
               
               items.forEach((item) => {
+                const newsTitle = item.querySelector('title')?.textContent || '';
+                const newsGuid = md5(newsTitle);
                 const newsItem: NewsItem = {
                   title: item.querySelector('title')?.textContent || 'Без заголовка',
                   description: this.stripHtml(item.querySelector('description')?.textContent || 'Без описания'),

@@ -1,3 +1,5 @@
+<form [formGroup]="signupForm" (ngSubmit)="register()"></form>
+
 <ion-header>
   <ion-toolbar color="primary">
     <app-header [pageTitle]="pageTitle"></app-header>
@@ -63,7 +65,8 @@
 <ion-grid>
   <ion-row class="ion-justify-content-center">
   <ion-list lines="none">
-    <ion-item><ion-button class="signup-btn" type="submit" expand="block" size="default" style="min-width: 200px">Sign Up</ion-button></ion-item>
+    <ion-item>
+      <ion-button class="signup-btn" (click)="register()" type="submit" expand="block" size="default" style="min-width: 200px">Sign Up</ion-button></ion-item>
     <ion-row class="other-auth-options-row">
     </ion-row>
   </ion-list>

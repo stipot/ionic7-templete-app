@@ -1,0 +1,35 @@
+  ion-content {
+    --ion-background-color: #f4f4f4; // Фон контента (опционально)
+  }
+  
+  .rsa-grid {
+    padding: 16px;
+  
+    ion-row {
+      margin-bottom: 16px;
+    }
+  
+    .full-width-card {
+      width: 100%;
+      margin: 0;
+  
+      ion-card-content {
+        padding: 0;
+  
+        ion-textarea {
+          --padding-start: 16px;
+          --padding-end: 16px;
+          --padding-top: 8px;
+          --padding-bottom: 8px;
+          min-height: 150px; // Минимальная высота текстовых областей
+        }
+      }
+    }
+  
+    // Для мобильных устройств (экраны уже 768px)
+    @media (max-width: 768px) {
+      ion-col[size-md="6"] {
+        padding-bottom: 8px; // Отступ между элементами в мобильном виде
+      }
+    }
+  }

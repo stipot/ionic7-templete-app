@@ -4,6 +4,9 @@ import { ModalController, MenuController } from '@ionic/angular';
 import { Validators, FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { TermsOfServiceComponent } from '../terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.component';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import {FirestoreService} from "../user/firestore.service"
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +18,34 @@ export class SignupComponent  implements OnInit {
   signupForm: FormGroup;
   matching_passwords_group: FormGroup;
   email: string = ""
+  password: string = '';
+
+  register() {
+    this.email = this.signupForm.get('email')?.value;
+    this.password = this.signupForm.get('matching_passwords.password')?.value;
+    const auth = getAuth(this.firestore.userData);
+    const db = getFirestore(this.firestore.userData);
+
+    createUserWithEmailAndPassword(auth, this.email, this.password)
+      .then((userCredential) => {
+        console.log('Регистрация успешна');
+        
+        const userId = userCredential.user.uid;
+        setDoc(doc(db, 'users', userId), {
+          email: this.email,
+          waterConsumption: []
+        });
+
+        this.router.navigate(['/login']);
+      })
+      .catch((error) => {
+        console.error('Ошибка регистрации:', error.message);
+      });
+  }
+
+  goToLogin() {
+    this.router.navigate(['/water-tracker/login']);
+  }
 
   validation_messages = {
     'email': [
@@ -36,8 +67,9 @@ export class SignupComponent  implements OnInit {
 
 
   constructor(
-    public modalController: ModalController
-
+    public modalController: ModalController,
+    private router: Router,
+    private firestore: FirestoreService
   ) { 
 
     this.matching_passwords_group = new FormGroup({

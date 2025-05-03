@@ -266,7 +266,7 @@ export class RssDataComponent implements OnInit {
         'Content-Type': 'application/xml'
       });
 
-      console.log(`Начинаем загрузку ${source.name} с ${source.url}`);
+      console.log(`We start loading ${source.name} from ${source.url}`);
 
       this.http.get(requestUrl, { headers, responseType: 'text' })
         .subscribe({
@@ -281,8 +281,8 @@ export class RssDataComponent implements OnInit {
                 const newsTitle = item.querySelector('title')?.textContent || '';
                 const newsGuid = md5(newsTitle);
                 const newsItem: NewsItem = {
-                  title: item.querySelector('title')?.textContent || 'Без заголовка',
-                  description: this.stripHtml(item.querySelector('description')?.textContent || 'Без описания'),
+                  title: item.querySelector('title')?.textContent || 'No title',
+                  description: this.stripHtml(item.querySelector('description')?.textContent || 'No description'),
                   link: item.querySelector('link')?.textContent || '#',
                   image: this.getImageFromItem(item, source),
                   pubDate: item.querySelector('pubDate')?.textContent || '',
@@ -300,11 +300,11 @@ export class RssDataComponent implements OnInit {
                 }
               });
             } catch (error) {
-              console.error(`Ошибка парсинга XML от ${source.name}:`, error);
+              console.error(`XML parsing error from ${source.name}:`, error);
             }
           },
           error: (error) => {
-            console.error(`Ошибка загрузки ${source.name}:`, {
+            console.error(`Loading error ${source.name}:`, {
               status: error.status,
               message: error.message,
               url: source.url
@@ -526,7 +526,7 @@ export class RssDataComponent implements OnInit {
 
     const newFeedItems: FeedItem[] = [];
     outlines.forEach(outline => {
-      const description = outline.getAttribute('text') || 'Без описания';
+      const description = outline.getAttribute('text') || 'No description';
       const url = outline.getAttribute('xmlUrl') || '';
       if (url) {
         const newItem: FeedItem = {

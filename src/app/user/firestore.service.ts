@@ -17,17 +17,17 @@ export class FirestoreService {
   constructor() {
     this.auth = getAuth(this.userData);
     setPersistence(this.auth, browserLocalPersistence).then(() => {
-      console.log('Firebase persistence установлено');
+      console.log('Firebase persistence installed');
     });
     this.UserDB = getFirestore(this.userData);
 
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.userId = user.uid;
-        console.log('User ID установлен:', this.userId);
+        console.log('User ID set:', this.userId);
       } else {
         this.userId = null;
-        console.log('User вышел, User ID сброшен');
+        console.log('User logged out, User ID reset');
       }
     });
   }
@@ -40,7 +40,7 @@ export class FirestoreService {
   async getComponentData(componentName: string): Promise<any | null> {
     try {
       if (!this.userId) {
-        console.log('User ID не установлен.');
+        console.log('User ID not set.');
         return null;
       }
       const docRef = doc(this.UserDB, 'profiles', this.userId);
@@ -49,11 +49,11 @@ export class FirestoreService {
         const data = docSnap.data();
         return data[componentName] ?? null;
       } else {
-        console.log(`Документ profiles пользователя ${this.userId} не найден.`);
+        console.log(`User profiles document ${this.userId} not found.`);
         return null;
       }
     } catch (error) {
-      console.error('Ошибка при получении данных компонента:', error);
+      console.error('Error while retrieving component data:', error);
       return null;
     }
   }
@@ -66,7 +66,7 @@ export class FirestoreService {
   async storeComponentData(componentName: string, data: any): Promise<void> {
     try {
       if (!this.userId) {
-        console.log('User ID не установлен.');
+        console.log('User ID not installed.');
         return;
       }
       const docRef = doc(this.UserDB, 'profiles', this.userId);
@@ -77,9 +77,9 @@ export class FirestoreService {
       }
       updatedData[componentName] = data;
       await setDoc(docRef, updatedData);
-      console.log(`Данные компонента "${componentName}" успешно сохранены для пользователя ${this.userId}.`);
+      console.log(`Component data "${componentName}" successfully saved for the user ${this.userId}.`);
     } catch (error) {
-      console.error('Ошибка при сохранении данных компонента:', error);
+      console.error('Error saving component data:', error);
     }
   }
 

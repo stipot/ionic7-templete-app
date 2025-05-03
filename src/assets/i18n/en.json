@@ -101,7 +101,11 @@
     "SIMPLE_MAP_TEXT": "This is the Yandex base map embedded in the Ionic component.",
     "MAP_WITH_POINT": "Map with a dot",
     "MAP_WITH_POINT_TEXT": "This is already a map with a label through the code and processing by the click coordinate."
+  },
+  "NOTES":{
+    "TEXT_NOTES": "Text of the note",
+    "NOTES_MISSING": "Notes are missing",
+    "DELETE_MARKED_NOTES": "Delete all marked notes"
   }
-
 
 }

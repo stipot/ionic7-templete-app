@@ -81,6 +81,7 @@ export class RssDataComponent implements OnInit {
     }
   ];
   
+  public feeds: NewsSource[] = []; // Массив лент новостей
   public newsItems: NewsItem[] = [];
   public feedItems: FeedItem[] = [];
   public favoriteNewsItems: NewsItem[] = [];
@@ -174,6 +175,33 @@ export class RssDataComponent implements OnInit {
     } else {
       this.loadFavorites(); // fallback на localStorage
     }
+  }
+
+  async loadFeedItems(): Promise<void> {
+    const feedsFromDB = await this.firestore.getComponentData('feeds');
+    if (feedsFromDB && Array.isArray(feedsFromDB)) {
+      this.feedItems = feedsFromDB;
+      localStorage.setItem('feedItems', JSON.stringify(this.feedItems)); // кешируем
+    } else {
+      const feedsFromLocal = localStorage.getItem('feedItems');
+      if (feedsFromLocal) {
+        this.feedItems = JSON.parse(feedsFromLocal);
+      } else {
+        this.feedItems = []; // или дефолтные данные
+      }
+    }
+  }
+  
+  async saveFeedItems(): Promise<void> {
+    // Сохраняем в localStorage
+    localStorage.setItem('feedItems', JSON.stringify(this.feedItems));
+    // Сохраняем в Firebase
+    await this.firestore.storeComponentData('feeds', this.feedItems);
+  }
+  
+  async saveFeedsToFirestore(): Promise<void> {
+    await this.firestore.storeComponentData('feeds', this.feedItems);
+    localStorage.setItem('feedItems', JSON.stringify(this.feedItems));
   }
 
   syncLanguageUI(): void {
@@ -416,9 +444,11 @@ export class RssDataComponent implements OnInit {
     };
     this.feedItems.unshift(newItem);
     this.startEditing(newItem);
+    this.saveFeedItems(); // сохраняем массив
   }
 
   deleteFeedItem(item: FeedItem): void {
+    this.saveFeedItems();
     this.feedItems = this.feedItems.filter((i) => i.guid !== item.guid);
   }
 

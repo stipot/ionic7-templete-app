@@ -91,6 +91,30 @@ export class FirestoreService {
       console.error('Ошибка при сохранении данных компонента:', error);
     }
   }
+
+  async getFeeds(): Promise<any | null> {
+    if (!this.userId) return null;
+    const docRef = doc(this.UserDB, 'profiles', this.userId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      return data['feeds'] ?? null;
+    }
+    return null;
+  }
+  
+  async storeFeeds(feedsData: any): Promise<void> {
+    if (!this.userId) return;
+    const docRef = doc(this.UserDB, 'profiles', this.userId);
+    const docSnap = await getDoc(docRef);
+    let updatedData: Record<string, any> = {};
+    if (docSnap.exists()) {
+      updatedData = docSnap.data() as Record<string, any>;
+    }
+    updatedData['feeds'] = feedsData;
+    await setDoc(docRef, updatedData);
+  }
+
 }
 
 

@@ -42,6 +42,7 @@ import { MoodCalendarComponent } from './mood-calendar/mood-calendar.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { RsaComponent } from './rsa/rsa.component';
+import { MapsComponent } from './maps/maps.component';
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -74,7 +75,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CameraComponent,
     FileViewerComponent,
     DragAndDropComponent,
-    RsaComponent,
+    MapsComponent,
+    RsaComponent
   ],
   imports: [
     BrowserModule,

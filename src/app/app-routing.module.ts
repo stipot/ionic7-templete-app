@@ -36,6 +36,8 @@ import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component'
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { RsaComponent } from './rsa/rsa.component';
 
+import { MapsComponent } from './maps/maps.component';
+
 const routes: Routes = [
   
   {
@@ -59,6 +61,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'front-layout',
     pathMatch: 'full'
+  },
+  {
+    path:'maps',
+    component: MapsComponent
   },
   {
     path: 'folder/:id',

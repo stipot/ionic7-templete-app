@@ -1,31 +1,55 @@
-<ion-header>
-  <div class="header-container">
+<ion-content class="scrollable-content">
+  <header>
+    <h1 class="large-text">Deals</h1>
+  </header>
+
+  <div class="header">
     <ion-img
       src="https://березовая-метла.рф/upload/iblock/b80/o8oobwl6vi3cmghoeomp79m5jg41xy10.jpg"
-      class="header-image"
-    ></ion-img>
-    <ion-toolbar class="transparent-toolbar">
-      <ion-title size="large">Deals</ion-title>
-    </ion-toolbar>
+      class="header-image">
+    </ion-img>
   </div>
-</ion-header>
 
-<ion-content>
-  <ion-card *ngFor="let product of getProiducts()"  size="4">
+  <div class="search-container">
+    <ion-searchbar [(ngModel)]="searchText" debounce="500" placeholder="Поиск"></ion-searchbar>
+    <button class="search-toggle-button" (click)="toggleSearchType()">
+      {{ searchType === 'name' ? 'Поиск по скидкам' : 'Поиск по названию' }}
+    </button>
+  </div>
+
+  <div class="deal-container">
+    <ng-container *ngFor="let deal of products">
+      <ion-card class="deal-card">
+
+        <ion-card-header>
+          <ion-card-title>{{ deal.name }}</ion-card-title>
+          <ion-card-subtitle>{{"DEAL_MODULE.DEAL_TIME" | translate}}: {{ formattedDate }} </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <img [src]="deal.imageUrl" alt="{{ deal.name }} imageUrl" class="deal-imageUrl">
+        </ion-card-content>
+
+      </ion-card>
+    </ng-container>
+  </div>
+
+
+  <ion-card *ngFor="let product of getProducts()">
     <ion-card-content>
       <ion-label
         class="ion-margin-start"
-        [class.stroke]="product.checked"
-      >
+        [class.stroke]="product.checked">
         <p>{{ product.name }}</p>
         <h4>{{ product.desc }}</h4>
       </ion-label>
-      <ion-img [src]="product.imageUrl" *ngIf="product.imageUrl" ></ion-img>
+      <ion-img
+        [src]="product.imageUrl" 
+        *ngIf="product.imageUrl" 
+        (click)="openLink(product.link)"
+        style="cursor:pointer">
+    </ion-img>
     </ion-card-content>
   </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>deals</ion-card-title>
-    </ion-card-header>
-  </ion-card>
+
 </ion-content>

@@ -5,18 +5,22 @@ import { NotesComponent } from './notes/notes.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoTaskComponent } from './todo-task/todo-task.component';
 import {LoginPageModule } from "./login/login.module"
 import { FashionComponent } from './fashion/fashion.component';
+import { FashionDetailComponent } from './fashion-detail/fashion-detail.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component";
 import { SignupComponent } from './signup/signup.component';
 import { IntroComponent } from './intro/intro.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RecipesComponent } from './recipes/recipes.component';
-import { RssDataComponent } from './rss-data/rss-data.component';
+import {RssDataModule} from "./rss-data/rss-data.module"
 import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.component';
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 import {CameraComponent} from './camera/camera.component';
+
+
 
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 
@@ -33,18 +37,46 @@ import {MplayerComponent} from "./mplayer/mplayer.component";
 import { KanbanComponent } from './kanban/kanban.component';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component'
-import { WaterTrackerComponent } from './water-tracker/water-tracker.component'
+import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { RsaComponent } from './rsa/rsa.component';
+import { MapsComponent } from './maps/maps.component';
 import { MiniblogComponent } from './miniblog/miniblog.component';
 
 const routes: Routes = [
+  
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
+  },
+
+  {
+    
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+    
+    
+  },
+
   {
     path: '',
     redirectTo: 'front-layout',
     pathMatch: 'full'
   },
   {
+    path:'maps',
+    component: MapsComponent
+  },
+  {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
+  },
+  {    path: 'shopping',
+    component: ShoppingListComponent
   },
   {    path: 'file-viewer',
     component: FileViewerComponent
@@ -107,12 +139,12 @@ const routes: Routes = [
     component: TodoListComponent
   },
   {
-    path: 'signup',
-    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
+    path: 'todo-task',
+    component: TodoTaskComponent
   },
   {
-    path: 'fashion',
-    component: FashionComponent
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
   },
   {
     path: 'filters',
@@ -143,10 +175,6 @@ const routes: Routes = [
     component: ContactCardComponent
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
-  {
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
   },
@@ -155,8 +183,13 @@ const routes: Routes = [
     component: RecipesComponent
   },
   {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
+  },  
+  {
     path: 'rss-data',
-    component: RssDataComponent
+    loadChildren: () => import('./rss-data/rss-data.module').then(m => m.RssDataModule)
+    //component: RssDataComponent
   },
   { path: 'intro',
   component: IntroComponent
@@ -185,6 +218,17 @@ const routes: Routes = [
   component: DragAndDropComponent
   },
   {
+    path: 'rsa',
+    component: RsaComponent
+  },
+  {
+    path: 'fashion', component: FashionComponent
+  },
+
+  {
+    path: 'fashion-detail', component: FashionDetailComponent
+  },
+  {
     path: '**',
   redirectTo: 'page-not-found'
   },
@@ -194,7 +238,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

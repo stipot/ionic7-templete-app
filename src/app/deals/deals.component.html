@@ -1,22 +1,42 @@
-<ion-header collapse="condense">
-  <ion-toolbar>
-    <ion-title size="large">deals
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="scrollable-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Deals</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content [fullscreen]="true">
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>deals</ion-card-title>
-  </ion-card-header>
-  <ion-card *ngFor="let product of getProiducts()">
-  <ion-card-content>
-      <ion-label class="ion-margin-start" [class.stroke]="product.checked">
-          <p>{{ product.name }}</p> 
-          <h4>{{ product.desc }}</h4>
-      </ion-label>
-    </ion-card-content>
-    </ion-card>
-</ion-card>
+  <div class="header">
+    <ion-img
+      src="https://березовая-метла.рф/upload/iblock/b80/o8oobwl6vi3cmghoeomp79m5jg41xy10.jpg"
+      class="header-image">
+    </ion-img>
+  </div>
+  
+<div class="search-container">
+  <ion-searchbar [(ngModel)]="searchText" debounce="500" placeholder="Поиск"></ion-searchbar>
+  <ion-button size="small" (click)="toggleSearchType()" fill="outline" color="primary" class="search-toggle-button">
+    {{ searchType === 'name' ? 'Поиск по скидкам' : 'Поиск по названию' }}
+  </ion-button>
+</div>
+
+  <div class="deal-container">
+    <ng-container *ngFor="let product of getProducts()">
+      <ion-card class="deal-card">
+
+        <ion-card-header>
+          <ion-card-title>{{ product.name }}</ion-card-title>
+          <ion-card-subtitle>{{product.desc}} </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+          <img [src]="product.imageUrl" *ngIf="product.imageUrl" (click)="openLink(product.link)" style="cursor:pointer">
+        </ion-card-content>
+
+      </ion-card>
+    </ng-container>
+  </div>
+  
 </ion-content>

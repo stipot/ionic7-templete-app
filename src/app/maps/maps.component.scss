@@ -1,0 +1,31 @@
+.map-section {
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: #001b7e75;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    color: #ffffff;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    color: #ffffff;
+  }
+}
+
+.map-card {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 300px;
+  position: relative;
+
+  .map {
+    width: 100%;
+    height: 100%;
+  }
+}

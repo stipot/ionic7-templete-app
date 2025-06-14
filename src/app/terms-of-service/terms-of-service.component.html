@@ -4,21 +4,54 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="dismiss()">Close</ion-button>
+      <ion-button (click)="dismiss()"*ngIf="isModal==true">Close</ion-button>
     </ion-buttons>
-    <ion-title>
-      Terms of service
-    </ion-title>
+    <ion-title> {{"TERMS_TITLE" | translate}}  </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding"  size="6">
-  <h3 class="legal-title">AGREEMENT TO TERMS</h3>
-  <p class="legal-text">
-    These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and [business entity name] (“we,” “us” or “our”), concerning your access to and use of the [website name.com] website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”).
-  </p>
+  <ion-fab slot="fixed" horizontal="right" vertical="bottom" class="ion-padding">
+    <ion-fab-button> {{lang}}
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngFor="let l of langs" (click)="change_lang(l)" >
+      {{l}}
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <div *ngIf="lang=='en'">
+    <h3 class="legal-title">AGREEMENT TO TERMS</h3>
+    <p class="legal-text">
+      These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) 
+      and [business entity name] (“we,” “us” or “our”), concerning your access to and use of the [website name.com] website as well as any other media form, 
+      media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”).
+    </p>
   <h3 class="legal-title">INTELLECTUAL PROPERTY RIGHTS</h3>
-  <p class="legal-text">
-    Unless otherwise indicated, the Site is our proprietary property and all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics on the Site (collectively, the “Content”) and the trademarks, service marks, and logos contained therein (the “Marks”) are owned or controlled by us or licensed to us, and are protected by copyright and trademark laws and various other intellectual property rights and unfair competition laws of the United States, foreign jurisdictions, and international conventions.
-  </p>
+    <p class="legal-text">
+      Unless otherwise indicated, the Site is our proprietary property and all source code, databases, functionality, software, 
+      website designs, audio, video, text, photographs, and graphics on the Site (collectively, the “Content”) and the trademarks, 
+      service marks, and logos contained therein (the “Marks”) are owned or controlled by us or licensed to us, 
+      and are protected by copyright and trademark laws and various other intellectual property rights and unfair competition laws of the United States, foreign jurisdictions, and international conventions.
+    </p>
+  </div>
+  <div *ngIf="lang=='ru'">
+    <h3 class="legal-title">СОГЛАСИЕ С УСЛОВИЯМИ</h3>
+    <p class="legal-text">
+      Настоящие Условия и положения представляют собой юридически обязывающее соглашение, заключенное между вами, лично или от имени организации («вы») 
+      и [название организации] («мы», «нас» или «наш»), относительно вашего доступа к веб-сайту [имя веб-сайта.com] и его использования, 
+      а также любой другой медиа-формы, медиа-канала, мобильного веб-сайта или мобильного приложения, связанных с ними, 
+      связанных с ними или иным образом связанных с ними (совместно именуемые «Сайт»).
+    </p>
+  <h3 class="legal-title">ПРАВА ИНТЕЛЛЕКТУАЛЬНОЙ СОБСТВЕННОСТИ</h3>
+    <p class="legal-text">
+      Если не указано иное, Сайт является нашей собственностью, и весь исходный код, базы данных, функциональные возможности, программное обеспечение, 
+      дизайн веб-сайта, аудио, видео, текст, фотографии и графика на Сайте (совместно именуемые «Контент»), а также товарные знаки, знаки обслуживания 
+      и логотипы, содержащиеся на нем («Знаки»), принадлежат нам или контролируются нами или лицензированы для нас и защищены законами об авторском праве 
+      и товарных знаках, а также различными другими правами интеллектуальной собственности и законами о недобросовестной конкуренции Соединенных Штатов, 
+      иностранных юрисдикций и международных конвенций.
+    </p>
+  </div>
+
 </ion-content>

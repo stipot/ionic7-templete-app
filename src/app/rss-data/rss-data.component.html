@@ -1,3 +1,4 @@
+<!-- rss-data.component.html -->
 <ion-header>
   <ion-toolbar color="primary">
     <app-header [pageTitle]="pageTitle"></app-header>
@@ -5,16 +6,219 @@
 </ion-header>
 
 <ion-content>
-  <div class="news-container">
-    <ion-card *ngFor="let item of newsItems" class="news-card">
-      <img [src]="item.image" [alt]="item.title" />
-      <ion-card-header>
-        <ion-card-title>{{ item.title }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>{{ item.description }}</p>
-        <ion-button fill="clear" [href]="item.link" target="_blank">Подробнее</ion-button>
-      </ion-card-content>
-    </ion-card>
+  <ion-segment [(ngModel)]="segment" color="primary" class="ion-padding">
+    <ion-segment-button value="news" class="equal-segment">
+      <ion-label>Новости</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="feed" class="equal-segment">
+      <ion-label>Ленты</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div [ngSwitch]="segment">
+    <div *ngSwitchCase="'news'">
+      <ion-grid>
+        <!-- Первая строка: тулбар с фильтром и toggler -->
+        <ion-row>
+          <ion-col>
+            <ion-toolbar>
+              <ion-item slot="start" lines="none" class="filter-item">
+                <ion-label>Фильтр по источнику</ion-label>
+                <ion-select 
+                  [(ngModel)]="selectedSource" 
+                  (ionChange)="onSourceFilterChange($event)"
+                  interface="popover"
+                  placeholder="Выберите источник"
+                >
+                  <ion-select-option value="all">Все источники</ion-select-option>
+                  <ion-select-option *ngFor="let source of newsSources" [value]="source.guid">
+                    {{ source.name }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item slot="end" lines="none">
+                <ion-label>Просмотр</ion-label>
+                <ion-toggle [(ngModel)]="previewMode" (ionChange)="togglePreviewMode($event)"></ion-toggle>
+              </ion-item>
+            </ion-toolbar>
+          </ion-col>
+        </ion-row>
+
+        <!-- Вторая строка: новости и iframe -->
+        <ion-row>
+          <!-- Колонка с новостями -->
+          <ion-col [size]="previewMode ? 4 : 12">
+            <div *ngIf="isLoading" class="loading-container">
+              <ion-spinner name="crescent"></ion-spinner>
+              <p>Загрузка новостей...</p>
+            </div>
+
+            <div class="news-container" *ngIf="!isLoading">
+              <ion-grid>
+                <ion-row>
+                  <ion-col 
+                    size-xs="12" 
+                    size-sm="6" 
+                    size-md="4" 
+                    size-lg="3" 
+                    *ngFor="let item of newsItems"
+                  >
+                    <ion-card class="news-card">
+                      <div class="image-container">
+                        <img [src]="item.image" [alt]="item.title" (error)="handleImageError(item)" />
+                        <ion-badge class="badge-overlay" [color]="'primary'">
+                          <img *ngIf="item.favicon" [src]="item.favicon" class="favicon" [alt]="item.source + ' favicon'" />
+                          {{ item.source || 'Источник' }}
+                        </ion-badge>
+                      </div>
+                      <ion-card-header>
+                        <ion-card-title class="news-title">{{ item.title }}</ion-card-title>
+                      </ion-card-header>
+                      <ion-card-content>
+                        <p class="news-description">{{ item.description }}</p>
+                        <div class="button-container">
+                          <ion-button 
+                            fill="clear" 
+                            [href]="previewMode ? null : item.link" 
+                            [target]="previewMode ? null : '_blank'"
+                            (click)="previewMode ? openNews(item) : null"
+                          >
+                            Подробнее
+                          </ion-button>
+                          <ion-button fill="clear" (click)="toggleFavorite(item)">
+                            <ion-icon slot="icon-only" [name]="isFavorite(item.guid) ? 'star' : 'star-outline'"></ion-icon>
+                          </ion-button>
+                        </div>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+
+            <ion-item *ngIf="!isLoading && newsItems.length === 0" lines="none">
+              <ion-label class="ion-text-center">
+                Выберите источник новостей или проверьте подключение
+              </ion-label>
+            </ion-item>
+          </ion-col>
+
+          <!-- Колонка с iframe -->
+          <ion-col size="8" *ngIf="previewMode">
+            <div class="iframe-container">
+              <iframe 
+                *ngIf="selectedNewsUrl" 
+                [src]="selectedNewsUrl" 
+                frameborder="0"
+              ></iframe>
+              <div *ngIf="!selectedNewsUrl" class="preview-placeholder">
+                <p>Выберите новость для просмотра</p>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div *ngSwitchCase="'feed'">
+      <!-- Toolbar с кнопками Импорт и Экспорт -->
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="exportToOPML()">
+            Экспорт
+          </ion-button>
+          <ion-button>
+            <label for="import-opml" class="import-button">Импорт</label>
+            <input id="import-opml" type="file" accept=".opml, .xml" (change)="importFromOPML($event)" style="display: none;" />
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button expand="full" color="primary" (click)="addNewFeedItem()">
+            {{ 'FEED.ADD_POST' | translate }}
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+
+      <div class="language-selector">
+        <ion-label>{{ 'FEED.LABEL_LANGUAGE' | translate }}</ion-label>
+        <div class="language-list">
+          <div *ngFor="let lang of languages" class="language-item">
+            <span>{{ 'FEED.' + lang.label | translate }}</span>
+            <ion-badge color="primary" *ngIf="lang.active">{{ 'FEED.ACTIVE' | translate }}</ion-badge>
+          </div>
+        </div>
+        <div class="language-reminder">
+          <small>{{ 'FEED.LANGUAGE_REMINDER' | translate }}</small>
+          <ion-button size="small" routerLink="/settings">
+            {{ 'FEED.GOTO_SETTINGS' | translate }}
+          </ion-button>
+        </div>
+      </div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-sm="6" size-md="4" *ngFor="let item of feedItems">
+            <ion-card>
+              <ion-card-content>
+                <div *ngIf="!item.isEditing" (dblclick)="startEditing(item)">
+                  {{ item.description }}. GUID: {{ item.guid }}
+                </div>
+                <div *ngIf="item.isEditing">
+                  <form [formGroup]="feedForm" (ngSubmit)="saveEditing(item)">
+                    <ion-item>
+                      <ion-label position="floating">Описание</ion-label>
+                      <ion-textarea
+                        formControlName="description"
+                        maxlength="64"
+                        placeholder="Введите описание (макс 64 символа)"
+                      ></ion-textarea>
+                    </ion-item>
+                    <ion-note *ngIf="feedForm.get('description')?.touched && feedForm.get('description')?.errors?.['maxlength']">
+                      Описание не должно превышать 64 символа
+                    </ion-note>
+
+                    <ion-item>
+                      <ion-label position="floating">URL</ion-label>
+                      <ion-input
+                        formControlName="url"
+                        type="url"
+                        placeholder="Введите URL (http:// или https://)"
+                      ></ion-input>
+                    </ion-item>
+                    <ion-note *ngIf="feedForm.get('url')?.touched && feedForm.get('url')?.errors?.['pattern']">
+                      URL должен начинаться с http:// или https://
+                    </ion-note>
+                  </form>
+                </div>
+              </ion-card-content>
+
+              <ion-card-footer>
+                <ion-buttons class="ion-justify-content-between">
+                  <div>
+                    <ion-button *ngIf="!item.isEditing" fill="clear" (click)="startEditing(item)">
+                      {{ 'FEED.EDIT' | translate }}
+                    </ion-button>
+                    <ion-button *ngIf="item.isEditing" fill="clear" (click)="saveEditing(item)" [disabled]="feedForm.invalid">
+                      {{ 'FEED.SAVE' | translate }}
+                    </ion-button>
+                    <ion-button *ngIf="item.isEditing" fill="clear" (click)="cancelEditing(item)">
+                      {{ 'FEED.CANCEL' | translate }}
+                    </ion-button>
+                  </div>
+                  <div>
+                    <ion-button fill="clear" (click)="checkFeedItem(item)">
+                      {{ 'FEED.CHECK' | translate }}
+                    </ion-button>
+                    <ion-button fill="clear" color="danger" (click)="deleteFeedItem(item)">
+                      {{ 'FEED.DELETE' | translate }}
+                    </ion-button>
+                  </div>
+                </ion-buttons>
+              </ion-card-footer>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </div>
 </ion-content>

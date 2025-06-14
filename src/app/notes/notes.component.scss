@@ -1,11 +1,11 @@
-.note-input {
-  font-size: 20px;
+.message {
+  text-align: center;
 }
-.remove-note-list {
-  display: flex;
-  flex-direction: column;
+
+.done {
+  opacity: 0.5;
 }
-.remove-note {
-  display: flex;
-  justify-content: space-between;
+
+.button-active {
+  visibility: hidden;
 }

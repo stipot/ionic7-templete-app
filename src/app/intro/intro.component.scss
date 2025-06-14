@@ -1,13 +1,80 @@
-swiper-container {
-    width: 100%;
-    height: 100%;
-    }
-swiper-slide {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    }
-             
+.overlay-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10; // Над изображением
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4); // Фон для читаемости текста
+  padding: 1rem;
+  box-sizing: border-box;
+  text-align: center;
 
-            
+  @media (max-width: 768px) {
+    padding: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.3rem;
+  }
+}
+
+.text-wrapper {
+  color: white;
+  max-width: 90%;
+  font-size: 1.2rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); // Доп контраст для читаемости
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+
+  h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0.25rem 0;
+  }
+}
+
+.slide-image-full {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slide-image-full img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nav-buttons-absolute {
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5vw;
+  pointer-events: none;
+}
+
+.nav-buttons-absolute ion-button {
+  opacity: 0.6;
+  font-weight: bold;
+  font-size: clamp(14px, 2vw, 20px);
+  pointer-events: all;
+}

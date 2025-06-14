@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { getAuth, browserLocalPersistence, setPersistence, onAuthStateChanged } from 'firebase/auth';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: "root",
@@ -11,32 +12,22 @@ export class FirestoreService {
   UserDB: any;
   userId: string | null = null;
 
-  private secondFirebaseConfig = {
-    apiKey: "AIzaSyAhyDd5SI8sFRPNkMH_kvgcsyjxe9AF_4Q",
-    authDomain: "ionic7-templete-app-public.firebaseapp.com",
-    projectId: "ionic7-templete-app-public",
-    storageBucket: "ionic7-templete-app-public.appspot.com",
-    messagingSenderId: "822636124132",
-    appId: "1:822636124132:web:a65c67da73bd8e03e099f1",
-    measurementId: "G-R13DHHMDRQ"
-  };
-
-  public userData = initializeApp(this.secondFirebaseConfig, 'userData');
+  public userData = initializeApp(environment.firebase, 'userData');
 
   constructor() {
     this.auth = getAuth(this.userData);
     setPersistence(this.auth, browserLocalPersistence).then(() => {
-      console.log('Firebase persistence установлено');
+      console.log('Firebase persistence installed');
     });
     this.UserDB = getFirestore(this.userData);
 
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.userId = user.uid;
-        console.log('User ID установлен:', this.userId);
+        console.log('User ID set:', this.userId);
       } else {
         this.userId = null;
-        console.log('User вышел, User ID сброшен');
+        console.log('User logged out, User ID reset');
       }
     });
   }
@@ -49,7 +40,7 @@ export class FirestoreService {
   async getComponentData(componentName: string): Promise<any | null> {
     try {
       if (!this.userId) {
-        console.log('User ID не установлен.');
+        console.log('User ID not set.');
         return null;
       }
       const docRef = doc(this.UserDB, 'profiles', this.userId);
@@ -58,11 +49,11 @@ export class FirestoreService {
         const data = docSnap.data();
         return data[componentName] ?? null;
       } else {
-        console.log(`Документ profiles пользователя ${this.userId} не найден.`);
+        console.log(`User profiles document ${this.userId} not found.`);
         return null;
       }
     } catch (error) {
-      console.error('Ошибка при получении данных компонента:', error);
+      console.error('Error while retrieving component data:', error);
       return null;
     }
   }
@@ -75,7 +66,7 @@ export class FirestoreService {
   async storeComponentData(componentName: string, data: any): Promise<void> {
     try {
       if (!this.userId) {
-        console.log('User ID не установлен.');
+        console.log('User ID not installed.');
         return;
       }
       const docRef = doc(this.UserDB, 'profiles', this.userId);
@@ -86,11 +77,14 @@ export class FirestoreService {
       }
       updatedData[componentName] = data;
       await setDoc(docRef, updatedData);
-      console.log(`Данные компонента "${componentName}" успешно сохранены для пользователя ${this.userId}.`);
+      console.log(`Component data "${componentName}" successfully saved for the user ${this.userId}.`);
     } catch (error) {
-      console.error('Ошибка при сохранении данных компонента:', error);
+      console.error('Error saving component data:', error);
     }
   }
+
+  
+
 }
 
 

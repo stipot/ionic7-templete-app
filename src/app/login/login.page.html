@@ -7,22 +7,22 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <ion-item lines="full">
       <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" required></ion-input>
+      <ion-input type="text" formControlName="email" required></ion-input>
     </ion-item>
     <ion-item lines="full">
       <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" required></ion-input>
+      <ion-input type="password" formControlName="password" required></ion-input>
     </ion-item>
     <div style="width:100%;display: flex; justify-content: center;">
-      <ion-button style="flex:1">
-        <ion-icon  type="submit" color="danger" expand="block-center">Sign In</ion-icon>
+      <ion-button style="flex:1" type="submit">
+        <ion-icon   color="danger" expand="block-center">Sign In</ion-icon>
         Sign In
       </ion-button>
       
-      <ion-button style="flex:1"  [routerLink]="['/forgot-password']" class="small-text">Sign Up
+      <ion-button style="flex:1"  [routerLink]="['/signup']" class="small-text">Sign Up
         <ion-icon >Sign Up</ion-icon></ion-button>
     </div>
   

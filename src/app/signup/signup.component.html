@@ -1,3 +1,5 @@
+<form [formGroup]="signupForm" (ngSubmit)="register()"></form>
+
 <ion-header>
   <ion-toolbar color="primary">
     <app-header [pageTitle]="pageTitle"></app-header>
@@ -63,7 +65,8 @@
 <ion-grid>
   <ion-row class="ion-justify-content-center">
   <ion-list lines="none">
-    <ion-item><ion-button class="signup-btn" type="submit" expand="block" size="default" style="min-width: 200px">Sign Up</ion-button></ion-item>
+    <ion-item>
+      <ion-button class="signup-btn" (click)="register()" type="submit" expand="block" size="default" style="min-width: 200px">Sign Up</ion-button></ion-item>
     <ion-row class="other-auth-options-row">
     </ion-row>
   </ion-list>
@@ -95,7 +98,7 @@
 
   <ion-grid >
     <ion-row class="ion-justify-content-center">
-      By creating an account you agree to our &nbsp;<a (click)="showPrivacyModal()">Privacy Policy</a>&nbsp;and&nbsp;<a>Terms of use</a>.
+      By creating an account you agree to our &nbsp;<a (click)="showPrivacyModal()">Privacy Policy</a>&nbsp;and&nbsp;<a (click)="showTermsOfServiceModal()">Terms of use</a>.
     </ion-row>
   </ion-grid>
 

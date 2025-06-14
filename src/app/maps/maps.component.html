@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{"MAP.TOP_TITTLE" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="map-section">
+    <h2>🚩 {{"MAP.SIMPLE_MAP" | translate}}</h2>
+    <p>{{"MAP.SIMPLE_MAP_TEXT" | translate}}</p>
+    <div class="map-card">
+      <div #mapContainer class="map"></div>
+    </div>
+  </div>
+  
+  <div class="map-section">
+    <h2>🏙️🚩 {{"MAP.MAP_WITH_POINT" | translate}}</h2>
+    <p>{{"MAP.MAP_WITH_POINT_TEXT" | translate}}</p>
+
+    <div class="map-card">
+      <div #mapWithMarker class="map"></div>
+    </div>
+
+  </div>
+
+</ion-content>

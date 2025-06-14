@@ -1,0 +1,155 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Shopping cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<div class="tabs">
+  <button 
+    class="tab-button" 
+    [class.active]="activeTab === 'list'"
+    (click)="switchTab('list')"
+  >
+    Список покупок
+  </button>
+  <button 
+    class="tab-button" 
+    [class.active]="activeTab === 'add'"
+    (click)="switchTab('add')"
+  >
+    Добавить товар
+  </button>
+  <button 
+    class="tab-button" 
+    [class.active]="activeTab === 'categories'"
+    (click)="switchTab('categories')"
+  >
+    Категории
+  </button>
+</div>
+
+<!-- Вкладка списка покупок -->
+<div *ngIf="activeTab === 'list'" class="list-container">
+  <div *ngFor="let category of categories" class="category-section">
+    <h3 class="category-title">{{ category.name }}</h3>
+    
+    <div *ngIf="getItemsByCategory(category.id).length > 0; else noItems">
+      <div *ngFor="let item of getItemsByCategory(category.id)" 
+           class="item"
+           [style.border-left]="'4px solid ' + getStatusColor(item.status)">
+        <div class="item-content">
+          <div class="item-details">
+            <span class="item-name">{{ item.name }}</span>
+            <span class="item-quantity">Кол-во: {{ item.quantity }}</span>
+          </div>
+          <div class="item-status">
+            <select 
+              [(ngModel)]="item.status" 
+              (change)="changeStatus(item.id, item.status)"
+              [style.color]="getStatusColor(item.status)"
+            >
+              <option *ngFor="let status of statusOptions" 
+                      [value]="status.value" 
+                      [style.color]="status.color">
+                {{ status.label }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <button class="delete-button" (click)="removeItem(item.id)">×</button>
+      </div>
+    </div>
+    
+    <ng-template #noItems>
+      <div class="no-items">Нет товаров в этой категории</div>
+    </ng-template>
+  </div>
+
+  <div *ngIf="categories.length === 0" class="empty-message">
+    Нет категорий. Создайте категории во вкладке "Категории"
+  </div>
+</div>
+
+<!-- Вкладка добавления товара -->
+<div *ngIf="activeTab === 'add'" class="add-form">
+  <div class="form-group">
+    <label for="itemName">Название товара</label>
+    <input 
+      type="text" 
+      id="itemName" 
+      [(ngModel)]="newItemName" 
+      placeholder="Введите название товара"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="quantity">Количество</label>
+    <input 
+      type="number" 
+      id="quantity" 
+      [(ngModel)]="newItemQuantity" 
+      min="1" 
+      value="1"
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="category">Категория</label>
+    <select 
+      id="category" 
+      [(ngModel)]="selectedCategoryId" 
+      class="category-select"
+    >
+      <option [ngValue]="null" disabled selected>Выберите категорию</option>
+      <option *ngFor="let category of categories" [ngValue]="category.id">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+
+  <button 
+    class="add-button" 
+    (click)="addItem()" 
+    [disabled]="!newItemName.trim() || !selectedCategoryId"
+  >
+    Добавить в список
+  </button>
+</div>
+
+<!-- Вкладка управления категориями -->
+<div *ngIf="activeTab === 'categories'" class="categories-form">
+  <div class="form-group">
+    <label for="newCategory">Новая категория</label>
+    <input 
+      type="text" 
+      id="newCategory" 
+      [(ngModel)]="newCategoryName" 
+      placeholder="Введите название категории"
+    >
+  </div>
+
+  <button 
+    class="add-button" 
+    (click)="addCategory()" 
+    [disabled]="!newCategoryName.trim()"
+  >
+    Добавить категорию
+  </button>
+
+  <div class="categories-list">
+    <h3>Список категорий</h3>
+    <div *ngFor="let category of categories" class="category-item">
+      <span>{{ category.name }}</span>
+      <button 
+        class="delete-button" 
+        (click)="removeCategory(category.id)"
+        [disabled]="getItemsByCategory(category.id).length > 0"
+      >
+        ×
+      </button>
+    </div>
+  </div>
+</div>
+</ion-content>

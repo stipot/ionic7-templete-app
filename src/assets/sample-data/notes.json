@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "Добавить новую вкладку",
+        "isActive": false
+    },
+    {
+        "id": 2,
+        "name": "Удалить сервис",
+        "isActive": false
+    },
+    {
+        "id": 3,
+        "name": "Написать README.md",
+        "isActive": true
+    }
+]

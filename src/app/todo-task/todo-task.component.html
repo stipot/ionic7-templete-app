@@ -1,36 +1,54 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="addMainTask()">➕ Задача</ion-button>
-      <ion-button (click)="addSubtask()">➕ Подзадача</ion-button>
-    </ion-buttons>
-    
-    <ion-buttons slot="end">
-      <ion-button (click)="removeLastTask()" color="danger">➖ Задача</ion-button>
-      <ion-button (click)="removeLastSubtask()" color="danger">➖ Подзадача</ion-button>
-    </ion-buttons>
+    <ion-title>Управление задачами</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let task of tasks" class="task-container">
-    <ion-item>
-      <ion-label position="stacked">Задача</ion-label>
+  <div *ngFor="let task of tasks; let last = last" class="task-row">
+    <ion-item class="task-item">
       <ion-textarea
+        id="task-{{task.id}}"
         [(ngModel)]="task.content"
-        placeholder="Введите основную задачу">
+        (click)="handleTaskClick(task.id)"
+        [ngClass]="'style-' + task.styleIndex"
+        placeholder="Основная задача"
+        [autoGrow]="false"
+      >
       </ion-textarea>
-    <div *ngFor="let subtask of task.subtasks" class="subtask-container">
-        <ion-textarea
+    </ion-item>
+
+    <ion-button class="compact-button add-subtask-button" (click)="addSubtask()"
+                [disabled]="tasks.length === 0">
+      <ion-icon name="list" slot="icon-only"></ion-icon>
+    </ion-button>
+
+    <div class="subtasks-row">
+      <div *ngFor="let subtask of task.subtasks" class="subtask-item">
+        <textarea
           id="subtask-{{task.id}}-{{subtask.id}}"
           [(ngModel)]="subtask.content"
           (click)="handleSubtaskClick(task.id, subtask.id)"
           [ngClass]="'style-' + subtask.styleIndex"
-          placeholder="Введите подзадачу">
-        </ion-textarea>
-    </div>    
-  </ion-item>
+          placeholder="Подзадача"
+          rows="1"
+          maxlength="200"
+        ></textarea>
+      </div>
+    </div>
+  </div>
 
+  <div *ngIf="tasks.length > 0" class="add-main-task-container">
+    <ion-button class="compact-button start-button" (click)="addMainTask()">
+      <ion-icon name="add" slot="icon-only"></ion-icon>
+      Добавить основную задачу
+    </ion-button>
+  </div>
 
+  <div *ngIf="tasks.length === 0" class="empty-state">
+    <ion-button class="start-button" (click)="addMainTask()">
+      <ion-icon name="rocket" slot="start"></ion-icon>
+      Создать первую задачу
+    </ion-button>
   </div>
 </ion-content>

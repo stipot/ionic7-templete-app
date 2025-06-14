@@ -3,8 +3,8 @@ import { Component, Renderer2 } from '@angular/core';
 interface Task {
   id: number;
   content: string;
+  styleIndex: number;
   subtasks: Subtask[];
-  styleIndex?: number
 }
 
 interface Subtask {
@@ -37,6 +37,7 @@ export class TodoTaskComponent {
     const newTask: Task = {
       id: this.generateTaskId(),
       content: '',
+      styleIndex: 0,
       subtasks: []
     };
     this.tasks.push(newTask);
@@ -45,12 +46,11 @@ export class TodoTaskComponent {
   addSubtask() {
     if (this.tasks.length > 0) {
       const lastTask = this.tasks[this.tasks.length - 1];
-      const newSubtask: Subtask = {
+      lastTask.subtasks.push({
         id: this.generateSubtaskId(lastTask.id),
         content: '',
         styleIndex: 0
-      };
-      lastTask.subtasks.push(newSubtask);
+      });
     }
   }
 
@@ -69,6 +69,14 @@ export class TodoTaskComponent {
     }
   }
 
+  handleTaskClick(taskId: number) {
+    const task = this.tasks.find(t => t.id === taskId);
+    if (task) {
+      task.styleIndex = (task.styleIndex + 1) % this.textStyles.length;
+      this.updateTaskStyle(taskId);
+    }
+  }
+
   handleSubtaskClick(taskId: number, subtaskId: string) {
     const task = this.tasks.find(t => t.id === taskId);
     if (task) {
@@ -80,16 +88,29 @@ export class TodoTaskComponent {
     }
   }
 
-  private updateSubtaskStyle(taskId: number, subtaskId: string) {
-    const textarea = document.querySelector(`#subtask-${taskId}-${subtaskId} textarea`);
-    if (textarea) {
-      this.renderer.removeStyle(textarea, 'text-decoration');
-      
+  private updateTaskStyle(taskId: number) {
+    const taskElement = document.querySelector(`#task-${taskId} textarea`);
+    if (taskElement) {
       const task = this.tasks.find(t => t.id === taskId);
-      const style = this.textStyles[task?.subtasks.find(s => s.id === subtaskId)?.styleIndex ?? 0];
-      
+      const style = this.textStyles[task?.styleIndex ?? 0];
+
+      this.renderer.removeStyle(taskElement, 'text-decoration');
       if (style !== 'normal') {
-        this.renderer.setStyle(textarea, 'text-decoration', style);
+        this.renderer.setStyle(taskElement, 'text-decoration', style);
+      }
+    }
+  }
+
+  private updateSubtaskStyle(taskId: number, subtaskId: string) {
+    const subtaskElement = document.querySelector(`#subtask-${taskId}-${subtaskId} textarea`);
+    if (subtaskElement) {
+      const task = this.tasks.find(t => t.id === taskId);
+      const subtask = task?.subtasks.find(s => s.id === subtaskId);
+      const style = this.textStyles[subtask?.styleIndex ?? 0];
+
+      this.renderer.removeStyle(subtaskElement, 'text-decoration');
+      if (style !== 'normal') {
+        this.renderer.setStyle(subtaskElement, 'text-decoration', style);
       }
     }
   }

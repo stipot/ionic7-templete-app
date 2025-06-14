@@ -1,7 +1,12 @@
 <ion-content class="scrollable-content">
-  <header>
-    <h1 class="large-text">Deals</h1>
-  </header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Deals</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
   <div class="header">
     <ion-img
@@ -9,16 +14,16 @@
       class="header-image">
     </ion-img>
   </div>
-
-  <div class="search-container">
-    <ion-searchbar [(ngModel)]="searchText" debounce="500" placeholder="Поиск"></ion-searchbar>
-    <button class="search-toggle-button" (click)="toggleSearchType()">
-      {{ searchType === 'name' ? 'Поиск по скидкам' : 'Поиск по названию' }}
-    </button>
-  </div>
+  
+<div class="search-container">
+  <ion-searchbar [(ngModel)]="searchText" debounce="500" placeholder="Поиск"></ion-searchbar>
+  <ion-button size="small" (click)="toggleSearchType()" fill="outline" color="primary" class="search-toggle-button">
+    {{ searchType === 'name' ? 'Поиск по скидкам' : 'Поиск по названию' }}
+  </ion-button>
+</div>
 
   <div class="deal-container">
-    <ng-container *ngFor="let product of products">
+    <ng-container *ngFor="let product of getProducts()">
       <ion-card class="deal-card">
 
         <ion-card-header>

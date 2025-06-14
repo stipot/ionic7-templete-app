@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { TranslateService } from '@ngx-translate/core';
+// import { title } from 'process';
+// import { url } from 'inspector';
+// import { Icon } from 'ionicons/dist/types/components/icon/icon';
 
 register();
 
@@ -31,6 +34,7 @@ export class AppComponent {
     { title: 'News', url: '/rss-data', icon: '' },
     { title: 'Notes', url: '/notes', icon: 'Пометки' },
     { title: 'ToDo list', url: '/todo-list', icon: 'todo-list' },
+    { title: 'ToDo task', url: '/todo-task', icon: 'todo-task'},
     { title: 'VideoPlayer', url: '/videoplayer', icon: '' },
     { title: 'filters', url: '/filters', icon: 'reader-outline' },
     { title: 'Validations', url: '/validations', icon: '' },

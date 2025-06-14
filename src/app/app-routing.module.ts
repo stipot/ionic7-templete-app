@@ -5,8 +5,10 @@ import { NotesComponent } from './notes/notes.component'
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from "./settings/settings.component"
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoTaskComponent } from './todo-task/todo-task.component';
 import {LoginPageModule } from "./login/login.module"
 import { FashionComponent } from './fashion/fashion.component';
+import { FashionDetailComponent } from './fashion-detail/fashion-detail.component';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component";
 import { SignupComponent } from './signup/signup.component';
 import { IntroComponent } from './intro/intro.component';
@@ -17,6 +19,8 @@ import {BarcodeScannerComponent} from './barcode-scanner/barcode-scanner.compone
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
 import {FrontLayoutComponent} from "./front-layout/front-layout.component"
 import {CameraComponent} from './camera/camera.component';
+
+
 
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 
@@ -130,12 +134,12 @@ const routes: Routes = [
     component: TodoListComponent
   },
   {
-    path: 'signup',
-    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
+    path: 'todo-task',
+    component: TodoTaskComponent
   },
   {
-    path: 'fashion',
-    component: FashionComponent
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
   },
   {
     path: 'filters',
@@ -212,19 +216,24 @@ const routes: Routes = [
     path: 'rsa',
     component: RsaComponent
   },
+  {
+    path: 'fashion', component: FashionComponent
+  },
 
+  {
+    path: 'fashion-detail', component: FashionDetailComponent
+  },
   {
     path: '**',
   redirectTo: 'page-not-found'
   },
-  
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }

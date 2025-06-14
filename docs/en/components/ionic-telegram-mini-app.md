@@ -1,43 +1,41 @@
-# Development of Functionality for "Telegram Mini-App"
+# Developing functionality for "Telegram Mini-App"
 
-This functionality is created to embed an Ionic application into a Telegram Mini-App.
+This functionality is designed to place an ionic application in Telegram Mini-App.
 
-The following services are used in this functionality: Firebase by Google & Telegram (BotFather).
+To deploy the application, you need to place it on the application server to get a public link.
 
-> Firebase:
+## FireBase:
+In the current case, the following services are used: Firebase from Google
 
- - Create an account in the service
+- Creating an account in the service
+- Creating a project inside the service
+- Creating a Database inside the service
+- Selecting a project and Initializing a project inside VSCodium: The console will give a link to enable API
+- Getting a link
 
- -  Create a project inside the service
+## Telegram:BotFather
+Also, to implement this service, telegram (Mini-App) was used, in particular the bot for creating bots (BotFather).
 
- -  Create a database inside the service
+- Create a bot using the command: /newbot
+- Create and configure a button to call the Mini-Application: /setmenubutton
+< First, insert the link https://ionic7-templete-app-public.web.app
+< Then name the button any convenient name
 
- -  Select the project and initialize it inside VSCodium: the console will provide a link to enable the API
+For further development of the project, you need to use Telegram instructions, for example:
 
- -  Obtain the URL
+---------
 
- -  Telegram: BotFather
-
- - Create a bot using the command: /newbot
-
- > Create and configure a button to launch the Mini-App: /setmenubutton
-    < First, insert the link https://ionic7-templete-app-public.web.app
-    < Then name the button with any convenient name
-
-> For further project development, you need to use Telegram instructions, for example:
-
-Using Telegram Bot API:
+Using the Telegram Bot API:
 
 In the Ionic application, implement interaction with the Telegram API via HTTP requests.
 
-To send messages, use a URL like:
+To send messages, use a URL like this:
 
-------------
-
+text
+```
 https://api.telegram.org/bot<token>/sendMessage?chat_id=<chat_id>&text=Your message
+```
+Here <token> is the bot token, and <chat_id> is the chat ID (can be obtained by sending a message to the bot and processing the response)
+----------
 
- where <token> is the bot token, and <chat_id> is the chat identifier (can be obtained by sending a message to the bot and processing the response).
- 
-------------
--- DONE --
-
+- ​​DONE --

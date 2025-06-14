@@ -17,9 +17,11 @@ import { environment } from '../environments/environment';
 
 // Компоненты
 import { FashionComponent } from './fashion/fashion.component';
+import { FashionDetailComponent } from './fashion-detail/fashion-detail.component';
 import { FormsComponent } from './forms/forms.component';
 import { NotesComponent } from './notes/notes.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
+import { TodoTaskComponent } from './todo-task/todo-task.component';
 import { KanbanComponent } from './kanban/kanban.component';
 import { ContactCardComponent } from './contact-card/contact-card.component';
 import { SettingsComponent } from './settings/settings.component';
@@ -54,9 +56,11 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     FashionComponent,
+    FashionDetailComponent,
     FormsComponent,
     NotesComponent,
     TodoListComponent,
+    TodoTaskComponent,
     KanbanComponent,
     ContactCardComponent,
     SettingsComponent,

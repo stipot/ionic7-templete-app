@@ -42,6 +42,7 @@ import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { MoodCalendarComponent } from './mood-calendar/mood-calendar.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 import { MiniblogComponent } from './miniblog/miniblog.component';
+import { AddBlogModalComponent } from './miniblog/add-blog-modal.component';
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -75,7 +76,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CameraComponent,
     FileViewerComponent,
     DragAndDropComponent,
-    MiniblogComponent
+    MiniblogComponent,
+    AddBlogModalComponent
   ],
   imports: [
     BrowserModule,

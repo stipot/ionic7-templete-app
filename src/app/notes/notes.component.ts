@@ -24,7 +24,7 @@ export class NotesComponent implements OnInit {
 
   activeNote: Note = {id: "", name: "", isActive: false, order: 0}
   private readonly STORAGE_KEY = 'notes_app_data'
-  private readonly ORDER_STEP = 100
+  private readonly ORDER_STEP = 1
 
   constructor(protected http: HttpClient, private db: UserService, private cdRef: ChangeDetectorRef) {
     this.downloadData()

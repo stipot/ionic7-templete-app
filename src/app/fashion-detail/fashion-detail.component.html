@@ -11,19 +11,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding" size="6">
-  <div class="catalog">
-  <div *ngFor="let item of items" class="item">
-    <ion-img 
+<div *ngIf="item" class="detail">
+  <h2>{{ item.name }}</h2>
+  <p>Цена: {{ item.price }} руб</p>
+  <p>Описание: {{ item.description }}</p>
+  <p>Количество: {{ item.quantity }}</p>
+  <ion-img 
   src="./assets/sample-images/{{item.images}}" class="product-image"></ion-img>
-    <h2>{{ item.name }}</h2>
-    <p>Цена: {{ item.price }} руб</p>
-    <p>Описание: {{ item.description }}</p>
-    <ion-button (click)="goToItem(item)">Подробнее</ion-button>
-  </div>
-  </div>
-
-  
-
-  
-
+  <ion-button (click)="goBack()">Назад в каталог</ion-button>
+</div>
 </ion-content>

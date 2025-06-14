@@ -9,7 +9,8 @@
   "Notes": "Notes",
   "filters": "Filters",
   "validations": "validations",
-  "privacy-policy": "Privacy",
+  "TERMS_TITLE": "Terms of service",
+  "PRIVACY_TITLE": "Privacy policy",
   "login": "Login",
   "Семья": "Family",
   "Друзья": "Friends",
@@ -43,6 +44,7 @@
   "Время": "Time",
   "Цена": "Pice",
   "Загрузка": "Loading",
+  "Shopping": "Shopping",
   "RSA": "RSA encription",
 
   "Recipes": "Recipes",
@@ -91,7 +93,19 @@
     "ACTIVE": "Active",
     "LANGUAGE_REMINDER": "Changing the language",
     "GOTO_SETTINGS": "Go to settings"
+  },
+  "MAP": {
+    "TOP_TITTLE": "YandexMap",
+    "YANDEXMAPS": "YandexMap",
+    "SIMPLE_MAP": "Simple map",
+    "SIMPLE_MAP_TEXT": "This is the Yandex base map embedded in the Ionic component.",
+    "MAP_WITH_POINT": "Map with a dot",
+    "MAP_WITH_POINT_TEXT": "This is already a map with a label through the code and processing by the click coordinate."
+  },
+  "NOTES":{
+    "TEXT_NOTES": "Text of the note",
+    "NOTES_MISSING": "Notes are missing",
+    "DELETE_MARKED_NOTES": "Delete all marked notes"
   }
-
 
 }

@@ -45,13 +45,18 @@
   left: 10px;
   display: flex;
   align-items: center;
-  padding: 5px 10px;
+  padding: 6px 12px;
+  border-radius: 16px;
+  background: var(--ion-color-primary);
+  color: white;
+  font-size: 0.85rem;
+  gap: 8px; /* Отступ между favicon и текстом */
 }
 
 .favicon {
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
+  width: 20px; /* Увеличен размер для читаемости */
+  height: 20px;
+  object-fit: contain;
 }
 
 .news-title {
@@ -130,6 +135,14 @@ ion-grid.news-container {
 @media (max-width: 576px) {
   .news-card {
     margin: 5px 0;
+  }
+  .badge-overlay {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+  .favicon {
+    width: 16px;
+    height: 16px;
   }
 }
 

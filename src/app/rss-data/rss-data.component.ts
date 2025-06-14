@@ -37,7 +37,7 @@ interface NewsItem {
   pubDate: string;
   source: string;
   sourceGuid: string;
-  guid: string; // Добавляем GUID для новости
+  guid: string;
   favicon?: string;
 }
 
@@ -85,7 +85,7 @@ export class RssDataComponent implements OnInit {
     }
   ];
 
-  public feeds: NewsSource[] = []; // Массив лент новостей
+  public feeds: NewsSource[] = [];
   public newsItems: NewsItem[] = [];
   public feedItems: FeedItem[] = [];
   public favoriteNewsItems: NewsItem[] = [];
@@ -93,7 +93,7 @@ export class RssDataComponent implements OnInit {
   public isLoading: boolean = false;
   public sourceLoadingStatus: { [key: string]: boolean } = {};
   public feedForm!: FormGroup;
-  public favorites: string[] = []; // Список GUID избранных новостей
+  public favorites: string[] = [];
 
   public userData = initializeApp(environment.firebase, 'userData');
   public auth = getAuth(this.userData);
@@ -129,7 +129,7 @@ export class RssDataComponent implements OnInit {
   ngOnInit(): void {
     this.currentLang = this.translate.currentLang || this.translate.defaultLang;
     this.syncLanguageUI();
-    this.loadFavorites(); // Загружаем фавориты при инициализации
+    this.loadFavorites();
 
     this.translate.onLangChange.subscribe(event => {
       this.currentLang = event.lang;
@@ -146,27 +146,21 @@ export class RssDataComponent implements OnInit {
     this.loadFavoritesFromFirestore()
   }
 
-  
-  // Загрузка фаворитов из localStorage
   loadFavorites(): void {
     const savedFavorites = localStorage.getItem('favorites');
     this.favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
   }
 
-  // Сохранение фаворитов в localStorage и Firestore
-  async saveFavorites(): Promise<void> { // Убираем userId из аргументов
+  async saveFavorites(): Promise<void> {
     localStorage.setItem('favorites', JSON.stringify(this.favorites));
-    // Сохраняем в Firestore по пути particles -> userId -> 'favorites'
     await this.firestore.storeComponentData('favorites', this.favorites);
   }
 
-  // Проверка, находится ли новость в избранном
   isFavorite(newsGuid: string): boolean {
     return this.favorites.includes(newsGuid);
   }
 
-    // Переключение статуса избранного
-  async toggleFavorite(news: NewsItem): Promise<void> { // Убираем userId из аргументов
+  async toggleFavorite(news: NewsItem): Promise<void> {
     if (this.isFavorite(news.guid)) {
       this.favorites = this.favorites.filter(guid => guid !== news.guid);
     } else {
@@ -175,14 +169,13 @@ export class RssDataComponent implements OnInit {
     await this.saveFavorites();
   }
 
-    // Загрузка фаворитов из Firestore при инициализации
-  async loadFavoritesFromFirestore(): Promise<void> { // Убираем userId из аргументов
+  async loadFavoritesFromFirestore(): Promise<void> {
     const favoritesFromDB = await this.firestore.getComponentData('favorites');
     if (favoritesFromDB && Array.isArray(favoritesFromDB)) {
       this.favorites = favoritesFromDB;
-      this.saveFavorites(); // Обновляем localStorage
+      this.saveFavorites();
     } else {
-      this.loadFavorites(); // fallback на localStorage
+      this.loadFavorites();
     }
   }
 
@@ -190,21 +183,19 @@ export class RssDataComponent implements OnInit {
     const feedsFromDB = await this.firestore.getComponentData('feeds');
     if (feedsFromDB && Array.isArray(feedsFromDB)) {
       this.feedItems = feedsFromDB;
-      localStorage.setItem('feedItems', JSON.stringify(this.feedItems)); // кешируем
+      localStorage.setItem('feedItems', JSON.stringify(this.feedItems));
     } else {
       const feedsFromLocal = localStorage.getItem('feedItems');
       if (feedsFromLocal) {
         this.feedItems = JSON.parse(feedsFromLocal);
       } else {
-        this.feedItems = []; // или дефолтные данные
+        this.feedItems = [];
       }
     }
   }
   
   async saveFeedItems(): Promise<void> {
-    // Сохраняем в localStorage
     localStorage.setItem('feedItems', JSON.stringify(this.feedItems));
-    // Сохраняем в Firebase
     await this.firestore.storeComponentData('feeds', this.feedItems);
   }
   
@@ -276,7 +267,6 @@ export class RssDataComponent implements OnInit {
               const xmlDoc = parser.parseFromString(response, 'application/xml');
               const items = xmlDoc.querySelectorAll('item');
 
-              
               items.forEach((item) => {
                 const newsTitle = item.querySelector('title')?.textContent || '';
                 const newsGuid = md5(newsTitle);
@@ -288,7 +278,7 @@ export class RssDataComponent implements OnInit {
                   pubDate: item.querySelector('pubDate')?.textContent || '',
                   source: source.name,
                   sourceGuid: source.guid,
-                  guid: newsGuid, // Генерируем уникальный GUID для новости
+                  guid: newsGuid,
                   favicon: ''
                 };
                 
@@ -322,19 +312,25 @@ export class RssDataComponent implements OnInit {
     this.newsItems.forEach(item => {
       const source = this.newsSources.find(s => s.guid === item.sourceGuid);
       if (source) {
-        const url = new URL(source.url);
-        const domain = url.hostname;
-        const faviconUrl = `https://${domain}/favicon.ico`;
+        try {
+          const url = new URL(source.url);
+          const domain = url.hostname;
+          // Используем Google Favicon API для надежного получения favicon
+          const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
 
-        this.http.head(faviconUrl, { observe: 'response' })
-          .subscribe({
-            next: () => {
-              item.favicon = faviconUrl;
-            },
-            error: () => {
-              item.favicon = `https://via.placeholder.com/16x16?text=${encodeURIComponent(item.source || 'News')}`;
-            }
-          });
+          // Проверяем доступность favicon через img load
+          const img = new Image();
+          img.src = faviconUrl;
+          img.onload = () => {
+            item.favicon = faviconUrl;
+          };
+          img.onerror = () => {
+            item.favicon = `https://via.placeholder.com/16x16?text=${encodeURIComponent(item.source || 'News')}`;
+          };
+        } catch (error) {
+          console.error(`Error parsing URL for favicon: ${source.url}`, error);
+          item.favicon = `https://via.placeholder.com/16x16?text=${encodeURIComponent(item.source || 'News')}`;
+        }
       }
     });
   }
@@ -453,7 +449,7 @@ export class RssDataComponent implements OnInit {
     };
     this.feedItems.unshift(newItem);
     this.startEditing(newItem);
-    this.saveFeedItems(); // сохраняем массив
+    this.saveFeedItems();
   }
 
   deleteFeedItem(item: FeedItem): void {
@@ -469,7 +465,6 @@ export class RssDataComponent implements OnInit {
     }
   }
 
-  // Экспорт лент в OPML
   exportToOPML(): void {
     const opml = this.generateOPML();
     const blob = new Blob([opml], { type: 'text/xml' });
@@ -483,7 +478,6 @@ export class RssDataComponent implements OnInit {
     window.URL.revokeObjectURL(url);
   }
 
-  // Генерация OPML-файла
   private generateOPML(): string {
     const dateCreated = new Date().toISOString();
     let opml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
@@ -505,7 +499,6 @@ export class RssDataComponent implements OnInit {
     return opml;
   }
 
-  // Импорт лент из OPML
   importFromOPML(event: any): void {
     const file = event.target.files[0];
     if (!file) return;
@@ -518,7 +511,6 @@ export class RssDataComponent implements OnInit {
     reader.readAsText(file);
   }
 
-  // Парсинг OPML-файла
   private parseOPML(opmlText: string): void {
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(opmlText, 'application/xml');
@@ -573,9 +565,4 @@ export class RssDataComponent implements OnInit {
     updatedData['feeds'] = feedsData;
     await setDoc(docRef, updatedData);
   }
-  
-
 }
-
-
-

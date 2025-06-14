@@ -10,26 +10,12 @@
   <ion-card *ngFor="let blog of blogs">
     <ion-card-header>
       <ion-card-title>{{blog.name}}</ion-card-title>
-      <ion-card-subtitle>{{blog.chapter}}</ion-card-subtitle>
+      <ion-card-subtitle><ion-badge color="primary">{{blog.chapter}}</ion-badge></ion-card-subtitle>
       <ion-img [src]="blog.src"></ion-img>
     </ion-card-header>
   
     <ion-card-content>
       {{blog.text}}
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Yoasobi и не только. Песни которые стоит послушать в мае</ion-card-title>
-      <ion-card-subtitle><ion-badge color="primary">Музыка</ion-badge></ion-card-subtitle>
-      <ion-img
-  src="https://starrail.guru/wp-content/uploads/2024/07/feysyao-portret-971x546-optimized.png"
-  alt="The Wisconsin State Capitol building in Madison, WI at night"
-></ion-img>
-    </ion-card-header>
-  
-    <ion-card-content>
-      Вот наступил май. За это время весной вышло несколько ярких релизов. В этой статье будут преставлены топ песн для майских прогулок.
     </ion-card-content>
   </ion-card>
   <ion-fab slot="fixed" horizontal="left" vertical="bottom">

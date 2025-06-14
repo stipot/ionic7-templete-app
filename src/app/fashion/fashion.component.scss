@@ -1,92 +1,22 @@
-div.main-body{
-    background: rgb(0, 0, 0);
-    color: black;
-    height: 100%;
-    overflow-y:scroll; 
-    position:relative;
-}
-
-.goods_list{
+.catalog {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: 200px;
+  }
+
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
     justify-content: center;
-}
-
-#dialog-prd {
-    align-items: center;
-}
-
-.product-card{
-    --ion-item-background: #ffffff;
-    background-color: #ffffff;
-    height: 360px;
-    width: 360px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    word-wrap: break-all;
-    margin-right: 5px;
-    margin-left: 25px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-}
-
-.product-name{
-    color: black;
-    white-space: nowrap;
-    font-size: 20px;
-    text-align: bottom;
-    padding: auto;
-    display: flex;
-    margin-top: 2px;
-}
-
-.ion-padding{
-    display: flex;
-    align-items: center;
-}
-
-.product-img{
-    height: 250px;
-    width: 250px;
-    margin-top: 8px;
-    display: flex;
-    text-align: center;
-    align-items: center;
-}
-
-.btn-close{
-    display: flex;
-    justify-content: flex-end;
-    margin-left: 100%;
-}
-
-.prd-price{
-    color: rgb(0, 0, 0);
-    white-space: nowrap;
-    font-size: 20px;
-    text-align: bottom;
-    margin-top: 2px;
-    padding: auto;
-    display: flex;
-}
-
-.prd-quan{
-    color: rgb(0, 0, 0);
-    white-space: nowrap;
-    font-size: 20px;
-    text-align: bottom;
-    margin-top: 15px;
-    padding: auto;
-    display: flex;
-}
-
-div[scrollx=true],div[scrolly=true] {
-    position: relative;
-    overflow: scroll;
-}
-
-div[scrolly=true] {
-   overflow-y: scroll;
-}
+    padding: 16px;
+  }
+  

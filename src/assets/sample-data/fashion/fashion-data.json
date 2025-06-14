@@ -1,24 +1,19 @@
 [
     {
-        "name": "Хлеб",
-        "description" : "Мука, 250мл воды, масло растительное 2,5 ложки, дрожжи сухие 11гр, сахар одна столовая ложка, соль 1,5 ложки",
-        "price" : 80,
-        "picture" : "https://img1.russianfood.com/dycontent/images_upl/106/big_105949.jpg",
-        "quantity" : 176
+      "name": "Футболка",
+      "description": "Удобная хлопковая футболка",
+      "price": 1000,
+      "quantity": 10,
+      "images": ["71170.61_25_1000x1000.jpg"
+      ]
     },
     {
-        "name": "Борщ",
-        "description" : "Вода, Свинини/говядина, свекла, морковь, лук, масло, томатная паста",
-        "price" : 500,
-        "picture" : "https://www.gastronom.ru/binfiles/images/20220907/b7f6fa22.jpg",
-        "quantity" : 224
-    },
-    {
-        "name": "Оливье",
-        "description" : "Картофель, Морковь, яйца, горох, огурцы, колбаса, лук, укроп",
-        "price" : 300,
-        "picture" : "https://www.gastronom.ru/binfiles/images/20180119/b17ee29a.jpg",
-        "quantity" : 83
+      "name": "Джинсы",
+      "description": "Классические джинсы с высокой посадкой",
+      "price": 2500,
+      "quantity": 5,
+      "images":["9bmh8ohai3brhkugiqbiw3ood4um4cmsyj2nisj8.jpg"
 
+      ]
     }
-]
+  ]

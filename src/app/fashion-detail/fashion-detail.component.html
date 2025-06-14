@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+    </ion-buttons>
+    <ion-title>
+      Drag and drop
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" size="6">
+<div *ngIf="item" class="detail">
+  <h2>{{ item.name }}</h2>
+  <p>Цена: {{ item.price }} руб</p>
+  <p>Описание: {{ item.description }}</p>
+  <p>Количество: {{ item.quantity }}</p>
+  <ion-img 
+  src="./assets/sample-images/{{item.images}}" class="product-image"></ion-img>
+  <ion-button (click)="goBack()">Назад в каталог</ion-button>
+</div>
+</ion-content>

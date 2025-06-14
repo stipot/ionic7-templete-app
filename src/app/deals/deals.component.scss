@@ -1,0 +1,42 @@
+ion-toolbar.transparent-toolbar {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+}
+
+.header-image {
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.deal-container {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 10px; 
+}
+
+.deal-card {
+  flex: 1 1 auto; 
+  min-width: 150px;
+  max-width: 430px; 
+}
+
+.deal-logo {
+  height: 150px;
+  width: 150px; 
+  margin-bottom: 10px; 
+}
+
+.custom-button {
+  background-color: pink;
+  border: 2px solid white;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}

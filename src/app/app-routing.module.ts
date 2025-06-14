@@ -41,6 +41,7 @@ import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RsaComponent } from './rsa/rsa.component';
 import { MapsComponent } from './maps/maps.component';
+import { MiniblogComponent } from './miniblog/miniblog.component';
 
 const routes: Routes = [
   
@@ -92,6 +93,10 @@ const routes: Routes = [
   {
     path: 'mood-calendar',
     component: MoodCalendarComponent
+  },
+  {
+    path: 'miniblog',
+    component: MiniblogComponent
   },
   {
     path: 'contact-card',

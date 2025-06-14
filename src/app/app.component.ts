@@ -18,6 +18,7 @@ export class AppComponent {
     {title: 'MAP.YANDEXMAPS', url: '/maps', icon: ''},
     { title: 'FrontPage', url: '/front-layout', icon: 'front-layout' },
     { title: 'Settings', url: '/settings', icon: '' },
+    { title: 'Miniblog', url: '/miniblog', icon: '' },
     { title: 'Intro', url: '/intro', icon: '' },
     { title: 'Water-tracker', url: '/water-tracker', icon: '' },
     { title: 'Kanban', url: '/kanban', icon: '' },

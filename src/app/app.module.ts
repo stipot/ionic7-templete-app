@@ -46,6 +46,8 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { RsaComponent } from './rsa/rsa.component';
 import { MapsComponent } from './maps/maps.component';
+import { MiniblogComponent } from './miniblog/miniblog.component';
+import { AddBlogModalComponent } from './miniblog/add-blog-modal.component';
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -82,7 +84,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     DragAndDropComponent,
     ShoppingListComponent,
     MapsComponent,
-    RsaComponent
+    RsaComponent,
+    MiniblogComponent,
+    AddBlogModalComponent
   ],
   imports: [
     BrowserModule,

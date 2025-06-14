@@ -45,6 +45,7 @@
     "chart.js": "^4.4.7",
     "chartjs-plugin-annotation": "^3.1.0",
     "firebase": "^10.14.1",
+    "i": "^0.3.7",
     "ionic": "^5.4.16",
     "ionic-native": "^2.9.0",
     "ionicons": "^7.0.0",

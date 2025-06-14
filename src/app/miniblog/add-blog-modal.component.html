@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Новая запись</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Отмена</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Название</ion-label>
+    <ion-input [(ngModel)]="blog.name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Раздел</ion-label>
+    <ion-input [(ngModel)]="blog.chapter"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Изображение (URL)</ion-label>
+    <ion-input [(ngModel)]="blog.src"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Текст</ion-label>
+    <ion-textarea [(ngModel)]="blog.text"></ion-textarea>
+  </ion-item>
+  <ion-button expand="block" (click)="confirm()">Сохранить</ion-button>
+</ion-content>

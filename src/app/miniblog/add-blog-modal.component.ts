@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
@@ -10,16 +11,20 @@ export class AddBlogModalComponent {
     name: '',
     chapter: '',
     src: '',
-    text: ''
+    text: '',
   };
 
-  constructor(private modalCtrl: ModalController) {}
+  constructor(private modalController: ModalController) {}
 
   cancel() {
-    this.modalCtrl.dismiss(null, 'cancel');
+    this.modalController.dismiss();
   }
 
   confirm() {
-    this.modalCtrl.dismiss(this.blog, 'confirm');
+    if (this.blog.name && this.blog.chapter && this.blog.text) {
+      this.modalController.dismiss(this.blog);
+    } else {
+      alert('Пожалуйста, заполните обязательные поля.');
+    }
   }
 }

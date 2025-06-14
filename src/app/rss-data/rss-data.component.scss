@@ -1,118 +1,140 @@
+/* rss-data.component.scss */
+.equal-segment {
+  flex: 1 1 0;
+  text-align: center;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+}
+
+.news-container {
+  padding: 0 10px;
+}
+
+.news-card {
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* Соотношение сторон 16:9 для изображений */
+}
+
+.image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+.favicon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.news-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Ограничение на 2 строки */
+  -webkit-box-orient: vertical;
+}
+
+.news-description {
+  font-size: 0.9rem;
+  color: #555;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Ограничение на 3 строки */
+  -webkit-box-orient: vertical;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.iframe-container {
+  height: 100%;
+  min-height: 400px;
+}
+
+.iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.preview-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: #f4f4f4;
+  color: #888;
+}
+
 .language-selector {
   padding: 16px;
-  background-color: #f9f reigns9f9;
 }
 
 .language-list {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
+  margin: 10px 0;
 }
 
 .language-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #ddd;
-}
-
-.language-item span {
-  font-size: 16px;
+  gap: 5px;
 }
 
 .language-reminder {
-  margin-top: 16px;
-  text-align: center;
-  border-top: 1px solid #ddd;
-  padding-top: 10px;
-}
-
-ion-note {
-  color: var(--ion-color-danger);
-  font-size: 0.8rem;
-  padding-left: 16px;
-}
-
-ion-item.ion-invalid.ion-touched {
-  --border-color: var(--ion-color-danger);
-}
-
-.error-container {
-  padding: 8px 16px;
-  color: var(--ion-color-danger);
-}
-
-ion-item {
-  --padding-start: 0;
-  --inner-padding-end: 0;
-}
-
-ion-textarea, ion-input {
-  --background: #f8f8f8;
-  --border-radius: 4px;
-}
-
-/* rss-data.component.scss - добавим стили для preview */
-.preview-placeholder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  background-color: #f8f8f8;
-  border: 1px dashed #ccc;
-  color: #666;
-}
-
-.iframe-container {
-  width: 100%;
-  height: 100%;
-}
-
-.iframe-container iframe {
-  width: 100%;
-  height: 600px; /* Можно настроить высоту по вашему усмотрению */
-}
-
-/* Добавляем отступ между label и select */
-.filter-item ion-label {
-  margin-right: 10px; /* Отступ между "Фильтр по источнику" и выпадающим списком */
-}
-
-/* Стили для favicon */
-.favicon {
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
-  vertical-align: middle;
-}
-
-.badge-overlay {
-  display: flex;
-  align-items: center;
-}
-
-/* Стили для кнопки импорта */
-.import-button {
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-}
-
-/* Стили для контейнера кнопок */
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-top: 10px;
 }
 
-/* Стили для кнопки звездочки */
-ion-button[fill="clear"] ion-icon[name="star"] {
-  color: var(--ion-color-warning); /* Желтый цвет для заполненной звездочки */
+/* Адаптивные стили для новостей */
+ion-grid.news-container {
+  --ion-grid-padding: 0;
 }
 
-ion-button[fill="clear"] ion-icon[name="star-outline"] {
-  color: var(--ion-color-medium); /* Серый цвет для пустой звездочки */
+@media (max-width: 576px) {
+  .news-card {
+    margin: 5px 0;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .news-card {
+    margin: 5px;
+  }
 }

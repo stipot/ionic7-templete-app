@@ -1,6 +1,9 @@
 <!-- rss-data.component.html -->
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <app-header [pageTitle]="pageTitle"></app-header>
   </ion-toolbar>
 </ion-header>
@@ -47,7 +50,7 @@
         <!-- Вторая строка: новости и iframe -->
         <ion-row>
           <!-- Колонка с новостями -->
-          <ion-col [size]="previewMode ? 4 : 12" >
+          <ion-col [size]="previewMode ? 4 : 12">
             <div *ngIf="isLoading" class="loading-container">
               <ion-spinner name="crescent"></ion-spinner>
               <p>Загрузка новостей...</p>
@@ -56,7 +59,13 @@
             <div class="news-container" *ngIf="!isLoading">
               <ion-grid>
                 <ion-row>
-                  <ion-col [size]="previewMode ? 12 : 4" *ngFor="let item of newsItems">
+                  <ion-col 
+                    size-xs="12" 
+                    size-sm="6" 
+                    size-md="4" 
+                    size-lg="3" 
+                    *ngFor="let item of newsItems"
+                  >
                     <ion-card class="news-card">
                       <div class="image-container">
                         <img [src]="item.image" [alt]="item.title" (error)="handleImageError(item)" />
@@ -216,7 +225,3 @@
     </div>
   </div>
 </ion-content>
-
-
-
-

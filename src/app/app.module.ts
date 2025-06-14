@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 
 // Компоненты
 import { FashionComponent } from './fashion/fashion.component';
+import { FashionDetailComponent } from './fashion-detail/fashion-detail.component';
 import { FormsComponent } from './forms/forms.component';
 import { NotesComponent } from './notes/notes.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -55,6 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     FashionComponent,
+    FashionDetailComponent,
     FormsComponent,
     NotesComponent,
     TodoListComponent,

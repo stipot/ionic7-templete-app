@@ -28,6 +28,7 @@ export class FrontLayoutComponent implements OnInit {
     { c_name: "User", c_desc: "Компанент управление пользователем", link: "/user" },
     { c_name: "contact card", c_desc: "Компонент Контактная Карта представляет собой личный профиль, как в социальных сетях.", link: "/contact-card" },
     { c_name: "Рецепты", c_desc: "Компонент разработан для отображения и взаимодействия с рецептами в приложении Angular.", link: "/recipes" },
+    { c_name: "Shopping", c_desc: "Компонент Shopping предоставляет пользователям информацию о списке товаров", link: "/shopping" },
     { c_name: "cryptorates", c_desc: "Компонент CryptoRates предоставляет пользователям актуальную информацию о ценах на популярные криптовалюты.", link: "/cryptorates" },
     { c_name: "Новости", c_desc: "Компонент разработан для получения и отображения данных из RSS-ленты в приложении Angular.", link: "/rss-data" },
     { c_name: "Заметки", c_desc: "Компонент нужен для записи важных вещей чтобы не забыть.", link: "/notes" },

@@ -25,7 +25,7 @@ export class MiniblogComponent{
     {
       name: "Yoasobi и не только. Песни которые стоит послушать в мае",
       chapter: "Музыка",
-      src: "https://starrail.guru/wp-content/uploads/2024/07/feysyao-portret-971x546-optimized.png",
+      src: "https://avatars.mds.yandex.net/get-mpic/4362548/2a0000018b436a406ec158e0734001651186/orig",
       text: "Вот наступил май. За это время весной вышло несколько ярких релизов. В этой статье будут преставлены топ песн для майских прогулок.",
     }
   ];

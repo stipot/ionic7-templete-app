@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -33,6 +34,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { RssDataComponent } from './rss-data/rss-data.component';
 import {DealsComponent} from './deals/deals.component';
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
+import {CalcModule} from './calc/calc.module'
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18s/', '.json')};
@@ -41,6 +44,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [AppComponent, FashionComponent, FormsComponent, NotesComponent, TodoListComponent, ContactCardComponent, SettingsComponent, UserComponent, PrivacyPolicyComponent, ForgotPasswordComponent,DealsComponent, BarcodeScannerComponent,  RssDataComponent, IntroComponent, TermsOfServiceComponent],
   imports: [
+    CalcModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,

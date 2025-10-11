@@ -42,9 +42,15 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RsaComponent } from './rsa/rsa.component';
 import { MapsComponent } from './maps/maps.component';
 import { MiniblogComponent } from './miniblog/miniblog.component';
+import { AppComponent } from './app.component';
+import { GazonComponent } from './gazon/gazon.component';
+import { GazonModule } from './gazon/gazon.module';
 
 const routes: Routes = [
-  
+  {
+    path: 'gazon',
+    component: GazonComponent
+  },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)

@@ -1,14 +1,20 @@
 <ion-header>
-  <ion-toolbar color='Danger'>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Calc</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Калькулятор</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <p>
-    calc works!
-  </p>
+<ion-content class="ion-padding">
+  <div class="calculator">
+    <ion-input [(ngModel)]="expression" readonly></ion-input>
+
+    <div class="buttons">
+      <ion-button expand="block" color="light" *ngFor="let btn of buttons" (click)="onButtonClick(btn)">
+        {{ btn }}
+      </ion-button>
+    </div>
+
+    <ion-button expand="block" color="success" (click)="calculate()">=</ion-button>
+    <ion-button expand="block" color="danger" (click)="clear()">C</ion-button>
+  </div>
 </ion-content>

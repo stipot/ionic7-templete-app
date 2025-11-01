@@ -1,0 +1,17 @@
+.calculator {
+  max-width: 300px;
+  margin: auto;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+
+ion-input {
+  font-size: 1.5em;
+  text-align: right;
+  margin-bottom: 10px;
+}

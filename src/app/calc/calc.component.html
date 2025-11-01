@@ -6,7 +6,7 @@
 
 <ion-content class="ion-padding">
   <div class="calculator">
-    <ion-input [(ngModel)]="expression" readonly></ion-input>
+    <ion-input [(ngModel)]="expression" readonly placeholder="0"></ion-input>
 
     <div class="buttons">
       <ion-button expand="block" color="light" *ngFor="let btn of buttons" (click)="onButtonClick(btn)">

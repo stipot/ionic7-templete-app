@@ -1,17 +1,27 @@
 .calculator {
-  max-width: 300px;
+  max-width: 340px;
   margin: auto;
+  background: #99437c;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-  margin-top: 10px;
+  gap: 8px;
 }
-
+ion-button {
+  --border-radius: 12px;
+  font-size: 1.1em;
+  height: 50px;
+}
 ion-input {
   font-size: 1.5em;
   text-align: right;
   margin-bottom: 10px;
+}
+ion-content {
+  --background: radial-gradient(circle at top left, #ecb1f1, #121212);
 }

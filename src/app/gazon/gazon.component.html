@@ -29,13 +29,13 @@
         <ion-item>
           <ion-icon name="cloud-upload" slot="start" color="primary"></ion-icon>
           <ion-label class="ion-text-wrap">
-            <strong>1. Загрузите файл</strong> — выберите файл для конвертации
+            <strong>1. Загрузите файл</strong> — формат определится автоматически
           </ion-label>
         </ion-item>
         <ion-item>
           <ion-icon name="document" slot="start" color="primary"></ion-icon>
           <ion-label class="ion-text-wrap">
-            <strong>2. Выберите форматы</strong> — укажите исходный и целевой форматы
+            <strong>2. Выберите целевой формат</strong> — в какой формат конвертировать
           </ion-label>
         </ion-item>
         <ion-item>
@@ -66,6 +66,7 @@
           type="file" 
           (change)="onFileSelected($event)"
           #fileInput
+          accept="image/*"
         >
       </ion-item>
 
@@ -77,6 +78,7 @@
             <h3><strong>Файл:</strong> {{ selectedFile.name }}</h3>
             <p><strong>Размер:</strong> {{ fileSize }}</p>
             <p><strong>Тип:</strong> {{ selectedFile.type || 'Не определен' }}</p>
+            <p><strong>Определенный формат:</strong> {{ sourceFormat ? sourceFormat.toUpperCase() : 'Не удалось определить' }}</p>
           </ion-label>
           <ion-button fill="clear" color="danger" (click)="clearFile()" slot="end">
             <ion-icon name="close-circle"></ion-icon>
@@ -95,25 +97,21 @@
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- селект исходного формата -->
+      <!-- селект исходного формата (только для отображения) -->
       <ion-item>
         <ion-label position="stacked">
           <ion-icon name="arrow-back" slot="start"></ion-icon>
-          Исходный формат
+          Исходный формат (авто)
         </ion-label>
         <ion-select 
           [(ngModel)]="sourceFormat" 
-          placeholder="Выберите исходный формат"
+          placeholder="Определится автоматически"
           interface="action-sheet"
+          [disabled]="true"
         >
-          <ion-select-option value="jpg">JPG (Изображение)</ion-select-option>
-          <ion-select-option value="png">PNG (Изображение)</ion-select-option>
-          <ion-select-option value="pdf">PDF (Документ)</ion-select-option>
-          <ion-select-option value="doc">DOC (Документ Word)</ion-select-option>
-          <ion-select-option value="docx">DOCX (Документ Word)</ion-select-option>
-          <ion-select-option value="txt">TXT (Текстовый файл)</ion-select-option>
-          <ion-select-option value="mp4">MP4 (Видео)</ion-select-option>
-          <ion-select-option value="mp3">MP3 (Аудио)</ion-select-option>
+          <ion-select-option [value]="sourceFormat">
+            {{ sourceFormat ? sourceFormat.toUpperCase() + ' (авто)' : 'Не выбран' }}
+          </ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -129,13 +127,16 @@
           interface="action-sheet"
         >
           <ion-select-option value="jpg">JPG (Изображение)</ion-select-option>
+          <ion-select-option value="jpeg">JPEG (Изображение)</ion-select-option>
           <ion-select-option value="png">PNG (Изображение)</ion-select-option>
-          <ion-select-option value="pdf">PDF (Документ)</ion-select-option>
-          <ion-select-option value="doc">DOC (Документ Word)</ion-select-option>
-          <ion-select-option value="docx">DOCX (Документ Word)</ion-select-option>
-          <ion-select-option value="txt">TXT (Текстовый файл)</ion-select-option>
-          <ion-select-option value="mp4">MP4 (Видео)</ion-select-option>
-          <ion-select-option value="mp3">MP3 (Аудио)</ion-select-option>
+          <ion-select-option value="webp">WebP (Изображение)</ion-select-option>
+          <ion-select-option value="gif">GIF (Изображение)</ion-select-option>
+          <ion-select-option value="bmp">BMP (Изображение)</ion-select-option>
+          <ion-select-option value="ico">ICO (Иконка)</ion-select-option>
+          <ion-select-option value="tiff">TIFF (Изображение)</ion-select-option>
+          <ion-select-option value="svg">SVG (Векторное изображение)</ion-select-option>
+          <ion-select-option value="avif">AVIF (Современный формат)</ion-select-option>
+          <ion-select-option value="heic">HEIC (Формат Apple)</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -155,12 +156,24 @@
   <ion-button 
     expand="block" 
     (click)="convertFile()" 
-    [disabled]="!selectedFile || !sourceFormat || !targetFormat"
+    [disabled]="!selectedFile || !sourceFormat || !targetFormat || isLoading"
     size="large"
     class="ion-margin-top">
-    <ion-icon name="sync" slot="start"></ion-icon>
-    Конвертировать файл
-    <ion-icon name="download" slot="end"></ion-icon>
+    <ion-icon name="sync" slot="start" *ngIf="!isLoading"></ion-icon>
+    <ion-spinner *ngIf="isLoading" slot="start"></ion-spinner>
+    {{ isLoading ? 'Конвертация...' : 'Конвертировать файл' }}
+  </ion-button>
+
+  <!-- кнопка скачивания -->
+  <ion-button 
+    *ngIf="downloadUrl"
+    expand="block" 
+    (click)="downloadConvertedFile()" 
+    color="success"
+    size="large"
+    class="ion-margin-top">
+    <ion-icon name="download" slot="start"></ion-icon>
+    Скачать сконвертированный файл
   </ion-button>
 
   <!-- сообщение о результате -->

@@ -4,7 +4,7 @@ interface CalculatorButton {
   label: string;
   action: string;
   color: string;
-  handler: () => void;
+  value: string;
 }
 
 @Component({
@@ -22,41 +22,63 @@ export class CalcComponent implements OnInit {
 
   private initializeCalculatorButtons() {
     this.calculatorButtons = [
-      { label: 'C', action: 'clear', color: 'danger', handler: () => this.clear() },
-      { label: '( )', action: 'brackets', color: 'warning', handler: () => this.toggleBrackets() },
-      { label: '%', action: 'percentage', color: 'warning', handler: () => this.percentage() },
-      { label: '/', action: 'divide', color: 'warning', handler: () => this.onButtonClick('/') },
-      { label: '7', action: '7', color: 'light', handler: () => this.onButtonClick('7') },
-      { label: '8', action: '8', color: 'light', handler: () => this.onButtonClick('8') },
-      { label: '9', action: '9', color: 'light', handler: () => this.onButtonClick('9') },
-      { label: '*', action: 'multiply', color: 'warning', handler: () => this.onButtonClick('*') },
-      { label: '4', action: '4', color: 'light', handler: () => this.onButtonClick('4') },
-      { label: '5', action: '5', color: 'light', handler: () => this.onButtonClick('5') },
-      { label: '6', action: '6', color: 'light', handler: () => this.onButtonClick('6') },
-      { label: '-', action: 'subtract', color: 'warning', handler: () => this.onButtonClick('-') },
-      { label: '1', action: '1', color: 'light', handler: () => this.onButtonClick('1') },
-      { label: '2', action: '2', color: 'light', handler: () => this.onButtonClick('2') },
-      { label: '3', action: '3', color: 'light', handler: () => this.onButtonClick('3') },
-      { label: '+', action: 'add', color: 'warning', handler: () => this.onButtonClick('+') },
-      { label: '0', action: '0', color: 'light', handler: () => this.onButtonClick('0') },
-      { label: '.', action: 'decimal', color: 'medium', handler: () => this.onButtonClick('.') },
-      { label: '←', action: 'backspace', color: 'medium', handler: () => this.backspace() },
-      { label: '=', action: 'calculate', color: 'primary', handler: () => this.calculate() }
+      { label: 'C', action: 'clear', color: 'danger', value: 'clear' },
+      { label: '( )', action: 'brackets', color: 'warning', value: 'brackets' },
+      { label: '%', action: 'percentage', color: 'warning', value: 'percentage' },
+      { label: '/', action: 'divide', color: 'warning', value: '/' },
+      { label: '7', action: '7', color: 'light', value: '7' },
+      { label: '8', action: '8', color: 'light', value: '8' },
+      { label: '9', action: '9', color: 'light', value: '9' },
+      { label: '*', action: 'multiply', color: 'warning', value: '*' },
+      { label: '4', action: '4', color: 'light', value: '4' },
+      { label: '5', action: '5', color: 'light', value: '5' },
+      { label: '6', action: '6', color: 'light', value: '6' },
+      { label: '-', action: 'subtract', color: 'warning', value: '-' },
+      { label: '1', action: '1', color: 'light', value: '1' },
+      { label: '2', action: '2', color: 'light', value: '2' },
+      { label: '3', action: '3', color: 'light', value: '3' },
+      { label: '+', action: 'add', color: 'warning', value: '+' },
+      { label: '0', action: '0', color: 'light', value: '0' },
+      { label: '.', action: 'decimal', color: 'medium', value: '.' },
+      { label: '←', action: 'backspace', color: 'medium', value: 'backspace' },
+      { label: '=', action: 'calculate', color: 'primary', value: 'calculate' }
     ];
   }
 
-  onButtonClick(value: string) {
+  handleButtonClick(button: CalculatorButton) {
+    const value = button.value;
+
     if (this.expression === 'Ошибка') {
       this.expression = '';
     }
+
+    switch (value) {
+      case 'brackets':
+        this.toggleBrackets();
+        break;
+      case 'clear':
+        this.clear();
+        break;
+      case 'percentage':
+        this.percentage();
+        break;
+      case 'backspace':
+        this.backspace();
+        break;
+      case 'calculate':
+        this.calculate();
+        break;
+      default:
+        this.onButtonClick(value);
+        break;
+    }
+  }
+
+  onButtonClick(value: string) {
     this.expression += value;
   }
 
   toggleBrackets() {
-    if (this.expression === 'Ошибка') {
-      this.expression = '';
-    }
-    
     if (this.expression === '' || /[+\-*/(]$/.test(this.expression)) {
       this.expression += '(';
     } else {
@@ -102,10 +124,15 @@ export class CalcComponent implements OnInit {
   handleKeyboardEvent(event: KeyboardEvent) {
     const key = event.key;
 
-    if (/^[0-9+\-*/.()]$/.test(key)) {
-      this.onButtonClick(key);
+    if (/^[0-9+\-*/.()%]$/.test(key)) {
+      if (key === '%') {
+        this.percentage();
+      } else {
+        this.onButtonClick(key);
+      }
     }
     else if (key === 'Enter' || key === '=') {
+      event.preventDefault(); 
       this.calculate();
     }
     else if (key === 'Backspace') {

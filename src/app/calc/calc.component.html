@@ -13,7 +13,7 @@
         *ngFor="let button of calculatorButtons"
         expand="block" 
         [color]="button.color" 
-        (click)="button.handler()">
+        (click)="handleButtonClick(button)">
         {{ button.label }}
       </ion-button>
     </div>

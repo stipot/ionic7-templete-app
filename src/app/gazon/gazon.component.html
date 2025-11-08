@@ -1,47 +1,179 @@
 <!-- заголовок -->
-<ion-header class = 'ion-no-border'>
-  <ion-toolbar color = 'primary'>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Конвертер файлов</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <!-- карточка с описанием и инструкциями -->
-  <ion-card class = 'converter-card'>
+  <ion-card>
     <ion-card-header>
-      <ion-card-title>Конвертер форматов файлов</ion-card-title>
+      <ion-card-title>
+        <ion-icon name="sync" color="primary"></ion-icon>
+        Конвертер форматов файлов
+      </ion-card-title>
       <ion-card-subtitle>Простой и удобный инструмент для конвертации</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <p class= 'card-description'>
+      <p>
         Добро пожаловать в современный конвертер файлов! 
-        <br><br>
         Этот инструмент создан для того, чтобы сделать процесс конвертации файлов максимально простым, понятным и удобным в использовании.
       </p>
       
-      <p class = 'card-instructions'>
-        <br><br>
-        - КАК ИСПОЛЬЗОВАТЬ:
-        <br><br>
-        1. Загрузите файл, который хотите конвертировать;
-        <br>
-        2. Выберите исходный формат файла;
-        <br>
-        3. Укажите желаемый формат для конвертации;
-        <br>
-        4. Получите готовый файл в нужном формате!
-      </p>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-icon name="cloud-upload" slot="start" color="primary"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            <strong>1. Загрузите файл</strong> — выберите файл для конвертации
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="document" slot="start" color="primary"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            <strong>2. Выберите форматы</strong> — укажите исходный и целевой форматы
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="download" slot="start" color="primary"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            <strong>3. Конвертируйте</strong> — получите готовый файл в нужном формате!
+          </ion-label>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 
-  <!-- форма загрузки файла -->
-  <ion-item>
-    <ion-label>Выберите файл</ion-label>
-    <input 
-      type= 'file' 
-      (change) = 'onFileSelected($event)'
-      #fileInput
-    >
-  </ion-item>
+  <!-- секция загрузки файла -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="document" color="primary"></ion-icon>
+        Выбор файла
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="cloud-upload" slot="start"></ion-icon>
+          Выберите файл для конвертации
+        </ion-label>
+        <input 
+          type="file" 
+          (change)="onFileSelected($event)"
+          #fileInput
+        >
+      </ion-item>
 
+      <!-- информация о выбранном файле -->
+      <div *ngIf="selectedFile">
+        <ion-item>
+          <ion-icon name="document-outline" slot="start" color="primary"></ion-icon>
+          <ion-label>
+            <h3><strong>Файл:</strong> {{ selectedFile.name }}</h3>
+            <p><strong>Размер:</strong> {{ fileSize }}</p>
+            <p><strong>Тип:</strong> {{ selectedFile.type || 'Не определен' }}</p>
+          </ion-label>
+          <ion-button fill="clear" color="danger" (click)="clearFile()" slot="end">
+            <ion-icon name="close-circle"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- секция выбора форматов -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="options" color="primary"></ion-icon>
+        Настройки конвертации
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- селект исходного формата -->
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="arrow-back" slot="start"></ion-icon>
+          Исходный формат
+        </ion-label>
+        <ion-select 
+          [(ngModel)]="sourceFormat" 
+          placeholder="Выберите исходный формат"
+          interface="action-sheet"
+        >
+          <ion-select-option value="jpg">JPG (Изображение)</ion-select-option>
+          <ion-select-option value="png">PNG (Изображение)</ion-select-option>
+          <ion-select-option value="pdf">PDF (Документ)</ion-select-option>
+          <ion-select-option value="doc">DOC (Документ Word)</ion-select-option>
+          <ion-select-option value="docx">DOCX (Документ Word)</ion-select-option>
+          <ion-select-option value="txt">TXT (Текстовый файл)</ion-select-option>
+          <ion-select-option value="mp4">MP4 (Видео)</ion-select-option>
+          <ion-select-option value="mp3">MP3 (Аудио)</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- селект целевого формата -->
+      <ion-item>
+        <ion-label position="stacked">
+          <ion-icon name="arrow-forward" slot="start"></ion-icon>
+          Целевой формат
+        </ion-label>
+        <ion-select 
+          [(ngModel)]="targetFormat" 
+          placeholder="Выберите целевой формат"
+          interface="action-sheet"
+        >
+          <ion-select-option value="jpg">JPG (Изображение)</ion-select-option>
+          <ion-select-option value="png">PNG (Изображение)</ion-select-option>
+          <ion-select-option value="pdf">PDF (Документ)</ion-select-option>
+          <ion-select-option value="doc">DOC (Документ Word)</ion-select-option>
+          <ion-select-option value="docx">DOCX (Документ Word)</ion-select-option>
+          <ion-select-option value="txt">TXT (Текстовый файл)</ion-select-option>
+          <ion-select-option value="mp4">MP4 (Видео)</ion-select-option>
+          <ion-select-option value="mp3">MP3 (Аудио)</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- информация о конвертации -->
+      <div *ngIf="sourceFormat && targetFormat" class="ion-margin-top">
+        <ion-item lines="none">
+          <ion-icon name="information-circle" slot="start" color="primary"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            <small>Конвертация: {{ sourceFormat | uppercase }} → {{ targetFormat | uppercase }}</small>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- кнопка конвертации -->
+  <ion-button 
+    expand="block" 
+    (click)="convertFile()" 
+    [disabled]="!selectedFile || !sourceFormat || !targetFormat"
+    size="large"
+    class="ion-margin-top">
+    <ion-icon name="sync" slot="start"></ion-icon>
+    Конвертировать файл
+    <ion-icon name="download" slot="end"></ion-icon>
+  </ion-button>
+
+  <!-- сообщение о результате -->
+  <div *ngIf="conversionResult" class="ion-margin-top">
+    <ion-card [color]="conversionResult.success ? 'success' : 'danger'">
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-icon [name]="conversionResult.success ? 'checkmark-circle' : 'alert-circle'" slot="start"></ion-icon>
+          <ion-label class="ion-text-wrap">
+            {{ conversionResult.message }}
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

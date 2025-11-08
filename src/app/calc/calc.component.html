@@ -6,15 +6,16 @@
 
 <ion-content class="ion-padding">
   <div class="calculator">
-    <ion-input [(ngModel)]="expression" readonly placeholder="0"></ion-input>
+    <ion-input [(ngModel)]="expression" readonly placeholder="0" class="display"></ion-input>
 
     <div class="buttons">
-      <ion-button expand="block" color="light" *ngFor="let btn of buttons" (click)="onButtonClick(btn)">
-        {{ btn }}
+      <ion-button 
+        *ngFor="let button of calculatorButtons"
+        expand="block" 
+        [color]="button.color" 
+        (click)="button.handler()">
+        {{ button.label }}
       </ion-button>
     </div>
-
-    <ion-button expand="block" color="success" (click)="calculate()">=</ion-button>
-    <ion-button expand="block" color="danger" (click)="clear()">C</ion-button>
   </div>
 </ion-content>

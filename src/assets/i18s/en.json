@@ -40,8 +40,22 @@
     "CALCULATOR": {
       "TITLE": "Calculator",
       "BASIC": "Basic",
-      "ADVANCED": "ADVANCED"
+      "ADVANCED": "Advanced"
+    },
+    "FORM": {
+      "TITLE": "Form with calculator integration",
+      "SUBTITLE": "Use calculator to fill in fields",
+      "AMOUNT_LABEL": "Amount",
+      "AMOUNT_PLACEHOLDER": "Enter value or use calculator",
+      "RESULT_LABEL": "Calculation result",
+      "USE_RESULT_BUTTON": "Use result",
+      "CLEAR_FORM_BUTTON": "Clear form"
+    },
+    "POPUP": {
+      "TITLE": "Form calculator",
+      "SUBTITLE": "Calculate value and press \"Apply\"",
+      "APPLY_BUTTON": "Apply result",
+      "CLOSE_BUTTON": "Close"
     }
-
-    
+  
   }

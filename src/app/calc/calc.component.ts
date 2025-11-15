@@ -20,12 +20,35 @@ export class CalcComponent implements OnInit, OnDestroy {
   isExtendedMode: boolean = false;
   extendedButtons: CalculatorButton[] = [];
   
+  inputValue: string = '';
+  calculationResult: string = '';
+  showCalculator: boolean = false;
+  popupExpression: string = '';
+  
+  titleText: string = 'Калькулятор';
+  basicText: string = 'Обычный';
+  advancedText: string = 'Расширенный';
+  formTitle: string = 'Форма с интеграцией калькулятора';
+  formSubtitle: string = 'Используйте калькулятор для заполнения полей';
+  amountLabel: string = 'Сумма';
+  amountPlaceholder: string = 'Введите значение или используйте калькулятор';
+  resultLabel: string = 'Результат вычислений';
+  useResultButton: string = 'Использовать результат';
+  clearFormButton: string = 'Очистить форму';
+  popupTitle: string = 'Калькулятор для формы';
+  popupSubtitle: string = 'Вычислите значение и нажмите "Применить"';
+  applyButton: string = 'Применить результат';
+  closeButton: string = 'Закрыть';
+  
   private langSub!: Subscription;
 
   constructor(private translate: TranslateService) {}
 
-  ngOnInit() {
-    this.langSub = this.translate.onLangChange.subscribe(() => {
+  async ngOnInit() {
+    await this.loadTranslations();
+    
+    this.langSub = this.translate.onLangChange.subscribe(async () => {
+      await this.loadTranslations();
     });
     
     this.initializeCalculatorButtons();
@@ -36,6 +59,50 @@ export class CalcComponent implements OnInit, OnDestroy {
     if (this.langSub) {
       this.langSub.unsubscribe();
     }
+  }
+
+  private async loadTranslations() {
+    this.titleText = await this.translate.get('CALCULATOR.TITLE').toPromise();
+    this.basicText = await this.translate.get('CALCULATOR.BASIC').toPromise();
+    this.advancedText = await this.translate.get('CALCULATOR.ADVANCED').toPromise();
+    this.formTitle = await this.translate.get('FORM.TITLE').toPromise();
+    this.formSubtitle = await this.translate.get('FORM.SUBTITLE').toPromise();
+    this.amountLabel = await this.translate.get('FORM.AMOUNT_LABEL').toPromise();
+    this.amountPlaceholder = await this.translate.get('FORM.AMOUNT_PLACEHOLDER').toPromise();
+    this.resultLabel = await this.translate.get('FORM.RESULT_LABEL').toPromise();
+    this.useResultButton = await this.translate.get('FORM.USE_RESULT_BUTTON').toPromise();
+    this.clearFormButton = await this.translate.get('FORM.CLEAR_FORM_BUTTON').toPromise();
+    this.popupTitle = await this.translate.get('POPUP.TITLE').toPromise();
+    this.popupSubtitle = await this.translate.get('POPUP.SUBTITLE').toPromise();
+    this.applyButton = await this.translate.get('POPUP.APPLY_BUTTON').toPromise();
+    this.closeButton = await this.translate.get('POPUP.CLOSE_BUTTON').toPromise();
+  }
+
+  openCalculator() {
+    this.showCalculator = true;
+    this.popupExpression = this.inputValue || '';
+  }
+
+  closeCalculator() {
+    this.showCalculator = false;
+  }
+
+  applyCalculation() {
+    if (this.popupExpression && this.popupExpression !== 'Ошибка') {
+      this.calculationResult = this.popupExpression;
+    }
+    this.showCalculator = false;
+  }
+
+  useCalculation() {
+    if (this.calculationResult) {
+      this.inputValue = this.calculationResult;
+    }
+  }
+
+  clearForm() {
+    this.inputValue = '';
+    this.calculationResult = '';
   }
 
   private initializeCalculatorButtons() {
@@ -65,43 +132,30 @@ export class CalcComponent implements OnInit, OnDestroy {
 
   private initializeExtendedButtons() {
     this.extendedButtons = [
-      // Ряд 1 - базовые операции
       { label: 'C', action: 'clear', color: 'danger', value: 'clear' },
       { label: '( )', action: 'brackets', color: 'warning', value: 'brackets' },
       { label: '%', action: 'percentage', color: 'warning', value: 'percentage' },
       { label: '/', action: 'divide', color: 'warning', value: '/' },
-      
-      // Ряд 2 - научные функции 1
       { label: 'log', action: 'log', color: 'tertiary', value: 'log' },
       { label: 'ln', action: 'ln', color: 'tertiary', value: 'ln' },
       { label: '√', action: 'sqrt', color: 'tertiary', value: 'sqrt' },
       { label: 'xʸ', action: 'power', color: 'tertiary', value: 'power' },
-      
-      // Ряд 3 - научные функции 2
       { label: 'sin', action: 'sin', color: 'tertiary', value: 'sin' },
       { label: 'cos', action: 'cos', color: 'tertiary', value: 'cos' },
       { label: 'π', action: 'pi', color: 'tertiary', value: 'pi' },
       { label: 'e', action: 'e', color: 'tertiary', value: 'e' },
-
-      // Ряд 4 - цифры 7-9 и умножение
       { label: '7', action: '7', color: 'light', value: '7' },
       { label: '8', action: '8', color: 'light', value: '8' },
       { label: '9', action: '9', color: 'light', value: '9' },
       { label: '*', action: 'multiply', color: 'warning', value: '*' },
-      
-      // Ряд 5 - цифры 4-6 и вычитание
       { label: '4', action: '4', color: 'light', value: '4' },
       { label: '5', action: '5', color: 'light', value: '5' },
       { label: '6', action: '6', color: 'light', value: '6' },
       { label: '-', action: 'subtract', color: 'warning', value: '-' },
-      
-      // Ряд 6 - цифры 1-3 и сложение
       { label: '1', action: '1', color: 'light', value: '1' },
       { label: '2', action: '2', color: 'light', value: '2' },
       { label: '3', action: '3', color: 'light', value: '3' },
       { label: '+', action: 'add', color: 'warning', value: '+' },
-      
-      // Ряд 7 - ноль, точка, backspace, равно
       { label: '0', action: '0', color: 'light', value: '0' },
       { label: '.', action: 'decimal', color: 'medium', value: '.' },
       { label: '←', action: 'backspace', color: 'medium', value: 'backspace' },
@@ -118,148 +172,130 @@ export class CalcComponent implements OnInit, OnDestroy {
   }
 
   handleButtonClick(button: CalculatorButton) {
-    const value = button.value;
+    this.handleCalculatorButton(button, 'main');
+  }
 
-    if (this.expression === 'Ошибка') {
-      this.expression = '';
+  handlePopupButtonClick(button: CalculatorButton) {
+    this.handleCalculatorButton(button, 'popup');
+  }
+
+  private handleCalculatorButton(button: CalculatorButton, type: 'main' | 'popup') {
+    const value = button.value;
+    const currentExpression = type === 'main' ? this.expression : this.popupExpression;
+    const setExpression = (expr: string) => {
+      if (type === 'main') {
+        this.expression = expr;
+      } else {
+        this.popupExpression = expr;
+      }
+    };
+
+    if (currentExpression === 'Ошибка') {
+      setExpression('');
     }
 
     switch (value) {
       case 'brackets':
-        this.toggleBrackets();
+        setExpression(this.toggleBracketsLogic(currentExpression));
         break;
       case 'clear':
-        this.clear();
+        setExpression('');
         break;
       case 'percentage':
-        this.percentage();
+        setExpression(this.percentageLogic(currentExpression));
         break;
       case 'backspace':
-        this.backspace();
+        setExpression(currentExpression.slice(0, -1));
         break;
       case 'calculate':
-        this.calculate();
+        setExpression(this.calculateLogic(currentExpression));
         break;
       case 'sqrt':
-        this.addFunction('sqrt(');
+        setExpression(this.addFunctionLogic(currentExpression, 'sqrt('));
         break;
       case 'power':
-        this.onButtonClick('**');
+        setExpression(currentExpression + '**');
         break;
       case 'sin':
-        this.addFunction('sin(');
+        setExpression(this.addFunctionLogic(currentExpression, 'sin('));
         break;
       case 'cos':
-        this.addFunction('cos(');
+        setExpression(this.addFunctionLogic(currentExpression, 'cos('));
         break;
       case 'pi':
-        this.onButtonClick(Math.PI.toString());
+        setExpression(currentExpression + Math.PI.toString());
         break;
       case 'log':
-        this.addFunction('log(');
+        setExpression(this.addFunctionLogic(currentExpression, 'log('));
         break;
       case 'ln':
-        this.addFunction('ln(');
+        setExpression(this.addFunctionLogic(currentExpression, 'ln('));
         break;
       case 'e':
-        this.onButtonClick(Math.E.toString());
+        setExpression(currentExpression + Math.E.toString());
         break;
       default:
-        this.onButtonClick(value);
+        setExpression(currentExpression + value);
         break;
     }
   }
 
-  onButtonClick(value: string) {
-    this.expression += value;
-  }
-
-  addFunction(funcName: string) {
-    if (this.expression === '' || /[+\-*/(^]$/.test(this.expression)) {
-      this.expression += funcName;
-    } else if (/[\d).]$/.test(this.expression)) {
-      this.expression += '*' + funcName;
-    } else {
-      this.expression += funcName;
-    }
-  }
-
-  toggleBrackets() {
-    if (this.expression === '' || /[+\-*/(]$/.test(this.expression)) {
-      this.expression += '(';
+  private toggleBracketsLogic(expr: string): string {
+    if (expr === '' || /[+\-*/(]$/.test(expr)) {
+      return expr + '(';
     } else {
       let balance = 0;
-      for (let i = 0; i < this.expression.length; i++) {
-        if (this.expression[i] === '(') balance++;
-        if (this.expression[i] === ')') balance--;
+      for (let i = 0; i < expr.length; i++) {
+        if (expr[i] === '(') balance++;
+        if (expr[i] === ')') balance--;
       }
       
-      if (balance > 0 && (/[0-9)]$/.test(this.expression))) {
-        this.expression += ')';
+      if (balance > 0 && (/[0-9)]$/.test(expr))) {
+        return expr + ')';
       } else {
-        if (/[0-9)]$/.test(this.expression)) {
-          this.expression += '*(';
+        if (/[0-9)]$/.test(expr)) {
+          return expr + '*(';
         } else {
-          this.expression += '(';
+          return expr + '(';
         }
       }
     }
   }
 
-  percentage() {
+  private percentageLogic(expr: string): string {
     try {
-      if (this.expression.trim() === '') return;
+      if (expr.trim() === '') return expr;
       
-      const numbers = this.expression.match(/(\d+(?:\.\d+)?)$/);
+      const numbers = expr.match(/(\d+(?:\.\d+)?)$/);
       if (numbers) {
         const lastNumber = parseFloat(numbers[0]);
         const percent = lastNumber / 100;
-        this.expression = this.expression.slice(0, -numbers[0].length) + percent.toString();
+        return expr.slice(0, -numbers[0].length) + percent.toString();
       } else {
-        let safeExpression = this.expression.replace(/×/g, '*');
+        let safeExpression = expr.replace(/×/g, '*');
         const result = eval(safeExpression) / 100;
-        this.expression = result.toString();
+        return result.toString();
       }
-      
     } catch (e) {
-      this.expression = 'Ошибка';
+      return 'Ошибка';
     }
   }
 
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    const key = event.key;
-
-    if (key === '^') {
-      event.preventDefault();
-      this.onButtonClick('**');
-      return;
-    }
-
-    if (/^[0-9+\-*/.()%]$/.test(key)) {
-      if (key === '%') {
-        this.percentage();
-      } else {
-        this.onButtonClick(key);
-      }
-    }
-    else if (key === 'Enter' || key === '=') {
-      event.preventDefault(); 
-      this.calculate();
-    }
-    else if (key === 'Backspace') {
-      this.backspace();
-    }
-    else if (key === 'Escape' || key.toLowerCase() === 'c') {
-      this.clear();
+  private addFunctionLogic(expr: string, funcName: string): string {
+    if (expr === '' || /[+\-*/(^]$/.test(expr)) {
+      return expr + funcName;
+    } else if (/[\d).]$/.test(expr)) {
+      return expr + '*' + funcName;
+    } else {
+      return expr + funcName;
     }
   }
 
-  calculate() {
+  private calculateLogic(expr: string): string {
     try {
-      if (this.expression.trim() === '') return;
+      if (expr.trim() === '') return expr;
       
-      let safeExpression = this.expression
+      let safeExpression = expr
         .replace(/sqrt\(/g, 'Math.sqrt(')
         .replace(/sin\(/g, 'Math.sin(')
         .replace(/cos\(/g, 'Math.cos(')
@@ -281,14 +317,12 @@ export class CalcComponent implements OnInit, OnDestroy {
       const result = new Function('return ' + safeExpression)();
       
       if (!isFinite(result) || isNaN(result)) {
-        this.expression = 'Ошибка';
-        return;
+        return 'Ошибка';
       }
       
-      this.expression = this.roundResult(result).toString();
-      
+      return this.roundResult(result).toString();
     } catch (e) {
-      this.expression = 'Ошибка';
+      return 'Ошибка';
     }
   }
 
@@ -296,11 +330,56 @@ export class CalcComponent implements OnInit, OnDestroy {
     return Math.round(num * 10000000000) / 10000000000;
   }
 
-  clear() {
-    this.expression = '';
-  }
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    const key = event.key;
 
-  backspace() {
-    this.expression = this.expression.slice(0, -1);
+    if (key === '^') {
+      event.preventDefault();
+      if (this.showCalculator) {
+        this.popupExpression += '**';
+      } else {
+        this.expression += '**';
+      }
+      return;
+    }
+
+    if (/^[0-9+\-*/.()%]$/.test(key)) {
+      if (key === '%') {
+        if (this.showCalculator) {
+          this.popupExpression = this.percentageLogic(this.popupExpression);
+        } else {
+          this.expression = this.percentageLogic(this.expression);
+        }
+      } else {
+        if (this.showCalculator) {
+          this.popupExpression += key;
+        } else {
+          this.expression += key;
+        }
+      }
+    }
+    else if (key === 'Enter' || key === '=') {
+      event.preventDefault();
+      if (this.showCalculator) {
+        this.popupExpression = this.calculateLogic(this.popupExpression);
+      } else {
+        this.expression = this.calculateLogic(this.expression);
+      }
+    }
+    else if (key === 'Backspace') {
+      if (this.showCalculator) {
+        this.popupExpression = this.popupExpression.slice(0, -1);
+      } else {
+        this.expression = this.expression.slice(0, -1);
+      }
+    }
+    else if (key === 'Escape' || key.toLowerCase() === 'c') {
+      if (this.showCalculator) {
+        this.popupExpression = '';
+      } else {
+        this.expression = '';
+      }
+    }
   }
 }

@@ -7,11 +7,25 @@
 .display {
   font-size: 2em;
   text-align: right;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   --background: #f8f9fa;
   --color: #000;
   --padding-start: 16px;
   --padding-end: 16px;
+}
+
+.mode-switcher-under-display {
+  margin-bottom: 15px;
+  
+  ion-segment {
+    --background: var(--ion-color-light);
+  }
+  
+  ion-segment-button {
+    --color: var(--ion-color-medium);
+    --color-checked: var(--ion-color-primary);
+    --indicator-color: var(--ion-color-primary);
+  }
 }
 
 .buttons {
@@ -21,8 +35,24 @@
 }
 
 ion-button {
-  height: 60px;
-  font-size: 1.2em;
-  --border-radius: 10px;
+  height: 55px; 
+  font-size: 1.1em;
+  --border-radius: 8px;
+  
+  &.extended-button {
+    font-size: 0.85em;
+    --background: #6c757d;
+    --background-hover: #5a6268;
+    --background-activated: #545b62;
+  }
+  
+  &[class*="span-2"] {
+    grid-column: span 2;
+  }
 }
-// Интерфейс описывающий структуру данных моего веб-интерфейса(кнопки), создать переменную с экземпляром моего интерфейса, нужен метод для отображения интерфейса калькулятора на основе экземпляра данных
+
+@media (min-width: 400px) {
+  .calculator {
+    max-width: 350px;
+  }
+}

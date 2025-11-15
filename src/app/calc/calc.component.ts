@@ -15,9 +15,12 @@ interface CalculatorButton {
 export class CalcComponent implements OnInit {
   expression: string = '';
   calculatorButtons: CalculatorButton[] = [];
+  isExtendedMode: boolean = false;
+  extendedButtons: CalculatorButton[] = [];
 
   ngOnInit() {
     this.initializeCalculatorButtons();
+    this.initializeExtendedButtons();
   }
 
   private initializeCalculatorButtons() {
@@ -45,6 +48,53 @@ export class CalcComponent implements OnInit {
     ];
   }
 
+  private initializeExtendedButtons() {
+    this.extendedButtons = [
+      { label: 'C', action: 'clear', color: 'danger', value: 'clear' },
+      { label: '( )', action: 'brackets', color: 'warning', value: 'brackets' },
+      { label: '%', action: 'percentage', color: 'warning', value: 'percentage' },
+      { label: '/', action: 'divide', color: 'warning', value: '/' },
+      
+      { label: 'log', action: 'log', color: 'tertiary', value: 'log' },
+      { label: 'ln', action: 'ln', color: 'tertiary', value: 'ln' },
+      { label: '√', action: 'sqrt', color: 'tertiary', value: 'sqrt' },
+      { label: 'xʸ', action: 'power', color: 'tertiary', value: 'power' },
+      
+      { label: 'sin', action: 'sin', color: 'tertiary', value: 'sin' },
+      { label: 'cos', action: 'cos', color: 'tertiary', value: 'cos' },
+      { label: 'π', action: 'pi', color: 'tertiary', value: 'pi' },
+      { label: 'e', action: 'e', color: 'tertiary', value: 'e' },
+      
+      { label: '7', action: '7', color: 'light', value: '7' },
+      { label: '8', action: '8', color: 'light', value: '8' },
+      { label: '9', action: '9', color: 'light', value: '9' },
+      { label: '*', action: 'multiply', color: 'warning', value: '*' },
+
+      { label: '4', action: '4', color: 'light', value: '4' },
+      { label: '5', action: '5', color: 'light', value: '5' },
+      { label: '6', action: '6', color: 'light', value: '6' },
+      { label: '-', action: 'subtract', color: 'warning', value: '-' },
+      
+      { label: '1', action: '1', color: 'light', value: '1' },
+      { label: '2', action: '2', color: 'light', value: '2' },
+      { label: '3', action: '3', color: 'light', value: '3' },
+      { label: '+', action: 'add', color: 'warning', value: '+' },
+      
+      { label: '0', action: '0', color: 'light', value: '0' },
+      { label: '.', action: 'decimal', color: 'medium', value: '.' },
+      { label: '←', action: 'backspace', color: 'medium', value: 'backspace' },
+      { label: '=', action: 'calculate', color: 'primary', value: 'calculate' }
+    ];
+  }
+
+  toggleMode() {
+    this.isExtendedMode = !this.isExtendedMode;
+  }
+
+  getCurrentButtons(): CalculatorButton[] {
+    return this.isExtendedMode ? this.extendedButtons : this.calculatorButtons;
+  }
+
   handleButtonClick(button: CalculatorButton) {
     const value = button.value;
 
@@ -68,6 +118,30 @@ export class CalcComponent implements OnInit {
       case 'calculate':
         this.calculate();
         break;
+      case 'sqrt':
+        this.addFunction('sqrt(');
+        break;
+      case 'power':
+        this.onButtonClick('**');
+        break;
+      case 'sin':
+        this.addFunction('sin(');
+        break;
+      case 'cos':
+        this.addFunction('cos(');
+        break;
+      case 'pi':
+        this.onButtonClick(Math.PI.toString());
+        break;
+      case 'log':
+        this.addFunction('log(');
+        break;
+      case 'ln':
+        this.addFunction('ln(');
+        break;
+      case 'e':
+        this.onButtonClick(Math.E.toString());
+        break;
       default:
         this.onButtonClick(value);
         break;
@@ -76,6 +150,30 @@ export class CalcComponent implements OnInit {
 
   onButtonClick(value: string) {
     this.expression += value;
+  }
+
+  addFunction(funcName: string) {
+    if (this.expression === '' || /[+\-*/(^]$/.test(this.expression)) {
+      this.expression += funcName;
+    } 
+    else if (/[\d).]$/.test(this.expression)) {
+      this.expression += '*' + funcName;
+    }
+    else {
+      this.expression += funcName;
+    }
+  }
+
+  sqrt() {
+    this.addFunction('sqrt(');
+  }
+
+  logFunction(func: string) {
+    this.addFunction(func + '(');
+  }
+
+  trigFunction(func: string) {
+    this.addFunction(func + '(');
   }
 
   toggleBrackets() {
@@ -124,6 +222,12 @@ export class CalcComponent implements OnInit {
   handleKeyboardEvent(event: KeyboardEvent) {
     const key = event.key;
 
+    if (key === '^') {
+      event.preventDefault();
+      this.onButtonClick('**');
+      return;
+    }
+
     if (/^[0-9+\-*/.()%]$/.test(key)) {
       if (key === '%') {
         this.percentage();
@@ -147,30 +251,41 @@ export class CalcComponent implements OnInit {
     try {
       if (this.expression.trim() === '') return;
       
-      let balance = 0;
-      for (let i = 0; i < this.expression.length; i++) {
-        if (this.expression[i] === '(') balance++;
-        if (this.expression[i] === ')') balance--;
-      }
+      let safeExpression = this.expression
+        .replace(/sqrt\(/g, 'Math.sqrt(')
+        .replace(/sin\(/g, 'Math.sin(')
+        .replace(/cos\(/g, 'Math.cos(')
+        .replace(/log\(/g, 'Math.log10(')
+        .replace(/ln\(/g, 'Math.log(')
+        .replace(/π/g, Math.PI.toString())
+        .replace(/e/g, Math.E.toString());
       
-      let safeExpression = this.expression;
+      let balance = 0;
+      for (let i = 0; i < safeExpression.length; i++) {
+        if (safeExpression[i] === '(') balance++;
+        if (safeExpression[i] === ')') balance--;
+      }
       
       for (let i = 0; i < balance; i++) {
         safeExpression += ')';
       }
       
-      const result = eval(safeExpression);
+      const result = new Function('return ' + safeExpression)();
       
       if (!isFinite(result) || isNaN(result)) {
         this.expression = 'Ошибка';
         return;
       }
       
-      this.expression = result.toString();
+      this.expression = this.roundResult(result).toString();
       
     } catch (e) {
       this.expression = 'Ошибка';
     }
+  }
+
+  private roundResult(num: number): number {
+    return Math.round(num * 10000000000) / 10000000000;
   }
 
   clear() {

@@ -6,14 +6,30 @@
 
 <ion-content class="ion-padding">
   <div class="calculator">
+    <div class="calculator-header">
+      <h2>Калькулятор</h2>
+      <ion-button 
+        [color]="isExtendedMode ? 'tertiary' : 'medium'" 
+        (click)="toggleMode()"
+        class="mode-toggle-button"
+        fill="outline">
+        <ion-icon 
+          [name]="isExtendedMode ? 'calculator' : 'calculator-outline'" 
+          slot="start">
+        </ion-icon>
+        {{ isExtendedMode ? 'Расширенный' : 'Обычный' }}
+      </ion-button>
+    </div>
+
     <ion-input [(ngModel)]="expression" readonly placeholder="0" class="display"></ion-input>
 
     <div class="buttons">
       <ion-button 
-        *ngFor="let button of calculatorButtons"
+        *ngFor="let button of getCurrentButtons()"
         expand="block" 
         [color]="button.color" 
-        (click)="handleButtonClick(button)">
+        (click)="handleButtonClick(button)"
+        [class.extended-button]="button.color === 'tertiary'">
         {{ button.label }}
       </ion-button>
     </div>

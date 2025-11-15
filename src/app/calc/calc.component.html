@@ -1,27 +1,33 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Калькулятор</ion-title>
+    <ion-title>{{ isEnglish ? 'Calculator' : 'Калькулятор' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleLanguage()">
+        <ion-icon [name]="isEnglish ? 'language' : 'language-outline'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <div class="calculator">
-    <div class="calculator-header">
-      <h2>Калькулятор</h2>
-      <ion-button 
-        [color]="isExtendedMode ? 'tertiary' : 'medium'" 
-        (click)="toggleMode()"
-        class="mode-toggle-button"
-        fill="outline">
-        <ion-icon 
-          [name]="isExtendedMode ? 'calculator' : 'calculator-outline'" 
-          slot="start">
-        </ion-icon>
-        {{ isExtendedMode ? 'Расширенный' : 'Обычный' }}
-      </ion-button>
+    <div class="mode-switcher-under-display">
+      <ion-segment [value]="isExtendedMode ? 'scientific' : 'basic'" (ionChange)="toggleMode()">
+        <ion-segment-button value="basic">
+          <ion-label>{{ isEnglish ? 'Basic' : 'Обычный' }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="scientific">
+          <ion-label>{{ isEnglish ? 'Advanced' : 'Расширенный' }}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
     </div>
 
-    <ion-input [(ngModel)]="expression" readonly placeholder="0" class="display"></ion-input>
+    <ion-input 
+      [(ngModel)]="expression" 
+      readonly 
+      [placeholder]="isEnglish ? '0' : '0'" 
+      class="display">
+    </ion-input>
 
     <div class="buttons">
       <ion-button 

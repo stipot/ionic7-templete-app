@@ -17,6 +17,20 @@ export class CalcComponent implements OnInit {
   calculatorButtons: CalculatorButton[] = [];
   isExtendedMode: boolean = false;
   extendedButtons: CalculatorButton[] = [];
+  isEnglish: boolean = false;
+
+  get modeButtonText(): string {
+    if (this.isEnglish) {
+      return this.isExtendedMode ? 'Basic Mode' : 'Advanced Mode';
+    } else {
+      return this.isExtendedMode ? 'Обычный режим' : 'Расширенный режим';
+    }
+  }
+  toggleLanguage() {
+    this.isEnglish = !this.isEnglish;
+  }
+
+
 
   ngOnInit() {
     this.initializeCalculatorButtons();

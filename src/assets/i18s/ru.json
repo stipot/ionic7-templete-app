@@ -33,5 +33,13 @@
     "password": "пароль",
     "ToDo list": "Список дел",
     "barcode-scanner": "QR-сканер",
-    "calc": "Калькулятор"
+    "calc": {
+      "name": "Калькулятор"
+    },
+    "CALCULATOR": {
+      "TITLE": "Калькулятор",
+      "BASIC": "Обычный",
+      "ADVANCED": "Расширенный"
+    }
+
   }

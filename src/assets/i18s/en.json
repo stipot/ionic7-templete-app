@@ -33,6 +33,15 @@
     "password": "password",
     "ToDo list": "ToDo list",
     "barcode-scanner": "Barcode Scanner",
-    "calc": "Сalculator"
+    "calc": {
+      "name": "Сalculator"
+    },
+    
+    "CALCULATOR": {
+      "TITLE": "Calculator",
+      "BASIC": "Basic",
+      "ADVANCED": "ADVANCED"
+    }
+
     
   }

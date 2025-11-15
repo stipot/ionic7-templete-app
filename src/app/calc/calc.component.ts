@@ -1,4 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 interface CalculatorButton {
   label: string;
@@ -12,29 +14,28 @@ interface CalculatorButton {
   templateUrl: './calc.component.html',
   styleUrls: ['./calc.component.scss'],
 })
-export class CalcComponent implements OnInit {
+export class CalcComponent implements OnInit, OnDestroy {
   expression: string = '';
   calculatorButtons: CalculatorButton[] = [];
   isExtendedMode: boolean = false;
   extendedButtons: CalculatorButton[] = [];
-  isEnglish: boolean = false;
+  
+  private langSub!: Subscription;
 
-  get modeButtonText(): string {
-    if (this.isEnglish) {
-      return this.isExtendedMode ? 'Basic Mode' : 'Advanced Mode';
-    } else {
-      return this.isExtendedMode ? 'Обычный режим' : 'Расширенный режим';
-    }
-  }
-  toggleLanguage() {
-    this.isEnglish = !this.isEnglish;
-  }
-
-
+  constructor(private translate: TranslateService) {}
 
   ngOnInit() {
+    this.langSub = this.translate.onLangChange.subscribe(() => {
+    });
+    
     this.initializeCalculatorButtons();
     this.initializeExtendedButtons();
+  }
+
+  ngOnDestroy() {
+    if (this.langSub) {
+      this.langSub.unsubscribe();
+    }
   }
 
   private initializeCalculatorButtons() {
@@ -64,36 +65,43 @@ export class CalcComponent implements OnInit {
 
   private initializeExtendedButtons() {
     this.extendedButtons = [
+      // Ряд 1 - базовые операции
       { label: 'C', action: 'clear', color: 'danger', value: 'clear' },
       { label: '( )', action: 'brackets', color: 'warning', value: 'brackets' },
       { label: '%', action: 'percentage', color: 'warning', value: 'percentage' },
       { label: '/', action: 'divide', color: 'warning', value: '/' },
       
+      // Ряд 2 - научные функции 1
       { label: 'log', action: 'log', color: 'tertiary', value: 'log' },
       { label: 'ln', action: 'ln', color: 'tertiary', value: 'ln' },
       { label: '√', action: 'sqrt', color: 'tertiary', value: 'sqrt' },
       { label: 'xʸ', action: 'power', color: 'tertiary', value: 'power' },
       
+      // Ряд 3 - научные функции 2
       { label: 'sin', action: 'sin', color: 'tertiary', value: 'sin' },
       { label: 'cos', action: 'cos', color: 'tertiary', value: 'cos' },
       { label: 'π', action: 'pi', color: 'tertiary', value: 'pi' },
       { label: 'e', action: 'e', color: 'tertiary', value: 'e' },
-      
+
+      // Ряд 4 - цифры 7-9 и умножение
       { label: '7', action: '7', color: 'light', value: '7' },
       { label: '8', action: '8', color: 'light', value: '8' },
       { label: '9', action: '9', color: 'light', value: '9' },
       { label: '*', action: 'multiply', color: 'warning', value: '*' },
-
+      
+      // Ряд 5 - цифры 4-6 и вычитание
       { label: '4', action: '4', color: 'light', value: '4' },
       { label: '5', action: '5', color: 'light', value: '5' },
       { label: '6', action: '6', color: 'light', value: '6' },
       { label: '-', action: 'subtract', color: 'warning', value: '-' },
       
+      // Ряд 6 - цифры 1-3 и сложение
       { label: '1', action: '1', color: 'light', value: '1' },
       { label: '2', action: '2', color: 'light', value: '2' },
       { label: '3', action: '3', color: 'light', value: '3' },
       { label: '+', action: 'add', color: 'warning', value: '+' },
       
+      // Ряд 7 - ноль, точка, backspace, равно
       { label: '0', action: '0', color: 'light', value: '0' },
       { label: '.', action: 'decimal', color: 'medium', value: '.' },
       { label: '←', action: 'backspace', color: 'medium', value: 'backspace' },
@@ -169,25 +177,11 @@ export class CalcComponent implements OnInit {
   addFunction(funcName: string) {
     if (this.expression === '' || /[+\-*/(^]$/.test(this.expression)) {
       this.expression += funcName;
-    } 
-    else if (/[\d).]$/.test(this.expression)) {
+    } else if (/[\d).]$/.test(this.expression)) {
       this.expression += '*' + funcName;
-    }
-    else {
+    } else {
       this.expression += funcName;
     }
-  }
-
-  sqrt() {
-    this.addFunction('sqrt(');
-  }
-
-  logFunction(func: string) {
-    this.addFunction(func + '(');
-  }
-
-  trigFunction(func: string) {
-    this.addFunction(func + '(');
   }
 
   toggleBrackets() {
@@ -309,6 +303,4 @@ export class CalcComponent implements OnInit {
   backspace() {
     this.expression = this.expression.slice(0, -1);
   }
-
-  constructor() { }
 }

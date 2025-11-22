@@ -8,14 +8,14 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { DragDropModule } from '@angular/cdk/drag-drop'; // Add Angular CDK module
-import { CommonModule } from '@angular/common'; // Required for NgFor
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 
-// Компоненты
 import { FashionComponent } from './fashion/fashion.component';
 import { FashionDetailComponent } from './fashion-detail/fashion-detail.component';
 import { FormsComponent } from './forms/forms.component';
@@ -31,27 +31,26 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { DealsComponent } from './deals/deals.component';
 import { BarcodeScannerComponent } from './barcode-scanner/barcode-scanner.component';
 import { IntroComponent } from './intro/intro.component';
-import { CameraComponent } from './camera/camera.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { AppSharedComponentsModule } from './shared/common.module';
-import{CryptoRatesComponent} from "./cryptorates/cryptorates.component";
+import { CryptoRatesComponent } from "./cryptorates/cryptorates.component";
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
-import {FrontLayoutComponent} from "./front-layout/front-layout.component";
+import { FrontLayoutComponent } from "./front-layout/front-layout.component";
 import { RecipesComponent } from './recipes/recipes.component';
-import {MplayerComponent} from "./mplayer/mplayer.component";
+import { MplayerComponent } from "./mplayer/mplayer.component";
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
 import { MoodCalendarComponent } from './mood-calendar/mood-calendar.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { IonicStorageModule } from '@ionic/storage-angular';
 import { RsaComponent } from './rsa/rsa.component';
 import { MapsComponent } from './maps/maps.component';
 import { MiniblogComponent } from './miniblog/miniblog.component';
 import { AddBlogModalComponent } from './miniblog/add-blog-modal.component';
+import { GazonComponent } from './gazon/gazon.component';
+import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 
-// Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18s/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -79,18 +78,19 @@ export function HttpLoaderFactory(http: HttpClient) {
     RecipesComponent,
     MoodCalendarComponent,
     MplayerComponent,
-    CameraComponent,
     FileViewerComponent,
     DragAndDropComponent,
     ShoppingListComponent,
     MapsComponent,
     RsaComponent,
     MiniblogComponent,
-    AddBlogModalComponent
+    AddBlogModalComponent,
+    GazonComponent,
+    WaterTrackerComponent,
   ],
   imports: [
     BrowserModule,
-    HttpClientModule, // Убедитесь, что этот импорт только один
+    HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
@@ -98,15 +98,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppSharedComponentsModule,
     CommonModule,
     DragDropModule,
-    IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
-    // Инициализация базы данных
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
+        useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
     })

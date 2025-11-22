@@ -1,0 +1,230 @@
+.game-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+// ... остальной SCSS код без изменений
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  h1 {
+    margin: 0;
+    font-size: 3em;
+    color: #776e65;
+    font-weight: bold;
+  }
+}
+
+.scores {
+  display: flex;
+  gap: 10px;
+}
+
+.score-box {
+  background: #bbada0;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: white;
+  text-align: center;
+  
+  .score-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+  }
+  
+  .score-value {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+}
+
+.new-game-container {
+  margin-bottom: 20px;
+}
+
+.game-board {
+  position: relative;
+  margin: 20px auto;
+}
+
+.grid-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  background: #bbada0;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.grid-background {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+}
+
+.grid-row {
+  display: flex;
+  margin-bottom: 10px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.grid-cell {
+  width: 80px;
+  height: 80px;
+  background: rgba(238, 228, 218, 0.35);
+  border-radius: 3px;
+  margin-right: 10px;
+  
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.tiles-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+}
+
+.tile {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: #776e65;
+  
+  // Убираем transition для избежания дёрганий
+  // transition: transform 0.15s ease-in-out;
+  
+  &.tile-new {
+    animation: appear 0.2s ease-in-out;
+  }
+  
+  &.tile-merged {
+    animation: pop 0.2s ease-in-out;
+    z-index: 10;
+  }
+}
+
+// Цвета для плиток
+.tile-2 { background: #eee4da; }
+.tile-4 { background: #ede0c8; }
+.tile-8 { background: #f2b179; color: white; }
+.tile-16 { background: #f59563; color: white; }
+.tile-32 { background: #f67c5f; color: white; }
+.tile-64 { background: #f65e3b; color: white; }
+.tile-128 { background: #edcf72; color: white; font-size: 1.8em; }
+.tile-256 { background: #edcc61; color: white; font-size: 1.8em; }
+.tile-512 { background: #edc850; color: white; font-size: 1.8em; }
+.tile-1024 { background: #edc53f; color: white; font-size: 1.5em; }
+.tile-2048 { background: #edc22e; color: white; font-size: 1.5em; }
+
+@keyframes appear {
+  0% { 
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% { 
+    transform: scale(1.1);
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  0% { 
+    transform: scale(1);
+  }
+  50% { 
+    transform: scale(1.2);
+  }
+  100% { 
+    transform: scale(1);
+  }
+}
+
+.game-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(238, 228, 218, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  z-index: 100;
+  
+  p {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #776e65;
+  }
+}
+
+.instructions {
+  margin-top: 30px;
+  color: #776e65;
+  font-size: 0.9em;
+  
+  p {
+    margin: 5px 0;
+  }
+}
+
+// Адаптивность
+@media (max-width: 480px) {
+  .grid-container {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .grid-cell {
+    width: 60px;
+    height: 60px;
+    margin-right: 7px;
+  }
+  
+  .tile {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+  }
+  
+  .tile-128,
+  .tile-256,
+  .tile-512 {
+    font-size: 1.3em;
+  }
+  
+  .tile-1024,
+  .tile-2048 {
+    font-size: 1.1em;
+  }
+}

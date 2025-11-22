@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      2048 Game
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" (keydown)="handleKeyDown($event)" tabindex="0">
+  <div class="game-container">
+    
+    <div class="header">
+      <h1>2048</h1>
+      <div class="scores">
+        <div class="score-box">
+          <div class="score-label">SCORE</div>
+          <div class="score-value">{{score}}</div>
+        </div>
+        <div class="score-box">
+          <div class="score-label">BEST</div>
+          <div class="score-value">{{bestScore}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="new-game-container">
+      <ion-button (click)="restartGame()" color="primary">New Game</ion-button>
+    </div>
+
+    <div class="game-board">
+      <div class="grid-container">
+        <div class="grid-background">
+          <div class="grid-row" *ngFor="let row of [0,1,2,3]">
+            <div class="grid-cell" *ngFor="let col of [0,1,2,3]"></div>
+          </div>
+        </div>
+        
+        <div class="tiles-container">
+          <div *ngFor="let tile of getAllTiles(); trackBy: trackByTileId"
+               class="tile"
+               [class]="getTileClass(tile)"
+               [style.transform]="getTileTransform(tile)">
+            <span class="tile-text">{{tile.value}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="gameOver" class="game-message game-over">
+      <p>Game Over!</p>
+      <ion-button (click)="restartGame()">Try Again</ion-button>
+    </div>
+
+    <div *ngIf="won" class="game-message game-won">
+      <p>You Win!</p>
+      <ion-button (click)="restartGame()">Play Again</ion-button>
+    </div>
+
+    <div class="instructions">
+      <p><strong>Как играть:</strong> Используй стрелки на клавиатуре для перемещения плиток.</p>
+      <p>Соединяй одинаковые числа чтобы получить 2048!</p>
+    </div>
+
+  </div>
+</ion-content>

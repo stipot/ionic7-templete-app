@@ -4,148 +4,165 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Конвертер файлов</ion-title>
+    <ion-title>
+      <ion-icon name="sync" class="ion-margin-end"></ion-icon>
+      Конвертер файлов
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <!-- карточка с описанием и инструкциями -->
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>
-        <ion-icon name="sync" color="primary"></ion-icon>
-        Конвертер форматов файлов
-      </ion-card-title>
-      <ion-card-subtitle>Простой и удобный инструмент для конвертации</ion-card-subtitle>
-    </ion-card-header>
+<ion-content class="ion-padding" fullscreen>
+  <!-- приветственная карточка -->
+  <div class="welcome-section">
+    <ion-card class="welcome-card animated-card">
+      <ion-card-header>
+        <ion-card-title class="welcome-title">
+          <ion-icon name="sync" color="primary" class="pulse-icon"></ion-icon>
+          Конвертер форматов файлов
+        </ion-card-title>
+        <ion-card-subtitle>Простой и удобный инструмент для конвертации</ion-card-subtitle>
+      </ion-card-header>
 
-    <ion-card-content>
-      <p>
-        Добро пожаловать в современный конвертер файлов! 
-        Этот инструмент создан для того, чтобы сделать процесс конвертации файлов максимально простым, понятным и удобным в использовании.
-      </p>
-      
-      <ion-list lines="none">
-        <ion-item>
-          <ion-icon name="cloud-upload" slot="start" color="primary"></ion-icon>
-          <ion-label class="ion-text-wrap">
-            <strong>1. Загрузите файл</strong> — формат определится автоматически
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="document" slot="start" color="primary"></ion-icon>
-          <ion-label class="ion-text-wrap">
-            <strong>2. Выберите целевой формат</strong> — в какой формат конвертировать
-          </ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="download" slot="start" color="primary"></ion-icon>
-          <ion-label class="ion-text-wrap">
-            <strong>3. Конвертируйте</strong> — получите готовый файл в нужном формате!
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+      <ion-card-content>
+        <p class="welcome-text">
+          Добро пожаловать в современный конвертер файлов! 
+          Этот инструмент создан для того, чтобы сделать процесс конвертации файлов максимально простым, понятным и удобным в использовании.
+        </p>
+        
+        <ion-grid class="features-grid">
+          <ion-row>
+            <ion-col size="12" size-md="4">
+              <div class="feature-item">
+                <ion-icon name="cloud-upload" color="primary" class="feature-icon"></ion-icon>
+                <h3>Загрузите файл</h3>
+                <p>Формат определится автоматически</p>
+              </div>
+            </ion-col>
+            <ion-col size="12" size-md="4">
+              <div class="feature-item">
+                <ion-icon name="document" color="primary" class="feature-icon"></ion-icon>
+                <h3>Выберите формат</h3>
+                <p>В какой формат конвертировать</p>
+              </div>
+            </ion-col>
+            <ion-col size="12" size-md="4">
+              <div class="feature-item">
+                <ion-icon name="download" color="primary" class="feature-icon"></ion-icon>
+                <h3>Скачайте результат</h3>
+                <p>Получите готовый файл!</p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
   <!-- секция загрузки файла -->
-  <ion-card>
+  <ion-card class="upload-card animated-card">
     <ion-card-header>
-      <ion-card-title>
+      <ion-card-title class="section-title">
         <ion-icon name="document" color="primary"></ion-icon>
         Выбор файла
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item>
-        <ion-label position="stacked">
-          <ion-icon name="cloud-upload" slot="start"></ion-icon>
-          Выберите файл для конвертации
-        </ion-label>
-        <input 
-          type="file" 
-          (change)="onFileSelected($event)"
-          #fileInput
-          accept="image/*"
-        >
-      </ion-item>
+      <!-- область drag and drop -->
+      <div 
+        class="drop-zone" 
+        [class.drag-over]="isDragOver"
+        (drop)="onFileDrop($event)"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (click)="fileInput.click()">
+        
+        <div class="drop-content" *ngIf="!selectedFile">
+          <ion-icon name="cloud-upload-outline" class="drop-icon"></ion-icon>
+          <h3>Перетащите файл сюда или нажмите для выбора</h3>
+          <p>Поддерживаются изображения, документы и текстовые файлы</p>
+        </div>
 
-      <!-- информация о выбранном файле -->
-      <div *ngIf="selectedFile">
-        <ion-item>
-          <ion-icon name="document-outline" slot="start" color="primary"></ion-icon>
-          <ion-label>
-            <h3><strong>Файл:</strong> {{ selectedFile.name }}</h3>
-            <p><strong>Размер:</strong> {{ fileSize }}</p>
-            <p><strong>Тип:</strong> {{ selectedFile.type || 'Не определен' }}</p>
-            <p><strong>Определенный формат:</strong> {{ sourceFormat ? sourceFormat.toUpperCase() : 'Не удалось определить' }}</p>
-          </ion-label>
-          <ion-button fill="clear" color="danger" (click)="clearFile()" slot="end">
+        <div class="file-preview" *ngIf="selectedFile">
+          <ion-icon [name]="getFileIcon(selectedFile.type)" class="file-icon"></ion-icon>
+          <div class="file-info">
+            <h3>{{ selectedFile.name }}</h3>
+            <p>{{ fileSize }} • {{ selectedFile.type || 'Тип не определен' }}</p>
+            <p class="format-badge">формат: {{ sourceFormat ? sourceFormat.toUpperCase() : 'не определен' }}</p>
+          </div>
+          <ion-button fill="clear" color="medium" (click)="clearFile(); $event.stopPropagation()">
             <ion-icon name="close-circle"></ion-icon>
           </ion-button>
-        </ion-item>
+        </div>
       </div>
+
+      <input 
+        #fileInput
+        type="file" 
+        (change)="onFileSelected($event)"
+        accept="image/*, .pdf, .doc, .docx, .txt, .rtf"
+        class="file-input"
+      >
     </ion-card-content>
   </ion-card>
 
   <!-- секция выбора форматов -->
-  <ion-card>
+  <ion-card class="formats-card animated-card" *ngIf="selectedFile">
     <ion-card-header>
-      <ion-card-title>
+      <ion-card-title class="section-title">
         <ion-icon name="options" color="primary"></ion-icon>
         Настройки конвертации
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- селект исходного формата (только для отображения) -->
-      <ion-item>
-        <ion-label position="stacked">
-          <ion-icon name="arrow-back" slot="start"></ion-icon>
-          Исходный формат (авто)
-        </ion-label>
-        <ion-select 
-          [(ngModel)]="sourceFormat" 
-          placeholder="Определится автоматически"
-          interface="action-sheet"
-          [disabled]="true"
-        >
-          <ion-select-option [value]="sourceFormat">
-            {{ sourceFormat ? sourceFormat.toUpperCase() + ' (авто)' : 'Не выбран' }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <!-- селект целевого формата -->
-      <ion-item>
-        <ion-label position="stacked">
-          <ion-icon name="arrow-forward" slot="start"></ion-icon>
-          Целевой формат
-        </ion-label>
-        <ion-select 
-          [(ngModel)]="targetFormat" 
-          placeholder="Выберите целевой формат"
-          interface="action-sheet"
-        >
-          <ion-select-option value="jpg">JPG (Изображение)</ion-select-option>
-          <ion-select-option value="jpeg">JPEG (Изображение)</ion-select-option>
-          <ion-select-option value="png">PNG (Изображение)</ion-select-option>
-          <ion-select-option value="webp">WebP (Изображение)</ion-select-option>
-          <ion-select-option value="gif">GIF (Изображение)</ion-select-option>
-          <ion-select-option value="bmp">BMP (Изображение)</ion-select-option>
-          <ion-select-option value="ico">ICO (Иконка)</ion-select-option>
-          <ion-select-option value="tiff">TIFF (Изображение)</ion-select-option>
-          <ion-select-option value="svg">SVG (Векторное изображение)</ion-select-option>
-          <ion-select-option value="avif">AVIF (Современный формат)</ion-select-option>
-          <ion-select-option value="heic">HEIC (Формат Apple)</ion-select-option>
-        </ion-select>
-      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <!-- исходный формат -->
+            <ion-item class="format-item" lines="none">
+              <ion-icon name="arrow-down" slot="start" color="primary"></ion-icon>
+              <ion-label position="stacked">Исходный формат</ion-label>
+              <ion-select 
+                [(ngModel)]="sourceFormat" 
+                interface="action-sheet"
+                [disabled]="true">
+                <ion-select-option [value]="sourceFormat">
+                  {{ sourceFormat ? sourceFormat.toUpperCase() + ' (авто)' : 'не выбран' }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          
+          <ion-col size="12" size-md="6">
+            <!-- целевой формат -->
+            <ion-item class="format-item" lines="none">
+              <ion-icon name="arrow-forward" slot="start" color="primary"></ion-icon>
+              <ion-label position="stacked">Целевой формат</ion-label>
+              <ion-select 
+                [(ngModel)]="targetFormat" 
+                placeholder="выберите формат"
+                interface="action-sheet">
+                <ion-select-option value="jpg">JPG (изображение)</ion-select-option>
+                <ion-select-option value="png">PNG (изображение)</ion-select-option>
+                <ion-select-option value="webp">WebP (изображение)</ion-select-option>
+                <ion-select-option value="gif">GIF (изображение)</ion-select-option>
+                <ion-select-option value="bmp">BMP (изображение)</ion-select-option>
+                <ion-select-option value="svg">SVG (вектор)</ion-select-option>
+                <ion-select-option value="pdf">PDF (документ)</ion-select-option>
+                <ion-select-option value="txt">TXT (текст)</ion-select-option>
+                <ion-select-option value="doc">DOC (документ)</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
       <!-- информация о конвертации -->
-      <div *ngIf="sourceFormat && targetFormat" class="ion-margin-top">
-        <ion-item lines="none">
+      <div *ngIf="sourceFormat && targetFormat" class="conversion-info">
+        <ion-item lines="none" class="info-item">
           <ion-icon name="information-circle" slot="start" color="primary"></ion-icon>
-          <ion-label class="ion-text-wrap">
-            <small>Конвертация: {{ sourceFormat | uppercase }} → {{ targetFormat | uppercase }}</small>
+          <ion-label>
+            <h3>Конвертация: {{ sourceFormat | uppercase }} → {{ targetFormat | uppercase }}</h3>
+            <p>Готово к преобразованию файла</p>
           </ion-label>
         </ion-item>
       </div>
@@ -153,37 +170,45 @@
   </ion-card>
 
   <!-- кнопка конвертации -->
-  <ion-button 
-    expand="block" 
-    (click)="convertFile()" 
-    [disabled]="!selectedFile || !sourceFormat || !targetFormat || isLoading"
-    size="large"
-    class="ion-margin-top">
-    <ion-icon name="sync" slot="start" *ngIf="!isLoading"></ion-icon>
-    <ion-spinner *ngIf="isLoading" slot="start"></ion-spinner>
-    {{ isLoading ? 'Конвертация...' : 'Конвертировать файл' }}
-  </ion-button>
+  <div class="action-buttons" *ngIf="selectedFile">
+    <ion-button 
+      expand="block" 
+      (click)="convertFile()" 
+      [disabled]="!selectedFile || !sourceFormat || !targetFormat || isLoading"
+      size="large"
+      class="convert-button"
+      shape="round">
+      <ion-icon name="sync" slot="start" *ngIf="!isLoading"></ion-icon>
+      <ion-spinner name="crescent" *ngIf="isLoading" slot="start"></ion-spinner>
+      {{ isLoading ? 'Идет конвертация...' : 'Конвертировать файл' }}
+    </ion-button>
 
-  <!-- кнопка скачивания -->
-  <ion-button 
-    *ngIf="downloadUrl"
-    expand="block" 
-    (click)="downloadConvertedFile()" 
-    color="success"
-    size="large"
-    class="ion-margin-top">
-    <ion-icon name="download" slot="start"></ion-icon>
-    Скачать сконвертированный файл
-  </ion-button>
+    <!-- кнопка скачивания -->
+    <ion-button 
+      *ngIf="downloadUrl"
+      expand="block" 
+      (click)="downloadConvertedFile()" 
+      color="success"
+      size="large"
+      class="download-button ion-margin-top">
+      <ion-icon name="download" slot="start"></ion-icon>
+      Скачать сконвертированный файл
+    </ion-button>
+  </div>
 
   <!-- сообщение о результате -->
-  <div *ngIf="conversionResult" class="ion-margin-top">
-    <ion-card [color]="conversionResult.success ? 'success' : 'danger'">
+  <div *ngIf="conversionResult" class="result-message">
+    <ion-card [class]="conversionResult.success ? 'success-card' : 'error-card'" class="animated-card">
       <ion-card-content>
         <ion-item lines="none">
-          <ion-icon [name]="conversionResult.success ? 'checkmark-circle' : 'alert-circle'" slot="start"></ion-icon>
+          <ion-icon 
+            [name]="conversionResult.success ? 'checkmark-circle' : 'alert-circle'" 
+            slot="start"
+            [color]="conversionResult.success ? 'success' : 'danger'">
+          </ion-icon>
           <ion-label class="ion-text-wrap">
-            {{ conversionResult.message }}
+            <h3>{{ conversionResult.success ? 'Успешно!' : 'Ошибка' }}</h3>
+            <p>{{ conversionResult.message }}</p>
           </ion-label>
         </ion-item>
       </ion-card-content>

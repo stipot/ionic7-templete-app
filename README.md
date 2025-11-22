@@ -10,6 +10,10 @@ Full [Documentation](https://stipot.github.io/ionic7-templete-app/).
 ```
 node -v
 ```
+## Install CLI
+```bash
+npm install -g @ionic/cli
+```
 
 ## Install dependencies
 

@@ -106,6 +106,9 @@
     "TEXT_NOTES": "Text of the note",
     "NOTES_MISSING": "Notes are missing",
     "DELETE_MARKED_NOTES": "Delete all marked notes"
+  },
+  "GAZON":{
+    "MENU": "Format Converter"
   }
 
 }

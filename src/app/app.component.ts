@@ -16,6 +16,7 @@ register();
 export class AppComponent {
   public appPages = [
     {title: 'MAP.YANDEXMAPS', url: '/maps', icon: ''},
+    {title: 'GAZON.MENU', url: '/gazon', icon: ''},
     { title: 'FrontPage', url: '/front-layout', icon: 'front-layout' },
     { title: 'Settings', url: '/settings', icon: '' },
     { title: 'Miniblog', url: '/miniblog', icon: '' },

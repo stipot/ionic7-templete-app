@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      2048 Game
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" (keydown)="handleKeyDown($event)" tabindex="0">
+  <div class="game-container" [class]="'theme-' + currentTheme">
+    
+    <div class="header">
+      <h1>{{getTargetValue()}}</h1>
+      <div class="scores">
+        <div class="score-box">
+          <div class="score-label">SCORE</div>
+          <div class="score-value">{{score}}</div>
+        </div>
+        <div class="score-box">
+          <div class="score-label">BEST</div>
+          <div class="score-value">{{bestScore}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-controls">
+      <ion-button (click)="restartGame()" color="primary">New Game</ion-button>
+      <ion-button (click)="changeTheme()" color="medium">{{getThemeButtonText()}}</ion-button>
+      <ion-button (click)="changeSize()" color="secondary">{{getSizeButtonText()}}</ion-button>
+    </div>
+
+    <div class="game-board">
+      <div class="grid-container" [class]="'size-' + currentSize">
+        <div class="grid-background">
+          <div class="grid-row" *ngFor="let row of getGridArray()">
+            <div class="grid-cell" *ngFor="let col of getGridArray()"></div>
+          </div>
+        </div>
+        
+        <div class="tiles-container">
+          <div *ngFor="let tile of getAllTiles(); trackBy: trackByTileId"
+               class="tile"
+               [class]="getTileClass(tile)"
+               [style.transform]="getTileTransform(tile)">
+            <span class="tile-text">{{tile.value}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="gameOver" class="game-message game-over">
+      <p>Game Over!</p>
+      <ion-button (click)="restartGame()">Try Again</ion-button>
+    </div>
+
+    <div *ngIf="won" class="game-message game-won">
+      <p>You Win!</p>
+      <ion-button (click)="restartGame()">Play Again</ion-button>
+    </div>
+
+    <div class="instructions">
+      <p><strong>Как играть:</strong> Используй стрелки на клавиатуре для перемещения плиток.</p>
+      <p>Соединяй одинаковые числа чтобы получить {{getTargetValue()}}!</p>
+      <p><strong>Размер поля:</strong> {{currentSize}}×{{currentSize}}</p>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,365 @@
+.game-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  h1 {
+    margin: 0;
+    font-size: 3em;
+    color: #776e65;
+    font-weight: bold;
+  }
+}
+
+.scores {
+  display: flex;
+  gap: 10px;
+}
+
+.score-box {
+  background: #bbada0;
+  padding: 10px 15px;
+  border-radius: 6px;
+  color: white;
+  text-align: center;
+  
+  .score-label {
+    font-size: 0.8em;
+    text-transform: uppercase;
+  }
+  
+  .score-value {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+}
+
+.game-controls {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.game-board {
+  position: relative;
+  margin: 20px auto;
+}
+
+.grid-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  background: #bbada0;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.grid-background {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+}
+
+.grid-row {
+  display: flex;
+  margin-bottom: 10px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.grid-cell {
+  border-radius: 3px;
+  margin-right: 10px;
+  background: rgba(238, 228, 218, 0.35);
+  
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+// Размеры для разных режимов
+.size-3 .grid-cell {
+  width: 120px;
+  height: 120px;
+}
+
+.size-4 .grid-cell {
+  width: 80px;
+  height: 80px;
+}
+
+.size-5 .grid-cell {
+  width: 64px;
+  height: 64px;
+}
+
+.tiles-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+}
+
+.tile {
+  position: absolute;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #776e65;
+  
+  &.tile-new {
+    animation: appear 0.2s ease-in-out;
+  }
+  
+  &.tile-merged {
+    animation: pop 0.2s ease-in-out;
+    z-index: 10;
+  }
+}
+
+// Размеры плиток для разных режимов
+.size-3 .tile {
+  width: 120px;
+  height: 120px;
+  font-size: 2.2em;
+}
+
+.size-4 .tile {
+  width: 80px;
+  height: 80px;
+  font-size: 2em;
+}
+
+.size-5 .tile {
+  width: 64px;
+  height: 64px;
+  font-size: 1.6em;
+}
+
+@keyframes appear {
+  0% { 
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% { 
+    transform: scale(1.1);
+  }
+  100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  0% { 
+    transform: scale(1);
+  }
+  50% { 
+    transform: scale(1.2);
+  }
+  100% { 
+    transform: scale(1);
+  }
+}
+
+.game-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(238, 228, 218, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  z-index: 100;
+  
+  p {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #776e65;
+  }
+}
+
+.instructions {
+  margin-top: 30px;
+  color: #776e65;
+  font-size: 0.9em;
+  
+  p {
+    margin: 5px 0;
+  }
+}
+
+// Темы оформления
+.theme-classic {
+  .tile-2 { background: #eee4da; }
+  .tile-4 { background: #ede0c8; }
+  .tile-8 { background: #f2b179; color: white; }
+  .tile-16 { background: #f59563; color: white; }
+  .tile-32 { background: #f67c5f; color: white; }
+  .tile-64 { background: #f65e3b; color: white; }
+  .tile-128 { background: #edcf72; color: white; }
+  .tile-256 { background: #edcc61; color: white; }
+  .tile-512 { background: #edc850; color: white; }
+  .tile-1024 { background: #edc53f; color: white; }
+  .tile-2048 { background: #edc22e; color: white; }
+  .tile-4096 { background: #edc111; color: white; }
+}
+
+.theme-dark {
+  background: #1a1a1a;
+  color: #ffffff;
+
+  .header h1 {
+    color: #ffffff;
+  }
+
+  .instructions {
+    color: #cccccc;
+  }
+
+  .grid-container {
+    background: #2d2d2d;
+  }
+
+  .grid-cell {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .tile-2 { background: #3a3a3a; color: #ffffff; }
+  .tile-4 { background: #4a4a4a; color: #ffffff; }
+  .tile-8 { background: #8b4513; color: #ffffff; }
+  .tile-16 { background: #a0522d; color: #ffffff; }
+  .tile-32 { background: #cd853f; color: #ffffff; }
+  .tile-64 { background: #daa520; color: #ffffff; }
+  .tile-128 { background: #ffd700; color: #000000; }
+  .tile-256 { background: #ffec8b; color: #000000; }
+  .tile-512 { background: #fffacd; color: #000000; }
+  .tile-1024 { background: #ffffe0; color: #000000; }
+  .tile-2048 { background: #ffffff; color: #000000; }
+  .tile-4096 { background: #e8f4f8; color: #000000; }
+}
+
+.theme-colorful {
+  .tile-2 { background: #ff6b6b; color: white; }
+  .tile-4 { background: #4ecdc4; color: white; }
+  .tile-8 { background: #45b7d1; color: white; }
+  .tile-16 { background: #96ceb4; color: white; }
+  .tile-32 { background: #feca57; color: white; }
+  .tile-64 { background: #ff9ff3; color: white; }
+  .tile-128 { background: #54a0ff; color: white; }
+  .tile-256 { background: #5f27cd; color: white; }
+  .tile-512 { background: #00d2d3; color: white; }
+  .tile-1024 { background: #ff9f43; color: white; }
+  .tile-2048 { background: #ee5253; color: white; }
+  .tile-4096 { background: #10ac84; color: white; }
+}
+
+.theme-minimal {
+  .grid-container {
+    background: #e0e0e0;
+  }
+
+  .grid-cell {
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  .tile {
+    background: #ffffff;
+    border: 2px solid #333333;
+    color: #333333;
+    
+    &.tile-2 { border-color: #666666; }
+    &.tile-4 { border-color: #444444; }
+    &.tile-8 { border-color: #222222; background: #f0f0f0; }
+    &.tile-16 { border-color: #111111; background: #e0e0e0; }
+    &.tile-32 { border-color: #000000; background: #d0d0d0; }
+    &.tile-64 { border-color: #000000; background: #c0c0c0; font-weight: bold; }
+    &.tile-128 { border-color: #000000; background: #b0b0b0; font-weight: bold; }
+    &.tile-256 { border-color: #000000; background: #a0a0a0; font-weight: bold; }
+    &.tile-512 { border-color: #000000; background: #909090; font-weight: bold; color: white; }
+    &.tile-1024 { border-color: #000000; background: #808080; font-weight: bold; color: white; }
+    &.tile-2048 { border-color: #000000; background: #707070; font-weight: bold; color: white; }
+    &.tile-4096 { border-color: #000000; background: #606060; font-weight: bold; color: white; }
+  }
+}
+
+// Адаптивность
+@media (max-width: 480px) {
+  .grid-container {
+    width: 300px;
+    height: 300px;
+    
+    &.size-3 .grid-cell,
+    &.size-3 .tile {
+      width: 80px;
+      height: 80px;
+    }
+
+    &.size-4 .grid-cell,
+    &.size-4 .tile {
+      width: 60px;
+      height: 60px;
+    }
+
+    &.size-5 .grid-cell,
+    &.size-5 .tile {
+      width: 48px;
+      height: 48px;
+    }
+  }
+  
+  .size-3 .tile {
+    font-size: 1.6em;
+  }
+  
+  .size-4 .tile {
+    font-size: 1.5em;
+  }
+  
+  .size-5 .tile {
+    font-size: 1.2em;
+  }
+  
+  .game-controls {
+    flex-direction: column;
+    align-items: center;
+    
+    ion-button {
+      width: 200px;
+    }
+  }
+  
+  .header {
+    flex-direction: column;
+    gap: 10px;
+    
+    h1 {
+      font-size: 2.5em;
+    }
+  }
+}

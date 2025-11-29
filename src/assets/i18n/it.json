@@ -84,5 +84,8 @@
       "ACTIVE": "Attivo",
       "LANGUAGE_REMINDER": "Modifica della lingua",
       "GOTO_SETTINGS": "Vai alle impostazioni"
-    }
+    },
+  "GAZON":{
+    "MENU": "Convertitore di formato"
+  }
   }

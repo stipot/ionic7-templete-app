@@ -1,0 +1,265 @@
+.welcome-section {
+  margin-bottom: 20px;
+}
+
+.welcome-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.welcome-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #333;
+  
+  // добавляем отступ для иконки
+  ion-icon {
+    margin-right: 12px; // увеличиваем расстояние между иконкой и текстом
+  }
+}
+
+.welcome-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.features-grid {
+  margin-top: 15px;
+}
+
+.feature-item {
+  text-align: center;
+  padding: 12px;
+  margin-bottom: 8px;
+  
+  h3 {
+    font-weight: 600;
+    margin: 8px 0 4px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  p {
+    color: #666;
+    font-size: 12px;
+    margin: 0;
+  }
+}
+
+.feature-icon {
+  font-size: 36px;
+  color: #3880ff;
+}
+
+.upload-card, .formats-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  
+  // добавляем отступ для иконок в секциях
+  ion-icon {
+    margin-right: 10px;
+  }
+}
+
+// зона для перетаскивания файлов
+.drop-zone {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 30px 15px;
+  text-align: center;
+  cursor: pointer;
+  background: #f9f9f9;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &.drag-over {
+    border-color: #3880ff;
+    background: #f0f5ff;
+  }
+}
+
+.drop-content {
+  .drop-icon {
+    font-size: 36px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  h3 {
+    margin: 0 0 5px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 12px;
+  }
+}
+
+// превью файла
+.file-preview {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  
+  .file-icon {
+    font-size: 28px;
+    margin-right: 12px;
+    color: #3880ff;
+  }
+  
+  .file-info {
+    flex: 1;
+    
+    h3 {
+      margin: 0 0 3px;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    p {
+      margin: 0 0 3px;
+      color: #666;
+      font-size: 12px;
+    }
+  }
+}
+
+.format-badge {
+  display: inline-block;
+  background: #3880ff;
+  color: white;
+  padding: 3px 6px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.file-input {
+  display: none;
+}
+
+// выбор форматов
+.format-item {
+  margin-bottom: 10px;
+}
+
+.conversion-info {
+  margin-top: 15px;
+}
+
+.info-item {
+  background: #f0f5ff;
+  border-radius: 8px;
+  padding: 12px;
+  
+  h3 {
+    font-weight: 600;
+    margin: 0 0 3px;
+    color: #333;
+  }
+  
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 12px;
+  }
+}
+
+// кнопки
+.action-buttons {
+  margin: 20px 0;
+}
+
+.convert-button {
+  margin-bottom: 10px;
+  --background: #3880ff;
+  --color: white;
+  font-weight: 600;
+}
+
+.download-button {
+  margin-bottom: 10px;
+  --background: #2dd36f;
+  --color: white;
+  font-weight: 600;
+}
+
+// сообщения о результате
+.result-message {
+  margin: 15px 0;
+}
+
+.success-card {
+  background: #f0fff4;
+  border-left: 4px solid #2dd36f;
+  border-radius: 8px;
+}
+
+.error-card {
+  background: #fff5f5;
+  border-left: 4px solid #eb445a;
+  border-radius: 8px;
+}
+
+// адаптивность для телефонов
+@media (max-width: 768px) {
+  .welcome-card {
+    margin: 0 -16px;
+    border-radius: 0;
+  }
+  
+  .feature-item {
+    padding: 12px 8px;
+    
+    .feature-icon {
+      font-size: 36px;
+    }
+  }
+  
+  .drop-zone {
+    padding: 30px 16px;
+    
+    .drop-content {
+      .drop-icon {
+        font-size: 36px;
+      }
+      
+      h3 {
+        font-size: 16px;
+      }
+    }
+  }
+  
+  .file-preview {
+    padding: 12px;
+    
+    .file-icon {
+      font-size: 24px;
+      margin-right: 12px;
+    }
+  }
+}

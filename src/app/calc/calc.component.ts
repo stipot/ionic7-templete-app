@@ -21,7 +21,6 @@ export class CalcComponent implements OnInit, OnDestroy {
   extendedButtons: CalculatorButton[] = [];
   
   inputValue: string = '';
-  calculationResult: string = '';
   showCalculator: boolean = false;
   popupExpression: string = '';
   
@@ -32,8 +31,6 @@ export class CalcComponent implements OnInit, OnDestroy {
   formSubtitle: string = 'Используйте калькулятор для заполнения полей';
   amountLabel: string = 'Сумма';
   amountPlaceholder: string = 'Введите значение или используйте калькулятор';
-  resultLabel: string = 'Результат вычислений';
-  useResultButton: string = 'Использовать результат';
   clearFormButton: string = 'Очистить форму';
   popupTitle: string = 'Калькулятор для формы';
   popupSubtitle: string = 'Вычислите значение и нажмите "Применить"';
@@ -69,8 +66,6 @@ export class CalcComponent implements OnInit, OnDestroy {
     this.formSubtitle = await this.translate.get('FORM.SUBTITLE').toPromise();
     this.amountLabel = await this.translate.get('FORM.AMOUNT_LABEL').toPromise();
     this.amountPlaceholder = await this.translate.get('FORM.AMOUNT_PLACEHOLDER').toPromise();
-    this.resultLabel = await this.translate.get('FORM.RESULT_LABEL').toPromise();
-    this.useResultButton = await this.translate.get('FORM.USE_RESULT_BUTTON').toPromise();
     this.clearFormButton = await this.translate.get('FORM.CLEAR_FORM_BUTTON').toPromise();
     this.popupTitle = await this.translate.get('POPUP.TITLE').toPromise();
     this.popupSubtitle = await this.translate.get('POPUP.SUBTITLE').toPromise();
@@ -80,6 +75,7 @@ export class CalcComponent implements OnInit, OnDestroy {
 
   openCalculator() {
     this.showCalculator = true;
+    // Если в поле уже есть значение, используем его как начальное выражение
     this.popupExpression = this.inputValue || '';
   }
 
@@ -89,20 +85,14 @@ export class CalcComponent implements OnInit, OnDestroy {
 
   applyCalculation() {
     if (this.popupExpression && this.popupExpression !== 'Ошибка') {
-      this.calculationResult = this.popupExpression;
+      // Применяем результат напрямую в поле ввода
+      this.inputValue = this.popupExpression;
     }
     this.showCalculator = false;
   }
 
-  useCalculation() {
-    if (this.calculationResult) {
-      this.inputValue = this.calculationResult;
-    }
-  }
-
   clearForm() {
     this.inputValue = '';
-    this.calculationResult = '';
   }
 
   private initializeCalculatorButtons() {

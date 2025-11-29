@@ -59,15 +59,7 @@
                 </ion-button>
               </ion-item>
 
-              <ion-item>
-                <ion-label position="stacked">{{ resultLabel }}</ion-label>
-                <ion-input [value]="calculationResult" readonly></ion-input>
-              </ion-item>
-
               <div class="action-buttons">
-                <ion-button expand="block" color="primary" (click)="useCalculation()">
-                  {{ useResultButton }}
-                </ion-button>
                 <ion-button expand="block" color="secondary" (click)="clearForm()">
                   {{ clearFormButton }}
                 </ion-button>

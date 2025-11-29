@@ -29,6 +29,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'calc',
+    loadChildren: () => import('./calc/calc.module').then(m => m.CalcModule)
+  },
+  {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then(m => m.FolderPageModule)
   },

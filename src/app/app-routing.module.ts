@@ -44,7 +44,11 @@ import { MapsComponent } from './maps/maps.component';
 import { MiniblogComponent } from './miniblog/miniblog.component';
 
 const routes: Routes = [
-  
+  {
+    path: 'game-2048',
+    loadChildren: () => import('./g2048/g2048.module').then(m => m.G2048Module)
+  },
+
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)

@@ -15,6 +15,7 @@ register();
 })
 export class AppComponent {
   public appPages = [
+    { title: '2048 Game', url: '/game-2048', icon: 'game-controller' },
     {title: 'MAP.YANDEXMAPS', url: '/maps', icon: ''},
     { title: 'FrontPage', url: '/front-layout', icon: 'front-layout' },
     { title: 'Settings', url: '/settings', icon: '' },

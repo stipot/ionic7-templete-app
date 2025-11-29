@@ -9,6 +9,9 @@ interface Tile {
   merged?: boolean;
 }
 
+type GameTheme = 'classic' | 'dark' | 'colorful' | 'minimal';
+type GridSize = 3 | 4 | 5;
+
 @Component({
   selector: 'app-g2048',
   templateUrl: './g2048.component.html',
@@ -20,20 +23,26 @@ export class G2048Component {
   bestScore: number = 0;
   gameOver: boolean = false;
   won: boolean = false;
-  private size: number = 4;
+  currentTheme: GameTheme = 'classic';
+  currentSize: GridSize = 4;
+  private targetValue: number = 2048;
   
   constructor() {
     this.initializeGame();
   }
 
   initializeGame() {
+    // Устанавливаем целевое значение в зависимости от размера
+    this.targetValue = this.currentSize === 3 ? 512 : 
+                      this.currentSize === 4 ? 2048 : 4096;
+
     this.grid = [];
-    for (let row = 0; row < this.size; row++) {
+    for (let row = 0; row < this.currentSize; row++) {
       this.grid[row] = [];
-      for (let col = 0; col < this.size; col++) {
+      for (let col = 0; col < this.currentSize; col++) {
         this.grid[row][col] = {
           value: 0,
-          id: row * this.size + col,
+          id: row * this.currentSize + col,
           row: row,
           col: col
         };
@@ -47,11 +56,47 @@ export class G2048Component {
     this.addRandomTile();
   }
 
+  changeTheme() {
+    const themes: GameTheme[] = ['classic', 'dark', 'colorful', 'minimal'];
+    const currentIndex = themes.indexOf(this.currentTheme);
+    this.currentTheme = themes[(currentIndex + 1) % themes.length];
+  }
+
+  changeSize() {
+    const sizes: GridSize[] = [3, 4, 5];
+    const currentIndex = sizes.indexOf(this.currentSize);
+    this.currentSize = sizes[(currentIndex + 1) % sizes.length];
+    this.initializeGame();
+  }
+
+  getThemeButtonText(): string {
+    const themeNames = {
+      'classic': 'Классика',
+      'dark': 'Тёмная',
+      'colorful': 'Цветная',
+      'minimal': 'Минимализм'
+    };
+    return `Стиль: ${themeNames[this.currentTheme]}`;
+  }
+
+  getSizeButtonText(): string {
+    const sizeNames = {
+      3: '3×3',
+      4: '4×4', 
+      5: '5×5'
+    };
+    return `Карта: ${sizeNames[this.currentSize]}`;
+  }
+
+  getTargetValue(): number {
+    return this.targetValue;
+  }
+
   private addRandomTile() {
     const emptyCells: {row: number, col: number}[] = [];
     
-    for (let row = 0; row < this.size; row++) {
-      for (let col = 0; col < this.size; col++) {
+    for (let row = 0; row < this.currentSize; row++) {
+      for (let col = 0; col < this.currentSize; col++) {
         if (this.grid[row][col].value === 0) {
           emptyCells.push({row, col});
         }
@@ -97,8 +142,8 @@ export class G2048Component {
   }
 
   private resetFlags() {
-    for (let row = 0; row < this.size; row++) {
-      for (let col = 0; col < this.size; col++) {
+    for (let row = 0; row < this.currentSize; row++) {
+      for (let col = 0; col < this.currentSize; col++) {
         this.grid[row][col].isNew = false;
         this.grid[row][col].merged = false;
       }
@@ -108,8 +153,8 @@ export class G2048Component {
   private updateFlags(previousGrid: string) {
     const previousState = JSON.parse(previousGrid);
     
-    for (let row = 0; row < this.size; row++) {
-      for (let col = 0; col < this.size; col++) {
+    for (let row = 0; row < this.currentSize; row++) {
+      for (let col = 0; col < this.currentSize; col++) {
         const currentValue = this.grid[row][col].value;
         const previousValue = previousState[row][col];
         
@@ -129,9 +174,9 @@ export class G2048Component {
   }
 
   private moveLeft() {
-    for (let row = 0; row < this.size; row++) {
+    for (let row = 0; row < this.currentSize; row++) {
       const values = [];
-      for (let col = 0; col < this.size; col++) {
+      for (let col = 0; col < this.currentSize; col++) {
         if (this.grid[row][col].value !== 0) {
           values.push(this.grid[row][col].value);
         }
@@ -150,16 +195,16 @@ export class G2048Component {
         }
       }
 
-      for (let col = 0; col < this.size; col++) {
+      for (let col = 0; col < this.currentSize; col++) {
         this.grid[row][col].value = col < newValues.length ? newValues[col] : 0;
       }
     }
   }
 
   private moveRight() {
-    for (let row = 0; row < this.size; row++) {
+    for (let row = 0; row < this.currentSize; row++) {
       const values = [];
-      for (let col = this.size - 1; col >= 0; col--) {
+      for (let col = this.currentSize - 1; col >= 0; col--) {
         if (this.grid[row][col].value !== 0) {
           values.push(this.grid[row][col].value);
         }
@@ -178,17 +223,17 @@ export class G2048Component {
         }
       }
 
-      for (let col = this.size - 1; col >= 0; col--) {
-        const index = this.size - 1 - col;
+      for (let col = this.currentSize - 1; col >= 0; col--) {
+        const index = this.currentSize - 1 - col;
         this.grid[row][col].value = index < newValues.length ? newValues[index] : 0;
       }
     }
   }
 
   private moveUp() {
-    for (let col = 0; col < this.size; col++) {
+    for (let col = 0; col < this.currentSize; col++) {
       const values = [];
-      for (let row = 0; row < this.size; row++) {
+      for (let row = 0; row < this.currentSize; row++) {
         if (this.grid[row][col].value !== 0) {
           values.push(this.grid[row][col].value);
         }
@@ -207,16 +252,16 @@ export class G2048Component {
         }
       }
 
-      for (let row = 0; row < this.size; row++) {
+      for (let row = 0; row < this.currentSize; row++) {
         this.grid[row][col].value = row < newValues.length ? newValues[row] : 0;
       }
     }
   }
 
   private moveDown() {
-    for (let col = 0; col < this.size; col++) {
+    for (let col = 0; col < this.currentSize; col++) {
       const values = [];
-      for (let row = this.size - 1; row >= 0; row--) {
+      for (let row = this.currentSize - 1; row >= 0; row--) {
         if (this.grid[row][col].value !== 0) {
           values.push(this.grid[row][col].value);
         }
@@ -235,8 +280,8 @@ export class G2048Component {
         }
       }
 
-      for (let row = this.size - 1; row >= 0; row--) {
-        const index = this.size - 1 - row;
+      for (let row = this.currentSize - 1; row >= 0; row--) {
+        const index = this.currentSize - 1 - row;
         this.grid[row][col].value = index < newValues.length ? newValues[index] : 0;
       }
     }
@@ -244,8 +289,8 @@ export class G2048Component {
 
   getAllTiles(): Tile[] {
     const tiles: Tile[] = [];
-    for (let row = 0; row < this.size; row++) {
-      for (let col = 0; col < this.size; col++) {
+    for (let row = 0; row < this.currentSize; row++) {
+      for (let col = 0; col < this.currentSize; col++) {
         if (this.grid[row][col].value !== 0) {
           tiles.push(this.grid[row][col]);
         }
@@ -255,8 +300,26 @@ export class G2048Component {
   }
 
   getTilePosition(tile: Tile): {x: number, y: number} {
-    const cellSize = 80;
-    const gap = 10;
+    // Используем фиксированные размеры для каждого типа поля
+    let cellSize, gap;
+    
+    switch (this.currentSize) {
+      case 3:
+        cellSize = 120;
+        gap = 10;
+        break;
+      case 4:
+        cellSize = 80;
+        gap = 10;
+        break;
+      case 5:
+        cellSize = 64;
+        gap = 10;
+        break;
+      default:
+        cellSize = 80;
+        gap = 10;
+    }
     
     return {
       x: tile.col * (cellSize + gap),
@@ -279,9 +342,9 @@ export class G2048Component {
   }
 
   private checkGameStatus() {
-    for (let row = 0; row < this.size; row++) {
-      for (let col = 0; col < this.size; col++) {
-        if (this.grid[row][col].value === 2048) {
+    for (let row = 0; row < this.currentSize; row++) {
+      for (let col = 0; col < this.currentSize; col++) {
+        if (this.grid[row][col].value === this.targetValue) {
           this.won = true;
           return;
         }
@@ -294,8 +357,8 @@ export class G2048Component {
   }
 
   private isGridFull(): boolean {
-    for (let row = 0; row < this.size; row++) {
-      for (let col = 0; col < this.size; col++) {
+    for (let row = 0; row < this.currentSize; row++) {
+      for (let col = 0; col < this.currentSize; col++) {
         if (this.grid[row][col].value === 0) {
           return false;
         }
@@ -305,16 +368,16 @@ export class G2048Component {
   }
 
   private hasValidMoves(): boolean {
-    for (let row = 0; row < this.size; row++) {
-      for (let col = 0; col < this.size - 1; col++) {
+    for (let row = 0; row < this.currentSize; row++) {
+      for (let col = 0; col < this.currentSize - 1; col++) {
         if (this.grid[row][col].value === this.grid[row][col + 1].value) {
           return true;
         }
       }
     }
     
-    for (let col = 0; col < this.size; col++) {
-      for (let row = 0; row < this.size - 1; row++) {
+    for (let col = 0; col < this.currentSize; col++) {
+      for (let row = 0; row < this.currentSize - 1; row++) {
         if (this.grid[row][col].value === this.grid[row + 1][col].value) {
           return true;
         }
@@ -351,5 +414,10 @@ export class G2048Component {
 
   trackByTileId(index: number, tile: Tile): number {
     return tile.id;
+  }
+
+  // Генератор массива для ngFor
+  getGridArray(): number[] {
+    return Array(this.currentSize).fill(0).map((x, i) => i);
   }
 }

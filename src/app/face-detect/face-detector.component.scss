@@ -1,0 +1,768 @@
+// Импорт шрифтов
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+// Переменные цветов
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --dark-bg: #0f0f1e;
+  --card-bg: #1a1a2e;
+  --glass-bg: rgba(26, 26, 46, 0.7);
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0c0;
+  --neon-blue: #00f5ff;
+  --neon-purple: #7b2ff7;
+  --neon-pink: #f107a3;
+  --neon-yellow: #ffd000;
+  --success: #00ff88;
+  --error: #ff4757;
+}
+
+// Общие стили
+.detector-content {
+  --background: var(--dark-bg);
+  font-family: 'Poppins', sans-serif;
+}
+
+.custom-toolbar {
+  --background: var(--card-bg);
+  --border-width: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.custom-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.8);
+  }
+}
+
+.detector-container {
+  min-height: 100%;
+  padding: 0;
+  position: relative;
+}
+
+// Анимация появления
+.animate-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Загрузка
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 56px);
+  padding: 20px;
+}
+
+.loading-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  max-width: 500px;
+  width: 100%;
+
+  h2 {
+    color: var(--text-primary);
+    margin: 30px 0 15px;
+    font-weight: 700;
+    font-size: 1.8rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .loading-text {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+  }
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.modern-spinner {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--neon-blue),
+    var(--neon-purple),
+    var(--neon-pink),
+    var(--neon-blue)
+  );
+  animation: spin 1.5s linear infinite;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    background: var(--card-bg);
+    border-radius: 50%;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-steps {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    min-width: 120px;
+
+    .step-icon {
+      font-size: 2rem;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    span {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// Ошибка
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 56px);
+  padding: 20px;
+}
+
+.error-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: 
+    0 8px 32px rgba(255, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 71, 87, 0.2);
+  max-width: 500px;
+  width: 100%;
+
+  .error-icon {
+    font-size: 80px;
+    color: var(--error);
+    margin-bottom: 20px;
+    animation: shake 0.5s ease-in-out;
+  }
+
+  h2 {
+    color: var(--text-primary);
+    margin: 20px 0 15px;
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+
+  .error-message {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  .retry-button {
+    --background: var(--secondary-gradient);
+    --border-radius: 15px;
+    font-weight: 600;
+    text-transform: none;
+    height: 50px;
+    font-size: 1rem;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+// Рабочее пространство детекции
+.detection-workspace {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  &.hidden {
+    display: none;
+  }
+}
+
+.video-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  background: #000;
+  aspect-ratio: 16 / 9;
+  max-height: 55vh;
+
+  .video-feed,
+  .detection-canvas,
+  .particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-feed {
+    z-index: 1;
+    transform: scaleX(-1); // Зеркалить для фронтальной камеры
+  }
+
+  .detection-canvas {
+    z-index: 2;
+    transform: scaleX(-1);
+  }
+
+  .particle-canvas {
+    z-index: 3;
+    transform: scaleX(-1);
+    pointer-events: none;
+  }
+}
+
+.recording-indicator {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+
+  .pulse-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--error);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+    animation: pulse-recording 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-recording {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 71, 87, 0);
+  }
+}
+
+// Панель управления
+.control-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  ion-button {
+    margin: 0;
+    height: 44px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    --border-radius: 12px;
+    text-transform: none;
+
+    ion-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Информация о распознавании
+.recognition-info {
+  .section-header .header-left ion-icon {
+    color: var(--neon-yellow);
+  }
+}
+
+.recognition-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recognition-item {
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border-left: 3px solid var(--neon-blue);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-family: 'Space Mono', monospace;
+  line-height: 1.5;
+  
+  &:nth-child(odd) {
+    border-left-color: var(--neon-purple);
+  }
+  
+  &:nth-child(3n) {
+    border-left-color: var(--neon-pink);
+  }
+}
+
+// Панель статистики (скрываемая)
+.stats-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      
+      ion-icon {
+        font-size: 1.3rem;
+        color: var(--neon-blue);
+      }
+
+      span {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--text-primary);
+      }
+    }
+
+    > ion-icon {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  .panel-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    padding: 0 12px 12px 12px;
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  &.collapsed {
+    .panel-header > ion-icon {
+      transform: rotate(0deg);
+    }
+
+    .panel-content {
+      max-height: 0;
+      padding: 0 12px;
+    }
+  }
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .stat-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+
+  .stat-content {
+    flex: 1;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 3px;
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+  }
+
+  .stat-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &.faces .stat-value {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+  }
+
+  &.confidence .stat-value {
+    color: var(--neon-purple);
+    text-shadow: 0 0 10px rgba(123, 47, 247, 0.5);
+  }
+
+  &.gestures .stat-value {
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px rgba(241, 7, 163, 0.5);
+  }
+
+  &.fps .stat-value {
+    color: var(--neon-yellow);
+    text-shadow: 0 0 10px rgba(255, 208, 0, 0.5);
+  }
+}
+
+// Информационная панель (скрываемая)
+.info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-section {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      
+      ion-icon {
+        font-size: 1.3rem;
+        color: var(--neon-purple);
+      }
+
+      span {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--text-primary);
+      }
+    }
+
+    > ion-icon {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  .section-content {
+    max-height: 500px;
+    overflow: hidden;
+    padding: 0 12px 12px 12px;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  &.collapsed {
+    .section-header > ion-icon {
+      transform: rotate(0deg);
+    }
+
+    .section-content {
+      max-height: 0;
+      padding: 0 12px;
+    }
+  }
+}
+
+.gesture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+}
+
+.gesture-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    transform: translateY(-2px);
+    border-color: var(--neon-purple);
+  }
+
+  .gesture-emoji {
+    font-size: 2rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+  }
+
+  .gesture-name {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.7rem;
+    text-align: center;
+    font-weight: 500;
+  }
+}
+
+.active-detections {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detection-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse-badge 2s ease-in-out infinite;
+  }
+
+  &.face-badge .badge-dot {
+    background: var(--neon-blue);
+    box-shadow: 0 0 8px var(--neon-blue);
+  }
+
+  &.hand-badge .badge-dot {
+    background: var(--neon-purple);
+    box-shadow: 0 0 8px var(--neon-purple);
+  }
+}
+
+@keyframes pulse-badge {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+  .stats-panel .panel-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gesture-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .loading-card,
+  .error-card {
+    padding: 30px 20px;
+
+    h2 {
+      font-size: 1.4rem;
+    }
+  }
+
+  .video-wrapper {
+    max-height: 45vh;
+  }
+
+  .control-panel {
+    grid-template-columns: 1fr;
+    
+    ion-button {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .detection-workspace {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .stats-panel .panel-content,
+  .info-section .section-content {
+    gap: 8px;
+  }
+
+  .stat-card {
+    padding: 10px;
+
+    .stat-icon {
+      font-size: 1.5rem;
+    }
+
+    .stat-value {
+      font-size: 1.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+    }
+  }
+
+  .gesture-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gesture-item {
+    padding: 8px 6px;
+
+    .gesture-emoji {
+      font-size: 1.5rem;
+    }
+
+    .gesture-name {
+      font-size: 0.65rem;
+    }
+  }
+
+  .control-panel {
+    ion-button {
+      height: 40px;
+      font-size: 0.8rem;
+
+      ion-icon {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .recognition-item {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+}
+
+// Дополнительные эффекты
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.stat-card,
+.info-section,
+.loading-card,
+.error-card {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+  
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+}

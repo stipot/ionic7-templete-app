@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment';
 
+import { FaceDetectorComponent } from './face-detect/face-detector.component';  // ИСПРАВЛЕНО
 import { FashionComponent } from './fashion/fashion.component';
 import { FashionDetailComponent } from './fashion-detail/fashion-detail.component';
 import { FormsComponent } from './forms/forms.component';
@@ -48,9 +49,10 @@ import { MiniblogComponent } from './miniblog/miniblog.component';
 import { AddBlogModalComponent } from './miniblog/add-blog-modal.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
 import { WidgetModule } from './widget/widget.module';
-import {CalcModule} from './calc/calc.module'
+import { CalcModule } from './calc/calc.module';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
+
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -59,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
+    FaceDetectorComponent,
     FashionComponent,
     FashionDetailComponent,
     FormsComponent,
@@ -101,6 +104,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppSharedComponentsModule,
     CommonModule,
     WidgetModule,
+    CalcModule,
     DragDropModule,
     IonicStorageModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

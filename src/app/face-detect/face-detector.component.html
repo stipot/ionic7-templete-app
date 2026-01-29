@@ -1,0 +1,248 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="custom-title">
+      Детектор Лиц
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="detector-content">
+  <div class="detector-container">
+    
+    <!-- Индикатор загрузки -->
+    <div *ngIf="loading" class="loading-container animate-in">
+      <div class="loading-card">
+        <div class="spinner-container">
+          <div class="modern-spinner"></div>
+        </div>
+        <h2>Загрузка AI моделей</h2>
+        <p class="loading-text">Инициализация MediaPipe Vision...</p>
+        <div class="loading-steps">
+          <div class="step">
+            <div class="step-icon">🧠</div>
+            <span>Face Detector</span>
+          </div>
+          <div class="step">
+            <div class="step-icon">👋</div>
+            <span>Gesture Recognition</span>
+          </div>
+          <div class="step">
+            <div class="step-icon">📹</div>
+            <span>Camera Access</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Сообщение об ошибке -->
+    <div *ngIf="error" class="error-container animate-in">
+      <div class="error-card">
+        <ion-icon name="warning-outline" class="error-icon"></ion-icon>
+        <h2>Ошибка инициализации</h2>
+        <p class="error-message">{{ error }}</p>
+        <ion-button 
+          (click)="initDetectors()" 
+          class="retry-button"
+          expand="block">
+          <ion-icon name="refresh-outline" slot="start"></ion-icon>
+          Попробовать снова
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Основной контейнер детекции -->
+    <div class="detection-workspace" [class.hidden]="loading || error">
+      
+      <!-- Видео с наложениями -->
+      <div class="video-wrapper">
+        <!-- Canvas для частиц (нижний слой) -->
+        <canvas #particleCanvas class="particle-canvas"></canvas>
+        
+        <!-- Видео -->
+        <video 
+          #video 
+          class="video-feed"
+          playsinline 
+          muted
+          autoplay>
+        </video>
+        
+        <!-- Canvas для детекции (верхний слой) -->
+        <canvas #canvas class="detection-canvas"></canvas>
+        
+        <!-- Индикатор записи -->
+        <div class="recording-indicator">
+          <div class="pulse-dot"></div>
+        </div>
+      </div>
+
+      <!-- Панель управления -->
+      <div class="control-panel">
+        <ion-button 
+          [color]="cameraEnabled ? 'success' : 'danger'"
+          (click)="toggleCamera()"
+          size="small"
+          expand="block">
+          <ion-icon [name]="cameraEnabled ? 'videocam' : 'videocam-off'" slot="start"></ion-icon>
+          {{ cameraEnabled ? 'Камера вкл' : 'Камера выкл' }}
+        </ion-button>
+
+        <ion-button 
+          [color]="faceDetectionEnabled ? 'primary' : 'medium'"
+          (click)="toggleFaceDetection()"
+          [disabled]="!cameraEnabled"
+          size="small"
+          expand="block">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          {{ faceDetectionEnabled ? 'Лица вкл' : 'Лица выкл' }}
+        </ion-button>
+
+        <ion-button 
+          [color]="gestureDetectionEnabled ? 'secondary' : 'medium'"
+          (click)="toggleGestureDetection()"
+          [disabled]="!cameraEnabled"
+          size="small"
+          expand="block">
+          <ion-icon name="hand-left-outline" slot="start"></ion-icon>
+          {{ gestureDetectionEnabled ? 'Жесты вкл' : 'Жесты выкл' }}
+        </ion-button>
+      </div>
+
+      <!-- Информация о распознавании -->
+      <div class="info-section recognition-info" [class.collapsed]="recognitionInfoCollapsed">
+        <div class="section-header" (click)="recognitionInfoCollapsed = !recognitionInfoCollapsed">
+          <div class="header-left">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span>Что распознано</span>
+          </div>
+          <ion-icon [name]="recognitionInfoCollapsed ? 'chevron-down-outline' : 'chevron-up-outline'"></ion-icon>
+        </div>
+        
+        <div class="section-content">
+          <div class="recognition-list">
+            <div *ngFor="let info of recognitionInfo" class="recognition-item">
+              {{ info }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Панель статистики (компактная, скрываемая) -->
+      <div class="stats-panel" [class.collapsed]="statsCollapsed">
+        <div class="panel-header" (click)="statsCollapsed = !statsCollapsed">
+          <div class="header-left">
+            <ion-icon name="stats-chart-outline"></ion-icon>
+            <span>Статистика</span>
+          </div>
+          <ion-icon [name]="statsCollapsed ? 'chevron-down-outline' : 'chevron-up-outline'"></ion-icon>
+        </div>
+        
+        <div class="panel-content">
+          <div class="stat-card faces">
+            <div class="stat-icon">👤</div>
+            <div class="stat-content">
+              <div class="stat-value">{{ stats.faces }}</div>
+              <div class="stat-label">Лица</div>
+            </div>
+          </div>
+
+          <div class="stat-card confidence">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-content">
+              <div class="stat-value">{{ stats.confidence.toFixed(0) }}%</div>
+              <div class="stat-label">Точность</div>
+            </div>
+          </div>
+
+          <div class="stat-card gestures">
+            <div class="stat-icon">✋</div>
+            <div class="stat-content">
+              <div class="stat-value">{{ stats.gestures.length }}</div>
+              <div class="stat-label">Жесты</div>
+            </div>
+          </div>
+
+          <div class="stat-card fps">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-content">
+              <div class="stat-value">{{ stats.fps }}</div>
+              <div class="stat-label">FPS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Информационная панель (компактная, скрываемая) -->
+      <div class="info-panel">
+        <!-- Жесты -->
+        <div class="info-section" [class.collapsed]="gesturesCollapsed">
+          <div class="section-header" (click)="gesturesCollapsed = !gesturesCollapsed">
+            <div class="header-left">
+              <ion-icon name="hand-left-outline"></ion-icon>
+              <span>Распознаваемые жесты</span>
+            </div>
+            <ion-icon [name]="gesturesCollapsed ? 'chevron-down-outline' : 'chevron-up-outline'"></ion-icon>
+          </div>
+          
+          <div class="section-content">
+            <div class="gesture-grid">
+              <div class="gesture-item">
+                <span class="gesture-emoji">👍</span>
+                <span class="gesture-name">Лайк</span>
+              </div>
+              <div class="gesture-item">
+                <span class="gesture-emoji">✌️</span>
+                <span class="gesture-name">Победа</span>
+              </div>
+              <div class="gesture-item">
+                <span class="gesture-emoji">✊</span>
+                <span class="gesture-name">Кулак</span>
+              </div>
+              <div class="gesture-item">
+                <span class="gesture-emoji">🖐️</span>
+                <span class="gesture-name">Ладонь</span>
+              </div>
+              <div class="gesture-item">
+                <span class="gesture-emoji">☝️</span>
+                <span class="gesture-name">Вверх</span>
+              </div>
+              <div class="gesture-item">
+                <span class="gesture-emoji">🤟</span>
+                <span class="gesture-name">ILY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Активные детекции -->
+        <div class="info-section" [class.collapsed]="detectionsCollapsed">
+          <div class="section-header" (click)="detectionsCollapsed = !detectionsCollapsed">
+            <div class="header-left">
+              <ion-icon name="layers-outline"></ion-icon>
+              <span>Активные детекции</span>
+            </div>
+            <ion-icon [name]="detectionsCollapsed ? 'chevron-down-outline' : 'chevron-up-outline'"></ion-icon>
+          </div>
+          
+          <div class="section-content">
+            <div class="active-detections">
+              <div class="detection-badge face-badge">
+                <span class="badge-dot"></span>
+                Детекция лиц
+              </div>
+              <div class="detection-badge hand-badge">
+                <span class="badge-dot"></span>
+                Распознавание жестов
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+</ion-content>

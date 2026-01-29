@@ -13,11 +13,8 @@ import { IntroComponent } from './intro/intro.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { BarcodeScannerComponent } from './barcode-scanner/barcode-scanner.component';
 import { TermsOfServiceComponent } from "./terms-of-service/terms-of-service.component"
-import {FrontLayoutComponent} from "./front-layout/front-layout.component"
-import {CameraComponent} from './camera/camera.component';
-import { WidgetModule } from "./widget/widget.module"
-
-
+import { FrontLayoutComponent } from "./front-layout/front-layout.component"
+import { CameraComponent } from './camera/camera.component';
 import { VideoPlayerComponent } from './videoplayer/videoplayer.component';
 import { DealsComponent } from './deals/deals.component';
 import { MoodCalendarComponent } from './mood-calendar/mood-calendar.component';
@@ -35,15 +32,20 @@ import { MiniblogComponent } from './miniblog/miniblog.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { GazonComponent } from './gazon/gazon.component';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
+import { FaceDetectorComponent } from './face-detect/face-detector.component';  // ИСПРАВЛЕНО
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'front-layout',
     pathMatch: 'full'
-  },  
-{
-      path: 'game-2048',
+  },
+  {
+    path: 'face-detector',
+    component: FaceDetectorComponent
+  },
+  {
+    path: 'game-2048',
     loadChildren: () => import('./g2048/g2048.module').then(m => m.G2048Module)
   },
   {
@@ -63,16 +65,11 @@ const routes: Routes = [
     loadChildren: () => import('./signup/signup.module').then(m => m.SignUpPageModule)
   },
   {
-    path: '',
-    redirectTo: 'front-layout',
-    pathMatch: 'full'
-  },
-  {
     path:'maps',
     component: MapsComponent
   },
   {
-      path: 'calc',
+    path: 'calc',
     loadChildren: () => import('./calc/calc.module').then(m => m.CalcModule)
   },
   {
@@ -168,12 +165,8 @@ const routes: Routes = [
     component: BarcodeScannerComponent
   },
   {
-    path: 'contact-card',
-    component: ContactCardComponent
-  },
-  {
     path: 'widget',
-  loadChildren: () => import('./widget/widget.module').then( m => m.WidgetModule)
+    loadChildren: () => import('./widget/widget.module').then( m => m.WidgetModule)
   },
   {
     path: 'forgot-password',

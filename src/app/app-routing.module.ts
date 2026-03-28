@@ -33,7 +33,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { GazonComponent } from './gazon/gazon.component';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { FaceDetectorComponent } from './face-detect/face-detector.component';  // ИСПРАВЛЕНО
-
+import { TaimerComponent } from './taimer/taimer.component';
 const routes: Routes = [
   {
     path: '',
@@ -215,6 +215,10 @@ const routes: Routes = [
   {
     path: 'fashion-detail', 
     component: FashionDetailComponent
+  },
+  {
+    path: "timer",
+    component: TaimerComponent
   },
   {
     path: '**',

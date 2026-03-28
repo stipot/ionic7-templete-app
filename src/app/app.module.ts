@@ -52,6 +52,8 @@ import { WidgetModule } from './widget/widget.module';
 import { CalcModule } from './calc/calc.module';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
+import { TierListComponent } from './tier-list/tier-list.component'
+import { TierListModule } from './tier-list/tier-list.module';
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -105,6 +107,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommonModule,
     WidgetModule,
     CalcModule,
+    TierListModule,
     DragDropModule,
     IonicStorageModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

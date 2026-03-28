@@ -217,6 +217,10 @@ const routes: Routes = [
     component: FashionDetailComponent
   },
   {
+    path: 'predicting-house-prices',
+    loadChildren: () => import('./predicting-house-prices/predicting-house-prices.module').then(m => m.PredictingHousePricesModule)
+  },
+  {
     path: '**',
     redirectTo: 'page-not-found'
   },

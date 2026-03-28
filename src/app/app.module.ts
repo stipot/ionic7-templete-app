@@ -52,6 +52,7 @@ import { WidgetModule } from './widget/widget.module';
 import { CalcModule } from './calc/calc.module';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
+import {PredictingHousePricesModule} from './predicting-house-prices/predicting-house-prices.module'
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -105,6 +106,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommonModule,
     WidgetModule,
     CalcModule,
+    PredictingHousePricesModule,
     DragDropModule,
     IonicStorageModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

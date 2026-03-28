@@ -217,6 +217,10 @@ const routes: Routes = [
     component: FashionDetailComponent
   },
   {
+    path: 'paint',
+    loadChildren: () => import('./paint/paint.module').then(m => m.PaintModule)
+  },
+  {
     path: '**',
     redirectTo: 'page-not-found'
   },

@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Paint</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+   <div class="container">
+      <!-- Панель инструментов -->
+      <section class="tools-board">
+        <div class="row">
+          <label class="title">Формы</label>
+          <ul class="options">
+            <!-- Инструмент для рисования прямоугольника -->
+            <li class="option tool" id="rectangle">
+              <img src="icons/rectangle.svg" alt="Rectangle">
+              <span>Прямоугольник</span>
+            </li>
+            <!-- Инструмент для рисования круга -->
+            <li class="option tool" id="circle">
+              <img src="icons/circle.svg" alt="Circle">
+              <span>Круг</span>
+            </li>
+            <!-- Инструмент для рисования треугольника -->
+            <li class="option tool" id="triangle">
+              <img src="icons/triangle.svg" alt="Triangle">
+              <span>Треугольник</span>
+            </li>
+            <li class="option">
+              <input type="checkbox" id="fill-color">
+              <label for="fill-color">Цвет заливки</label>
+            </li>
+          </ul>
+        </div>
+        <div class="row">
+          <label class="title">Опции</label>
+          <ul class="options">
+            <!-- Инструмент кисть -->
+            <li class="option active tool" id="brush">
+              <img src="icons/brush.svg" alt="Brush">
+              <span>Щетка</span>
+            </li>
+            <!-- Инструмент ластик -->
+            <li class="option tool" id="eraser">
+              <img src="icons/eraser.svg" alt="Eraser">
+              <span>Ластик</span>
+            </li>
+            <!-- Ползунок для изменения размера кисти -->
+            <li class="option">
+              <input type="range" id="size-slider" min="1" max="30" value="5">
+            </li>
+          </ul>
+        </div>
+        <div class="row colors">
+          <label class="title">Цвета</label>
+          <ul class="options">
+            <!-- Кнопки выбора цвета -->
+            <li class="option"></li>
+            <li class="option selected"></li>
+            <li class="option"></li>
+            <li class="option"></li>
+            <li class="option">
+              <input type="color" id="color-picker" value="#4A98F7">
+            </li>
+          </ul>
+        </div>
+        <div class="row buttons">
+          <!-- Кнопки очистки и сохранения -->
+          <button class="clear-canvas">Очистить</button>
+          <button class="save-img">Сохранить как фото</button>
+        </div>
+      </section>
+
+      <!-- Холст для рисования -->
+      <section class="drawing-board">
+        <canvas></canvas>
+      </section>
+    </div>
+
+
+
+
+</ion-content> 
+<!--<p>
+  paint works!
+</p>
+-->

@@ -221,6 +221,11 @@ const routes: Routes = [
     component: TimerComponent
   },
   {
+    path: '',
+    loadChildren: () => import('./timer/timer.module').then(m => m.TimerModule)
+  },
+  { path: '', redirectTo: '/timer', pathMatch: 'full' },
+  {
     path: '**',
     redirectTo: 'page-not-found'
   },

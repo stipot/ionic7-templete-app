@@ -1,3 +1,36 @@
-<p>
-  timer works!
-</p>
+<div class="timer-container">
+  <div class="timer-display">
+    {{ formattedTime }}
+  </div>
+
+  <div class="timer-controls">
+    <ion-button
+      (click)="startTimer()"
+      [disabled]="isRunning"
+      color="success">
+      Старт
+    </ion-button>
+    <ion-button
+      (click)="stopTimer()"
+      [disabled]="!isRunning"
+      color="danger">
+      Стоп
+    </ion-button>
+    <ion-button
+      (click)="resetTimer()"
+      color="medium">
+      Сброс
+    </ion-button>
+  </div>
+
+  <div class="time-input">
+    <ion-item>
+      <ion-label position="stacked">Время (секунды)</ion-label>
+      <ion-input
+        type="number"
+        [(ngModel)]="timeInSeconds"
+        [disabled]="isRunning">
+      </ion-input>
+    </ion-item>
+  </div>
+</div>

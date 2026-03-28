@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import {TimerComponent } from './timer.component';
 
-describe('TaimerComponent', () => {
+describe('TimerComponent', () => {
   let component: TimerComponent;
   let fixture: ComponentFixture<TimerComponent>;
 

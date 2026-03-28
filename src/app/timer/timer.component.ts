@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-taimer',
-  templateUrl: './taimer.component.html',
-  styleUrls: ['./taimer.component.scss'],
+  templateUrl: './timer.component.html',
+  styleUrls: ['./timer.component.scss'],
 })
-export class TaimerComponent  implements OnInit {
+export class TimerComponent  implements OnInit {
 
   constructor() { }
 

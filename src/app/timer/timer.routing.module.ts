@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TaimerComponent} from './taimer.component';
+import { TimerComponent} from './timer.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TaimerComponent
+    component: TimerComponent
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TaimerPageRoutingModule {}
+export class TimerPageRoutingModule {}

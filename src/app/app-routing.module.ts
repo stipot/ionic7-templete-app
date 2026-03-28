@@ -33,6 +33,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { GazonComponent } from './gazon/gazon.component';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { FaceDetectorComponent } from './face-detect/face-detector.component';  // ИСПРАВЛЕНО
+import { TierListComponent } from './tier-list/tier-list.component';
 
 const routes: Routes = [
   {
@@ -215,6 +216,10 @@ const routes: Routes = [
   {
     path: 'fashion-detail', 
     component: FashionDetailComponent
+  },
+  {
+    path:'Jwsr',
+    component: TierListComponent
   },
   {
     path: '**',

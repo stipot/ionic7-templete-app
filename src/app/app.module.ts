@@ -52,6 +52,7 @@ import { WidgetModule } from './widget/widget.module';
 import { CalcModule } from './calc/calc.module';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
+import { MorscoyBoiModule } from './morscoy-boi/morscoy-boi.module';
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -106,6 +107,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     WidgetModule,
     CalcModule,
     DragDropModule,
+    MorscoyBoiModule,
     IonicStorageModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

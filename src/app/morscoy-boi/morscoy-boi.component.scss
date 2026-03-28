@@ -1,0 +1,96 @@
+.status-bar {
+  text-align: center;
+  margin-bottom: 20px;
+  ion-chip {
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0 15px;
+  }
+}
+
+.board-container {
+  margin-bottom: 30px;
+  
+  .board-title {
+    text-align: center;
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+}
+
+.battle-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+  background-color: #3388ff; /* Цвет воды */
+  border: 4px solid #3388ff;
+  border-radius: 4px;
+  max-width: 350px; /* Ограничение ширины для мобильных */
+  margin: 0 auto;
+  aspect-ratio: 1 / 1; /* Делает сетку строго квадратной */
+}
+
+.grid-row {
+  display: contents; /* Позволяет ячейкам быть прямыми детьми грида */
+}
+
+.grid-cell {
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: default;
+  transition: all 0.2s ease;
+
+  // Стили для открытой клетки
+  &.revealed {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  // Стили для поля врага (кликабельное)
+  &:not(.revealed):hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+  }
+  
+  // Попадание
+  &.hit {
+    background-color: #ff4757 !important;
+    color: white;
+    animation: pulse 0.5s;
+  }
+
+  // Промах
+  &.miss {
+    background-color: #ced6e0;
+  }
+  
+  .miss-marker {
+    width: 8px;
+    height: 8px;
+    background-color: #2f3542;
+    border-radius: 50%;
+  }
+}
+
+// Стили для поля игрока
+.player-cell {
+  cursor: default;
+  &.ship {
+    background-color: #7bed9f; // Зеленый цвет корабля
+    border: 1px solid #2ed573;
+  }
+  &.hit {
+    background-color: #ff4757 !important;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}

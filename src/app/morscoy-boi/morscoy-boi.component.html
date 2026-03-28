@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Морской Бой</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <!-- Статус игры -->
+  <div class="status-bar">
+    <ion-chip [color]="isPlayerTurn ? 'success' : 'danger'" outline>
+      <ion-icon [name]="isPlayerTurn ? 'boat' : 'skull'"></ion-icon>
+      <ion-label>{{ statusMessage }}</ion-label>
+    </ion-chip>
+  </div>
+
+  <!-- Поле противника (Интерактивное) -->
+  <div class="board-container">
+    <h3 class="board-title">Поле Противника</h3>
+    <div class="battle-grid">
+      <div 
+        *ngFor="let row of computerBoard; let y = index" 
+        class="grid-row"
+      >
+        <div 
+          *ngFor="let cell of row; let x = index"
+          class="grid-cell"
+          [class.hit]="cell.isHit"
+          [class.miss]="cell.isMiss"
+          [class.revealed]="cell.isRevealed"
+          (click)="handleCellClick(cell, 'computer')"
+        >
+          <!-- Иконка при попадании -->
+          <ion-icon 
+            *ngIf="cell.isHit" 
+            name="skull" 
+            color="danger"
+          ></ion-icon>
+          <!-- Точка при промахе -->
+          <div 
+            *ngIf="cell.isMiss" 
+            class="miss-marker"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Поле игрока (Визуальное) -->
+  <div class="board-container">
+    <h3 class="board-title">Ваш Флот</h3>
+    <div class="battle-grid">
+      <div 
+        *ngFor="let row of playerBoard" 
+        class="grid-row"
+      >
+        <div 
+          *ngFor="let cell of row"
+          class="grid-cell player-cell"
+          [class.ship]="cell.hasShip"
+          [class.hit]="cell.isHit"
+          [class.miss]="cell.isMiss"
+        >
+          <ion-icon 
+            *ngIf="cell.isHit" 
+            name="skull" 
+            color="danger"
+          ></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Кнопка рестарта (появляется только в конце) -->
+  <div class="ion-padding-top" *ngIf="gameOver">
+    <ion-button expand="block" (click)="startNewGame()">Новая игра</ion-button>
+  </div>
+
+</ion-content>

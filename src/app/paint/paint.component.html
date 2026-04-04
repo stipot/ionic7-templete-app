@@ -4,87 +4,99 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Paint</ion-title>
+    <ion-button id="undo-btn">
+        <ion-icon name="arrow-undo-outline" slot="icon-only"></ion-icon>
+      </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="paint-container">
+    <!-- Панель инструментов -->
+    <div class="tools-board">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="section-title">Формы</ion-label>
+            <div class="options">
+              <ion-button fill="clear" id="rectangle" class="tool-btn">
+                <ion-icon name="square-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="circle" class="tool-btn">
+                <ion-icon name="radio-button-off-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="triangle" class="tool-btn">
+                <ion-icon name="triangle-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-item lines="none">
+                <ion-label>Заливка</ion-label>
+                <ion-checkbox id="fill-color" slot="end"></ion-checkbox>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
 
-   <div class="container">
-      <!-- Панель инструментов -->
-      <section class="tools-board">
-        <div class="row">
-          <label class="title">Формы</label>
-          <ul class="options">
-            <!-- Инструмент для рисования прямоугольника -->
-            <li class="option tool" id="rectangle">
-              <img src="icons/rectangle.svg" alt="Rectangle">
-              <span>Прямоугольник</span>
-            </li>
-            <!-- Инструмент для рисования круга -->
-            <li class="option tool" id="circle">
-              <img src="icons/circle.svg" alt="Circle">
-              <span>Круг</span>
-            </li>
-            <!-- Инструмент для рисования треугольника -->
-            <li class="option tool" id="triangle">
-              <img src="icons/triangle.svg" alt="Triangle">
-              <span>Треугольник</span>
-            </li>
-            <li class="option">
-              <input type="checkbox" id="fill-color">
-              <label for="fill-color">Цвет заливки</label>
-            </li>
-          </ul>
-        </div>
-        <div class="row">
-          <label class="title">Опции</label>
-          <ul class="options">
-            <!-- Инструмент кисть -->
-            <li class="option active tool" id="brush">
-              <img src="icons/brush.svg" alt="Brush">
-              <span>Щетка</span>
-            </li>
-            <!-- Инструмент ластик -->
-            <li class="option tool" id="eraser">
-              <img src="icons/eraser.svg" alt="Eraser">
-              <span>Ластик</span>
-            </li>
-            <!-- Ползунок для изменения размера кисти -->
-            <li class="option">
-              <input type="range" id="size-slider" min="1" max="30" value="5">
-            </li>
-          </ul>
-        </div>
-        <div class="row colors">
-          <label class="title">Цвета</label>
-          <ul class="options">
-            <!-- Кнопки выбора цвета -->
-            <li class="option"></li>
-            <li class="option selected"></li>
-            <li class="option"></li>
-            <li class="option"></li>
-            <li class="option">
-              <input type="color" id="color-picker" value="#4A98F7">
-            </li>
-          </ul>
-        </div>
-        <div class="row buttons">
-          <!-- Кнопки очистки и сохранения -->
-          <button class="clear-canvas">Очистить</button>
-          <button class="save-img">Сохранить как фото</button>
-        </div>
-      </section>
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="section-title">Инструменты</ion-label>
+            <div class="options">
+              <ion-button fill="clear" id="brush" class="tool-btn active">
+                <ion-icon name="brush-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="eraser" class="tool-btn">
+                <ion-icon name="phone-landscape-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="fill-tool" class="tool-btn">
+                <ion-icon name="color-fill-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-item lines="none">
+                <ion-label>Размер</ion-label>
+                <ion-range id="size-slider" min="1" max="30" value="5" pin="true"></ion-range>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
 
-      <!-- Холст для рисования -->
-      <section class="drawing-board">
-        <canvas></canvas>
-      </section>
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="section-title">Цвета</ion-label>
+            <div class="colors">
+              <div class="color-option" style="background-color: #ffffff;" data-color="#ffffff"></div>
+              <div class="color-option selected" style="background-color: #000000;" data-color="#000000"></div>
+              <div class="color-option" style="background-color: #E02020;" data-color="#E02020"></div>
+              <div class="color-option" style="background-color: #6DD400;" data-color="#6DD400"></div>
+              <div class="color-option" style="background-color: #4A98F7;" data-color="#4A98F7"></div>
+              <div class="color-picker-wrapper">
+                <input type="color" id="color-picker" value="#4A98F7">
+                <ion-icon name="color-palette-outline"></ion-icon>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <div class="action-buttons">
+              <ion-button expand="block" color="medium" id="clear-canvas">
+                <ion-icon name="trash-outline" slot="start"></ion-icon>
+                Очистить
+              </ion-button>
+              <ion-button expand="block" color="primary" id="save-img">
+                <ion-icon name="save-outline" slot="start"></ion-icon>
+                Сохранить
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
 
-
-
-
-</ion-content> 
+    <!-- Холст для рисования -->
+    <div class="drawing-board">
+      <canvas #paintCanvas id="paint-canvas"></canvas>
+    </div>
+  </div>
+</ion-content>
 <!--<p>
   paint works!
 </p>

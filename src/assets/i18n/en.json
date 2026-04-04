@@ -219,5 +219,13 @@
 
   ,"DEVELOPMENT": {
     "COMPONENTS": "Components in development:"
-  }
+  },
+  "TIMER": {
+  "COMPONENT_TITLE": "Timer",
+  "START": "Start",
+  "STOP": "Stop",
+  "RESET": "Reset",
+  "FINISHED_MSG": "Time is up!"
+}
+
 }

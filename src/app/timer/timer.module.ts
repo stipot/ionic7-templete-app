@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
+import { TranslateModule } from '@ngx-translate/core'; 
 import { TimerPageRoutingModule } from './timer.routing.module';
 import { TimerComponent } from './timer.component';
 
@@ -12,8 +12,9 @@ import { TimerComponent } from './timer.component';
     CommonModule,
     TimerPageRoutingModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    TranslateModule.forChild() 
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]  // позволяет использовать пользовательские элементы
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class TimerModule { }

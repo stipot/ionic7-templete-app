@@ -143,5 +143,12 @@
     "SUBTITLE": "Calcola valore e clicca \"Applica\"",
     "APPLY_BUTTON": "Applica risultato",
     "CLOSE_BUTTON": "Chiudi"
+  },
+  "TIMER": {
+  "COMPONENT_TITLE": "Timer",
+  "START": "Inizia",
+  "STOP": "Interrompere",
+  "RESET": "Reset",
+  "FINISHED_MSG": "Il tempo è scaduto!"
   }
 }

@@ -5,9 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DataService {
+  obj: Object;
+  constructor(private http: HttpClient) {
+    this.obj = this.http.get('/assets/sample-data/prices/data.ts')
+   }
 
-  constructor(private http: HttpClient) { }
-  getData(){
-    return this.http.get('/assets/sample-data/prices/data.json')
-  }
+  // getData(){
+  //   return this.http.get('/assets/sample-data/prices/data.json')
+  // }
 }

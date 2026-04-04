@@ -1,2 +1,145 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tier-List</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-#
+<ion-content class="ion-padding">
+  
+  <!-- ЛЕВАЯ ПАНЕЛЬ-->
+  <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
+    <div 
+      *ngFor="let img of sourceImages" 
+      draggable="true" 
+      (dragstart)="onDragStart(img)"
+      style="text-align: center; cursor: grab; color: #636363; padding: 8px; border-radius: 1px; background: #1d1d1d;">
+      <img [src]="img.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 1px;">
+      <div style="font-weight: bold; margin-top: 5px;">{{img.label}}</div>
+    </div>
+  </div>
+
+  <!-- РЯДЫ -->
+  <div style="display: flex; flex-direction: column; gap: 4px;">
+    
+    <!-- S -->
+    <div 
+      (drop)="onDrop($event, 'S')" 
+      (dragover)="$event.preventDefault()"
+      style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
+      <div style="width: 100px; background: #ce3a20d5; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px;color: rgb(0, 0, 0)">
+        S
+      </div>
+      <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <div *ngFor="let item of getItemsByTier('S')" style="position: relative;">
+          <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+          <ion-icon name="close-circle" 
+                    (click)="removeItem(item.id)"
+                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+          </ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <!-- A -->
+    <div 
+      (drop)="onDrop($event, 'A')" 
+      (dragover)="$event.preventDefault()"
+      style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
+      <div style="width: 100px; background: #ec781aec; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px;color: rgb(0, 0, 0)">
+        A
+      </div>
+      <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <div *ngFor="let item of getItemsByTier('A')" style="position: relative;">
+          <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+          <ion-icon name="close-circle" 
+                    (click)="removeItem(item.id)"
+                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+          </ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div 
+      (drop)="onDrop($event, 'B')" 
+      (dragover)="$event.preventDefault()"
+      style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
+      <div style="width: 100px; background: #e6e942ef; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
+        B
+      </div>
+      <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <div *ngFor="let item of getItemsByTier('B')" style="position: relative;"> <!-- цикл который показывает все картинки в ряду-->
+          <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+          <ion-icon name="close-circle" 
+                    (click)="removeItem(item.id)"
+                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+          </ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div 
+      (drop)="onDrop($event, 'C')" 
+      (dragover)="$event.preventDefault()"
+      style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
+      <div style="width: 100px; background: #18ac49cb; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
+        C
+      </div>
+      <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <div *ngFor="let item of getItemsByTier('C')" style="position: relative;">
+          <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+          <ion-icon name="close-circle" 
+                    (click)="removeItem(item.id)"
+                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+          </ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <!-- D -->
+    <div 
+      (drop)="onDrop($event, 'D')" 
+      (dragover)="$event.preventDefault()"
+      style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
+      <div style="width: 100px; background: #40abbece; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
+        D
+      </div>
+      <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <div *ngFor="let item of getItemsByTier('D')" style="position: relative;">
+          <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+          <ion-icon name="close-circle" 
+                    (click)="removeItem(item.id)"
+                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+          </ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <!-- E -->
+    <div 
+      (drop)="onDrop($event, 'E')" 
+      (dragover)="$event.preventDefault()"
+      style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
+      <div style="width: 100px; background: #7a46a5a9; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
+        E
+      </div>
+      <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+        <div *ngFor="let item of getItemsByTier('E')" style="position: relative;">
+          <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
+          <ion-icon name="close-circle" 
+                    (click)="removeItem(item.id)"
+                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+          </ion-icon>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<ion-button (click)="downloadImage()">Загрузить
+    <ion-icon name="buttondown" slot="start">
+    
+    </ion-icon>
+</ion-button>
+
+</ion-content>

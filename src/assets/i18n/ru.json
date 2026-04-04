@@ -238,5 +238,13 @@
 
   ,"DEVELOPMENT": {
     "COMPONENTS": "Компоненты в стадии разработки:"
+  },
+  "TIMER_TITLE":{
+  "TIMER_TITLE": "Таймер",
+  "TIMER_START": "Старт",
+  "TIMER_STOP": "Стоп",
+  "TIMER_RESET": "Сброс",
+  "TIMER_TIME_LABEL": "Время (секунды)",
+  "CLOSE": "Закрыть"
   }
 }

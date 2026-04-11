@@ -21,11 +21,15 @@
 
   <ion-list *ngIf="plants.length > 0">
     <ion-card *ngFor="let plant of plants" [ngClass]="{'needs-water': getDaysUntilWater(plant) <= 0}">
-      <img [src]="plant.imageUrl" alt="Plant image" *ngIf="plant.imageUrl" />
-      <ion-card-header>
-        <ion-card-subtitle>{{ plant.species }}</ion-card-subtitle>
-        <ion-card-title>{{ plant.name }}</ion-card-title>
-      </ion-card-header>
+      <ion-item lines="none" class="plant-header">
+        <ion-avatar slot="start" *ngIf="plant.imageUrl" class="plant-avatar">
+          <img [src]="plant.imageUrl" alt="Plant image" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ plant.name }}</h2>
+          <p>{{ plant.species }}</p>
+        </ion-label>
+      </ion-item>
 
       <ion-card-content>
         <div class="water-status">

@@ -143,5 +143,8 @@
     "SUBTITLE": "Calculez la valeur et cliquez sur \"Appliquer\"",
     "APPLY_BUTTON": "Appliquer le résultat",
     "CLOSE_BUTTON": "Fermer"
+  },
+  "PAINT":{
+    "COMPONENT_TITLE": "Peinture"
   }
 }

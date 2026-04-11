@@ -165,10 +165,10 @@ const routes: Routes = [
     path: 'barcode-scanner',
     component: BarcodeScannerComponent
   },
-  {
-    path: 'widget',
-    loadChildren: () => import('./widget/widget.module').then( m => m.WidgetModule)
-  },
+//  {
+//    path: 'widget',
+//    loadChildren: () => import('./widget/widget.module').then( m => m.WidgetModule)
+//  },
   {
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)

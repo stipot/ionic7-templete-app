@@ -18,23 +18,27 @@
     </div>
   </div>
 
-  <!-- РЯДЫ -->
-  <div style="display: flex; flex-direction: column; gap: 4px;">
+
+  <div class="tiers-container" style="display: flex; flex-direction: column; gap: 4px;">
     
-    <!-- S -->
+    <!-- S  on drop - передает 
+    dragover разрешение дропа в ряд 
+
+    -->
     <div 
-      (drop)="onDrop($event, 'S')" 
+      (drop)="onDrop($event, 'S')"  
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
-      <div style="width: 100px; background: #ce3a20d5; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px;color: rgb(0, 0, 0)">
+      <div style="width: 100px; background: #bb2f16d5; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px;color: rgb(0, 0, 0)">
         S
       </div>
+  <!-- ngFor местный цикл -->      
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
         <div *ngFor="let item of getItemsByTier('S')" style="position: relative;">
           <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
           <ion-icon name="close-circle" 
                     (click)="removeItem(item.id)"
-                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+                    style="position: absolute; top: -8px; right: -8px; font-size: 11px; cursor: pointer; background: rgb(97, 97, 97); border-radius: 50%;color:rgb(11, 11, 46);">
           </ion-icon>
         </div>
       </div>
@@ -45,7 +49,7 @@
       (drop)="onDrop($event, 'A')" 
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
-      <div style="width: 100px; background: #ec781aec; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px;color: rgb(0, 0, 0)">
+      <div style="width: 100px; background: #c56516ec; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px;color: rgb(0, 0, 0)">
         A
       </div>
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
@@ -53,7 +57,7 @@
           <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
           <ion-icon name="close-circle" 
                     (click)="removeItem(item.id)"
-                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+                    style="position: absolute; top: -8px; right: -8px; font-size: 11px; cursor: pointer; background:rgb(97, 97, 97); border-radius: 50%;color:rgb(11, 11, 46);">
           </ion-icon>
         </div>
       </div>
@@ -64,7 +68,7 @@
       (drop)="onDrop($event, 'B')" 
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
-      <div style="width: 100px; background: #e6e942ef; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
+      <div style="width: 100px; background: #c4b36aef; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
         B
       </div>
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
@@ -72,7 +76,7 @@
           <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
           <ion-icon name="close-circle" 
                     (click)="removeItem(item.id)"
-                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+                    style="position: absolute; top: -8px; right: -8px; font-size: 11px; cursor: pointer; background: rgb(97, 97, 97); border-radius: 50%;color:rgb(11, 11, 46);">
           </ion-icon>
         </div>
       </div>
@@ -83,7 +87,7 @@
       (drop)="onDrop($event, 'C')" 
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
-      <div style="width: 100px; background: #18ac49cb; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
+      <div style="width: 100px; background: #18ac499f; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
         C
       </div>
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
@@ -91,7 +95,7 @@
           <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
           <ion-icon name="close-circle" 
                     (click)="removeItem(item.id)"
-                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+                    style="position: absolute; top: -8px; right: -8px; font-size: 11px; cursor: pointer; background:rgb(97, 97, 97); border-radius: 50%;color:rgb(11, 11, 46);">
           </ion-icon>
         </div>
       </div>
@@ -102,7 +106,7 @@
       (drop)="onDrop($event, 'D')" 
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
-      <div style="width: 100px; background: #40abbece; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
+      <div style="width: 100px; background: #3b98a8ce; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
         D
       </div>
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
@@ -110,7 +114,7 @@
           <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
           <ion-icon name="close-circle" 
                     (click)="removeItem(item.id)"
-                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+                    style="position: absolute; top: -8px; right: -8px; font-size: 11px; cursor: pointer; background:rgb(97, 97, 97); border-radius: 50%;color:rgb(11, 11, 46);">
           </ion-icon>
         </div>
       </div>
@@ -129,17 +133,20 @@
           <img [src]="item.url" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px;">
           <ion-icon name="close-circle" 
                     (click)="removeItem(item.id)"
-                    style="position: absolute; top: -8px; right: -8px; font-size: 20px; cursor: pointer; background: white; border-radius: 50%;">
+                    style="position: absolute; top: -8px; right: -8px; font-size: 11px; cursor: pointer; background: rgb(97, 97, 97); border-radius: 50%;color:rgb(11, 11, 46);">
           </ion-icon>
         </div>
       </div>
     </div>
-
   </div>
-<ion-button (click)="downloadImage()">Загрузить
-    <ion-icon name="buttondown" slot="start">
+
+<ion-button (click)="downloadImage()">загрузить png
+    <ion-icon slot="start">
     
     </ion-icon>
+</ion-button>
+<ion-button (click)="saveAsImage()">
+  <ion-icon slot="start"></ion-icon>сохранение
 </ion-button>
 
 </ion-content>

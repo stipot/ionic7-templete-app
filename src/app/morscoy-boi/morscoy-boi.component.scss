@@ -25,72 +25,140 @@
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   gap: 2px;
-  background-color: #3388ff; /* Цвет воды */
-  border: 4px solid #3388ff;
-  border-radius: 4px;
-  max-width: 350px; /* Ограничение ширины для мобильных */
+  background-color: #0984e3; /* Цвет глубокой воды */
+  border: 4px solid #0984e3;
+  border-radius: 6px;
+  max-width: 350px;
   margin: 0 auto;
-  aspect-ratio: 1 / 1; /* Делает сетку строго квадратной */
+  aspect-ratio: 1 / 1;
+  user-select: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Тень под полем */
+}
+
+.battle-grid.disabled {
+  opacity: 0.6;
+  filter: grayscale(0.8);
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .grid-row {
-  display: contents; /* Позволяет ячейкам быть прямыми детьми грида */
+  display: contents;
 }
 
 .grid-cell {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1); /* Прозрачная вода */
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
   cursor: default;
   transition: all 0.2s ease;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
 
-  // Стили для открытой клетки
   &.revealed {
     background-color: rgba(255, 255, 255, 0.8);
   }
 
-  // Стили для поля врага (кликабельное)
-  &:not(.revealed):hover {
-    background-color: rgba(255, 255, 255, 0.5);
+  // Эффект наведения на врага
+  &:not(.revealed):not(.ship):hover {
+    background-color: rgba(255, 255, 255, 0.4);
     cursor: pointer;
   }
   
-  // Попадание
-  &.hit {
-    background-color: #ff4757 !important;
-    color: white;
-    animation: pulse 0.5s;
+  // --- КРАСИВЫЕ КОРАБЛИ ---
+  &.ship {
+    background-color: #2f3542; // Темно-серый (цвет корпуса)
+    border: 1px solid #1e272e;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5); // Внутренняя тень для объема
+    
+    // Имитация палубы (белый квадратик внутри)
+    &::after {
+      content: '';
+      width: 40%;
+      height: 40%;
+      background-color: #d1d8e0;
+      border-radius: 1px;
+      opacity: 0.8;
+    }
   }
 
-  // Промах
+  // --- ПОПАДАНИЕ (УРОН) ---
+  &.hit {
+    background-color: #ff3f34 !important;
+    border-color: #ff3f34;
+    
+    // Сбрасываем стиль корабля при взрыве
+    &::after {
+      display: none;
+    }
+    
+    animation: shake 0.4s ease-in-out;
+    
+    ion-icon {
+      filter: drop-shadow(0 0 3px rgba(0,0,0,0.5));
+    }
+  }
+
+  // --- ПРОМАХ ---
   &.miss {
-    background-color: #ced6e0;
+    background-color: rgba(255, 255, 255, 0.5);
   }
   
   .miss-marker {
-    width: 8px;
-    height: 8px;
-    background-color: #2f3542;
+    width: 6px;
+    height: 6px;
+    background-color: #57606f;
     border-radius: 50%;
   }
+
+  // Предпросмотр размещения
+  &.placement-preview {
+    background-color: #4cd137 !important;
+    opacity: 0.6;
+    &::after { background-color: #fff; }
+  }
+  
+  &.placement-mode {
+    cursor: pointer;
+  }
 }
 
-// Стили для поля игрока
-.player-cell {
-  cursor: default;
-  &.ship {
-    background-color: #7bed9f; // Зеленый цвет корабля
-    border: 1px solid #2ed573;
-  }
-  &.hit {
-    background-color: #ff4757 !important;
-  }
+// Анимация тряски при попадании
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px) rotate(-5deg); }
+  75% { transform: translateX(3px) rotate(5deg); }
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
+.placement-controls {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  border: 1px solid #dcdde1;
+  
+  h4 {
+    margin-bottom: 10px;
+    color: #2f3542;
+    font-weight: 600;
+  }
+  
+  .ship-selector {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  
+  ion-chip {
+    &.placed {
+      opacity: 0.3;
+      filter: grayscale(1);
+    }
+  }
 }

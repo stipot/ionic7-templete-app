@@ -6,22 +6,57 @@
 
 <ion-content class="ion-padding">
   
-  <!-- Статус игры -->
+  <!-- Статус -->
   <div class="status-bar">
-    <ion-chip [color]="isPlayerTurn ? 'success' : 'danger'" outline>
-      <ion-icon [name]="isPlayerTurn ? 'boat' : 'skull'"></ion-icon>
+    <ion-chip [color]="isPlacementMode ? 'primary' : (isPlayerTurn ? 'success' : 'danger')" outline>
+      <ion-icon [name]="isPlacementMode ? 'construct' : (isPlayerTurn ? 'boat' : 'skull')"></ion-icon>
       <ion-label>{{ statusMessage }}</ion-label>
     </ion-chip>
   </div>
 
-  <!-- Поле противника (Интерактивное) -->
+  <!-- Панель размещения -->
+  <div class="placement-controls" *ngIf="isPlacementMode">
+    <h4>Выберите корабль:</h4>
+    <div class="ship-selector">
+      <ion-chip 
+        *ngFor="let size of [4,3,2,1]" 
+        [color]="selectedShipSize === size ? 'primary' : 'medium'"
+        [class.placed]="!isShipAvailable(size)"
+        (click)="selectShip(size)"
+        [disabled]="!isShipAvailable(size)"
+      >
+        <ion-icon name="boat"></ion-icon>
+        <ion-label>{{size}}-палубный ({{getPlacedCount(size)}}/{{getTotalCount(size)}})</ion-label>
+      </ion-chip>
+    </div>
+    
+    <ion-button 
+      fill="outline" 
+      size="small" 
+      (click)="toggleOrientation()"
+      *ngIf="selectedShipSize"
+    >
+      <ion-icon slot="start" [name]="isHorizontal ? 'arrow-forward' : 'arrow-down'"></ion-icon>
+      {{ isHorizontal ? 'Горизонтально' : 'Вертикально' }}
+    </ion-button>
+    
+    <div class="ion-padding-top">
+      <ion-button 
+        color="success" 
+        (click)="finishPlacement()"
+        [disabled]="!isPlacementComplete()"
+      >
+        <ion-icon slot="start" name="checkmark"></ion-icon>
+        В бой!
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Поле противника -->
   <div class="board-container">
     <h3 class="board-title">Поле Противника</h3>
-    <div class="battle-grid">
-      <div 
-        *ngFor="let row of computerBoard; let y = index" 
-        class="grid-row"
-      >
+    <div class="battle-grid enemy-grid" [class.disabled]="isPlacementMode">
+      <div *ngFor="let row of computerBoard; let y = index" class="grid-row">
         <div 
           *ngFor="let cell of row; let x = index"
           class="grid-cell"
@@ -30,48 +65,35 @@
           [class.revealed]="cell.isRevealed"
           (click)="handleCellClick(cell, 'computer')"
         >
-          <!-- Иконка при попадании -->
-          <ion-icon 
-            *ngIf="cell.isHit" 
-            name="skull" 
-            color="danger"
-          ></ion-icon>
-          <!-- Точка при промахе -->
-          <div 
-            *ngIf="cell.isMiss" 
-            class="miss-marker"
-          ></div>
+          <ion-icon *ngIf="cell.isHit" name="skull" color="light"></ion-icon>
+          <div *ngIf="cell.isMiss" class="miss-marker"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Поле игрока (Визуальное) -->
+  <!-- Поле игрока -->
   <div class="board-container">
     <h3 class="board-title">Ваш Флот</h3>
     <div class="battle-grid">
-      <div 
-        *ngFor="let row of playerBoard" 
-        class="grid-row"
-      >
+      <div *ngFor="let row of playerBoard; let y = index" class="grid-row">
         <div 
-          *ngFor="let cell of row"
+          *ngFor="let cell of row; let x = index"
           class="grid-cell player-cell"
           [class.ship]="cell.hasShip"
           [class.hit]="cell.isHit"
           [class.miss]="cell.isMiss"
+          [class.placement-preview]="isPlacementMode && selectedShipSize && isValidPreview(cell, x, y)"
+          [class.placement-mode]="isPlacementMode"
+          (click)="handleCellClick(cell, 'player')"
         >
-          <ion-icon 
-            *ngIf="cell.isHit" 
-            name="skull" 
-            color="danger"
-          ></ion-icon>
+          <!-- Если подбит - показываем череп, если целый - ничего (виден CSS корабля) -->
+          <ion-icon *ngIf="cell.isHit" name="flame" color="light" style="font-size: 1.5rem;"></ion-icon>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Кнопка рестарта (появляется только в конце) -->
   <div class="ion-padding-top" *ngIf="gameOver">
     <ion-button expand="block" (click)="startNewGame()">Новая игра</ion-button>
   </div>

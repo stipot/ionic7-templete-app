@@ -9,8 +9,8 @@ describe('MorscoyBoiComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MorscoyBoiComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [MorscoyBoiComponent],
+      imports: [IonicModule] // 
     }).compileComponents();
 
     fixture = TestBed.createComponent(MorscoyBoiComponent);

@@ -219,5 +219,8 @@
 
   ,"DEVELOPMENT": {
     "COMPONENTS": "Components in development:"
+  },
+  "PHP":{
+    "COMPONENT_TITLE": "Price prediction"
   }
 }

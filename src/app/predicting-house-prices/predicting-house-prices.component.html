@@ -1,34 +1,34 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ myname }}</ion-title>
+    <ion-title>{{ "PHP.COMPONENT_TITLE" }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Посчитать стоимость дома</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Данная программа считает приблизительную цену дома, учитывая такие данные как расстояние до метро, площадь и регион.
+    </ion-card-content>
+  </ion-card>
 
   <ion-item>
     <ion-input label="Сколько минут до метро:" [(ngModel)] = "input_minutes_to_metro"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input label="Количество комнат:" [(ngModel)] = "input_number_of_rooms"></ion-input>
-  </ion-item>
-  <ion-item>
     <ion-input label="Площадь(м²):" [(ngModel)] = "input_area"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-input label="Жилая площадь(м²):" [(ngModel)] = "input_living_area"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input label="Площадь кухни(м²):" [(ngModel)] = "input_kitchen_area"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input label="Этаж:" [(ngModel)] = "input_floor"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input label="Количество этажей:" [(ngModel)] = "input_number_of_floors"></ion-input>
+    <ion-radio-group value="custom-checked" [(ngModel)] = "region">
+      <ion-radio value="Moscow" aria-label="Custom checkbox">Москва</ion-radio>
+      <ion-radio value="Region_Moscow" aria-label="Custom checkbox that is checked">Регион Москвы</ion-radio>
+    </ion-radio-group>
   </ion-item>
 
 <ion-button icon-only (click)="go()">Посчитать</ion-button>
@@ -38,7 +38,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      Цена дома: {{ price }}
+      Цена дома: <ion-text color="{{ color }}">{{ result }}</ion-text>
     </ion-card-content>
   </ion-card>
 

@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/front-layout"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Помощник цветовода</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="setOpen(true)">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="plants.length === 0" class="empty-state">
+    <ion-icon name="leaf-outline"></ion-icon>
+    <h3>У вас пока нет растений</h3>
+    <p>Нажмите + в правом верхнем углу, чтобы добавить первое растение!</p>
+  </div>
+
+  <ion-list *ngIf="plants.length > 0">
+    <ion-card *ngFor="let plant of plants" [ngClass]="{'needs-water': getDaysUntilWater(plant) <= 0}">
+      <img [src]="plant.imageUrl" alt="Plant image" *ngIf="plant.imageUrl" />
+      <ion-card-header>
+        <ion-card-subtitle>{{ plant.species }}</ion-card-subtitle>
+        <ion-card-title>{{ plant.name }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="water-status">
+          <ion-icon name="water-outline" [color]="getDaysUntilWater(plant) <= 0 ? 'danger' : 'primary'"></ion-icon>
+          <span *ngIf="getDaysUntilWater(plant) > 0">
+            Полив через {{ getDaysUntilWater(plant) }} дней
+          </span>
+          <span *ngIf="getDaysUntilWater(plant) <= 0" class="urgent">
+            Нужен полив!
+          </span>
+        </div>
+        <p class="last-watered">
+          Последний полив: {{ plant.lastWatered | date:'dd.MM.yyyy HH:mm' }}
+        </p>
+
+        <div class="action-buttons">
+          <ion-button fill="outline" color="primary" (click)="waterPlant(plant)">
+            <ion-icon name="water" slot="start"></ion-icon>
+            Полить
+          </ion-button>
+          <ion-button fill="clear" color="danger" (click)="deletePlant(plant.id)">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <!-- Add Plant Modal -->
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="setOpen(false)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="success">
+          <ion-title>Новое растение</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Закрыть</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-label position="stacked">Имя (кличка)</ion-label>
+          <ion-input [(ngModel)]="newPlant.name" placeholder="Например: Борис"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">Вид растения</ion-label>
+          <ion-input [(ngModel)]="newPlant.species" placeholder="Например: Кактус"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Поливать каждые ... дней</ion-label>
+          <ion-input type="number" [(ngModel)]="newPlant.waterFrequencyDays"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Ссылка на фото (опционально)</ion-label>
+          <ion-input [(ngModel)]="newPlant.imageUrl" placeholder="https://..."></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" class="ion-margin-top" color="success" (click)="addPlant()">
+          Добавить
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

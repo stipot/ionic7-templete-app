@@ -32,7 +32,8 @@ import { MiniblogComponent } from './miniblog/miniblog.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { GazonComponent } from './gazon/gazon.component';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
-import { FaceDetectorComponent } from './face-detect/face-detector.component';  // ИСПРАВЛЕНО
+import { FaceDetectorComponent } from './face-detect/face-detector.component';
+import { FloristAssistantComponent } from './florist-assistant/florist-assistant.component';
 
 const routes: Routes = [
   {
@@ -215,6 +216,10 @@ const routes: Routes = [
   {
     path: 'fashion-detail', 
     component: FashionDetailComponent
+  },
+  {
+    path: 'florist',
+    component: FloristAssistantComponent
   },
   {
     path: '**',

@@ -77,7 +77,7 @@
         
         <ion-item>
           <ion-label position="stacked">Вид растения</ion-label>
-          <ion-input [(ngModel)]="newPlant.species" placeholder="Например: Кактус"></ion-input>
+          <ion-input [(ngModel)]="newPlant.species" (ngModelChange)="onSpeciesChange($event)" placeholder="Например: Кактус (полив 14 дн.)"></ion-input>
         </ion-item>
 
         <ion-item>

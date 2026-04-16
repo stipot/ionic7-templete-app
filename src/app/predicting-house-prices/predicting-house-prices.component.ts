@@ -13,6 +13,8 @@ export class PredictingHousePricesComponent{
   // минут до метро
   input_minutes_to_metro: string = "";
   minutes_to_metro: number = 0;
+  // количество комнат
+  input_number_of_rooms: string = "";
   // площадь
   input_area: string = "";
   area: number = 0;
@@ -23,10 +25,12 @@ export class PredictingHousePricesComponent{
 
   price: number = 0;
   result: string = "";
+  format: number = 0;
 
   error: boolean = false;
 
   color: string = "";
+  rangeValue = "";
 
   constructor(private translate: TranslateService) {
   }
@@ -80,7 +84,10 @@ export class PredictingHousePricesComponent{
       }
     else 
       {
-        this.result = String(this.price)
+        this.format = this.price
+        const formattedPrice = this.format.toLocaleString('ru-RU'); // "66 424 608"
+        const result = `${formattedPrice.replace(/\s/g, "'")} руб`;
+        this.result = String(result)
         this.color = "primary"
       }
 

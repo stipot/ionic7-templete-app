@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ "PHP.COMPONENT_TITLE" }}</ion-title>
+    <ion-title>{{ "PHP.COMPONENT_TITLE" | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,9 +18,29 @@
     </ion-card-content>
   </ion-card>
 
+
+
+
+
   <ion-item>
-    <ion-input label="Сколько минут до метро:" [(ngModel)] = "input_minutes_to_metro"></ion-input>
+    <ion-label>Сколько минут до метро? (<ion-text color="primary">{{ input_minutes_to_metro }}</ion-text>)</ion-label>
+    <ion-range min="0" max="60" step="1" [(ngModel)]="input_minutes_to_metro"></ion-range>
   </ion-item>
+   <ion-item>
+    <ion-label>Сколько комнат в доме? (<ion-text color="primary">{{ input_number_of_rooms }}</ion-text>)</ion-label>
+    <ion-range min="0" max="12" step="1" [(ngModel)]="input_number_of_rooms"></ion-range>
+  </ion-item>
+
+
+
+
+
+
+
+
+  <!-- <ion-item>
+    <ion-input label="Сколько минут до метро:" [(ngModel)] = "input_minutes_to_metro"></ion-input>
+  </ion-item> -->
   <ion-item>
     <ion-input label="Площадь(м²):" [(ngModel)] = "input_area"></ion-input>
   </ion-item>

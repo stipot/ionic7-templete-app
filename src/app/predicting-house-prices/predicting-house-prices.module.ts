@@ -5,6 +5,7 @@ import { PredictingHousePricesRoutingModule } from './predicting-house-prices-ro
 import { PredictingHousePricesComponent } from './predicting-house-prices.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core'; 
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     FormsModule,
     IonicModule,    
-    PredictingHousePricesRoutingModule
+    PredictingHousePricesRoutingModule,
+    TranslateModule
   ]
 })
 export class PredictingHousePricesModule { }

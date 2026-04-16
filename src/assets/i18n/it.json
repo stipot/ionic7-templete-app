@@ -143,5 +143,8 @@
     "SUBTITLE": "Calcola valore e clicca \"Applica\"",
     "APPLY_BUTTON": "Applica risultato",
     "CLOSE_BUTTON": "Chiudi"
+  },
+  "PHP":{
+    "COMPONENT_TITLE": "Previsione dei prezzi"
   }
 }

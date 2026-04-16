@@ -131,6 +131,107 @@
   .drawing-board {
     min-height: 400px;
   }
-  
-  
 }
+  // ========== УДОБНЫЙ ПОЛЗУНОК РАЗМЕРА ==========
+.size-control {
+  margin-top: 15px;
+  padding: 10px 0;
+}
+
+.size-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  
+  .size-label {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  .size-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+    background: #f0f0f0;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+}
+
+ion-range {
+  --knob-size: 28px;           // Большая круглая ручка
+  --knob-background: var(--ion-color-primary);
+  --bar-height: 8px;           // Потолще полоска
+  --bar-background: #e0e0e0;
+  --bar-background-active: var(--ion-color-primary);
+  --pin-background: var(--ion-color-primary);
+  --pin-color: white;
+  padding: 10px 0;
+}
+
+// Показываем деления (чтобы видеть шаги)
+ion-range::part(ticks) {
+  display: block;
+}
+
+ion-range::part(tick) {
+  background: #ccc;
+  width: 2px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+ion-range::parapart(tick-active) {
+  background: var(--ion-color-primary);
+}
+  
+ // ========== ЛУПА (ZOOM) ==========
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 10px 0;
+  padding: 8px;
+  background: #f5f5f5;
+  border-radius: 40px;
+}
+
+.zoom-btn {
+  --border-radius: 50%;
+  height: 36px;
+  width: 36px;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+.zoom-level {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+  min-width: 60px;
+  text-align: center;
+}
+
+// Стили для canvas с зумом
+.drawing-board {
+  overflow: auto !important;  // Включаем скролл для увеличенного холста
+  position: relative;
+  
+  canvas {
+    transition: transform 0.1s ease;
+    cursor: crosshair;
+  }
+}
+
+// Курсор для руки
+.drawing-board canvas.grabbing {
+  cursor: grabbing !important;
+}
+
+.drawing-board canvas.grab {
+  cursor: grab !important;
+} 
+

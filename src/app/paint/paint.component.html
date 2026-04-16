@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Paint</ion-title>
+    <ion-title>{{"PAINT.COMPONENT_TITLE" | translate}}</ion-title>
     <!--<ion-button id="undo-btn">
         <ion-icon name="arrow-undo-outline" slot="icon-only"></ion-icon>
       </ion-button>-->
@@ -49,10 +49,38 @@
               <ion-button fill="clear" id="fill-tool" class="tool-btn">
                 <ion-icon name="color-fill-outline" slot="icon-only"></ion-icon>
               </ion-button>
-              <ion-item lines="none">
-                <ion-label>Размер</ion-label>
-                <ion-range id="size-slider" min="1" max="30" value="5" pin="true"></ion-range>
-              </ion-item>
+              <ion-button fill="clear" id="eyedropper-tool" class="tool-btn"> 
+                <ion-icon name="eyedrop" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="hand-tool" class="tool-btn">
+                <ion-icon name="hand-left-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+
+            <div class="size-control">
+              <div class="size-header"> 
+                  <ion-label class="size-label">Размер:</ion-label>
+                  <span class="size-value">{{brushWidth}} px </span>
+              </div>
+                  <ion-range id="size-slider" min="1" max="30" step="1" value="5" pin="true" snaps="true" ticks="true"></ion-range>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="section-title">Масштаб</ion-label>
+            <div class="zoom-controls">
+              <ion-button fill="outline" id="zoom-out" class="zoom-btn">
+                <ion-icon name="remove-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <span class="zoom-level">{{zoomLevel}}%</span>
+              <ion-button fill="outline" id="zoom-in" class="zoom-btn">
+                <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="outline" id="zoom-reset" class="zoom-btn">
+                <ion-icon ame="home-outline" slot="icon-only"></ion-icon>
+              </ion-button>
             </div>
           </ion-col>
         </ion-row>

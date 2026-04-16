@@ -16,13 +16,24 @@ export class PaintComponent implements OnInit, AfterViewInit {
   private snapshot: ImageData | null = null;
   
   private selectedTool = 'brush';
-  private brushWidth = 5;
+  public brushWidth = 5;
   private selectedColor = '#000000';
   private fillShape = false;
 
-  // История для отмены (максимум 20 действий)
+  // История для отмены
   private history: ImageData[] = [];
   private historyIndex: number = -1;
+
+  // ========== ПЕРЕМЕННЫЕ ДЛЯ ЛУПЫ ==========
+  public zoomLevel: number = 100;
+  private scale: number = 1;
+  private translateX: number = 0;
+  private translateY: number = 0;
+  private isPanning: boolean = false;
+  private panStartX: number = 0;
+  private panStartY: number = 0;
+  private originalCanvasWidth: number = 0;
+  private originalCanvasHeight: number = 0;
 
   constructor() { }
 
@@ -41,6 +52,10 @@ export class PaintComponent implements OnInit, AfterViewInit {
     this.setCanvasSize();
     this.setDefaultBackground();
     
+    // Сохраняем оригинальные размеры
+    this.originalCanvasWidth = this.canvas.width;
+    this.originalCanvasHeight = this.canvas.height;
+    
     // Сохраняем начальное состояние
     this.saveToHistory();
     
@@ -54,7 +69,10 @@ export class PaintComponent implements OnInit, AfterViewInit {
     if (container) {
       this.canvas.width = container.clientWidth;
       this.canvas.height = container.clientHeight;
+      this.originalCanvasWidth = this.canvas.width;
+      this.originalCanvasHeight = this.canvas.height;
       this.setDefaultBackground();
+      this.updateZoom(); // Обновляем зум после изменения размера
     }
   }
 
@@ -67,20 +85,16 @@ export class PaintComponent implements OnInit, AfterViewInit {
 
   // ========== ОТМЕНА (UNDO) ==========
   private saveToHistory() {
-    // Проверка что canvas готов
     if (this.canvas.width === 0 || this.canvas.height === 0) return;
     
-    // Удаляем всё, что было после текущего индекса (если отменили и начали рисовать заново)
     if (this.historyIndex < this.history.length - 1) {
       this.history = this.history.slice(0, this.historyIndex + 1);
     }
     
-    // Сохраняем текущее состояние
     const imageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
     this.history.push(imageData);
     this.historyIndex++;
     
-    // Ограничиваем историю 20 действиями
     if (this.history.length > 20) {
       this.history.shift();
       this.historyIndex--;
@@ -95,7 +109,67 @@ export class PaintComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // ========== ЗАЛИВКА ОБЛАСТИ ==========
+  // ========== ПИПЕТКА ==========
+  private getColorAtPixel(x: number, y: number): string {
+    const imageData = this.ctx.getImageData(x, y, 1, 1);
+    const data = imageData.data;
+    
+    const rgbToHex = (r: number, g: number, b: number): string => {
+      return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    };
+    
+    return rgbToHex(data[0], data[1], data[2]);
+  }
+
+  private updateSelectedColor(color: string) {
+    document.querySelectorAll('.color-option').forEach(opt => {
+      opt.classList.remove('selected');
+    });
+    
+    document.querySelectorAll('.color-option').forEach(opt => {
+      const bgColor = (opt as HTMLElement).style.backgroundColor;
+      if (bgColor) {
+        const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+        if (match) {
+          const hex = '#' + ((1 << 24) + (parseInt(match[1]) << 16) + (parseInt(match[2]) << 8) + parseInt(match[3])).toString(16).slice(1);
+          if (hex.toLowerCase() === color.toLowerCase()) {
+            opt.classList.add('selected');
+          }
+        }
+      }
+    });
+    
+    const colorPicker = document.getElementById('color-picker') as HTMLInputElement;
+    if (colorPicker) {
+      colorPicker.value = color;
+    }
+  }
+
+  private activateEyedropperTool() {
+    this.selectedTool = 'eyedropper';
+    
+    document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+    const eyedropperBtn = document.getElementById('eyedropper-tool');
+    eyedropperBtn?.classList.add('active');
+    
+    this.canvas.style.cursor = 'crosshair';
+    
+    const eyedropperHandler = (e: MouseEvent) => {
+      const { x, y } = this.getMouseCoordinates(e);
+      const pickedColor = this.getColorAtPixel(Math.floor(x), Math.floor(y));
+      this.selectedColor = pickedColor;
+      this.updateSelectedColor(pickedColor);
+      
+      this.selectedTool = 'brush';
+      document.querySelector('#brush')?.classList.add('active');
+      this.canvas.style.cursor = 'crosshair';
+      this.canvas.removeEventListener('click', eyedropperHandler);
+    };
+    
+    this.canvas.addEventListener('click', eyedropperHandler);
+  }
+
+  // ========== ЗАЛИВКА ==========
   private hexToRgb(hex: string): { r: number; g: number; b: number } | null {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -178,10 +252,82 @@ export class PaintComponent implements OnInit, AfterViewInit {
     this.canvas.addEventListener('click', fillHandler);
   }
 
+  // ========== ЛУПА (ZOOM) ==========
+  private updateZoom() {
+    this.zoomLevel = Math.round(this.scale * 100);
+    
+    // Применяем трансформацию к canvas
+    this.canvas.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+    this.canvas.style.transformOrigin = '0 0';
+    
+    // Обновляем курсор
+    this.canvas.style.cursor = this.selectedTool === 'hand' ? 'grab' : 'crosshair';
+  }
+
+  public zoomIn() {
+    if (this.scale < 3) {
+      this.scale = Math.min(3, this.scale + 0.1);
+      this.updateZoom();
+    }
+  }
+
+  public zoomOut() {
+    if (this.scale > 0.5) {
+      this.scale = Math.max(0.5, this.scale - 0.1);
+      this.updateZoom();
+    }
+  }
+
+  public zoomReset() {
+    this.scale = 1;
+    this.translateX = 0;
+    this.translateY = 0;
+    this.updateZoom();
+  }
+
+  private startPan(e: MouseEvent) {
+    if (this.selectedTool === 'hand') {
+      this.isPanning = true;
+      this.panStartX = e.clientX - this.translateX;
+      this.panStartY = e.clientY - this.translateY;
+      this.canvas.style.cursor = 'grabbing';
+      e.preventDefault();
+    }
+  }
+
+  private pan(e: MouseEvent) {
+    if (this.isPanning && this.selectedTool === 'hand') {
+      this.translateX = e.clientX - this.panStartX;
+      this.translateY = e.clientY - this.panStartY;
+      this.updateZoom();
+      e.preventDefault();
+    }
+  }
+
+  private endPan() {
+    if (this.isPanning) {
+      this.isPanning = false;
+      this.canvas.style.cursor = 'grab';
+    }
+  }
+
+  private activateHandTool() {
+    this.selectedTool = 'hand';
+    document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+    const handBtn = document.getElementById('hand-tool');
+    handBtn?.classList.add('active');
+    this.canvas.style.cursor = 'grab';
+  }
+
   private setupEventListeners() {
     this.canvas.addEventListener('mousedown', this.startDraw.bind(this));
     this.canvas.addEventListener('mousemove', this.drawing.bind(this));
     this.canvas.addEventListener('mouseup', this.endDraw.bind(this));
+    
+    // Обработчики для панорамирования
+    this.canvas.addEventListener('mousedown', this.startPan.bind(this));
+    this.canvas.addEventListener('mousemove', this.pan.bind(this));
+    this.canvas.addEventListener('mouseup', this.endPan.bind(this));
     
     this.canvas.addEventListener('touchstart', this.handleTouchStart.bind(this));
     this.canvas.addEventListener('touchmove', this.handleTouchMove.bind(this));
@@ -192,6 +338,10 @@ export class PaintComponent implements OnInit, AfterViewInit {
         const target = e.currentTarget as HTMLElement;
         if (target.id === 'fill-tool') {
           this.activateFillTool();
+        } else if (target.id === 'eyedropper-tool') {
+          this.activateEyedropperTool();
+        } else if (target.id === 'hand-tool') {
+          this.activateHandTool();
         } else {
           this.switchTool(target);
         }
@@ -204,9 +354,11 @@ export class PaintComponent implements OnInit, AfterViewInit {
     });
     
     const sizeSlider = document.getElementById('size-slider') as HTMLIonRangeElement;
-    sizeSlider?.addEventListener('ionChange', (e: any) => {
-      this.brushWidth = e.detail.value as number;
-    });
+    if (sizeSlider) {
+      sizeSlider.addEventListener('ionChange', (e: any) => {
+        this.brushWidth = e.detail.value;
+      });
+    }
     
     document.querySelectorAll('.color-option').forEach(option => {
       option.addEventListener('click', (e) => {
@@ -226,7 +378,6 @@ export class PaintComponent implements OnInit, AfterViewInit {
     const saveBtn = document.getElementById('save-img');
     saveBtn?.addEventListener('click', () => this.saveImage());
     
-    // Кнопка отмены
     const undoBtn = document.getElementById('undo-btn');
     if (undoBtn) {
       undoBtn.addEventListener('click', () => {
@@ -234,14 +385,14 @@ export class PaintComponent implements OnInit, AfterViewInit {
       });
     }
     
-    // Горячая клавиша Ctrl+Z
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
-        e.preventDefault();
-        this.undo();
-      }
-    });
-  
+    // Кнопки зума
+    const zoomInBtn = document.getElementById('zoom-in');
+    const zoomOutBtn = document.getElementById('zoom-out');
+    const zoomResetBtn = document.getElementById('zoom-reset');
+    
+    zoomInBtn?.addEventListener('click', () => this.zoomIn());
+    zoomOutBtn?.addEventListener('click', () => this.zoomOut());
+    zoomResetBtn?.addEventListener('click', () => this.zoomReset());
   }
 
   private handleTouchStart(e: TouchEvent) {
@@ -276,11 +427,12 @@ export class PaintComponent implements OnInit, AfterViewInit {
   }
 
   private startDraw(e: MouseEvent) {
+    if (this.selectedTool === 'hand') return;
+    
     this.isDrawing = true;
     const { x, y } = this.getMouseCoordinates(e);
     this.startPoint = { x, y };
     
-    // Сохраняем состояние ПЕРЕД рисованием
     this.saveToHistory();
     
     this.snapshot = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
@@ -291,7 +443,7 @@ export class PaintComponent implements OnInit, AfterViewInit {
   }
 
   private drawing(e: MouseEvent) {
-    if (!this.isDrawing) return;
+    if (!this.isDrawing || this.selectedTool === 'hand') return;
     
     const { x, y } = this.getMouseCoordinates(e);
     
@@ -312,7 +464,6 @@ export class PaintComponent implements OnInit, AfterViewInit {
 
   private endDraw() {
     this.isDrawing = false;
-    // НЕ сохраняем здесь, чтобы не было дублирования
   }
 
   private drawDot(x: number, y: number) {

@@ -1,3 +1,61 @@
-<p>
-  speedometer works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Спидометр скорости</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="speedtest-container">
+
+    <h2 class="title">SpeedTest</h2>
+
+    
+    <div class="gauge">
+      <div class="gauge-bg"></div>
+
+      
+      <div class="marker m0">0</div>
+      <div class="marker m50">50</div>
+      <div class="marker m100">100</div>
+      <div class="marker m150">150</div>
+      <div class="marker m200">200</div>
+      <div class="marker m250">250</div>
+      <div class="marker m300">300</div>
+
+      <div class="needle" [style.transform]="'rotate(' + getAngle() + 'deg)'"></div>
+      <div class="center-dot"></div>
+
+      <div class="speed-value">{{ downloadSpeed }}</div>
+      <div class="speed-unit">Мбит/с</div>
+    </div>
+
+    <
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">📥 Download</div>
+        <div class="stat-value" [style.color]="getSpeedColor()">{{ downloadSpeed }} <span class="stat-unit">Mbps</span></div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">⏱️ Ping</div>
+        <div class="stat-value" [style.color]="getPingColor()">
+  {{ ping }} <span class="stat-unit">ms</span>
+</div>
+      </div>
+    </div>
+
+    
+    <div class="quality-badge" [style.color]="getSpeedColor()" [style.borderColor]="getSpeedColor()">
+      {{ getSpeedQuality() }}
+    </div>
+
+    
+    <ion-button (click)="runFullTest()" [disabled]="isTesting" expand="block" size="large" class="test-button">
+      {{ isTesting ? 'Тестирование...' : '▶ Запустить тест' }}
+    </ion-button>
+
+  </div>
+</ion-content>

@@ -64,7 +64,7 @@ export class AppComponent {
     { title: 'Deals', url: '/deals', icon: '' },
     { title: 'Fashion', url: '/fashion', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
-    { title: 'speedometer', url: '/speedometer', icon: ''}
+    { title: 'speedometer', url: '/speedometer', icon: 'speedometer'}
   ];
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang('ru');

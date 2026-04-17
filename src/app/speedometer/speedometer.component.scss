@@ -1,0 +1,183 @@
+.speedtest-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 500px;
+}
+
+.title {
+  color: var(--ion-color-primary);
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.gauge {
+  position: relative;
+  width: 300px;
+  height: 140px;
+  margin-bottom: 30px;
+}
+
+.gauge-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--ion-background-color, #1a1a2e);
+  border-radius: 300px 300px 0 0;
+  border: 3px solid var(--ion-color-medium);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Цифры по дуге спидометра */
+.marker {
+  position: absolute;
+  font-size: 12px;
+  color: var(--ion-color-medium);
+  font-weight: bold;
+  text-align: center;
+}
+
+.m0 {
+  bottom: 15px;
+  left: 10px;
+}
+
+.m50 {
+  bottom: 55px;
+  left: 25px;
+}
+
+.m100 {
+  bottom: 95px;
+  left: 65px;
+}
+
+.m150 {
+  bottom: 115px;
+  left: 150px;  
+  transform: translateX(-50%);
+}
+
+.m200 {
+  bottom: 95px;
+  left: 215px;
+}
+
+.m250 {
+  bottom: 55px;
+  left: 255px;
+}
+
+.m300 {
+  bottom: 15px;
+  left: 275px;
+}
+
+.needle {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform-origin: 50% 100%;
+  transition: transform 0.3s ease-out;
+  z-index: 10;
+}
+
+/* Стрелка */
+.needle::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -6px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 90px solid var(--ion-color-primary);
+}
+
+/* Точка в центре */
+.center-dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--ion-color-primary);
+  border-radius: 50%;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.speed-value {
+  position: absolute;
+  bottom: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 38px;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  z-index: 5;
+  transition: color 0.3s ease;
+}
+
+.speed-unit {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: var(--ion-color-medium);
+  z-index: 5;
+}
+
+.stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.stat-card {
+  flex: 1;
+  background: var(--ion-item-background, rgba(255,255,255,0.05));
+  border-radius: 16px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid var(--ion-color-medium);
+  
+  .stat-label {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+    margin-bottom: 5px;
+  }
+  
+  .stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+    transition: color 0.3s ease;
+    
+    .stat-unit {
+      font-size: 12px;
+      color: var(--ion-color-medium);
+    }
+  }
+}
+
+.quality-badge {
+  padding: 8px 16px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  background: var(--ion-item-background, rgba(255,255,255,0.05));
+  border: 1px solid;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.test-button {
+  margin-top: 20px;
+}

@@ -33,6 +33,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { GazonComponent } from './gazon/gazon.component';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { FaceDetectorComponent } from './face-detect/face-detector.component';  // ИСПРАВЛЕНО
+import { TierListComponent } from './tier-list/tier-list.component';
+
 import { SpeedometerComponent } from './speedometer/speedometer.component';
 import { TimerComponent } from './timer/timer.component';
 const routes: Routes = [
@@ -228,6 +230,10 @@ const routes: Routes = [
   {
     path: 'speedometer',
     component: SpeedometerComponent
+  },
+  {
+    path:'Jwsr',
+    component: TierListComponent
   },
   { path: '', redirectTo: '/timer', pathMatch: 'full' },
   {

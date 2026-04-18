@@ -1,11 +1,11 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-paint',
   templateUrl: './paint.component.html',
   styleUrls: ['./paint.component.scss'],
 })
-export class PaintComponent implements OnInit, AfterViewInit {
+export class PaintComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('paintCanvas', { static: false }) canvasRef!: ElementRef<HTMLCanvasElement>;
   
   private canvas!: HTMLCanvasElement;
@@ -24,7 +24,7 @@ export class PaintComponent implements OnInit, AfterViewInit {
   private history: ImageData[] = [];
   private historyIndex: number = -1;
 
-  // ========== ПЕРЕМЕННЫЕ ДЛЯ ЛУПЫ ==========
+  // Переменные для зума
   public zoomLevel: number = 100;
   private scale: number = 1;
   private translateX: number = 0;
@@ -34,6 +34,10 @@ export class PaintComponent implements OnInit, AfterViewInit {
   private panStartY: number = 0;
   private originalCanvasWidth: number = 0;
   private originalCanvasHeight: number = 0;
+
+  // Переменные для автосохранения
+  private autoSaveInterval: any;
+  private readonly AUTO_SAVE_KEY = 'paint_autosave';
 
   constructor() { }
 
@@ -46,18 +50,27 @@ export class PaintComponent implements OnInit, AfterViewInit {
     }, 100);
   }
 
+  ngOnDestroy() {
+    this.stopAutoSave();
+  }
+
   private initCanvas() {
     this.canvas = this.canvasRef.nativeElement;
     this.ctx = this.canvas.getContext('2d')!;
     this.setCanvasSize();
     this.setDefaultBackground();
     
-    // Сохраняем оригинальные размеры
     this.originalCanvasWidth = this.canvas.width;
     this.originalCanvasHeight = this.canvas.height;
     
-    // Сохраняем начальное состояние
-    this.saveToHistory();
+    // Пытаемся загрузить автосохранение
+    const hasAutoSave = this.loadAutoSave();
+    if (!hasAutoSave) {
+      this.saveToHistory();
+    }
+    
+    // Запускаем автосохранение каждые 10 секунд
+    this.startAutoSave();
     
     window.addEventListener('resize', () => {
       setTimeout(() => this.setCanvasSize(), 100);
@@ -72,7 +85,7 @@ export class PaintComponent implements OnInit, AfterViewInit {
       this.originalCanvasWidth = this.canvas.width;
       this.originalCanvasHeight = this.canvas.height;
       this.setDefaultBackground();
-      this.updateZoom(); // Обновляем зум после изменения размера
+      this.updateZoom();
     }
   }
 
@@ -80,6 +93,104 @@ export class PaintComponent implements OnInit, AfterViewInit {
     if (this.ctx) {
       this.ctx.fillStyle = '#FFFFFF';
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+  }
+
+  // ========== АВТОСОХРАНЕНИЕ ==========
+  private autoSave() {
+    try {
+      const imageData = this.canvas.toDataURL('image/png');
+      localStorage.setItem(this.AUTO_SAVE_KEY, imageData);
+      console.log('Автосохранение выполнено');
+    } catch (error) {
+      console.error('Ошибка автосохранения:', error);
+    }
+  }
+
+  private loadAutoSave(): boolean {
+    try {
+      const savedImage = localStorage.getItem(this.AUTO_SAVE_KEY);
+      if (savedImage) {
+        const img = new Image();
+        img.onload = () => {
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+          this.saveToHistory();
+          this.showToast('Автосохранённый рисунок восстановлен');
+        };
+        img.src = savedImage;
+        return true;
+      }
+    } catch (error) {
+      console.error('Ошибка загрузки автосохранения:', error);
+    }
+    return false;
+  }
+
+  private clearAutoSave() {
+    localStorage.removeItem(this.AUTO_SAVE_KEY);
+    console.log('Автосохранение очищено');
+  }
+
+  private startAutoSave() {
+    if (this.autoSaveInterval) {
+      clearInterval(this.autoSaveInterval);
+    }
+    this.autoSaveInterval = setInterval(() => {
+      this.autoSave();
+    }, 10000);
+  }
+
+  private stopAutoSave() {
+    if (this.autoSaveInterval) {
+      clearInterval(this.autoSaveInterval);
+      this.autoSaveInterval = null;
+    }
+  }
+
+  private showToast(message: string) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '20px';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.backgroundColor = 'rgba(0,0,0,0.8)';
+    toast.style.color = 'white';
+    toast.style.padding = '10px 20px';
+    toast.style.borderRadius = '8px';
+    toast.style.zIndex = '9999';
+    toast.style.fontSize = '14px';
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+      toast.remove();
+    }, 2000);
+  }
+
+  // ========== СОХРАНЕНИЕ РИСУНКА ==========
+  private getCurrentDateTime(): string {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}_${hours}-${minutes}-${seconds}`;
+  }
+
+  private saveImage() {
+    try {
+      const link = document.createElement('a');
+      link.download = `paint-${this.getCurrentDateTime()}.png`;
+      link.href = this.canvas.toDataURL('image/png');
+      link.click();
+      this.showToast('Рисунок сохранён');
+    } catch (error) {
+      console.error('Ошибка сохранения:', error);
+      this.showToast('Ошибка при сохранении');
     }
   }
 
@@ -95,6 +206,7 @@ export class PaintComponent implements OnInit, AfterViewInit {
     this.history.push(imageData);
     this.historyIndex++;
     
+    // Ограничиваем историю 20 действиями
     if (this.history.length > 20) {
       this.history.shift();
       this.historyIndex--;
@@ -106,6 +218,7 @@ export class PaintComponent implements OnInit, AfterViewInit {
       this.historyIndex--;
       const previousState = this.history[this.historyIndex];
       this.ctx.putImageData(previousState, 0, 0);
+      this.autoSave();
     }
   }
 
@@ -228,6 +341,7 @@ export class PaintComponent implements OnInit, AfterViewInit {
     
     this.ctx.putImageData(imageData, 0, 0);
     this.saveToHistory();
+    this.autoSave();
   }
 
   private activateFillTool() {
@@ -255,12 +369,8 @@ export class PaintComponent implements OnInit, AfterViewInit {
   // ========== ЛУПА (ZOOM) ==========
   private updateZoom() {
     this.zoomLevel = Math.round(this.scale * 100);
-    
-    // Применяем трансформацию к canvas
     this.canvas.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
     this.canvas.style.transformOrigin = '0 0';
-    
-    // Обновляем курсор
     this.canvas.style.cursor = this.selectedTool === 'hand' ? 'grab' : 'crosshair';
   }
 
@@ -324,7 +434,6 @@ export class PaintComponent implements OnInit, AfterViewInit {
     this.canvas.addEventListener('mousemove', this.drawing.bind(this));
     this.canvas.addEventListener('mouseup', this.endDraw.bind(this));
     
-    // Обработчики для панорамирования
     this.canvas.addEventListener('mousedown', this.startPan.bind(this));
     this.canvas.addEventListener('mousemove', this.pan.bind(this));
     this.canvas.addEventListener('mouseup', this.endPan.bind(this));
@@ -385,7 +494,6 @@ export class PaintComponent implements OnInit, AfterViewInit {
       });
     }
     
-    // Кнопки зума
     const zoomInBtn = document.getElementById('zoom-in');
     const zoomOutBtn = document.getElementById('zoom-out');
     const zoomResetBtn = document.getElementById('zoom-reset');
@@ -393,6 +501,15 @@ export class PaintComponent implements OnInit, AfterViewInit {
     zoomInBtn?.addEventListener('click', () => this.zoomIn());
     zoomOutBtn?.addEventListener('click', () => this.zoomOut());
     zoomResetBtn?.addEventListener('click', () => this.zoomReset());
+
+        // Горячая клавиша Ctrl+Z
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+        e.preventDefault();
+        this.undo();
+        console.log('Ctrl+Z сработал');
+      }
+    });
   }
 
   private handleTouchStart(e: TouchEvent) {
@@ -463,7 +580,10 @@ export class PaintComponent implements OnInit, AfterViewInit {
   }
 
   private endDraw() {
-    this.isDrawing = false;
+    if (this.isDrawing) {
+      this.isDrawing = false;
+      this.autoSave();
+    }
   }
 
   private drawDot(x: number, y: number) {
@@ -564,13 +684,8 @@ export class PaintComponent implements OnInit, AfterViewInit {
       this.ctx.fillStyle = '#FFFFFF';
       this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       this.saveToHistory();
+      this.clearAutoSave();
+      this.showToast('Холст очищен, автосохранение удалено');
     }
-  }
-
-  private saveImage() {
-    const link = document.createElement('a');
-    link.download = `paint-${Date.now()}.png`;
-    link.href = this.canvas.toDataURL();
-    link.click();
   }
 }

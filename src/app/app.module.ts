@@ -53,6 +53,10 @@ import { CalcModule } from './calc/calc.module';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
 import { FloristAssistantComponent } from './florist-assistant/florist-assistant.component';
+import { PaintModule } from './paint/paint.module';
+import { TierListComponent } from './tier-list/tier-list.component'
+import { TierListModule } from './tier-list/tier-list.module';
+
 
 
 // Фабрика для загрузчика переводов
@@ -95,11 +99,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddBlogModalComponent,
     WaterTrackerComponent,
     GazonComponent,
-<<<<<<< HEAD
     FloristAssistantComponent,
-=======
     
->>>>>>> 7aaac659ac59ac612386f3514616147b1c3d4960
   ],
   imports: [
     BrowserModule,
@@ -112,6 +113,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommonModule,
     // WidgetModule,
     CalcModule,
+    PaintModule,
+    TierListModule,
     DragDropModule,
     IonicStorageModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

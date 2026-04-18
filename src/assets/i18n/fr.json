@@ -145,7 +145,6 @@
     "APPLY_BUTTON": "Appliquer le résultat",
     "CLOSE_BUTTON": "Fermer"
   },
-<<<<<<< HEAD
   "FLORIST": {
     "COMPONENT_TITLE": "Assistant fleuriste",
     "EMPTY_STATE_TITLE": "Vous n'avez pas encore de plantes",
@@ -163,9 +162,10 @@
     "ADD_BUTTON": "Ajouter",
     "PLACEHOLDER_NAME": "ex: Boris",
     "PLACEHOLDER_SPECIES": "ex: Cactus"
-  }
-}
-=======
+  },
+  "PAINT":{
+    "COMPONENT_TITLE": "Peinture"
+  },
   "TIMER": {
   "COMPONENT_TITLE": "Minuterie",
   "START": "Lancement",
@@ -178,6 +178,18 @@
   "RECENT": "Histoire",
   "NAME": "Nom",
   "NAME2": "Champ de saisie"
+},
+"TIERLIST": {
+    "TITLE": "Liste de niveaux",
+    "DESCRIPTION": "Une liste de niveaux est un système de notation qui catégorise les éléments (personnages, jeux, films) du meilleur au pire. Les éléments sont classés par lettres, les niveaux les plus élevés étant les meilleurs. Cela permet d'évaluer rapidement la performance ou la popularité.Faites glisser l'image à l'endroit souhaité. Vous pouvez également importer votre propre image et enregistrer le résultat.",
+    "ROW_S": "S",
+    "ROW_A": "A",
+    "ROW_B": "B",
+    "ROW_C": "C",
+    "ROW_D": "D",
+    "ROW_E": "E",
+    "UPLOAD_BUTTON": "Téléverser une image",
+    "SAVE_BUTTON": "Enregistrer",
+    "SOURCE_IMAGES": "Images disponibles"
+  }
 }
-}
->>>>>>> 7aaac659ac59ac612386f3514616147b1c3d4960

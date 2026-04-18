@@ -1,246 +1,3 @@
-<<<<<<< HEAD
-{
-  "1": "Welcome",
-  "Inbox": "Inbox",
-  "outbox": "Outbox",
-  "favorites": "Favorites",
-  "archived": "Archived",
-  "trash": "Trash",
-  "spam": "Spam",
-  "notes": "Notes",
-  "filters": "Filters",
-  "validations": "validations",
-  "TERMS_TITLE": "Terms of Service",
-  "PRIVACY_TITLE": "Privacy Policy",
-  "login": "Username",
-  "Семья": "Family",
-  "Друзья": "Friends",
-  "Notes": "Notes",
-  "Работа": "Work",
-  "Путешествия": "Travel",
-  "Напоминания": "Reminders",
-  "Validations": "Validations",
-  "Username": "Username",
-  "Enter text": "Enter text",
-  "Name": "Name",
-  "Email input": "Email input",
-  "email@domain.com": "email@domain.com",
-  "Phone": "Phone",
-  "888-888-8888": "888-888-8888",
-  "Gender": "Gender",
-  "female": "female",
-  "male": "male",
-  "Password": "Password",
-  "password": "password",
-  "ToDo list": "ToDo list",
-  "barcode-scanner": "Barcode scanner",
-  "Contact card": "Contact card",
-  "Status": "Status",
-  "Following": "Following",
-  "Followers": "Followers",
-  "Birthday": "Birthday",
-  "Address": "Address",
-  "Marriage": "Marriage",
-  "Курсы криптовалют": "Crypto rates",
-  "Время": "Time",
-  "Цена": "Pice",
-  "Загрузка": "Loading",
-  "widget": "Widgets",
-  "News": "News",
-  "Save": "Save",
-  "Shopping": "Shopping list",
-  "RSA": "RSA Encryption",
-  "Settings": "Settings",
-  "2048 Game": "2048 Game",
-  "Miniblog": "Miniblog",
-  "Kanban": "Kanban",
-  "Recipes": "Recipes",
-  "VideoPlayer": "VideoPlayer",
-  "mplayer": "MPlayer",
-  "scilink": "Scientific links",
-  "camera": "Camera",
-  "File-viewer": "File viewer",
-  "Signup": "Sign up",
-  "Login": "Login",
-  "Forgot password": "Forgot password",
-  "User": "User",
-  "Deals": "Deals",
-  "Fashion": "Fashion",
-  "Profile": "Profile",
-  "ToDo task": "ToDo task",
-  "Mood calendar": "Mood calendar",
-  "Mood Statistic": "Mood Statistic",
-  "Water-tracker": "Water balance",
-
-  "FRONTPAGE": {
-    "COMPONENT_TITLE": "FrontPage"
-  },
-  "SETTINGS": {
-    "COMPONENT_TITLE": "Settings"
-  },
-  "INTRO": {
-    "COMPONENT_TITLE": "Intro"
-  },
-  "2048GAME": {
-    "COMPONENT_TITLE": "2048 Game"
-  },
-  "MINIBLOG": {
-    "COMPONENT_TITLE": "Miniblog"
-  },
-  "KANBAN": {
-    "COMPONENT_TITLE": "Kanban"
-  },
-  "RECIPES": {
-    "COMPONENT_TITLE": "Recipes"
-  },
-  "MOODCALENDAR": {
-    "COMPONENT_TITLE": "Mood calendar"
-  },
-  "NEWS": {
-    "COMPONENT_TITLE": "News"
-  },
-  "NOTES": {
-    "COMPONENT_TITLE": "Notes",
-    "TEXT_NOTES": "Note text",
-    "NOTES_MISSING": "Notes are missing",
-    "DELETE_MARKED_NOTES": "Delete all marked notes"
-  },
-  "TODOLIST": {
-    "COMPONENT_TITLE": "ToDo list"
-  },
-  "TODOTASK": {
-    "COMPONENT_TITLE": "ToDo task"
-  },
-  "VIDEOPLAYER": {
-    "COMPONENT_TITLE": "VideoPlayer"
-  },
-  "MPLAYER": {
-    "COMPONENT_TITLE": "MPlayer"
-  },
-  "SCILINK": {
-    "COMPONENT_TITLE": "Scientific links"
-  },
-  "BARCODE-SCANNER": {
-    "COMPONENT_TITLE": "Barcode scanner"
-  },
-  "CAMERA": {
-    "COMPONENT_TITLE": "Camera"
-  },
-  "MPlayer": "MPlayer",
-  "DragAndDrop": "Drag and Drop",
-  "CRYPTO_MODULE": {
-    "COMPONENT_TITLE": "Cryptocurrency rates",
-    "CRYPTO_TIME": "Updated",
-    "CRYPTO_PRICE": "Price",
-    "CRYPTO_NAME": "Cryptocurrency",
-    "CRYPTO_LOADING": "Loading..."
-  },
-  "MOOD": {
-    "HAPPY": "Happy",
-    "RELAXED": "Relaxed",
-    "GRATEFUL": "Grateful",
-    "TIRED": "Tired",
-    "UNSURE": "Unsure",
-    "BORED": "Bored",
-    "ANGRY": "Angry",
-    "STRESSED": "Stressed",
-    "SAD": "Sad"
-  },
-  "Intro": "Intro",
-  "FEED": {
-    "ADD_POST": "Add post",
-    "EDIT": "Edit",
-    "SAVE": "Save",
-    "CANCEL": "Cancel",
-    "CHECK": "Check",
-    "DELETE": "Delete",
-    "LABEL_LANGUAGE": "Select language",
-    "RUSSIAN": "Russian",
-    "ENGLISH": "English",
-    "FRENCH": "French",
-    "ITALIAN": "Italian",
-    "ACTIVE": "Active",
-    "LANGUAGE_REMINDER": "Language change",
-    "GOTO_SETTINGS": "Go to settings"
-  },
-  "MAP": {
-    "TOP_TITTLE": "Yandex Map",
-    "YANDEXMAPS": "Yandex Map",
-    "SIMPLE_MAP": "Simple map",
-    "SIMPLE_MAP_TEXT": "This is a basic Yandex map embedded in an Ionic component.",
-    "MAP_WITH_POINT": "Map with point",
-    "MAP_WITH_POINT_TEXT": "This is a map with a marker via code and click coordinate handling."
-  },
-  
-    "WIDGET":{
-    "COMPONENT_TITLE": "Widget",
-    "LOADING": "Loading",
-    "MOON_PHASE": "Phase",
-    "MOON_AGE": "Moon age",
-    "ADD_WIDGET": "Add widget",
-    "DAYS": "Days",
-    "INCREMENT": "+",
-    "DECREMENT": "-",
-    "RESET": "Reset",
-    "START": "Start",
-    "STOP": "Stop",
-    "LAP": "Lap",
-    "CLEAR": "Clear",
-    "TIME": "Time",
-    "LAPS": "Laps"
-    },
-      "calc": {
-      "name": "Сalculator"
-    },
-    
-    "CALCULATOR": {
-      "TITLE": "Calculator",
-      "BASIC": "Basic",
-      "ADVANCED": "Advanced"
-    },
-  "FORM": {
-    "TITLE": "Form with calculator integration",
-    "SUBTITLE": "Use the calculator to fill in the fields",
-    "AMOUNT_LABEL": "Amount",
-    "AMOUNT_PLACEHOLDER": "Enter value or use calculator",
-    "RESULT_LABEL": "Calculation result",
-    "USE_RESULT_BUTTON": "Use result",
-    "CLEAR_FORM_BUTTON": "Clear form"
-  },
-  "POPUP": {
-    "TITLE": "Calculator for form",
-    "SUBTITLE": "Calculate value and click \"Apply\"",
-    "APPLY_BUTTON": "Apply result",
-    "CLOSE_BUTTON": "Close"
-  },
-    "GAZON":{
-    "MENU": "Format Converter",
-    "TITLE": "Format Converter"
-  }
-
-  ,"DEVELOPMENT": {
-    "COMPONENTS": "Components in development:"
-  },
-  "FLORIST": {
-    "COMPONENT_TITLE": "Florist Assistant",
-    "EMPTY_STATE_TITLE": "You have no plants yet",
-    "EMPTY_STATE_SUBTITLE": "Press + in the top right corner to add your first plant!",
-    "DAYS_UNTIL_WATER": "Water in {{days}} d.",
-    "URGENT_WATER": "Needs watering!",
-    "LAST_WATERED": "Last watered: {{date}}",
-    "WATER_BUTTON": "Water",
-    "NEW_PLANT_TITLE": "New plant",
-    "CLOSE": "Close",
-    "PLANT_NAME": "Name (nickname)",
-    "PLANT_SPECIES": "Plant species",
-    "WATER_FREQUENCY": "Water every ... days",
-    "PHOTO_URL": "Photo URL (optional)",
-    "ADD_BUTTON": "Add",
-    "PLACEHOLDER_NAME": "e.g., Boris",
-    "PLACEHOLDER_SPECIES": "e.g., Cactus"
-  }
-}
-=======
 {
   "1": "Welcome",
   "Inbox": "Inbox",
@@ -463,6 +220,9 @@
 
   ,"DEVELOPMENT": {
     "COMPONENTS": "Components in development:"
+  },
+  "PAINT":{
+    "COMPONENT_TITLE": "Paint"
   }, 
   "SPEEDOMETER": {
   "TITLE": "Speedometer",
@@ -490,6 +250,24 @@
   "RECENT": "RECENT",
   "NAME": "Name",
   "NAME2": "The input field"
+  },
+  "FLORIST": {
+    "COMPONENT_TITLE": "Florist Assistant",
+    "EMPTY_STATE_TITLE": "You have no plants yet",
+    "EMPTY_STATE_SUBTITLE": "Press + in the top right corner to add your first plant!",
+    "DAYS_UNTIL_WATER": "Water in {{days}} d.",
+    "URGENT_WATER": "Needs watering!",
+    "LAST_WATERED": "Last watered: {{date}}",
+    "WATER_BUTTON": "Water",
+    "NEW_PLANT_TITLE": "New plant",
+    "CLOSE": "Close",
+    "PLANT_NAME": "Name (nickname)",
+    "PLANT_SPECIES": "Plant species",
+    "WATER_FREQUENCY": "Water every ... days",
+    "PHOTO_URL": "Photo URL (optional)",
+    "ADD_BUTTON": "Add",
+    "PLACEHOLDER_NAME": "e.g., Boris",
+    "PLACEHOLDER_SPECIES": "e.g., Cactus"
   }
 }
->>>>>>> 7aaac659ac59ac612386f3514616147b1c3d4960
+

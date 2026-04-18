@@ -34,6 +34,7 @@ import { GazonComponent } from './gazon/gazon.component';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { FaceDetectorComponent } from './face-detect/face-detector.component';  // ИСПРАВЛЕНО
 import { SpeedometerComponent } from './speedometer/speedometer.component';
+import { TimerComponent } from './timer/timer.component';
 const routes: Routes = [
   {
     path: '',
@@ -217,9 +218,18 @@ const routes: Routes = [
     component: FashionDetailComponent
   },
   {
+    path: "timer",
+    component: TimerComponent
+  },
+  {
+    path: '',
+    loadChildren: () => import('./timer/timer.module').then(m => m.TimerModule)
+  },
+  {
     path: 'speedometer',
     component: SpeedometerComponent
   },
+  { path: '', redirectTo: '/timer', pathMatch: 'full' },
   {
     path: '**',
     redirectTo: 'page-not-found'

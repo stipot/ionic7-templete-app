@@ -54,6 +54,7 @@ import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
 import { FloristAssistantComponent } from './florist-assistant/florist-assistant.component';
 
+
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -94,7 +95,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddBlogModalComponent,
     WaterTrackerComponent,
     GazonComponent,
+<<<<<<< HEAD
     FloristAssistantComponent,
+=======
+    
+>>>>>>> 7aaac659ac59ac612386f3514616147b1c3d4960
   ],
   imports: [
     BrowserModule,
@@ -117,7 +122,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

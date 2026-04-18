@@ -32,9 +32,15 @@ import { MiniblogComponent } from './miniblog/miniblog.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { GazonComponent } from './gazon/gazon.component';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
+<<<<<<< HEAD
 import { FaceDetectorComponent } from './face-detect/face-detector.component';
 import { FloristAssistantComponent } from './florist-assistant/florist-assistant.component';
 
+=======
+import { FaceDetectorComponent } from './face-detect/face-detector.component';  // ИСПРАВЛЕНО
+import { SpeedometerComponent } from './speedometer/speedometer.component';
+import { TimerComponent } from './timer/timer.component';
+>>>>>>> 7aaac659ac59ac612386f3514616147b1c3d4960
 const routes: Routes = [
   {
     path: '',
@@ -218,10 +224,26 @@ const routes: Routes = [
     component: FashionDetailComponent
   },
   {
+<<<<<<< HEAD
     path: 'florist',
     component: FloristAssistantComponent
   },
   {
+=======
+    path: "timer",
+    component: TimerComponent
+  },
+  {
+    path: '',
+    loadChildren: () => import('./timer/timer.module').then(m => m.TimerModule)
+  },
+  {
+    path: 'speedometer',
+    component: SpeedometerComponent
+  },
+  { path: '', redirectTo: '/timer', pathMatch: 'full' },
+  {
+>>>>>>> 7aaac659ac59ac612386f3514616147b1c3d4960
     path: '**',
     redirectTo: 'page-not-found'
   },

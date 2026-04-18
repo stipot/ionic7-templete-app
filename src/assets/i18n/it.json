@@ -1,5 +1,6 @@
 {
   "1": "Benvenuto",
+  "speedometer":"Tachimetro",
   "Inbox": "Posta in arrivo",
   "outbox": "Posta in uscita",
   "favorites": "Preferiti",
@@ -144,6 +145,7 @@
     "APPLY_BUTTON": "Applica risultato",
     "CLOSE_BUTTON": "Chiudi"
   },
+<<<<<<< HEAD
   "FLORIST": {
     "COMPONENT_TITLE": "Assistente fioraio",
     "EMPTY_STATE_TITLE": "Non hai ancora piante",
@@ -161,5 +163,19 @@
     "ADD_BUTTON": "Aggiungi",
     "PLACEHOLDER_NAME": "es: Boris",
     "PLACEHOLDER_SPECIES": "es: Cactus"
+=======
+  "TIMER": {
+  "COMPONENT_TITLE": "Timer",
+  "START": "Inizia",
+  "STOP": "Interrompere",
+  "RESET": "Reset",
+  "FINISHED_MSG": "Il tempo è scaduto!",
+  "HOURS": "Orologio",
+  "MINUTES": "Minuti",
+  "SECONDS": "Seconde",
+  "RECENT": "Storia",
+  "NAME": "Titolo",
+  "NAME2": "Campo di input"
+>>>>>>> 7aaac659ac59ac612386f3514616147b1c3d4960
   }
 }

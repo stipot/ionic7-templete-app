@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-speedometer',
   templateUrl: './speedometer.component.html',
   styleUrls: ['./speedometer.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule]
+  imports: [CommonModule, FormsModule, IonicModule, TranslateModule]
 })
 export class SpeedometerComponent {
   downloadSpeed: number = 0;
@@ -50,19 +50,19 @@ async measurePing(): Promise<number> {
   }
 }
   getSpeedColor(): string {
-    if (this.downloadSpeed < 10) return '#e57373';
-    if (this.downloadSpeed < 30) return '#ffb74d';
-    if (this.downloadSpeed < 60) return '#ffd54f';
-    return '#81c784';
-  }
+  if (this.downloadSpeed === 0) return 'var(--ion-color-medium)';
+  if (this.downloadSpeed < 30) return 'var(--ion-color-danger)';   
+  if (this.downloadSpeed < 60) return 'var(--ion-color-warning)';  
+  return 'var(--ion-color-success)';                               
+}
 
-  getSpeedQuality(): string {
-    if (this.downloadSpeed === 0) return 'Не измерено';
-    if (this.downloadSpeed < 10) return 'Очень медленно';
-    if (this.downloadSpeed < 30) return 'Нормально';
-    if (this.downloadSpeed < 60) return 'Хорошо';
-    return 'Отлично';
-  }
+getSpeedQualityKey(): string {
+  if (this.downloadSpeed === 0) return 'SPEEDOMETER.NOT_MEASURED';
+  if (this.downloadSpeed < 10) return 'SPEEDOMETER.VERY_SLOW';
+  if (this.downloadSpeed < 30) return 'SPEEDOMETER.NORMAL';
+  if (this.downloadSpeed < 60) return 'SPEEDOMETER.GOOD';
+  return 'SPEEDOMETER.EXCELLENT';
+}
 async runFullTest() {
   this.isTesting = true;
 
@@ -114,10 +114,9 @@ getAngle(): number {
   return (speed / 300) * 180 - 90;
 }
 getPingColor(): string {
-  if (this.ping === 0) return 'var(--ion-color-medium)';
-  if (this.ping < 20) return '#81c784';    
-  if (this.ping < 50) return '#ffd54f';    
-  if (this.ping < 100) return '#ffb74d';   
-  return '#e57373';                        
+  if (this.ping === 0) return 'var(--ion-color-medium)';   
+  if (this.ping < 30) return 'var(--ion-color-success)';   
+  if (this.ping < 90) return 'var(--ion-color-warning)';      
+  return 'var(--ion-color-danger)';                         
 }
 }

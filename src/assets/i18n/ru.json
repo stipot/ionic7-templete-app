@@ -239,4 +239,19 @@
   ,"DEVELOPMENT": {
     "COMPONENTS": "Компоненты в стадии разработки:"
   }
+  ,
+  "SPEEDOMETER": {
+  "TITLE": "Спидометр скорости",
+  "DOWNLOAD": "Download",
+  "PING": "Ping",
+  "UNIT_MBPS": "Мбит/с",
+  "UNIT_MS": "мс",
+  "NOT_MEASURED": "Не измерено",
+  "VERY_SLOW": "Очень медленно",
+  "NORMAL": "Нормально",
+  "GOOD": "Хорошо",
+  "EXCELLENT": "Отлично",
+  "TEST_BUTTON": "Запустить тест",
+  "TESTING": "Тестирование..."
+}
 }

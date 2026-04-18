@@ -221,4 +221,19 @@
   ,"DEVELOPMENT": {
     "COMPONENTS": "Components in development:"
   }
+  , 
+  "SPEEDOMETER": {
+  "TITLE": "Speedometer",
+  "DOWNLOAD": "Download",
+  "PING": "Ping",
+  "UNIT_MBPS": "Mbps",
+  "UNIT_MS": "ms",
+  "NOT_MEASURED": "Not measured",
+  "VERY_SLOW": "Very slow",
+  "NORMAL": "Normal",
+  "GOOD": "Good",
+  "EXCELLENT": "Excellent",
+  "TEST_BUTTON": "Run test",
+  "TESTING": "Testing..."
+}
 }

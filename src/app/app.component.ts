@@ -12,6 +12,7 @@ register();
 export class AppComponent {
   public appPages = [
     
+    { title: 'SPEEDOMETER.TITLE', url: '/speedometer', icon: 'speedometer'},
     { title: 'Face Detector', url: '/face-detector', icon: 'scan' },  // ДОБАВЛЕНО
     { title: 'FRONTPAGE.COMPONENT_TITLE', url: '/front-layout', icon: 'grid' },
     { title: 'SETTINGS.COMPONENT_TITLE', url: '/settings', icon: 'settings' },
@@ -64,7 +65,6 @@ export class AppComponent {
     { title: 'Deals', url: '/deals', icon: '' },
     { title: 'Fashion', url: '/fashion', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
-    { title: 'speedometer', url: '/speedometer', icon: 'speedometer'}
   ];
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang('ru');

@@ -3,84 +3,151 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 60%;
+  height: 60vh;
+  color: #666;
   text-align: center;
-  color: var(--ion-color-medium);
-
   ion-icon {
-    font-size: 64px;
-    margin-bottom: 16px;
+    font-size: 80px;
     color: var(--ion-color-success);
+    margin-bottom: 20px;
+    opacity: 0.6;
   }
 }
 
-ion-card {
+.plant-tile {
+  margin: 6px 3px;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: var(--ion-card-background, #1e1e1e);
 
-  &.needs-water {
-    border: 2px solid var(--ion-color-danger);
+  &:active {
+    transform: scale(0.97);
   }
 
-  .plant-header {
-    --padding-start: 16px;
-    --padding-top: 12px;
-    --background: transparent;
+  .image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 85%; // 1:1.17 Aspect Ratio for a more compact look
+    background: #2a2a2a;
+    overflow: hidden;
 
-    h2 {
-      font-weight: bold;
-      font-size: 1.2rem;
+    &.no-image {
+      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      ion-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 40px;
+        color: white;
+        opacity: 0.25;
+      }
     }
 
-    p {
-      color: var(--ion-color-medium);
-      margin-top: 2px;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .plant-avatar {
-      width: 56px;
-      height: 56px;
-      margin-right: 16px;
-      border: 2px solid #eee;
+    .water-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
+      background: rgba(var(--ion-color-primary-rgb), 0.85);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 
-      img {
-        object-fit: cover;
+      &.urgent {
+        background: rgba(var(--ion-color-danger-rgb), 0.9);
+        animation: pulse 2s infinite;
+      }
+
+      ion-icon {
+        font-size: 16px;
       }
     }
   }
-}
 
-.water-status {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-  font-weight: bold;
-
-  ion-icon {
-    margin-right: 8px;
-    font-size: 20px;
+  ion-card-header {
+    padding: 10px 10px 2px;
+    ion-card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #fff;
+    }
+    ion-card-subtitle {
+      font-size: 0.7rem;
+      color: #aaa;
+    }
   }
 
-  .urgent {
-    color: var(--ion-color-danger);
+  ion-card-content {
+    padding: 0 10px 10px;
+    
+    .status-text {
+      font-size: 0.7rem;
+      margin-bottom: 8px;
+      color: #888;
+      
+      .urgent {
+        color: var(--ion-color-danger);
+        font-weight: 700;
+      }
+    }
+
+    .tile-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 2px;
+
+      ion-button {
+        --padding-start: 4px;
+        --padding-end: 4px;
+        margin: 0;
+        height: 30px;
+        font-size: 1.2rem;
+        --color: var(--ion-color-primary);
+
+        &[color="danger"] {
+          --color: var(--ion-color-danger);
+        }
+      }
+    }
+  }
+
+  &.needs-water {
+    border: 1px solid rgba(var(--ion-color-danger-rgb), 0.4);
   }
 }
 
-.last-watered {
-  font-size: 12px;
-  color: var(--ion-color-medium);
-  margin-top: 4px;
+.action-button {
+  --border-radius: 12px;
+  margin-top: 24px;
+  font-weight: 600;
 }
 
-.action-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 16px;
-
-  ion-button {
-    margin: 0;
-  }
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(var(--ion-color-danger-rgb), 0.4); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(var(--ion-color-danger-rgb), 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(var(--ion-color-danger-rgb), 0); }
 }

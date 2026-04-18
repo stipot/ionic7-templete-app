@@ -219,5 +219,23 @@
 
   ,"DEVELOPMENT": {
     "COMPONENTS": "Components in development:"
+  },
+  "FLORIST": {
+    "COMPONENT_TITLE": "Florist Assistant",
+    "EMPTY_STATE_TITLE": "You have no plants yet",
+    "EMPTY_STATE_SUBTITLE": "Press + in the top right corner to add your first plant!",
+    "DAYS_UNTIL_WATER": "Water in {{days}} d.",
+    "URGENT_WATER": "Needs watering!",
+    "LAST_WATERED": "Last watered: {{date}}",
+    "WATER_BUTTON": "Water",
+    "NEW_PLANT_TITLE": "New plant",
+    "CLOSE": "Close",
+    "PLANT_NAME": "Name (nickname)",
+    "PLANT_SPECIES": "Plant species",
+    "WATER_FREQUENCY": "Water every ... days",
+    "PHOTO_URL": "Photo URL (optional)",
+    "ADD_BUTTON": "Add",
+    "PLACEHOLDER_NAME": "e.g., Boris",
+    "PLACEHOLDER_SPECIES": "e.g., Cactus"
   }
-}
+}

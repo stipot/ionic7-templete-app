@@ -237,5 +237,23 @@
 
   ,"DEVELOPMENT": {
     "COMPONENTS": "Компоненты в стадии разработки:"
+  },
+  "FLORIST": {
+    "COMPONENT_TITLE": "Помощник цветовода",
+    "EMPTY_STATE_TITLE": "У вас пока нет растений",
+    "EMPTY_STATE_SUBTITLE": "Нажмите + в правом верхнем углу, чтобы добавить первое растение!",
+    "DAYS_UNTIL_WATER": "Полив через {{days}} дн.",
+    "URGENT_WATER": "Нужен полив!",
+    "LAST_WATERED": "Последний полив: {{date}}",
+    "WATER_BUTTON": "Полить",
+    "NEW_PLANT_TITLE": "Новое растение",
+    "CLOSE": "Закрыть",
+    "PLANT_NAME": "Имя (кличка)",
+    "PLANT_SPECIES": "Вид растения",
+    "WATER_FREQUENCY": "Поливать каждые ... дней",
+    "PHOTO_URL": "Ссылка на фото (опционально)",
+    "ADD_BUTTON": "Добавить",
+    "PLACEHOLDER_NAME": "Например: Борис",
+    "PLACEHOLDER_SPECIES": "Например: Кактус"
   }
 }

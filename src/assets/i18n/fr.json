@@ -143,5 +143,23 @@
     "SUBTITLE": "Calculez la valeur et cliquez sur \"Appliquer\"",
     "APPLY_BUTTON": "Appliquer le résultat",
     "CLOSE_BUTTON": "Fermer"
+  },
+  "FLORIST": {
+    "COMPONENT_TITLE": "Assistant fleuriste",
+    "EMPTY_STATE_TITLE": "Vous n'avez pas encore de plantes",
+    "EMPTY_STATE_SUBTITLE": "Appuyez sur + dans le coin supérieur droit pour ajouter votre première plante !",
+    "DAYS_UNTIL_WATER": "Arrosage dans {{days}} j.",
+    "URGENT_WATER": "Besoin d'arrosage !",
+    "LAST_WATERED": "Dernier arrosage : {{date}}",
+    "WATER_BUTTON": "Arroser",
+    "NEW_PLANT_TITLE": "Nouvelle plante",
+    "CLOSE": "Fermer",
+    "PLANT_NAME": "Nom (surnom)",
+    "PLANT_SPECIES": "Espèce de plante",
+    "WATER_FREQUENCY": "Arroser tous les ... jours",
+    "PHOTO_URL": "URL de la photo (facultatif)",
+    "ADD_BUTTON": "Ajouter",
+    "PLACEHOLDER_NAME": "ex: Boris",
+    "PLACEHOLDER_SPECIES": "ex: Cactus"
   }
-}
+}

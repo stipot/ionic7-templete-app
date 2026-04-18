@@ -41,7 +41,6 @@ export class FrontLayoutComponent implements OnInit {
     { c_name: "Kanban-доска", c_desc: "Kanban-доска с возможностью перетаскивать задачи между столбцами.", link: "/kanban" },
     { c_name: "Drag and drop", c_desc: "Drag and drop feature example", link: "/drag-and-drop" },
     { c_name: "Water Trackerr", c_desc: "water trackerr", link: "/water-tracker" },
-    { c_name: "Помощник цветовода", c_desc: "Учет и полив ваших растений", link: "/florist" },
   ]
 
   constructor(private userService: UserService, private translate: TranslateService) {

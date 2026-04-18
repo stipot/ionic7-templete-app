@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>{{ titleText }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6">
+        <div class="calculator">
+          <div class="mode-switcher-under-display">
+            <ion-segment [value]="isExtendedMode ? 'advanced' : 'basic'" (ionChange)="toggleMode()">
+              <ion-segment-button value="basic">
+                <ion-label>{{ basicText }}</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="advanced">
+                <ion-label>{{ advancedText }}</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </div>
+
+          <ion-input [(ngModel)]="expression" readonly placeholder="0" class="display"></ion-input>
+
+          <div class="buttons">
+            <ion-button 
+              *ngFor="let button of getCurrentButtons()"
+              expand="block" 
+              [color]="button.color" 
+              (click)="handleButtonClick(button)"
+              [class.extended-button]="button.color === 'tertiary'">
+              {{ button.label }}
+            </ion-button>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="12" size-md="6">
+        <div class="demo-form">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ formTitle }}</ion-card-title>
+              <ion-card-subtitle>{{ formSubtitle }}</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <ion-item>
+                <ion-label position="stacked">{{ amountLabel }}</ion-label>
+                <ion-input 
+                  [(ngModel)]="inputValue" 
+                  [placeholder]="amountPlaceholder">
+                </ion-input>
+                <ion-button 
+                  slot="end" 
+                  fill="clear" 
+                  (click)="openCalculator()"
+                  class="calc-button">
+                  <ion-icon name="calculator" slot="icon-only"></ion-icon>
+                </ion-button>
+              </ion-item>
+
+              <div class="action-buttons">
+                <ion-button expand="block" color="secondary" (click)="clearForm()">
+                  {{ clearFormButton }}
+                </ion-button>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="calculator-popup" *ngIf="showCalculator">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ popupTitle }}</ion-card-title>
+        <ion-card-subtitle>{{ popupSubtitle }}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="mode-switcher">
+          <ion-segment [value]="isExtendedMode ? 'advanced' : 'basic'" (ionChange)="toggleMode()">
+            <ion-segment-button value="basic">
+              <ion-label>{{ basicText }}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="advanced">
+              <ion-label>{{ advancedText }}</ion-label>
+            </ion-segment-button>
+          </ion-segment>
+        </div>
+
+        <ion-input 
+          [(ngModel)]="popupExpression" 
+          readonly 
+          placeholder="0" 
+          class="calculator-display">
+        </ion-input>
+
+        <div class="calculator-buttons">
+          <ion-button 
+            *ngFor="let button of getCurrentButtons()"
+            expand="block" 
+            [color]="button.color" 
+            (click)="handlePopupButtonClick(button)"
+            [class.extended-button]="button.color === 'tertiary'">
+            {{ button.label }}
+          </ion-button>
+        </div>
+
+        <div class="calculator-actions">
+          <ion-button expand="block" color="primary" (click)="applyCalculation()">
+            {{ applyButton }}
+          </ion-button>
+          <ion-button expand="block" color="medium" (click)="closeCalculator()">
+            {{ closeButton }}
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

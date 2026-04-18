@@ -1,0 +1,158 @@
+.container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.calculator-section {
+  margin-bottom: 30px;
+}
+
+.calculator {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: var(--ion-color-light);
+  border-radius: 15px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.display {
+  font-size: 2em;
+  text-align: right;
+  margin-bottom: 15px;
+  --background: #f8f9fa;
+  --color: #000;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  background: white;
+  border-radius: 10px;
+  border: 2px solid var(--ion-color-medium);
+}
+
+.mode-switcher-under-display {
+  margin-bottom: 15px;
+  
+  ion-segment {
+    --background: var(--ion-color-light);
+  }
+  
+  ion-segment-button {
+    --color: var(--ion-color-medium);
+    --color-checked: var(--ion-color-primary);
+    --indicator-color: var(--ion-color-primary);
+  }
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+ion-button {
+  height: 60px;
+  font-size: 1.2em;
+  --border-radius: 10px;
+  
+  &.extended-button {
+    font-size: 0.9em;
+    --background: #6c757d;
+    --background-hover: #5a6268;
+    --background-activated: #545b62;
+  }
+}
+
+.demo-form {
+  margin-top: 20px;
+}
+
+.calc-button {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  margin-right: 8px;
+}
+
+.action-buttons {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.calculator-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 400px;
+  z-index: 1000;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  
+  ion-card {
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+.mode-switcher {
+  margin-bottom: 15px;
+  
+  ion-segment {
+    --background: var(--ion-color-light);
+  }
+  
+  ion-segment-button {
+    --color: var(--ion-color-medium);
+    --color-checked: var(--ion-color-primary);
+    --indicator-color: var(--ion-color-primary);
+  }
+}
+
+.calculator-display {
+  font-size: 1.5em;
+  text-align: right;
+  margin-bottom: 15px;
+  --background: #f8f9fa;
+  --color: #000;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  background: white;
+  border-radius: 8px;
+  border: 2px solid var(--ion-color-medium);
+}
+
+.calculator-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 15px;
+  
+  ion-button {
+    height: 50px;
+    font-size: 1.1em;
+    --border-radius: 8px;
+    
+    &.extended-button {
+      font-size: 0.8em;
+      --background: #6c757d;
+    }
+  }
+}
+
+.calculator-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.calculator-popup::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}

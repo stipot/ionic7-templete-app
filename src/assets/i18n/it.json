@@ -149,6 +149,12 @@
   "START": "Inizia",
   "STOP": "Interrompere",
   "RESET": "Reset",
-  "FINISHED_MSG": "Il tempo è scaduto!"
+  "FINISHED_MSG": "Il tempo è scaduto!",
+  "HOURS": "Orologio",
+  "MINUTES": "Minuti",
+  "SECONDS": "Seconde",
+  "RECENT": "Storia",
+  "NAME": "Titolo",
+  "NAME2": "Campo di input"
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-timer',
@@ -17,7 +18,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   recentTimers: any[] = []; // Список недавних
   
   private intervalId: any;
-
+  constructor(private translate: TranslateService) { }
   get formattedTime(): string {
     const h = Math.floor(this.timeInSeconds / 3600);
     const m = Math.floor((this.timeInSeconds % 3600) / 60);

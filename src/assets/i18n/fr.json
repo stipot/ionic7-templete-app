@@ -149,6 +149,12 @@
   "START": "Lancement",
   "STOP": "Stop",
   "RESET": "Reset",
-  "FINISHED_MSG": "Le temps est écoulé!"
+  "FINISHED_MSG": "Le temps est écoulé!",
+  "HOURS": "Montre",
+  "MINUTES": "Min",
+  "SECONDS": "Secondes",
+  "RECENT": "Histoire",
+  "NAME": "Nom",
+  "NAME2": "Champ de saisie"
 }
 }

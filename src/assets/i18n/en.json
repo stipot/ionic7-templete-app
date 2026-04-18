@@ -225,7 +225,13 @@
   "START": "Start",
   "STOP": "Stop",
   "RESET": "Reset",
-  "FINISHED_MSG": "Time is up!"
+  "FINISHED_MSG": "Time is up!",
+  "HOURS": "HOURS",
+  "MINUTES": "MINUTES",
+  "SECONDS": "SECONDS",
+  "RECENT": "RECENT",
+  "NAME": "Name",
+  "NAME2": "The input field"
 }
 
 }

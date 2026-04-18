@@ -2,6 +2,7 @@
   "1": "Welcome",
   "Inbox": "Inbox",
   "outbox": "Outbox",
+  "speedometer":"Speedometer",
   "favorites": "Favorites",
   "archived": "Archived",
   "trash": "Trash",
@@ -220,7 +221,56 @@
   ,"DEVELOPMENT": {
     "COMPONENTS": "Components in development:"
   },
-  "PHP":{
+  "PAINT":{
+    "COMPONENT_TITLE": "Paint"
+  }, 
+  "SPEEDOMETER": {
+  "TITLE": "Speedometer",
+  "DOWNLOAD": "Download",
+  "PING": "Ping",
+  "UNIT_MBPS": "Mbps",
+  "UNIT_MS": "ms",
+  "NOT_MEASURED": "Not measured",
+  "VERY_SLOW": "Very slow",
+  "NORMAL": "Normal",
+  "GOOD": "Good",
+  "EXCELLENT": "Excellent",
+  "TEST_BUTTON": "Run test",
+  "TESTING": "Testing..."
+  },
+  "TIMER": {
+  "COMPONENT_TITLE": "Timer",
+  "START": "Start",
+  "STOP": "Stop",
+  "RESET": "Reset",
+  "FINISHED_MSG": "Time is up!",
+  "HOURS": "HOURS",
+  "MINUTES": "MINUTES",
+  "SECONDS": "SECONDS",
+  "RECENT": "RECENT",
+  "NAME": "Name",
+  "NAME2": "The input field"
+  },
+  "FLORIST": {
+    "COMPONENT_TITLE": "Florist Assistant",
+    "EMPTY_STATE_TITLE": "You have no plants yet",
+    "EMPTY_STATE_SUBTITLE": "Press + in the top right corner to add your first plant!",
+    "DAYS_UNTIL_WATER": "Water in {{days}} d.",
+    "URGENT_WATER": "Needs watering!",
+    "LAST_WATERED": "Last watered: {{date}}",
+    "WATER_BUTTON": "Water",
+    "NEW_PLANT_TITLE": "New plant",
+    "CLOSE": "Close",
+    "PLANT_NAME": "Name (nickname)",
+    "PLANT_SPECIES": "Plant species",
+    "WATER_FREQUENCY": "Water every ... days",
+    "PHOTO_URL": "Photo URL (optional)",
+    "ADD_BUTTON": "Add",
+    "PLACEHOLDER_NAME": "e.g., Boris",
+    "PLACEHOLDER_SPECIES": "e.g., Cactus"
+  },
+    "PHP":{
     "COMPONENT_TITLE": "Predicting the price of an apartment"
   }
 }
+

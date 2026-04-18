@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'SPEEDOMETER.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="speedtest-container">
+
+    <h2 class="title">SpeedTest</h2>
+
+    
+    <div class="gauge">
+      <div class="gauge-bg"></div>
+
+      
+      <div class="marker m0">0</div>
+      <div class="marker m50">50</div>
+      <div class="marker m100">100</div>
+      <div class="marker m150">150</div>
+      <div class="marker m200">200</div>
+      <div class="marker m250">250</div>
+      <div class="marker m300">300</div>
+
+      <div class="needle" [style.transform]="'rotate(' + getAngle() + 'deg)'"></div>
+      <div class="center-dot"></div>
+
+      <div class="speed-value" [style.color]="getSpeedColor()">{{ downloadSpeed }}</div>
+      <div class="speed-unit">{{ 'SPEEDOMETER.UNIT_MBPS' | translate }}</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="stat-label">{{ 'SPEEDOMETER.DOWNLOAD' | translate }}</div>
+       <div class="stat-value" [style.color]="getSpeedColor()">
+          {{ downloadSpeed }} <span class="stat-unit">{{ 'SPEEDOMETER.UNIT_MBPS' | translate }}</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">{{ 'SPEEDOMETER.PING' | translate }}</div>
+       <div class="stat-value" [style.color]="getPingColor()">
+          {{ ping }} <span class="stat-unit">{{ 'SPEEDOMETER.UNIT_MS' | translate }}</span>
+        </div>
+      </div>
+    </div>
+
+    
+  <div class="quality-badge" [style.color]="getSpeedColor()">
+  {{ getSpeedQualityKey() | translate }}
+</div>
+
+    
+    <ion-button (click)="runFullTest()" [disabled]="isTesting" expand="block" size="large">
+      {{ isTesting ? '📊 ' + ('SPEEDOMETER.TESTING' | translate) : '▶ ' + ('SPEEDOMETER.TEST_BUTTON' | translate) }}
+      </ion-button>
+  </div>
+</ion-content>

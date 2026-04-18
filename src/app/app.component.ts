@@ -12,7 +12,7 @@ register();
 })
 export class AppComponent {
   public appPages = [
-    
+    { title: 'TIERLIST.TITLE', url: '/Jwsr', icon: 'prism'},
     { title: 'SPEEDOMETER.TITLE', url: '/speedometer', icon: 'speedometer'},
     { title: 'TIMER.COMPONENT_TITLE', url: '/timer', icon: 'timer'},
     { title: 'Face Detector', url: '/face-detector', icon: 'scan' },  // ДОБАВЛЕНО

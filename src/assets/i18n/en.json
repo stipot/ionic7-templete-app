@@ -251,4 +251,20 @@
   "NAME": "Name",
   "NAME2": "The input field"
   }
+
+  ,"TIERLIST": {
+    "TITLE": "Tier List",
+    "DESCRIPTION": "A tier list is a rating system that categorizes elements (characters, games, movies) from best to worst. Elements are categorized into letters, with higher tiers being better. They help quickly assess performance or popularity.Drag the image where you think it's needed. You can also upload your own image and save the result.",
+    "ROW_S": "S",
+    "ROW_A": "A",
+    "ROW_B": "B",
+    "ROW_C": "C",
+    "ROW_D": "D",
+    "ROW_E": "E",
+    "UPLOAD_BUTTON": "Upload Image",
+    "SAVE_BUTTON": "Save",
+    "SOURCE_IMAGES": "Available Images"
+  }
+  
+
 }

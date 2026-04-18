@@ -2,6 +2,7 @@
   "1": "Welcome",
   "Inbox": "Inbox",
   "outbox": "Outbox",
+  "speedometer":"Speedometer",
   "favorites": "Favorites",
   "archived": "Archived",
   "trash": "Trash",
@@ -222,5 +223,32 @@
   },
   "PAINT":{
     "COMPONENT_TITLE": "Paint"
+  }, 
+  "SPEEDOMETER": {
+  "TITLE": "Speedometer",
+  "DOWNLOAD": "Download",
+  "PING": "Ping",
+  "UNIT_MBPS": "Mbps",
+  "UNIT_MS": "ms",
+  "NOT_MEASURED": "Not measured",
+  "VERY_SLOW": "Very slow",
+  "NORMAL": "Normal",
+  "GOOD": "Good",
+  "EXCELLENT": "Excellent",
+  "TEST_BUTTON": "Run test",
+  "TESTING": "Testing..."
+  },
+  "TIMER": {
+  "COMPONENT_TITLE": "Timer",
+  "START": "Start",
+  "STOP": "Stop",
+  "RESET": "Reset",
+  "FINISHED_MSG": "Time is up!",
+  "HOURS": "HOURS",
+  "MINUTES": "MINUTES",
+  "SECONDS": "SECONDS",
+  "RECENT": "RECENT",
+  "NAME": "Name",
+  "NAME2": "The input field"
   }
 }

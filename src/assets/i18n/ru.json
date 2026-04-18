@@ -41,11 +41,13 @@
   "Address": "Адрес",
   "Marriage": "Семейное положение",
   "News": "Новости",
+  "timer": "Таймер",
   "Save": "Сохранить",
   "Shopping": "Список покупок",
   "RSA": "Шифрование RSA",
   "Settings": "Настройки",
   "2048 Game": "Игра 2048",
+  "speedometer":"Cпидометр",
   "Miniblog": "Миниблог",
   "Kanban": "Канбан",
   "Recipes": "Рецепты",
@@ -237,7 +239,34 @@
   "DEVELOPMENT": {
     "COMPONENTS": "Компоненты в стадии разработки:"
   },
-  "PAINT":{
+    "PAINT":{
     "COMPONENT_TITLE": "Рисовалка"
+  },
+  "TIMER": {
+    "COMPONENT_TITLE": "Таймер",
+    "START": "Запустить",
+    "STOP": "Остановить",
+    "RESET": "Сбросить",
+    "HOURS": "Часы",
+    "MINUTES": "Минуты",
+    "SECONDS": "Секунды",
+    "RECENT": "История",
+    "NAME": "Название",
+    "NAME2": "Поле ввода"
   }
+  ,
+  "SPEEDOMETER": {
+  "TITLE": "Спидометр скорости",
+  "DOWNLOAD": "Download",
+  "PING": "Ping",
+  "UNIT_MBPS": "Мбит/с",
+  "UNIT_MS": "мс",
+  "NOT_MEASURED": "Не измерено",
+  "VERY_SLOW": "Очень медленно",
+  "NORMAL": "Нормально",
+  "GOOD": "Хорошо",
+  "EXCELLENT": "Отлично",
+  "TEST_BUTTON": "Запустить тест",
+  "TESTING": "Тестирование..."
+}
 }

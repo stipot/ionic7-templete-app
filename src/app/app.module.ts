@@ -56,6 +56,7 @@ import { TierListComponent } from './tier-list/tier-list.component'
 import { TierListModule } from './tier-list/tier-list.module';
 
 
+
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -96,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddBlogModalComponent,
     WaterTrackerComponent,
     GazonComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -119,7 +121,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

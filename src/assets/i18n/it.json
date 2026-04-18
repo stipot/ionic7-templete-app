@@ -1,5 +1,6 @@
 {
   "1": "Benvenuto",
+  "speedometer":"Tachimetro",
   "Inbox": "Posta in arrivo",
   "outbox": "Posta in uscita",
   "favorites": "Preferiti",
@@ -143,6 +144,19 @@
     "SUBTITLE": "Calcola valore e clicca \"Applica\"",
     "APPLY_BUTTON": "Applica risultato",
     "CLOSE_BUTTON": "Chiudi"
+  },
+  "TIMER": {
+  "COMPONENT_TITLE": "Timer",
+  "START": "Inizia",
+  "STOP": "Interrompere",
+  "RESET": "Reset",
+  "FINISHED_MSG": "Il tempo è scaduto!",
+  "HOURS": "Orologio",
+  "MINUTES": "Minuti",
+  "SECONDS": "Seconde",
+  "RECENT": "Storia",
+  "NAME": "Titolo",
+  "NAME2": "Campo di input"
   }
   ,"TIERLIST": {
     "TITLE": "Lista dei livelli",

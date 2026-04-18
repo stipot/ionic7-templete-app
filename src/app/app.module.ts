@@ -52,6 +52,7 @@ import { WidgetModule } from './widget/widget.module';
 import { CalcModule } from './calc/calc.module';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
+import { PaintModule } from './paint/paint.module';
 import { TierListComponent } from './tier-list/tier-list.component'
 import { TierListModule } from './tier-list/tier-list.module';
 
@@ -110,6 +111,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommonModule,
     WidgetModule,
     CalcModule,
+    PaintModule,
     TierListModule,
     DragDropModule,
     IonicStorageModule.forRoot(),

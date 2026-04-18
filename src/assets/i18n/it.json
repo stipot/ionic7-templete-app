@@ -157,6 +157,9 @@
   "RECENT": "Storia",
   "NAME": "Titolo",
   "NAME2": "Campo di input"
+  },
+  "PAINT":{
+    "COMPONENT_TITLE": "Vernice"
   }
   ,"TIERLIST": {
     "TITLE": "Lista dei livelli",

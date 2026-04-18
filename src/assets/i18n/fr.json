@@ -145,6 +145,9 @@
     "APPLY_BUTTON": "Appliquer le résultat",
     "CLOSE_BUTTON": "Fermer"
   },
+  "PAINT":{
+    "COMPONENT_TITLE": "Peinture"
+  },
   "TIMER": {
   "COMPONENT_TITLE": "Minuterie",
   "START": "Lancement",

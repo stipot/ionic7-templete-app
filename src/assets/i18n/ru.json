@@ -235,12 +235,13 @@
     "GAZON":{
     "MENU": "Конвертер форматов",
     "TITLE": "Конвертер форматов"
-  }
-
-  ,"DEVELOPMENT": {
+  }  ,
+  "DEVELOPMENT": {
     "COMPONENTS": "Компоненты в стадии разработки:"
   },
-  
+    "PAINT":{
+    "COMPONENT_TITLE": "Рисовалка"
+  },
   "TIMER": {
     "COMPONENT_TITLE": "Таймер",
     "START": "Запустить",

@@ -191,5 +191,8 @@
     "UPLOAD_BUTTON": "Téléverser une image",
     "SAVE_BUTTON": "Enregistrer",
     "SOURCE_IMAGES": "Images disponibles"
+  },
+    "PHP":{
+    "COMPONENT_TITLE": "Prédiction du prix de l'appartement"
   }
 }

@@ -12,6 +12,7 @@ register();
 })
 export class AppComponent {
   public appPages = [
+    { title: 'PHP.COMPONENT_TITLE', url: 'predicting-house-prices', icon: 'business'},
     { title: 'TIERLIST.TITLE', url: '/Jwsr', icon: 'prism'},
     { title: 'SPEEDOMETER.TITLE', url: '/speedometer', icon: 'speedometer'},
     { title: 'TIMER.COMPONENT_TITLE', url: '/timer', icon: 'timer'},

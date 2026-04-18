@@ -52,6 +52,7 @@ import { RssDataComponent } from './rss-data/rss-data.component';
 import { CalcModule } from './calc/calc.module';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
+import {PredictingHousePricesModule} from './predicting-house-prices/predicting-house-prices.module'
 import { FloristAssistantComponent } from './florist-assistant/florist-assistant.component';
 import { PaintModule } from './paint/paint.module';
 import { TierListComponent } from './tier-list/tier-list.component'
@@ -113,6 +114,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommonModule,
     // WidgetModule,
     CalcModule,
+    PredictingHousePricesModule,
     PaintModule,
     TierListModule,
     DragDropModule,

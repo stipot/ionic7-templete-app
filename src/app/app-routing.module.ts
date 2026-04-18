@@ -232,6 +232,10 @@ const routes: Routes = [
     component: FloristAssistantComponent
   },
   {
+    path: 'predicting-house-prices',
+    loadChildren: () => import('./predicting-house-prices/predicting-house-prices.module').then(m => m.PredictingHousePricesModule)
+  },  
+  {
     path: '',
     loadChildren: () => import('./timer/timer.module').then(m => m.TimerModule)
   },

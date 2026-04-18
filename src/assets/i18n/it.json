@@ -191,6 +191,9 @@
     "UPLOAD_BUTTON": "Carica immagine",
     "SAVE_BUTTON": "Salva",
     "SOURCE_IMAGES": "Immagini disponibili"
+  },
+    "PHP":{
+    "COMPONENT_TITLE": "Previsione del prezzo dell'appartamento"
   }
     
 }

@@ -22,7 +22,7 @@ The component uses:
 - SCSS for responsive styles and animations
 - LocalStorage for auto-saving drawings
 
-## Improvement Plans
+## Todo Improvement Plans
 - Add a "Redo" button (Redo / Ctrl+Y)
 - Ability to insert images from a file or clipboard
 - Add text to canvas with a choice of fonts

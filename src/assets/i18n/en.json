@@ -221,6 +221,6 @@
     "COMPONENTS": "Components in development:"
   },
   "PHP":{
-    "COMPONENT_TITLE": "Price prediction"
+    "COMPONENT_TITLE": "Predicting the price of an apartment"
   }
 }

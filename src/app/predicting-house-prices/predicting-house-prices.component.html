@@ -10,47 +10,65 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Посчитать стоимость дома</ion-card-title>
+      <ion-card-title>Посчитать стоимость квартиры</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      Данная программа считает приблизительную цену дома, учитывая такие данные как расстояние до метро, площадь и регион.
+      Данная программа пытается угадать цену квартиры, учитывая указанные вами данные
     </ion-card-content>
   </ion-card>
-
-
-
-
 
   <ion-item>
     <ion-label>Сколько минут до метро? (<ion-text color="primary">{{ input_minutes_to_metro }}</ion-text>)</ion-label>
     <ion-range min="0" max="60" step="1" [(ngModel)]="input_minutes_to_metro"></ion-range>
   </ion-item>
-   <ion-item>
-    <ion-label>Сколько комнат в доме? (<ion-text color="primary">{{ input_number_of_rooms }}</ion-text>)</ion-label>
-    <ion-range min="0" max="12" step="1" [(ngModel)]="input_number_of_rooms"></ion-range>
-  </ion-item>
-
-
-
-
-
-
-
-
-  <!-- <ion-item>
-    <ion-input label="Сколько минут до метро:" [(ngModel)] = "input_minutes_to_metro"></ion-input>
-  </ion-item> -->
   <ion-item>
-    <ion-input label="Площадь(м²):" [(ngModel)] = "input_area"></ion-input>
+    <ion-label>Сколько комнат в квартире? (<ion-text color="primary">{{ input_number_of_rooms }}</ion-text>)</ion-label>
+    <ion-range min="1" max="12" step="1" [(ngModel)]="input_number_of_rooms"></ion-range>
   </ion-item>
   <ion-item>
-    <ion-radio-group value="custom-checked" [(ngModel)] = "region">
-      <ion-radio value="Moscow" aria-label="Custom checkbox">Москва</ion-radio>
-      <ion-radio value="Region_Moscow" aria-label="Custom checkbox that is checked">Регион Москвы</ion-radio>
-    </ion-radio-group>
+    <ion-label>Общая площадь квартиры? (в метрах) (<ion-text color="primary">{{ input_area }}</ion-text>)</ion-label>
+    <ion-range min="6" max="1117" step="1" [(ngModel)]="input_area"></ion-range>
+  </ion-item>
+  <ion-item>
+    <ion-label>Жилая площадь? (в метрах) (<ion-text color="primary">{{ input_living_area }}</ion-text>)</ion-label>
+    <ion-range min="2" max="566" step="1" [(ngModel)]="input_living_area"></ion-range>
+  </ion-item>
+  <ion-item>
+    <ion-label>Площадь кухни? (в метрах) (<ion-text color="primary">{{ input_kitchen_area }}</ion-text>)</ion-label>
+    <ion-range min="1" max="122" step="1" [(ngModel)]="input_kitchen_area"></ion-range>
+  </ion-item>
+  <ion-item>
+    <ion-label>Какой этаж? (<ion-text color="primary">{{ input_floor }}</ion-text>)</ion-label>
+    <ion-range min="1" max="90" step="1" [(ngModel)]="input_floor"></ion-range>
+  </ion-item>
+  <ion-item>
+    <ion-label>Количество этажей в доме? (<ion-text color="primary">{{ input_number_of_floors }}</ion-text>)</ion-label>
+    <ion-range min="1" max="90" step="1" [(ngModel)]="input_number_of_floors"></ion-range>
   </ion-item>
 
+  <ion-list>
+    <ion-item>
+      <ion-radio-group value="custom-checked" [(ngModel)] = "apartment_type">
+        <ion-radio value="New_building" labelPlacement="end" justify="start">Новое здание</ion-radio>
+        <ion-radio value="Secondary" labelPlacement="end" justify="start">Вторичка</ion-radio>
+      </ion-radio-group>
+    </ion-item>
+    <ion-item>
+      <ion-radio-group value="custom-checked" [(ngModel)] = "region">
+        <ion-radio value="Moscow" labelPlacement="end" justify="start">Москва</ion-radio>
+        <ion-radio value="Region_Moscow" labelPlacement="end" justify="start">Регион Москвы</ion-radio>
+      </ion-radio-group>
+    </ion-item>
+    <ion-item>
+      <ion-radio-group value="custom-checked" [(ngModel)] = "renovation">
+        <ion-radio value="Cosmetic" labelPlacement="end" justify="start">Косметический ремонт</ion-radio>
+        <ion-radio value="Designer" labelPlacement="end" justify="start">Дизайнерский ремонт</ion-radio>
+        <ion-radio value="European_style_renovation" labelPlacement="end" justify="start">Ремонт в европейском стиле</ion-radio>
+        <ion-radio value="Without" labelPlacement="end" justify="start">Без ремонта</ion-radio>
+      </ion-radio-group>
+    </ion-item>
+  </ion-list>
 <ion-button icon-only (click)="go()">Посчитать</ion-button>
   <ion-card>
     <ion-card-header>

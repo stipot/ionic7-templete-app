@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import html2canvas from 'html2canvas';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-tier-list',
   templateUrl: './tier-list.component.html',
@@ -102,7 +103,7 @@ async saveAsImage() {
   }
 }
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {}
 

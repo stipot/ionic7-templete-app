@@ -4,7 +4,7 @@ import { TierListPageRoutingModule } from './tierList.routing.module';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { TierListComponent } from './tier-list.component';
-
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [TierListComponent],
@@ -12,7 +12,8 @@ import { TierListComponent } from './tier-list.component';
     TierListPageRoutingModule,
     CommonModule,
     IonicModule,
-    FormsModule
+    FormsModule,
+    TranslateModule
   ]
 })
 export class TierListModule { }

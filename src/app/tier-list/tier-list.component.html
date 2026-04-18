@@ -1,11 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Tier-List</ion-title>
+    <ion-title>{{"TIERLIST.TITLE" | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  
+  <div style="text-align: center; margin-bottom: 30px;">
+    <p style="color: #9e9e9e; margin-top: 8px;">{{ 'TIERLIST.DESCRIPTION' | translate }}</p>
+  </div>
+
   <!-- ЛЕВАЯ ПАНЕЛЬ-->
   <div style="display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap;">
     <div 
@@ -30,7 +33,7 @@
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
       <div style="width: 100px; background: #bb2f16d5; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px;color: rgb(0, 0, 0)">
-        S
+        {{ 'TIERLIST.ROW_S' | translate }}
       </div>
   <!-- ngFor местный цикл -->      
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
@@ -50,7 +53,7 @@
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
       <div style="width: 100px; background: #c56516ec; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px;color: rgb(0, 0, 0)">
-        A
+        {{ 'TIERLIST.ROW_A' | translate }}
       </div>
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
         <div *ngFor="let item of getItemsByTier('A')" style="position: relative;">
@@ -69,7 +72,7 @@
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
       <div style="width: 100px; background: #c4b36aef; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
-        B
+       {{ 'TIERLIST.ROW_B' | translate }}
       </div>
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
         <div *ngFor="let item of getItemsByTier('B')" style="position: relative;"> <!-- цикл который показывает все картинки в ряду-->
@@ -88,7 +91,7 @@
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
       <div style="width: 100px; background: #18ac499f; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
-        C
+       {{ 'TIERLIST.ROW_C' | translate }}
       </div>
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
         <div *ngFor="let item of getItemsByTier('C')" style="position: relative;">
@@ -107,7 +110,7 @@
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
       <div style="width: 100px; background: #3b98a8ce; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
-        D
+       {{ 'TIERLIST.ROW_D' | translate }}
       </div>
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
         <div *ngFor="let item of getItemsByTier('D')" style="position: relative;">
@@ -126,7 +129,7 @@
       (dragover)="$event.preventDefault()"
       style="display: flex; border: 2px solid #333333; border-radius: 8px; min-height: 100px;">
       <div style="width: 100px; background: #7a46a5a9; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: rgb(0, 0, 0);">
-        E
+     {{ 'TIERLIST.ROW_E' | translate }}
       </div>
       <div style="flex: 1; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
         <div *ngFor="let item of getItemsByTier('E')" style="position: relative;">
@@ -140,13 +143,13 @@
     </div>
   </div>
 
-<ion-button (click)="downloadImage()">загрузить png
+<ion-button (click)="downloadImage()"> {{ 'TIERLIST.UPLOAD_BUTTON' | translate }}
     <ion-icon slot="start">
     
     </ion-icon>
 </ion-button>
 <ion-button (click)="saveAsImage()">
-  <ion-icon slot="start"></ion-icon>сохранение
+  <ion-icon slot="start"></ion-icon> {{ 'TIERLIST.SAVE_BUTTON' | translate }}
 </ion-button>
 
 </ion-content>

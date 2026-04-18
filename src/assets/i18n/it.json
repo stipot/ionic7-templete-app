@@ -144,4 +144,18 @@
     "APPLY_BUTTON": "Applica risultato",
     "CLOSE_BUTTON": "Chiudi"
   }
+  ,"TIERLIST": {
+    "TITLE": "Lista dei livelli",
+    "DESCRIPTION": "Una lista dei livelli è un sistema di valutazione che categorizza gli elementi (personaggi, giochi, film) dal migliore al peggiore. Gli elementi sono categorizzati con lettere, dove i livelli più alti indicano una qualità migliore. Aiutano a valutare rapidamente le prestazioni o la popolarità.Trascina l'immagine nel punto in cui ritieni necessario. Puoi anche caricare una tua immagine e salvare il risultato.",
+    "ROW_S": "S",
+    "ROW_A": "A",
+    "ROW_B": "B",
+    "ROW_C": "C",
+    "ROW_D": "D",
+    "ROW_E": "E",
+    "UPLOAD_BUTTON": "Carica immagine",
+    "SAVE_BUTTON": "Salva",
+    "SOURCE_IMAGES": "Immagini disponibili"
+  }
+    
 }

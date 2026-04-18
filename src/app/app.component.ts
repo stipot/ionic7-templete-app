@@ -11,7 +11,7 @@ register();
 })
 export class AppComponent {
   public appPages = [
-    {title: 'TierList', url: '/Jwsr', icon: 'prism'},
+    {title: 'TIERLIST.TITLE', url: '/Jwsr', icon: 'prism'},
     { title: 'Face Detector', url: '/face-detector', icon: 'scan' },  // ДОБАВЛЕНО
     { title: 'FRONTPAGE.COMPONENT_TITLE', url: '/front-layout', icon: 'grid' },
     { title: 'SETTINGS.COMPONENT_TITLE', url: '/settings', icon: 'settings' },

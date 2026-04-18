@@ -145,6 +145,24 @@
     "APPLY_BUTTON": "Applica risultato",
     "CLOSE_BUTTON": "Chiudi"
   },
+  "FLORIST": {
+    "COMPONENT_TITLE": "Assistente fioraio",
+    "EMPTY_STATE_TITLE": "Non hai ancora piante",
+    "EMPTY_STATE_SUBTITLE": "Premi + nell'angolo in alto a destra per aggiungere la tua prima pianta!",
+    "DAYS_UNTIL_WATER": "Irrigazione tra {{days}} g.",
+    "URGENT_WATER": "Bisogno di acqua!",
+    "LAST_WATERED": "Ultima irrigazione: {{date}}",
+    "WATER_BUTTON": "Innaffia",
+    "NEW_PLANT_TITLE": "Nuova pianta",
+    "CLOSE": "Chiudi",
+    "PLANT_NAME": "Nome (soprannome)",
+    "PLANT_SPECIES": "Specie della pianta",
+    "WATER_FREQUENCY": "Innaffia ogni ... giorni",
+    "PHOTO_URL": "URL foto (opzionale)",
+    "ADD_BUTTON": "Aggiungi",
+    "PLACEHOLDER_NAME": "es: Boris",
+    "PLACEHOLDER_SPECIES": "es: Cactus"
+  },
   "TIMER": {
   "COMPONENT_TITLE": "Timer",
   "START": "Inizia",

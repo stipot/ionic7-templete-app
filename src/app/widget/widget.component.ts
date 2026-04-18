@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AlertController, ActionSheetController } from '@ionic/angular';
 import { MoonService } from './widget.service';
@@ -60,7 +60,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
   isLoading: boolean = true;
 
   constructor(
-    private http: HttpClient,
+    @Inject(HttpClient) private http: HttpClient,
     private alertController: AlertController,
     private actionSheetController: ActionSheetController,
     private moonService: MoonService
@@ -95,7 +95,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
         this.getMoonPhase();
         this.isLoading = false;
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error loading locale:', error);
         this.isLoading = false;
       }
@@ -121,7 +121,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
       next: (moonData) => {
         this.mainWidgets[2].data = moonData;
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error calculating moon phase:', error);
       }
     });
@@ -411,7 +411,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
         };
         console.log('Weather data loaded:', this.mainWidgets[0].data);
       },
-      error: (error) => {
+      error: (error: any) => {
         console.log('Ошибка загрузки погоды:', error);
         this.mainWidgets[0].data = {
           temperature: 'Нет данных',

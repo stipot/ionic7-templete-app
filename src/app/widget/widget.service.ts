@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -45,15 +45,15 @@ export interface WidgetData {
 export class MoonService {
   private widgetData: WidgetData | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(@Inject(HttpClient) private http: HttpClient) {}
 
   loadWidgetData(): Observable<WidgetData> {
     return this.http.get<WidgetData>('assets/sample-data/moon/moon-data.json').pipe(
       map(data => {
-        this.widgetData = data;
-        return data;
+        this.widgetData = data as WidgetData;
+        return data as WidgetData;
       }),
-      catchError(error => {
+      catchError((error: any) => {
         console.error('Error loading moon data:', error);
         throw error;
       })

@@ -16,6 +16,7 @@ export class AppComponent {
     { title: 'SPEEDOMETER.TITLE', url: '/speedometer', icon: 'speedometer'},
     { title: 'TIMER.COMPONENT_TITLE', url: '/timer', icon: 'timer'},
     { title: 'Face Detector', url: '/face-detector', icon: 'scan' },  // ДОБАВЛЕНО
+    { title: 'FLORIST.COMPONENT_TITLE', url: '/florist', icon: 'leaf' },
     { title: 'FRONTPAGE.COMPONENT_TITLE', url: '/front-layout', icon: 'grid' },
     { title: 'SETTINGS.COMPONENT_TITLE', url: '/settings', icon: 'settings' },
     { title: 'INTRO.COMPONENT_TITLE', url: '/intro', icon: 'easel' },
@@ -71,7 +72,7 @@ export class AppComponent {
   ];
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang('ru');
-    this.translate.addLangs(['en', 'ru']);
+    this.translate.addLangs(['en', 'ru', 'fr', 'it']);
     this.translate.use('ru');
   }
 

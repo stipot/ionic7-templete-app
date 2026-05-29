@@ -12,6 +12,7 @@ register();
 })
 export class AppComponent {
   public appPages = [
+    {title: 'Расписание muiv.ru', url: '/schedule', icon: 'calendar-number'},
     { title: 'TIERLIST.TITLE', url: '/Jwsr', icon: 'prism'},
     { title: 'SPEEDOMETER.TITLE', url: '/speedometer', icon: 'speedometer'},
     { title: 'TIMER.COMPONENT_TITLE', url: '/timer', icon: 'timer'},

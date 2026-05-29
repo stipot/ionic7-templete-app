@@ -34,6 +34,7 @@ import { GazonComponent } from './gazon/gazon.component';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { FaceDetectorComponent } from './face-detect/face-detector.component';  // ИСПРАВЛЕНО
 import { TierListComponent } from './tier-list/tier-list.component';
+import { MuivSheduleComponent } from './muiv-schedule/muiv-schedule.component';
 
 import { SpeedometerComponent } from './speedometer/speedometer.component';
 import { TimerComponent } from './timer/timer.component';
@@ -234,6 +235,10 @@ const routes: Routes = [
   {
     path:'Jwsr',
     component: TierListComponent
+  },
+  {
+    path: 'schedule',
+    loadChildren: () => import('./muiv-schedule/muiv-schedule.module').then(m => m.MuivSheduleModule)
   },
   { path: '', redirectTo: '/timer', pathMatch: 'full' },
   {

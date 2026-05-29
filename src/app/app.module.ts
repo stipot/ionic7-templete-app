@@ -54,6 +54,7 @@ import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
 import { TierListComponent } from './tier-list/tier-list.component'
 import { TierListModule } from './tier-list/tier-list.module';
+import { MuivSheduleModule } from './muiv-schedule/muiv-schedule.module';
 
 
 
@@ -111,6 +112,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     WidgetModule,
     CalcModule,
     TierListModule,
+    MuivSheduleModule,
     DragDropModule,
     IonicStorageModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

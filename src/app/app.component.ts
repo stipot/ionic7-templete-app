@@ -14,11 +14,17 @@ register();
 export class AppComponent {
   public appPages = [
     {title: 'Video editor', url: 'veditor', icon: 'videocam'},
+    { title: 'PHP.COMPONENT_TITLE', url: 'predicting-house-prices', icon: 'business'},
+    { title: 'TIERLIST.TITLE', url: '/Jwsr', icon: 'prism'},
+    { title: 'SPEEDOMETER.TITLE', url: '/speedometer', icon: 'speedometer'},
+    { title: 'TIMER.COMPONENT_TITLE', url: '/timer', icon: 'timer'},
     { title: 'Face Detector', url: '/face-detector', icon: 'scan' },  // ДОБАВЛЕНО
+    { title: 'FLORIST.COMPONENT_TITLE', url: '/florist', icon: 'leaf' },
     { title: 'FRONTPAGE.COMPONENT_TITLE', url: '/front-layout', icon: 'grid' },
     { title: 'SETTINGS.COMPONENT_TITLE', url: '/settings', icon: 'settings' },
     { title: 'INTRO.COMPONENT_TITLE', url: '/intro', icon: 'easel' },
     { title: '2048GAME.COMPONENT_TITLE', url: '/game-2048', icon: 'game-controller' },
+    { title: 'PAINT.COMPONENT_TITLE', url: '/paint', icon: 'color-palette' },
     { title: 'calc.name', url: '/calc', icon: 'calculator' },
     { title: 'MAP.YANDEXMAPS', url: '/maps', icon: 'map' },
     { title: 'GAZON.MENU', url: '/gazon', icon: 'sync' },
@@ -69,7 +75,7 @@ export class AppComponent {
   ];
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang('ru');
-    this.translate.addLangs(['en', 'ru']);
+    this.translate.addLangs(['en', 'ru', 'fr', 'it']);
     this.translate.use('ru');
   }
 

@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'TIMER.COMPONENT_TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+  <ion-item>
+    <ion-label position="stacked">{{ 'TIMER.NAME' | translate }}</ion-label>
+    <ion-input 
+      [(ngModel)]="timerName" 
+      placeholder="{{ 'TIMER.NAME2' | translate }}">
+    </ion-input>
+  </ion-item>
+  <ion-row>
+    <ion-col>
+      <ion-label>{{ 'TIMER.HOURS' | translate }}</ion-label>
+      <ion-input type="number" [(ngModel)]="inputHours" min="0"></ion-input>
+    </ion-col>
+    <ion-col>
+      <ion-label>{{ 'TIMER.MINUTES' | translate }}</ion-label>
+      <ion-input type="number" [(ngModel)]="inputMinutes" min="0" max="59"></ion-input>
+    </ion-col>
+    <ion-col>
+      <ion-label>{{ 'TIMER.SECONDS' | translate }}</ion-label>
+      <ion-input type="number" [(ngModel)]="inputSeconds" min="0" max="59"></ion-input>
+    </ion-col>
+  </ion-row>
+  <div class="ion-text-center">
+    <h1 style="font-size: 4rem;">{{ formattedTime }}</h1>
+    
+    <ion-button (click)="startTimer()" [disabled]="isRunning">
+      {{ 'TIMER.START' | translate }}
+    </ion-button>
+    <ion-button (click)="stopTimer()" color="danger" [disabled]="!isRunning">
+      {{ 'TIMER.STOP' | translate }}
+    </ion-button>
+    <ion-button (click)="resetTimer()" color="light">
+      {{ 'TIMER.RESET' | translate }}
+    </ion-button>
+  </div>
+  </ion-grid>
+
+ 
+
+  <!-- Недавние таймеры -->
+  <ion-list *ngIf="recentTimers.length > 0">
+    <ion-list-header>
+      <ion-label>{{ 'TIMER.RECENT' | translate }}</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let t of recentTimers" button (click)="loadTimer(t)">
+      <ion-label>
+        <h2>{{ t.name }}</h2>
+        <p>{{ t.duration }}</p>
+      </ion-label>
+      <ion-icon name="time-outline" slot="end"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

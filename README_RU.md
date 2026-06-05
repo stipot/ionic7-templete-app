@@ -167,3 +167,9 @@ The version in our package.json gets copied to the one we publish, and users nee
 - создание компонента  "notes"
 - создание ссылки на компонент
 - работа с функциями компонента (notes.component.ts ) и его отрисовкой на сайте (notes.component.html, notes.component.scss)
+
+Для CICD в Firebase нужно добавить в GitHub Secrets секрет:
+
+FIREBASE_SERVICE_ACCOUNT_IONIC7_TEMPLETE_APP_PUBLIC
+
+Значение: JSON-ключ service account с правами на Firebase Hosting и Firestore rules/indexes deploy. Firebase CLI docs сейчас рекомендуют ADC/service account для CI, а FIREBASE_TOKEN уже legacy: https://firebase.google.com/docs/cli. Для auth используется официальный google-github-actions/auth: https://github.com/google-github-actions/auth.

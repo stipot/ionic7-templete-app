@@ -1,0 +1,54 @@
+name: Deploy to Firebase
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firebase-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      CI: true
+      FIREBASE_PROJECT_ID: ionic7-templete-app-public
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web app
+        run: npm run build -- --configuration production
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_IONIC7_TEMPLETE_APP_PUBLIC }}
+
+      - name: Deploy to Firebase
+        run: >
+          npx --yes firebase-tools@latest deploy
+          --only hosting,firestore
+          --project "${FIREBASE_PROJECT_ID}"
+          --non-interactive
+          --message "GitHub Actions deploy ${GITHUB_SHA}"

@@ -29,6 +29,7 @@ export class AppComponent {
     { title: '2048GAME.COMPONENT_TITLE', url: '/game-2048', icon: 'game-controller' },
     { title: 'PAINT.COMPONENT_TITLE', url: '/paint', icon: 'color-palette' },
     { title: 'calc.name', url: '/calc', icon: 'calculator' },
+    { title: 'ROLEP.COMPONENT_TITLE', url: '/rolep', icon: 'game-controller' }, 
     { title: 'MAP.YANDEXMAPS', url: '/maps', icon: 'map' },
     { title: 'GAZON.MENU', url: '/gazon', icon: 'sync' },
     { title: 'MINIBLOG.COMPONENT_TITLE', url: '/miniblog', icon: 'book' },

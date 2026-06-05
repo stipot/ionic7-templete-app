@@ -1,0 +1,187 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{"VIDEOEDITOR.COMPONENT_TITLE" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div style="display: flex; justify-content: space-between; align-items: flex-start; padding: 16px;">
+  
+  <!-- Блок с текстом слева -->
+  <ion-card-content style="font-size: 20px; line-height: 1.5; color: medium; padding: 0; margin-right: 20px;">
+    {{"VIDEOEDITOR.FIRST_TXT" | translate}}
+  </ion-card-content>
+
+  <!-- Кнопка справа -->
+  <ion-button (click)="fileInput.click()" 
+              style="--border-radius: 10px; 
+                     --box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+                     font-weight: 600; 
+                     margin: 0; 
+                     flex-shrink: 0;
+                     height: 44px;">
+    <ion-icon slot="start" name="add-outline" style="font-size: 20px;"></ion-icon>
+    <ion-label>{{"VIDEOEDITOR.ADD_VIDEO" | translate}}</ion-label>
+  </ion-button>
+
+</div>
+  <input type="file" #fileInput (change)="onFileSelected($event)" accept="video/*" style="display: none">
+
+  <div class="editor-canvas">
+    <div class="player-frame">
+      <video #videoPlayer
+             [class]="selectedFilter"
+             [class.ratio-square]="selectedRatio === 'square'"
+             [class.ratio-portrait]="selectedRatio === 'portrait'"
+             (timeupdate)="onTimeUpdate()" 
+             (loadedmetadata)="onMetadataLoaded()"
+             (ended)="isPlaying = false"
+             playsinline>
+      </video>
+
+      <div class="controls-overlay" *ngIf="videoSrc">
+        <button class="skip-btn" (click)="skip(-5)">
+          <ion-icon name="refresh-outline" class="flip-icon"></ion-icon>
+          <span class="skip-label">5</span>
+        </button>
+
+        <button class="central-play-btn" (click)="togglePlay()">
+          <ion-icon [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+        </button>
+
+        <button class="skip-btn" (click)="skip(5)">
+          <ion-icon name="refresh-outline"></ion-icon>
+          <span class="skip-label">5</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Seekbar под видео -->
+    <div class="controls-bar" *ngIf="videoSrc">
+      <ion-range min="0" [max]="duration" [value]="currentTime" (ionKnobMoveEnd)="onSeek($event)" color="primary">
+        <ion-label slot="start">{{ formatTime(currentTime) }}</ion-label>
+        <ion-label slot="end">{{ formatTime(duration) }}</ion-label>
+      </ion-range>
+    </div>
+
+    <!-- БЛОК ИНСТРУМЕНТОВ -->
+    <div class="tools-area" *ngIf="videoSrc">
+      
+      <!-- Главные кнопки: Видны только когда никакой режим не выбран -->
+      <div class="function-buttons" *ngIf="activeMode === 'none'">
+          <div class="tool-tile" (click)="activeMode = 'trim'">
+            <ion-icon name="cut-outline"></ion-icon>
+            <span>{{"VIDEOEDITOR.TRIM" | translate}}</span>
+          </div>
+        
+          <div class="tool-tile" (click)="activeMode = 'filters'">
+            <ion-icon name="color-filter-outline"></ion-icon>
+            <span>{{"VIDEOEDITOR.FILTERS" | translate}}</span>
+          </div>
+
+          <div class="tool-tile" (click)="activeMode = 'quality'">
+            <ion-icon name="options-outline"></ion-icon>
+            <span>{{"VIDEOEDITOR.FORMAT" | translate}}</span>
+          </div>
+      </div>
+
+      <!-- Панель обрезки -->
+      <div class="trim-container" *ngIf="activeMode === 'trim'">
+        <div class="tool-header">
+          <ion-button fill="clear" size="small" (click)="activeMode = 'none'">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <span>{{"VIDEOEDITOR.TRIM_D" | translate}}</span>
+        </div>
+
+        <div class="trim-actions" style="padding: 10px;">
+          <ion-button expand="block" (click)="applyTrim()">
+            {{"VIDEOEDITOR.TRIM_PRIM" | translate}}
+          </ion-button>
+          
+          <ion-button expand="block" fill="clear" color="danger" *ngIf="isTrimmed" (click)="isTrimmed = false; onMetadataLoaded()">
+            {{"VIDEOEDITOR.RESET_TO_ORIGINAL" | translate}}
+          </ion-button>
+        </div>
+
+        <div class="trim-controls">
+          <!-- Двойной ползунок Ionic для выбора диапазона -->
+          <ion-range dualKnobs="true" 
+                    [min]="0" 
+                    [max]="duration" 
+                    [value]="{ lower: trimStart, upper: trimEnd }"
+                    (ionChange)="onTrimChange($event)"
+                    color="primary">
+            <ion-label slot="start">{{ formatTime(trimStart) }}</ion-label>
+            <ion-label slot="end">{{ formatTime(trimEnd) }}</ion-label>
+          </ion-range>
+          <p class="trim-info">{{"VIDEOEDITOR.TIME_OF_FRAGMENT" | translate}} {{ formatTime(trimEnd - trimStart) }}</p>
+        </div>
+      </div>
+
+      <!-- Панель фильтров -->
+      <div class="filters-container" *ngIf="activeMode === 'filters'">
+        <div class="tool-header">
+          <ion-button fill="clear" size="small" (click)="activeMode = 'none'">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <span>{{"VIDEOEDITOR.CHOOSE_FILTER" | translate}}</span>
+        </div>
+
+        <div class="filters-scroll">
+          <div class="filter-item" 
+               *ngFor="let f of filtersList" 
+               (click)="applyFilter(f.class)"
+               [class.active]="selectedFilter === f.class">
+            <div class="filter-preview" [class]="f.class"></div>
+            <span class="filter-name">{{ f.name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Панель "Формат" -->
+      <div class="quality-container" *ngIf="activeMode === 'quality'">
+        <div class="tool-header">
+          <ion-button fill="clear" size="small" (click)="activeMode = 'none'">
+            <ion-icon name="chevron-back-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+          <span>{{"VIDEOEDITOR.SETTINGS_OF_FORMAT" | translate}}</span>
+        </div>
+
+        <div class="quality-options" style="display: flex; justify-content: space-around; padding: 20px;">
+          <ion-button [fill]="selectedRatio === 'original' ? 'solid' : 'outline'" (click)="setRatio('original')">
+            {{"VIDEOEDITOR.FORMAT1" | translate}}
+          </ion-button>
+          <ion-button [fill]="selectedRatio === 'square' ? 'solid' : 'outline'" (click)="setRatio('square')">
+            1:1
+          </ion-button>
+          <ion-button [fill]="selectedRatio === 'portrait' ? 'solid' : 'outline'" (click)="setRatio('portrait')">
+            9:16
+          </ion-button>
+        </div>
+      </div>
+    
+      <div class="final-actions" *ngIf="videoSrc" style="padding: 20px; text-align: center;">
+        <ion-button expand="block" color="success" (click)="saveTrimmedVideo()" [disabled]="isProcessing">
+          <ion-icon name="download-outline" slot="start"></ion-icon>
+          <ion-label *ngIf="isProcessing">{{ 'VIDEOEDITOR.MAKE_REC' | translate }}</ion-label>
+          <ion-label *ngIf="!isProcessing">{{ 'VIDEOEDITOR.SAVEV' | translate }}</ion-label>
+        </ion-button>
+        <p *ngIf="isProcessing" style="color: #888; font-size: 12px; margin-top: 10px;">
+          {{"VIDEOEDITOR.TEXT2" | translate}}
+        </p>
+      </div>
+      <!-- Оверлей загрузки (появляется только при записи) -->
+      <div class="processing-overlay" *ngIf="isProcessing">
+        <div class="loader-content">
+          <ion-spinner name="crescent" color="primary"></ion-spinner>
+          <h2>{{"VIDEOEDITOR.RECREC" | translate}} {{ recordingProgress }}%</h2>
+          <p></p>
+          <!-- визуальный прогресс -->
+          <ion-progress-bar [value]="recordingProgress / 100" color="primary"></ion-progress-bar>        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

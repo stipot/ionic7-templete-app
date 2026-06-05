@@ -178,8 +178,19 @@
   },
   "PAINT":{
     "COMPONENT_TITLE": "Vernice"
-  }
-  ,"TIERLIST": {
+  },
+  "WEATHER": {
+  "COMPONENT_TITLE": "Meteo",
+  "LOADING": "Caricamento meteo...",
+  "ERROR": "Impossibile caricare i dati meteo",
+  "CITY_PLACEHOLDER": "Seleziona città",
+  "FEELS_LIKE": "Percepita come",
+  "BUT_ACTUALLY": "ma in realtà",
+  "CITY_NOT_FOUND": "Città non trovata",
+  "WEEKDAY": ["lun, mar, mer, gio, ven, sab, dom"],
+  "REPEAT": "Ripeti"
+  },
+  "TIERLIST": {
     "TITLE": "Lista dei livelli",
     "DESCRIPTION": "Una lista dei livelli è un sistema di valutazione che categorizza gli elementi (personaggi, giochi, film) dal migliore al peggiore. Gli elementi sono categorizzati con lettere, dove i livelli più alti indicano una qualità migliore. Aiutano a valutare rapidamente le prestazioni o la popolarità.Trascina l'immagine nel punto in cui ritieni necessario. Puoi anche caricare una tua immagine e salvare il risultato.",
     "ROW_S": "S",

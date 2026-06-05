@@ -195,4 +195,15 @@
     "PHP":{
     "COMPONENT_TITLE": "Prédiction du prix de l'appartement"
   }
+  ,"WEATHER": {
+  "COMPONENT_TITLE": "Météo",
+  "LOADING": "Chargement de la météo...",
+  "ERROR": "Échec du chargement des données météo",
+  "CITY_PLACEHOLDER": "Sélectionnez une ville",
+  "FEELS_LIKE": "Ressenti comme",
+  "BUT_ACTUALLY": "mais en réalité",
+  "CITY_NOT_FOUND": "Ville non trouvée",
+  "WEEKDAY": ["lun, mar, mer, jeu, ven, sam, dim"],
+  "REPEAT": "Répéter"
+}
 }

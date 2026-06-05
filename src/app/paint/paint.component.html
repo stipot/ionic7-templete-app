@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{"PAINT.COMPONENT_TITLE" | translate}}</ion-title>
+    <!--<ion-button id="undo-btn">
+        <ion-icon name="arrow-undo-outline" slot="icon-only"></ion-icon>
+      </ion-button>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="paint-container">
+    <!-- Панель инструментов -->
+    <div class="tools-board">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="section-title">Формы</ion-label>
+            <div class="options">
+              <ion-button fill="clear" id="rectangle" class="tool-btn">
+                <ion-icon name="square-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="circle" class="tool-btn">
+                <ion-icon name="radio-button-off-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="triangle" class="tool-btn">
+                <ion-icon name="triangle-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-item lines="none">
+                <ion-label>Заливка</ion-label>
+                <ion-checkbox id="fill-color" slot="end"></ion-checkbox>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="section-title">Инструменты</ion-label>
+            <div class="options">
+              <ion-button fill="clear" id="brush" class="tool-btn active">
+                <ion-icon name="brush-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="eraser" class="tool-btn">
+                <ion-icon name="phone-landscape-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="fill-tool" class="tool-btn">
+                <ion-icon name="color-fill-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="eyedropper-tool" class="tool-btn"> 
+                <ion-icon name="eyedrop" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" id="hand-tool" class="tool-btn">
+                <ion-icon name="hand-left-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+
+            <div class="size-control">
+              <div class="size-header"> 
+                  <ion-label class="size-label">Размер:</ion-label>
+                  <span class="size-value">{{brushWidth}} px </span>
+              </div>
+                  <ion-range id="size-slider" min="1" max="30" step="1" value="5" pin="true" snaps="true" ticks="true"></ion-range>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="section-title">Масштаб</ion-label>
+            <div class="zoom-controls">
+              <ion-button fill="outline" id="zoom-out" class="zoom-btn">
+                <ion-icon name="remove-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <span class="zoom-level">{{zoomLevel}}%</span>
+              <ion-button fill="outline" id="zoom-in" class="zoom-btn">
+                <ion-icon name="add-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="outline" id="zoom-reset" class="zoom-btn">
+                <ion-icon ame="home-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-label class="section-title">Цвета</ion-label>
+            <div class="colors">
+              <div class="color-option" style="background-color: #ffffff;" data-color="#ffffff"></div>
+              <div class="color-option selected" style="background-color: #000000;" data-color="#000000"></div>
+              <div class="color-option" style="background-color: #E02020;" data-color="#E02020"></div>
+              <div class="color-option" style="background-color: #6DD400;" data-color="#6DD400"></div>
+              <div class="color-option" style="background-color: #4A98F7;" data-color="#4A98F7"></div>
+              <div class="color-picker-wrapper">
+                <input type="color" id="color-picker" value="#4A98F7">
+                <ion-icon name="color-palette-outline"></ion-icon>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <div class="action-buttons">
+              <ion-button expand="block" color="tertiary" id="undo-btn">
+                <ion-icon name="arrow-undo-outline" slot="start"></ion-icon>
+                Отменить (Ctrl+Z)
+              </ion-button>
+              <ion-button expand="block" color="medium" id="clear-canvas">
+                <ion-icon name="trash-outline" slot="start"></ion-icon>
+                Очистить
+              </ion-button>
+              <ion-button expand="block" color="primary" id="save-img">
+                <ion-icon name="save-outline" slot="start"></ion-icon>
+                Сохранить
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <!-- Холст для рисования -->
+    <div class="drawing-board">
+      <canvas #paintCanvas id="paint-canvas"></canvas>
+    </div>
+  </div>
+</ion-content>
+<!--<p>
+  paint works!
+</p>
+-->

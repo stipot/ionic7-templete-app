@@ -48,11 +48,21 @@ import { MapsComponent } from './maps/maps.component';
 import { MiniblogComponent } from './miniblog/miniblog.component';
 import { AddBlogModalComponent } from './miniblog/add-blog-modal.component';
 import { RssDataComponent } from './rss-data/rss-data.component';
-import { WidgetModule } from './widget/widget.module';
+// import { WidgetModule } from './widget/widget.module';
 import { CalcModule } from './calc/calc.module';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
 import { RolepModule } from './rolep/rolep.module';
+import { ClothingShopPage } from './clothing-shop/clothing-shop.page';
+import {PredictingHousePricesModule} from './predicting-house-prices/predicting-house-prices.module'
+import { FloristAssistantComponent } from './florist-assistant/florist-assistant.component';
+import {WeatherModule} from './weather/weather.module';
+import { PaintModule } from './paint/paint.module';
+import { TierListComponent } from './tier-list/tier-list.component'
+import { TierListModule } from './tier-list/tier-list.module';
+import { MuivSheduleModule } from './muiv-schedule/muiv-schedule.module';
+
+
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -94,6 +104,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddBlogModalComponent,
     WaterTrackerComponent,
     GazonComponent,
+    ClothingShopPage,
+    FloristAssistantComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -105,9 +118,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     AppSharedComponentsModule,
     CommonModule,
-    WidgetModule,
+    // WidgetModule,
     CalcModule,
+    PredictingHousePricesModule,
+    PaintModule,
+    TierListModule,
+    MuivSheduleModule,
     DragDropModule,
+    WeatherModule,
     IonicStorageModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
@@ -117,7 +135,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

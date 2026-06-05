@@ -34,6 +34,10 @@ import { GazonComponent } from './gazon/gazon.component';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { FaceDetectorComponent } from './face-detect/face-detector.component';  // ИСПРАВЛЕНО
 import { WeatherComponent } from './weather/weather.component';
+import { TierListComponent } from './tier-list/tier-list.component';
+import { FloristAssistantComponent } from './florist-assistant/florist-assistant.component';
+import { SpeedometerComponent } from './speedometer/speedometer.component';
+import { TimerComponent } from './timer/timer.component';
 const routes: Routes = [
   {
     path: '',
@@ -164,10 +168,10 @@ const routes: Routes = [
     path: 'barcode-scanner',
     component: BarcodeScannerComponent
   },
-  {
-    path: 'widget',
-    loadChildren: () => import('./widget/widget.module').then( m => m.WidgetModule)
-  },
+//  {
+//    path: 'widget',
+//    loadChildren: () => import('./widget/widget.module').then( m => m.WidgetModule)
+//  },
   {
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
@@ -216,10 +220,39 @@ const routes: Routes = [
     path: 'fashion-detail', 
     component: FashionDetailComponent
   },
-  {
+    {
     path: 'LaLa', 
     component: WeatherComponent
   },
+  {
+    path: 'paint',
+    loadChildren: () => import('./paint/paint.module').then(m => m.PaintModule)
+  },
+  {
+    path: "timer",
+    component: TimerComponent
+  },
+  {
+    path: 'florist',
+    component: FloristAssistantComponent
+  },
+  {
+    path: 'predicting-house-prices',
+    loadChildren: () => import('./predicting-house-prices/predicting-house-prices.module').then(m => m.PredictingHousePricesModule)
+  },  
+  {
+    path: '',
+    loadChildren: () => import('./timer/timer.module').then(m => m.TimerModule)
+  },
+  {
+    path: 'speedometer',
+    component: SpeedometerComponent
+  },
+  {
+    path:'Jwsr',
+    component: TierListComponent
+  },
+  { path: '', redirectTo: '/timer', pathMatch: 'full' },
   {
     path: '**',
     redirectTo: 'page-not-found'

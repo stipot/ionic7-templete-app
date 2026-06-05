@@ -1,0 +1,76 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="Title">
+    {{"WEATHER.COMPONENT_TITLE"| translate}}
+    <ion-buttons slot="start">
+    </ion-buttons>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <ion-card>
+
+      <ion-button (click)="refreshWeather()">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </ion-button>
+
+
+      <ion-button (click)="changeCity()">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+
+
+  <div *ngIf="isLoading" class="loading-container">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p> {{"WEATHER.LOADING"| translate}}</p>
+  </div>
+
+    <!-- Ошибка -->
+  <div *ngIf="errorMessage" class="error-container">
+    <ion-icon name="alert-circle-outline"></ion-icon>
+    <p>{{ errorMessage }}</p>
+    <ion-button (click)="loadWeatherData()">{{"WEATHER.REAPAET"| translate}}</ion-button>
+  </div>
+
+  <!-- Погода -->
+  <div *ngIf="!isLoading && !errorMessage && weatherData">
+    <div class="city-title">
+      <span class="TitleGorod">{{ currentCity }}</span>
+    </div>
+
+    <!-- <br><br><br><br> -->
+    <span class="text">{{ getFeelsLikeText() }}</span>
+
+    <br><br><br><br><br>
+    <span class="text2">{{ temperature }}°</span>
+
+    <ion-grid class="tab1">
+      <ion-row>
+        <ion-col>
+          <ion-icon class="iconki1" name="calendar-outline"></ion-icon>
+          <div class="row1">
+            <ion-row *ngFor="let day of weeklyForecast">{{ day.date }}</ion-row>
+          </div>
+        </ion-col>
+
+        <ion-col>
+          <ion-icon class="iconki1" name="sunny-outline"></ion-icon>
+          <span class="shasl">/</span>
+          <ion-icon class="iconki1" name="moon-outline"></ion-icon>
+          <div class="row2">
+            <ion-row *ngFor="let day of weeklyForecast">
+              {{ day.dayTemp }}°/{{ day.nightTemp }}°
+            </ion-row>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+</ion-card>
+</ion-content>

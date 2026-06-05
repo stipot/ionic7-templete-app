@@ -48,7 +48,7 @@ jobs:
       - name: Deploy to Firebase
         run: >
           npx --yes firebase-tools@latest deploy
-          --only hosting,firestore
+          --only hosting
           --project "${FIREBASE_PROJECT_ID}"
           --non-interactive
           --message "GitHub Actions deploy ${GITHUB_SHA}"

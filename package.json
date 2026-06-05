@@ -36,6 +36,8 @@
     "@capacitor/preferences": "^6.0.3",
     "@capacitor/status-bar": "^6.0.1",
     "@capawesome/capacitor-file-picker": "^6.2.0",
+    "@ffmpeg/ffmpeg": "^0.12.15",
+    "@ffmpeg/util": "^0.12.2",
     "@ionic/angular": "^7.8.6",
     "@ionic/pwa-elements": "^3.3.0",
     "@ionic/storage-angular": "^4.0.0",

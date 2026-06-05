@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { TranslateService } from '@ngx-translate/core';
+import { title } from 'process';
 import { url } from 'inspector';
 
 register();
@@ -12,6 +13,7 @@ register();
 })
 export class AppComponent {
   public appPages = [
+    {title: 'Video editor', url: 'veditor', icon: 'videocam'},
     { title: 'PHP.COMPONENT_TITLE', url: 'predicting-house-prices', icon: 'business'},
     { title: 'TIERLIST.TITLE', url: '/Jwsr', icon: 'prism'},
     { title: 'SPEEDOMETER.TITLE', url: '/speedometer', icon: 'speedometer'},

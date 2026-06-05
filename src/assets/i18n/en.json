@@ -172,6 +172,27 @@
     "MAP_WITH_POINT_TEXT": "This is a map with a marker via code and click coordinate handling."
   },
   
+  "VIDEOEDITOR": {
+    "COMPONENT_TITLE": "Video Editor",
+    "FIRST_TXT": "This is a simple video editor! Here you can trim videos, apply filters, and change the format. Just click the 'Add Video' button on the right to get started!",
+    "ADD_VIDEO": "Add video",
+    "TRIM": "Trim",
+    "FILTERS": "Filters",
+    "FORMAT": "Format",
+    "TRIM_D": "Trim video",
+    "TRIM_PRIM": "Apply trim",
+    "RESET_TO_ORIGINAL": "Reset to original",
+    "TIME_OF_FRAGMENT": "Duration of fragment:",
+    "CHOOSE_FILTER": "Choose a filter",
+    "SETTINGS_OF_FORMAT": "Format settings",
+    "FORMAT1": "Original",
+    "MAKE_REC": "Processing...",
+    "SAVEV": "Save video",
+    "TEXT2": "Please do not close the tab. The video is being recorded in real-time...",
+    "RECREC": "Recording:",
+    "TEXT3": "Please do not close the page"
+  },
+
     "WIDGET":{
     "COMPONENT_TITLE": "Widget",
     "LOADING": "Loading",

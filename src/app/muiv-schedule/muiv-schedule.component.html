@@ -1,0 +1,224 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Расписание muiv.ru</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="schedule-page">
+  <div class="schedule-shell ion-padding">
+    <section class="hero-card">
+      <div class="brand-row">
+        <div class="brand-block">
+          <div class="brand-logo">
+            <ion-icon name="school-outline"></ion-icon>
+          </div>
+          <div>
+            <div class="brand-title">MUIV.RU</div>
+            <!-- <div class="brand-subtitle">Знания, которые меняют мир</div> -->
+          </div>
+        </div>
+
+        <ion-button fill="clear" class="menu-button" aria-label="Открыть меню" (click)="openMenu()">
+          <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-copy">
+          <h1>Расписание занятий</h1>
+          <p>
+            Актуальное расписание учебных занятий.
+          </p>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="building-card">
+            <ion-icon name="business-outline"></ion-icon>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="filters-card">
+      <div class="filters-grid">
+        <ion-item lines="none" class="field-item">
+          <ng-container *ngIf="!isLoading(); else selectSkeleton">
+            <ion-select
+              label="Факультет"
+              label-placement="floating"
+              fill="outline"
+              placeholder="Выберите факультет"
+              [ngModel]="faculty()"
+              (ngModelChange)="onFacultyChange($event)"
+            >
+              <ion-select-option *ngFor="let f of faculties()" [value]="f">{{ f }}</ion-select-option>
+            </ion-select>
+          </ng-container>
+        </ion-item>
+
+        <ion-item lines="none" class="field-item">
+          <ng-container *ngIf="!isLoading(); else selectSkeleton">
+            <ion-select
+              label="Курс"
+              label-placement="floating"
+              fill="outline"
+              placeholder="Выберите курс"
+              [ngModel]="course()"
+              (ngModelChange)="onCourseChange($event)"
+              [disabled]="!faculty()"
+            >
+              <ion-select-option *ngFor="let c of courses()" [value]="c">{{ c }}</ion-select-option>
+            </ion-select>
+          </ng-container>
+        </ion-item>
+
+        <ion-item lines="none" class="field-item">
+          <ng-container *ngIf="!isLoading(); else selectSkeleton">
+            <ion-select
+              label="Группа"
+              label-placement="floating"
+              fill="outline"
+              placeholder="Выберите группу"
+              [ngModel]="group()"
+              (ngModelChange)="onGroupChange($event)"
+              [disabled]="!course()"
+            >
+              <ion-select-option *ngFor="let g of groups()" [value]="g">{{ g }}</ion-select-option>
+            </ion-select>
+          </ng-container>
+        </ion-item>
+      </div>
+
+      <ng-template #selectSkeleton>
+        <div class="select-skeleton">
+          <div class="skeleton-shimmer"></div>
+        </div>
+      </ng-template>
+
+      <ng-container *ngIf="allSelected()">
+        <div class="week-row">
+          <div class="field-item week-display" role="group" aria-label="Текущая неделя">
+            <ion-icon class="week-display__icon" name="calendar-clear-outline" aria-hidden="true"></ion-icon>
+            <div class="week-display__body">
+              <span class="week-display__label">Неделя</span>
+              <span class="week-display__value">{{ currentWeekLabel() }}</span>
+            </div>
+          </div>
+
+        </div>
+      </ng-container>
+    </section>
+
+    <ng-container *ngIf="allSelected(); else selectionPlaceholder">
+      <section class="days-tabs" aria-label="Дни недели">
+        <button
+          type="button"
+          class="week-swap-btn"
+          [disabled]="!canPrevWeek()"
+          (click)="previousWeek()"
+          aria-label="Предыдущая неделя"
+        >
+          <ion-icon name="chevron-back-outline" aria-hidden="true"></ion-icon>
+        </button>
+
+        <div class="days-tabs__inner">
+          <button
+            *ngFor="let item of visibleWeekDays(); trackBy: trackByVisibleDay"
+            type="button"
+            class="day-tab"
+            [class.day-tab--active]="item.globalIndex === activeDayIndex()"
+            (click)="selectDay(item.globalIndex)"
+          >
+            <span class="day-tab__label">{{ item.day.dayLabel }}</span>
+            <span class="day-tab__date">{{ item.day.date }}</span>
+          </button>
+        </div>
+
+        <button
+          type="button"
+          class="week-swap-btn"
+          [disabled]="!canNextWeek()"
+          (click)="nextWeek()"
+          aria-label="Следующая неделя"
+        >
+          <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </section>
+
+      <section class="lessons-list">
+        <article
+          class="lesson-card"
+          [class.lesson-card--vacant]="!slot.lesson"
+          [class.lesson-card--no-time]="slot.lesson !== null && !hasSlotTime(slot)"
+          *ngFor="let slot of visibleSlots(); trackBy: trackBySlot"
+        >
+          <div class="lesson-card__icon" [class.lesson-card__icon--empty]="!slot.lesson">
+            <span class="lesson-card__pair-number" aria-hidden="true">{{ slot.pairNumber }}</span>
+          </div>
+
+          <div class="lesson-card__time" *ngIf="hasSlotTime(slot)">
+            <strong>{{ slot.lesson!.timeStart }} – {{ slot.lesson!.timeEnd }}</strong>
+          </div>
+
+          <div
+            class="lesson-card__content"
+            [class.lesson-card__content--solo]="lessonContentSolo(slot)"
+          >
+            <ng-container *ngIf="slot.lesson; else emptySlotTitle">
+              <h3>{{ slot.lesson.subject }}</h3>
+              <span *ngIf="hasMeaningfulLessonType(slot.lesson.type)" [class]="lessonTypeClass(slot.lesson.type)">{{ slot.lesson.type }}</span>
+            </ng-container>
+            <ng-template #emptySlotTitle>
+              <h3 class="lesson-card__subject--empty">Нет занятия</h3>
+            </ng-template>
+          </div>
+
+          <div class="lesson-card__meta" [class.lesson-card__meta--empty]="!slot.lesson">
+            <strong *ngIf="slot.lesson">{{ slot.lesson.location }}</strong>
+          </div>
+        </article>
+      </section>
+    </ng-container>
+
+    <ng-template #selectionPlaceholder>
+      <section class="selection-placeholder">
+        <div class="placeholder-icon-ring">
+          <ion-icon name="filter-outline"></ion-icon>
+        </div>
+        <h2>Выберите параметры</h2>
+        <p>Для отображения расписания укажите факультет, курс и группу в фильтрах выше</p>
+
+        <div class="placeholder-steps">
+          <div class="placeholder-step" [class.placeholder-step--done]="faculty()">
+            <div class="step-dot">
+              <ion-icon *ngIf="faculty(); else stepNumber1" name="checkmark-outline"></ion-icon>
+              <ng-template #stepNumber1><span>1</span></ng-template>
+            </div>
+            <span>Факультет</span>
+          </div>
+          <div class="placeholder-step-line" [class.placeholder-step-line--done]="faculty()"></div>
+
+          <div class="placeholder-step" [class.placeholder-step--done]="course()">
+            <div class="step-dot">
+              <ion-icon *ngIf="course(); else stepNumber2" name="checkmark-outline"></ion-icon>
+              <ng-template #stepNumber2><span>2</span></ng-template>
+            </div>
+            <span>Курс</span>
+          </div>
+          <div class="placeholder-step-line" [class.placeholder-step-line--done]="course()"></div>
+
+          <div class="placeholder-step" [class.placeholder-step--done]="group()">
+            <div class="step-dot">
+              <ion-icon *ngIf="group(); else stepNumber3" name="checkmark-outline"></ion-icon>
+              <ng-template #stepNumber3><span>3</span></ng-template>
+            </div>
+            <span>Группа</span>
+          </div>
+        </div>
+      </section>
+    </ng-template>
+  </div>
+</ion-content>

@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/front-layout"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'FLORIST.COMPONENT_TITLE' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="setOpen(true)">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="plants.length === 0" class="empty-state">
+    <ion-icon name="leaf-outline"></ion-icon>
+    <h3>{{ 'FLORIST.EMPTY_STATE_TITLE' | translate }}</h3>
+    <p>{{ 'FLORIST.EMPTY_STATE_SUBTITLE' | translate }}</p>
+  </div>
+
+  <ion-grid *ngIf="plants.length > 0">
+    <ion-row>
+      <ion-col size="6" size-md="4" size-lg="3" *ngFor="let plant of plants">
+        <ion-card [ngClass]="{'needs-water': getDaysUntilWater(plant) <= 0}" class="plant-tile">
+          <div class="image-container" [ngClass]="{'no-image': !plant.imageUrl}">
+            <img [src]="plant.imageUrl" *ngIf="plant.imageUrl" (error)="plant.imageUrl = 'https://images.unsplash.com/photo-1402246399064-fbb3fb5038c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60'" alt="Plant image" />
+            <ion-icon name="leaf" *ngIf="!plant.imageUrl"></ion-icon>
+            <div class="water-badge" [ngClass]="{'urgent': getDaysUntilWater(plant) <= 0}">
+              <ion-icon [name]="getDaysUntilWater(plant) <= 0 ? 'warning' : 'water'"></ion-icon>
+            </div>
+          </div>
+          
+          <ion-card-header>
+            <ion-card-title>{{ plant.name }}</ion-card-title>
+            <ion-card-subtitle>{{ plant.species }}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <div class="status-text">
+              <span *ngIf="getDaysUntilWater(plant) > 0">
+                {{ 'FLORIST.DAYS_UNTIL_WATER' | translate:{days: getDaysUntilWater(plant)} }}
+              </span>
+              <span *ngIf="getDaysUntilWater(plant) <= 0" class="urgent">
+                {{ 'FLORIST.URGENT_WATER' | translate }}
+              </span>
+            </div>
+            
+            <div class="tile-actions">
+              <ion-button fill="clear" size="small" (click)="waterPlant(plant)">
+                <ion-icon name="water" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" size="small" color="danger" (click)="deletePlant(plant.id)">
+                <ion-icon name="trash" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Add Plant Modal -->
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="setOpen(false)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="success">
+          <ion-title>{{ 'FLORIST.NEW_PLANT_TITLE' | translate }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">{{ 'FLORIST.CLOSE' | translate }}</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item lines="full">
+          <ion-label position="stacked">{{ 'FLORIST.PLANT_NAME' | translate }}</ion-label>
+          <ion-input [(ngModel)]="newPlant.name" [placeholder]="'FLORIST.PLACEHOLDER_NAME' | translate"></ion-input>
+        </ion-item>
+        
+        <ion-item lines="full">
+          <ion-label position="stacked">{{ 'FLORIST.PLANT_SPECIES' | translate }}</ion-label>
+          <ion-input [(ngModel)]="newPlant.species" (ngModelChange)="onSpeciesChange($event)" [placeholder]="'FLORIST.PLACEHOLDER_SPECIES' | translate"></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">{{ 'FLORIST.WATER_FREQUENCY' | translate }}</ion-label>
+          <ion-input type="number" [(ngModel)]="newPlant.waterFrequencyDays"></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="stacked">{{ 'FLORIST.PHOTO_URL' | translate }}</ion-label>
+          <ion-input [(ngModel)]="newPlant.imageUrl" placeholder="https://..."></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" class="ion-margin-top action-button" color="success" (click)="addPlant()">
+          {{ 'FLORIST.ADD_BUTTON' | translate }}
+        </ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

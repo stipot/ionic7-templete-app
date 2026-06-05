@@ -1,3 +1,69 @@
-<p>
-  wardrobe works!
-</p>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>WardrobeOnline</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ 'WardrobeOnline' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="items.length === 0" class="empty-state ion-padding">
+    <ion-icon name="shirt-outline" size="large" class="empty-icon"></ion-icon>
+    <ion-label>Ваш гардероб пуст</ion-label>
+    <p>Добавьте элементы одежды, чтобы начать</p>
+  </div>
+
+  <ion-grid *ngIf="items.length > 0">
+    <ion-row class="ion-align-items-stretch">
+      <ion-col size="12" sizeMd="6" sizeLg="4" *ngFor="let item of items; trackBy: trackByFn">
+        <ion-card class="wardrobe-card">
+          <div *ngIf="item.photo" class="photo-container">
+            <img [src]="item.photo" alt="{{ item.name }}" />
+            <div class="overlay">
+              <ion-button 
+                fill="clear" 
+                color="danger" 
+                (click)="deleteItem(item.id)"
+                class="delete-btn">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+          <div *ngIf="!item.photo" class="photo-placeholder">
+            <ion-icon name="shirt-outline"></ion-icon>
+          </div>
+
+          <ion-card-header>
+            <ion-card-title>{{ item.name }}</ion-card-title>
+            <ion-card-subtitle>{{ item.type }}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <div class="info-row">
+              <span class="label">Сезон:</span>
+              <ion-badge color="primary">{{ item.season }}</ion-badge>
+            </div>
+            <div class="info-row">
+              <span class="label">Размер:</span>
+              <ion-badge color="secondary">{{ item.size }}</ion-badge>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+    <ion-fab-button (click)="openAddItemModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+

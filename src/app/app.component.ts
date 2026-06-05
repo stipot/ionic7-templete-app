@@ -13,6 +13,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Face Detector', url: '/face-detector', icon: 'scan' },  // ДОБАВЛЕНО
     { title: 'FRONTPAGE.COMPONENT_TITLE', url: '/front-layout', icon: 'grid' },
+    { title: 'WardrobeOnline', url: '/wardrobe', icon: 'shirt' },
     { title: 'SETTINGS.COMPONENT_TITLE', url: '/settings', icon: 'settings' },
     { title: 'INTRO.COMPONENT_TITLE', url: '/intro', icon: 'easel' },
     { title: '2048GAME.COMPONENT_TITLE', url: '/game-2048', icon: 'game-controller' },

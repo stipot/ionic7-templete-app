@@ -1,8 +1,155 @@
-<p>
-  rolep works
-</p>
-<ion-list>
-  <ion-item>
-    <ion-input label="Default input"></ion-input>
-  </ion-item>
-  <ion-button expand="block">Тык</ion-button> 
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>RPG ИГРА</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Экран создания персонажа -->
+  <div *ngIf="gameStage === 'create'" class="create-screen">
+    <div class="logo">
+      <ion-icon name="game-controller-outline"></ion-icon>
+      <h1>RPG ИГРА</h1>
+      <p>Создай своего героя и сражайся!</p>
+    </div>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Создание персонажа</ion-card-title>
+        <ion-card-subtitle>Введите имя и выберите класс</ion-card-subtitle>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Имя героя</ion-label>
+          <ion-input [(ngModel)]="characterName"></ion-input>
+        </ion-item>
+
+        <div class="class-selection">
+          <h3>Выберите класс:</h3>
+          <div class="classes-grid">
+            <div *ngFor="let classItem of classes" 
+                 class="class-card" 
+                 [class.selected]="selectedClass === classItem.id"
+                 (click)="selectClass(classItem.id)">
+              <div class="class-icon" [style.background]="'var(--ion-color-' + classItem.color + ')'">
+                <ion-icon [name]="classItem.icon"></ion-icon>
+              </div>
+              <h4>{{ classItem.name }}</h4>
+              <p>{{ classItem.description }}</p>
+              <div class="class-stats">
+                <ion-chip size="small" color="danger">
+                  <ion-icon name="heart-outline"></ion-icon>
+                  <span>HP: {{ classItem.stats.hp }}</span>
+                </ion-chip>
+                <ion-chip size="small" color="warning">
+                  <ion-icon name="flash-outline"></ion-icon>
+                  <span>⚔️: {{ classItem.stats.attack }}</span>
+                </ion-chip>
+                <ion-chip size="small" color="secondary">
+                  <ion-icon name="shield-outline"></ion-icon>
+                  <span>🛡️: {{ classItem.stats.defense }}</span>
+                </ion-chip>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ion-button expand="block" (click)="createCharacter()" [disabled]="!characterName">
+          Начать игру
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Экран выбора комнаты -->
+  <div *ngIf="gameStage === 'room'" class="rooms-screen">
+    <h2>Выберите локацию</h2>
+    <div class="rooms-grid">
+      <ion-card *ngFor="let room of rooms" (click)="selectRoom(room)">
+        <ion-card-header>
+          <ion-card-title>{{ room.name }}</ion-card-title>
+          <ion-card-subtitle>{{ room.description }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-chip color="danger">
+            <ion-icon name="skull-outline"></ion-icon>
+            <span>{{ room.enemy.name }} ({{ room.enemy.hp }} HP)</span>
+          </ion-chip>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- Экран битвы -->
+  <div *ngIf="gameStage === 'battle' && !gameOver">
+    <h2>Битва!</h2>
+    
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ character?.name }} ({{ character?.class === 'warrior' ? 'Воин' : (character?.class === 'rogue' ? 'Вор' : 'Маг') }})</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-progress-bar [value]="getCharacterHpPercent() / 100" [color]="getHpColor(getCharacterHpPercent())"></ion-progress-bar>
+        <p>HP: {{ character?.hp }}/{{ character?.maxHp }}</p>
+        <p>Атака: {{ character?.attack }} | Защита: {{ character?.defense }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="vs">VS</div>
+
+    <ion-card color="danger">
+      <ion-card-header>
+        <ion-card-title>{{ currentEnemy?.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-progress-bar [value]="getEnemyHpPercent() / 100" color="danger"></ion-progress-bar>
+        <p>HP: {{ currentEnemy?.hp }}/{{ currentEnemy?.maxHp }}</p>
+        <p>Атака: {{ currentEnemy?.attack }} | Защита: {{ currentEnemy?.defense }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="actions" *ngIf="!isEnemyTurn">
+      <ion-chip color="warning">Действий осталось: {{ actionsLeft }}/3</ion-chip>
+      
+      <div class="action-buttons">
+        <ion-button expand="block" color="danger" (click)="attack()" [disabled]="actionsLeft === 0">Атаковать</ion-button>
+        <ion-button expand="block" color="secondary" (click)="defend()" [disabled]="actionsLeft === 0">Защита</ion-button>
+        <ion-button expand="block" color="success" (click)="heal()" [disabled]="actionsLeft === 0">Лечение</ion-button>
+        
+        <ion-button *ngIf="character?.class === 'mage'" expand="block" color="tertiary" (click)="magicAttack()" [disabled]="actionsLeft === 0">Магия</ion-button>
+        <ion-button *ngIf="character?.class === 'rogue'" expand="block" color="warning" (click)="specialAttack()" [disabled]="actionsLeft === 0">Скрытая атака</ion-button>
+        <ion-button *ngIf="character?.class === 'warrior'" expand="block" color="danger" (click)="rageAttack()" [disabled]="actionsLeft === 0">Ярость</ion-button>
+      </div>
+    </div>
+
+    <div *ngIf="isEnemyTurn" class="enemy-turn">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Ход врага...</p>
+    </div>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Лог битвы</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div *ngFor="let log of battleLogs" [class]="'log-' + log.type">
+          {{ log.text }}
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Экран окончания игры -->
+  <div *ngIf="gameStage === 'battle' && gameOver" class="game-over">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ winner === 'player' ? 'ПОБЕДА!' : 'ПОРАЖЕНИЕ' }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ winner === 'player' ? 'Вы победили!' : 'Вы проиграли...' }}</p>
+        <ion-button expand="block" (click)="resetGame()">Играть снова</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

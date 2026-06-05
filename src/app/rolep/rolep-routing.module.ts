@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { RolepComponent } from './rolep.component';
+import { RouterModule, Routes } from '@angular/router';
+import { RolepPage } from './rolep.component';
 
-const routes:  Routes  = [
-    {
-        path: '',
-        component: RolepComponent
-    }
+const routes: Routes = [
+  {
+    path: '',
+    component: RolepPage
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class RolepPageRoutingModule {}
+export class RolepPageRoutingModule { }

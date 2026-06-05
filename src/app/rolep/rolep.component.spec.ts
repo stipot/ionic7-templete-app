@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
+import { RolepPage } from './rolep.component';
 
-import { RolepComponent } from './rolep.component';
-
-describe('RolepComponent', () => {
-  let component: RolepComponent;
-  let fixture: ComponentFixture<RolepComponent>;
+describe('RolepPage', () => {
+  let component: RolepPage;
+  let fixture: ComponentFixture<RolepPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ RolepComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [ RolepPage ],
+      imports: [IonicModule.forRoot(), FormsModule]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RolepComponent);
+    fixture = TestBed.createComponent(RolepPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -80,6 +80,9 @@
   "INTRO": {
     "COMPONENT_TITLE": "Intro"
   },
+  "ROLEP": {
+    "COMPONENT_TITLE": "RPG"
+  },
   "2048GAME": {
     "COMPONENT_TITLE": "2048 Game"
   },

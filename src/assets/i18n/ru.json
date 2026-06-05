@@ -89,6 +89,9 @@
   "MINIBLOG": {
     "COMPONENT_TITLE": "Миниблог"
   },
+  "ROLEP": {
+    "COMPONENT_TITLE": "Ролевая игра"
+  },
 
   "KANBAN": {
     "COMPONENT_TITLE": "Канбан"

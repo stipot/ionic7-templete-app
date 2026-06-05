@@ -203,6 +203,11 @@ ion-toolbar {
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.48);
 }
 
+.book-card.selected {
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 32px 78px rgba(0, 142, 255, 0.35);
+}
+
 .book-card.dragging {
   opacity: 0.55;
   transform: perspective(900px) rotateY(-1deg) translateY(-12px) scale(0.98);
@@ -377,4 +382,16 @@ ion-toolbar {
     grid-template-columns: 1fr auto;
     align-items: center;
   }
+}
+
+.file-info {
+  display: inline-flex;
+  width: fit-content;
+  margin: 10px 0 0;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.74rem;
+  font-weight: 800;
 }

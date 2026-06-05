@@ -7,6 +7,10 @@ export interface LibraryBook {
   color: string;
   year?: number;
   note?: string;
+  fileName?: string;
+  fileType?: 'pdf' | 'epub';
+  fileDataUrl?: string;
+  fileSize?: number;
 }
 
 @Component({
@@ -18,6 +22,7 @@ export class MyLibraryComponent implements OnInit {
   readonly storageKey = 'expressive-book-library';
 
   library: LibraryBook[] = [];
+  selectedBookIds = new Set<string>();
   draggingIndex: number | null = null;
   statusMessage = '';
 
@@ -129,9 +134,14 @@ export class MyLibraryComponent implements OnInit {
     }
 
     const [removed] = this.library.splice(index, 1);
+    this.selectedBookIds.delete(removed.id);
     this.library = [...this.library];
     this.persistLibrary();
     this.setStatus(`Книга «${removed.title}» удалена.`);
+  }
+
+  onBookCardClick(bookId: string): void {
+    this.toggleBookSelection(bookId, !this.isBookSelected(bookId));
   }
 
   moveBook(index: number, direction: -1 | 1): void {
@@ -176,48 +186,200 @@ export class MyLibraryComponent implements OnInit {
     this.draggingIndex = null;
   }
 
-  downloadLibrary(): void {
-    const blob = new Blob([this.libraryJsonPreview], { type: 'application/json;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+  get selectedCount(): number {
+    return this.selectedBookIds.size;
+  }
 
-    link.href = url;
-    link.download = `my-library-${new Date().toISOString().slice(0, 10)}.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-    this.setStatus('Коллекция скачана как JSON-файл.');
+  get selectedBooks(): LibraryBook[] {
+    return this.library.filter((book) => this.selectedBookIds.has(book.id));
+  }
+
+  isBookSelected(id: string): boolean {
+    return this.selectedBookIds.has(id);
+  }
+
+  toggleBookSelection(id: string, selected: boolean): void {
+    if (selected) {
+      this.selectedBookIds.add(id);
+    } else {
+      this.selectedBookIds.delete(id);
+    }
+  }
+
+  clearSelection(): void {
+    this.selectedBookIds.clear();
+  }
+
+  downloadLibrary(format: 'json' = 'json'): void {
+    const date = new Date().toISOString().slice(0, 10);
+    this.downloadBlob(
+      new Blob([this.libraryJsonPreview], { type: 'application/json;charset=utf-8' }),
+      `my-library-${date}.${format}`
+    );
+    this.setStatus('JSON-копия коллекции скачана. Файлы книг скачиваются только после выбора книги.');
   }
 
   uploadBooks(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const file = input.files?.[0];
+    const files = Array.from(input.files || []);
 
-    if (!file) {
+    if (!files.length) {
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        const parsed = JSON.parse(String(reader.result));
-        const books = this.normalizeImportedBooks(parsed);
+    Promise.all(files.map((file) => this.importFile(file)))
+      .then((booksGroups) => {
+        const books = booksGroups.flat();
 
         if (!books.length) {
-          this.setStatus('В JSON не найдено подходящих книг.');
+          this.setStatus('В выбранных файлах не найдено подходящих книг. Используйте .pdf, .epub или .json.');
           return;
         }
 
-        this.library = books;
+        this.library = [...books, ...this.library];
         this.persistLibrary();
-        this.setStatus(`Загружено книг: ${books.length}.`);
-      } catch {
-        this.setStatus('Не удалось прочитать JSON-файл. Проверьте формат файла.');
-      } finally {
+        this.setStatus(`Добавлено на полку: ${books.length}.`);
+      })
+      .catch(() => this.setStatus('Не удалось прочитать файл. Проверьте формат и повторите попытку.'))
+      .finally(() => {
         input.value = '';
-      }
-    };
+      });
+  }
 
-    reader.readAsText(file);
+  downloadSelectedBooks(format: 'original' | 'json' = 'original'): void {
+    if (!this.selectedCount) {
+      this.setStatus('Сначала выберите хотя бы одну книгу на полке.');
+      return;
+    }
+
+    if (format === 'json') {
+      const date = new Date().toISOString().slice(0, 10);
+      this.downloadBlob(
+        new Blob([JSON.stringify(this.selectedBooks, null, 2)], { type: 'application/json;charset=utf-8' }),
+        `my-library-selected-${date}.json`
+      );
+      this.setStatus('JSON выбранных книг скачан.');
+      return;
+    }
+
+    const downloadableBooks = this.selectedBooks.filter((book) => Boolean(book.fileDataUrl && book.fileName));
+
+    if (!downloadableBooks.length) {
+      this.setStatus('У выбранных книг нет загруженных PDF/EPUB-файлов для скачивания.');
+      return;
+    }
+
+    downloadableBooks.forEach((book) => this.downloadStoredBook(book));
+    this.setStatus(`Скачивание выбранных файлов запущено: ${downloadableBooks.length}.`);
+  }
+
+  downloadBook(book: LibraryBook): void {
+    if (!this.isBookSelected(book.id)) {
+      this.setStatus('Перед скачиванием выберите книгу чекбоксом.');
+      return;
+    }
+
+    if (!book.fileDataUrl || !book.fileName) {
+      this.setStatus(`У книги «${book.title}» нет загруженного PDF/EPUB-файла.`);
+      return;
+    }
+
+    this.downloadStoredBook(book);
+    this.setStatus(`Книга «${book.title}» скачивается.`);
+  }
+
+  private importFile(file: File): Promise<LibraryBook[]> {
+    const extension = file.name.split('.').pop()?.toLowerCase();
+
+    if (extension === 'json') {
+      return this.readFileAsText(file).then((text) => this.normalizeImportedBooks(JSON.parse(text)));
+    }
+
+    if (extension === 'pdf' || extension === 'epub') {
+      return this.readFileAsDataUrl(file).then((fileDataUrl) => [this.createBookFromUploadedFile(file, extension, fileDataUrl)]);
+    }
+
+    return Promise.resolve([]);
+  }
+
+  private createBookFromUploadedFile(file: File, fileType: 'pdf' | 'epub', fileDataUrl: string): LibraryBook {
+    const title = this.titleFromFileName(file.name);
+
+    return {
+      id: this.createId(),
+      title,
+      author: 'Не указан',
+      note: `Загруженный файл ${file.name}`,
+      color: this.getRandomColor(),
+      fileName: file.name,
+      fileType,
+      fileDataUrl,
+      fileSize: file.size,
+    };
+  }
+
+  private readFileAsText(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ''));
+      reader.onerror = () => reject(reader.error);
+      reader.readAsText(file);
+    });
+  }
+
+  private readFileAsDataUrl(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ''));
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  private downloadStoredBook(book: LibraryBook): void {
+    if (!book.fileDataUrl || !book.fileName) {
+      return;
+    }
+
+    const link = document.createElement('a');
+    link.href = book.fileDataUrl;
+    link.download = book.fileName;
+    link.click();
+  }
+
+  private downloadBlob(blob: Blob, filename: string): void {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
+  private titleFromFileName(fileName: string): string {
+    return fileName.replace(/\.[^/.]+$/, '').replace(/[_-]+/g, ' ').trim() || 'Без названия';
+  }
+
+  formatBookFile(book: LibraryBook): string {
+    if (!book.fileType) {
+      return 'без файла';
+    }
+
+    const size = book.fileSize ? ` · ${this.formatFileSize(book.fileSize)}` : '';
+    return `${book.fileType.toUpperCase()}${size}`;
+  }
+
+  private formatFileSize(bytes: number): string {
+    if (bytes < 1024) {
+      return `${bytes} Б`;
+    }
+
+    const kilobytes = bytes / 1024;
+    if (kilobytes < 1024) {
+      return `${kilobytes.toFixed(1)} КБ`;
+    }
+
+    return `${(kilobytes / 1024).toFixed(1)} МБ`;
   }
 
   clearLibrary(): void {
@@ -280,8 +442,17 @@ export class MyLibraryComponent implements OnInit {
         year: this.normalizeYear(book.year),
         note: String(book.note || '').trim(),
         color: typeof book.color === 'string' && book.color.trim() ? book.color : this.getRandomColor(),
+        fileName: typeof book.fileName === 'string' ? book.fileName : undefined,
+        fileType: book.fileType === 'pdf' || book.fileType === 'epub' ? book.fileType : undefined,
+        fileDataUrl: typeof book.fileDataUrl === 'string' ? book.fileDataUrl : undefined,
+        fileSize: this.normalizeFileSize(book.fileSize),
       }))
       .filter((book) => Boolean(book.title && book.author));
+  }
+
+  private normalizeFileSize(size: unknown): number | undefined {
+    const normalized = Number(size);
+    return Number.isFinite(normalized) && normalized > 0 ? normalized : undefined;
   }
 
   private resetNewBook(): void {

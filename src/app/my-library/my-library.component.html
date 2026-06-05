@@ -9,10 +9,10 @@
     <section class="hero-section">
       <div class="hero-copy">
         
-        <h2>Собирай книги, двигай их по полке и храни коллекцию в JSON.</h2>
+        <h2>Загружай ссылки на PDF/EPUB-книги, добавляй их на полку и скачивай только выбранные для удобного списка прочтенных вами книг!</h2>
         <p>
-          Добавляй книги вручную или случайно, переставляй их, скачивай коллекцию
-          для резервной копии и загружай её обратно в приложение.
+          Добавляй книги вручную, переставляй их, делай JSON-копию
+          и скачивай PDF/EPUB только после выбора книги на полке.
         </p>
 
         <div class="library-stats">
@@ -21,8 +21,8 @@
             <span>книг на полке</span>
           </div>
           <div>
-            <strong>JSON</strong>
-            <span>импорт / экспорт</span>
+            <strong>PDF / EPUB</strong>
+            <span>загрузка книг</span>
           </div>
         </div>
       </div>
@@ -31,13 +31,22 @@
         <ion-button expand="block" color="primary" (click)="addRandomBook()">
           Добавить случайную книгу
         </ion-button>
-        <ion-button expand="block" fill="outline" color="secondary" (click)="downloadLibrary()" [disabled]="!library.length">
-          Скачать коллекцию
+        <ion-button expand="block" fill="outline" color="secondary" (click)="downloadLibrary('json')" [disabled]="!library.length">
+          Скачать JSON-копию
+        </ion-button>
+        <ion-button expand="block" fill="outline" color="success" (click)="downloadSelectedBooks('original')" [disabled]="!selectedCount">
+          Скачать выбранные файлы
+        </ion-button>
+        <ion-button expand="block" fill="outline" color="warning" (click)="downloadSelectedBooks('json')" [disabled]="!selectedCount">
+          Скачать выбранные JSON
         </ion-button>
         <ion-button expand="block" fill="clear" color="light" (click)="fileInput.click()">
-          Загрузить коллекцию
+          Загрузить PDF/EPUB на полку
         </ion-button>
-        <input #fileInput type="file" hidden accept="application/json" (change)="uploadBooks($event)" />
+        <input #fileInput type="file" hidden multiple accept=".json,.epub,.pdf,application/pdf,application/epub+zip" (change)="uploadBooks($event)" />
+        <ion-chip *ngIf="selectedCount">
+          <ion-label>Выбрано: {{ selectedCount }}</ion-label>
+        </ion-chip>
       </div>
     </section>
 
@@ -83,13 +92,20 @@
           class="book-card"
           *ngFor="let book of library; let i = index"
           draggable="true"
+          (click)="onBookCardClick(book.id)"
           (dragstart)="dragStart($event, i)"
           (dragover)="dragOver($event)"
           (drop)="drop($event, i)"
           (dragend)="dragEnd()"
           [class.dragging]="draggingIndex === i"
+          [class.selected]="isBookSelected(book.id)"
           [ngStyle]="{ '--book-color': book.color }"
         >
+          <ion-checkbox
+            [checked]="isBookSelected(book.id)"
+            (ionChange)="toggleBookSelection(book.id, $event.detail.checked)"
+            slot="start"
+          ></ion-checkbox>
           <div class="book-spine">
             <span>{{ book.title }}</span>
           </div>
@@ -103,16 +119,20 @@
               <h2>{{ book.title }}</h2>
               <p class="author">{{ book.author }}</p>
               <p class="note" *ngIf="book.note">{{ book.note }}</p>
+              <p class="file-info">{{ formatBookFile(book) }}</p>
             </div>
 
             <div class="book-controls">
-              <ion-button size="small" fill="clear" color="light" (click)="moveBook(i, -1)" [disabled]="i === 0">
+              <ion-button size="small" fill="clear" color="light" (click)="$event.stopPropagation(); moveBook(i, -1)" [disabled]="i === 0">
                 ←
               </ion-button>
-              <ion-button size="small" fill="clear" color="light" (click)="moveBook(i, 1)" [disabled]="i === library.length - 1">
+              <ion-button size="small" fill="clear" color="light" (click)="$event.stopPropagation(); moveBook(i, 1)" [disabled]="i === library.length - 1">
                 →
               </ion-button>
-              <ion-button size="small" fill="clear" color="danger" (click)="deleteBook(i)">
+              <ion-button size="small" fill="clear" color="success" (click)="$event.stopPropagation(); downloadBook(book)" [disabled]="!isBookSelected(book.id) || !book.fileDataUrl">
+                ⬇
+              </ion-button>
+              <ion-button size="small" fill="clear" color="danger" (click)="$event.stopPropagation(); deleteBook(i)">
                 ✕
               </ion-button>
             </div>
@@ -125,7 +145,7 @@
       <ng-template #emptyShelf>
         <div class="empty-state glass-panel">
           <h2>Полка пуста</h2>
-          <p>Добавьте книгу вручную, нажмите случайное добавление или загрузите JSON-коллекцию.</p>
+          <p>Добавьте книгу вручную, нажмите случайное добавление или загрузите PDF/EPUB-файлы.</p>
           <ion-button color="primary" (click)="restoreSamples()">Вернуть демо-книги</ion-button>
         </div>
       </ng-template>
@@ -134,7 +154,7 @@
     <section class="library-tools glass-panel">
       <div>
         <h2>Управление коллекцией</h2>
-        <p>JSON-файл можно сохранить у себя и потом снова загрузить в библиотеку.</p>
+        <p>PDF/EPUB добавляются как книги на полку. Скачивание файлов доступно только для выбранных книг.</p>
       </div>
       <div class="tool-actions">
         <ion-button fill="outline" color="light" (click)="restoreSamples()">Демо-книги</ion-button>

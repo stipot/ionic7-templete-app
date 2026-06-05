@@ -45,6 +45,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'veditor',
+    loadChildren: () => import('./videoeditor/videoeditor.module').then(m => m.VideoeditorModule)
+  },
+  {
     path: 'face-detector',
     component: FaceDetectorComponent
   },

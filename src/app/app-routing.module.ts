@@ -254,6 +254,35 @@ const routes: Routes = [
   },
   { path: '', redirectTo: '/timer', pathMatch: 'full' },
   {
+    path: 'paint',
+    loadChildren: () => import('./paint/paint.module').then(m => m.PaintModule)
+  },
+  {
+    path: "timer",
+    component: TimerComponent
+  },
+  {
+    path: 'florist',
+    component: FloristAssistantComponent
+  },
+  {
+    path: 'predicting-house-prices',
+    loadChildren: () => import('./predicting-house-prices/predicting-house-prices.module').then(m => m.PredictingHousePricesModule)
+  },  
+  {
+    path: '',
+    loadChildren: () => import('./timer/timer.module').then(m => m.TimerModule)
+  },
+  {
+    path: 'speedometer',
+    component: SpeedometerComponent
+  },
+  {
+    path:'Jwsr',
+    component: TierListComponent
+  },
+  { path: '', redirectTo: '/timer', pathMatch: 'full' },
+  {
     path: '**',
     redirectTo: 'page-not-found'
   },

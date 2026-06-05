@@ -72,6 +72,9 @@
   "Mood Statistic": "Mood Statistic",
   "Water-tracker": "Water balance",
 
+  "CLOTHING_SHOP": {
+  "TITLE": "Clothing Store"
+  },
   "FRONTPAGE": {
     "COMPONENT_TITLE": "FrontPage"
   },

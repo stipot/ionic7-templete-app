@@ -78,6 +78,10 @@
     "CRYPTO_NAME": "Cryptomonnaie",
     "CRYPTO_LOADING": "Chargement..."
   },
+
+  "CLOTHING_SHOP": {
+  "TITLE": "Magasin de vêtements"
+  },
   "MOOD": {
     "HAPPY": "Heureux",
     "RELAXED": "Détendu",

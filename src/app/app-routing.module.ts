@@ -8,6 +8,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoTaskComponent } from './todo-task/todo-task.component';
 import { FashionComponent } from './fashion/fashion.component';
 import { FashionDetailComponent } from './fashion-detail/fashion-detail.component';
+import { ClothingShopPage } from './clothing-shop/clothing-shop.page';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component";
 import { IntroComponent } from './intro/intro.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -291,6 +292,10 @@ const routes: Routes = [
     loadChildren: () => import('./muiv-schedule/muiv-schedule.module').then(m => m.MuivSheduleModule)
   },
   { path: '', redirectTo: '/timer', pathMatch: 'full' },
+  {
+  path: 'clothing-shop',
+  component: ClothingShopPage
+  },
   {
     path: '**',
     redirectTo: 'page-not-found'

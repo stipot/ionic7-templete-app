@@ -52,6 +52,7 @@ import { RssDataComponent } from './rss-data/rss-data.component';
 import { CalcModule } from './calc/calc.module';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
+import { ClothingShopPage } from './clothing-shop/clothing-shop.page';
 import {PredictingHousePricesModule} from './predicting-house-prices/predicting-house-prices.module'
 import { FloristAssistantComponent } from './florist-assistant/florist-assistant.component';
 import {WeatherModule} from './weather/weather.module';
@@ -102,6 +103,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddBlogModalComponent,
     WaterTrackerComponent,
     GazonComponent,
+    ClothingShopPage,
     FloristAssistantComponent,
     
   ],

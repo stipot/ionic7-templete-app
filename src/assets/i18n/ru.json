@@ -70,6 +70,10 @@
 
   "Water-tracker": "Водный баланс",
 
+  "CLOTHING_SHOP": {
+  "TITLE": "Магазин одежды"
+  },
+
   "FRONTPAGE": {
     "COMPONENT_TITLE": "Главная страница",
     "FRONTPAGE_SETTINGS": "Настройки"

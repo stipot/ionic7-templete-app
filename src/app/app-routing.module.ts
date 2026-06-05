@@ -36,6 +36,7 @@ import { FaceDetectorComponent } from './face-detect/face-detector.component';  
 import { WeatherComponent } from './weather/weather.component';
 import { TierListComponent } from './tier-list/tier-list.component';
 import { FloristAssistantComponent } from './florist-assistant/florist-assistant.component';
+import { MuivSheduleComponent } from './muiv-schedule/muiv-schedule.component';
 import { SpeedometerComponent } from './speedometer/speedometer.component';
 import { TimerComponent } from './timer/timer.component';
 const routes: Routes = [
@@ -284,6 +285,10 @@ const routes: Routes = [
   {
     path:'Jwsr',
     component: TierListComponent
+  },
+  {
+    path: 'schedule',
+    loadChildren: () => import('./muiv-schedule/muiv-schedule.module').then(m => m.MuivSheduleModule)
   },
   { path: '', redirectTo: '/timer', pathMatch: 'full' },
   {

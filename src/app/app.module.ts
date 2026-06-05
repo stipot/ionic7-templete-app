@@ -58,6 +58,7 @@ import {WeatherModule} from './weather/weather.module';
 import { PaintModule } from './paint/paint.module';
 import { TierListComponent } from './tier-list/tier-list.component'
 import { TierListModule } from './tier-list/tier-list.module';
+import { MuivSheduleModule } from './muiv-schedule/muiv-schedule.module';
 
 
 
@@ -118,6 +119,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PredictingHousePricesModule,
     PaintModule,
     TierListModule,
+    MuivSheduleModule,
     DragDropModule,
     WeatherModule,
     IonicStorageModule.forRoot(),

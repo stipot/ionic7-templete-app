@@ -293,5 +293,16 @@
     "PHP":{
     "COMPONENT_TITLE": "Predicting the price of an apartment"
   }
-}
 
+  ,"WEATHER": {
+  "COMPONENT_TITLE": "Weather",
+  "LOADING": "Loading weather...",
+  "ERROR": "Failed to load weather data",
+  "CITY_PLACEHOLDER": "Select city",
+  "FEELS_LIKE": "Feels like",
+  "BUT_ACTUALLY": "but actually",
+  "CITY_NOT_FOUND": "City not found",
+  "WEEKDAY": ["mon, tue, wed, thu, fri, sat, sun"],
+  "REPEAT": "Repeat"
+}
+}

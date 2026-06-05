@@ -54,6 +54,7 @@ import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
 import {PredictingHousePricesModule} from './predicting-house-prices/predicting-house-prices.module'
 import { FloristAssistantComponent } from './florist-assistant/florist-assistant.component';
+import {WeatherModule} from './weather/weather.module';
 import { PaintModule } from './paint/paint.module';
 import { TierListComponent } from './tier-list/tier-list.component'
 import { TierListModule } from './tier-list/tier-list.module';
@@ -118,6 +119,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PaintModule,
     TierListModule,
     DragDropModule,
+    WeatherModule,
     IonicStorageModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

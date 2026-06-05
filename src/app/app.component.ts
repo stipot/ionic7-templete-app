@@ -3,6 +3,7 @@ import { register } from 'swiper/element/bundle';
 import { TranslateService } from '@ngx-translate/core';
 import { title } from 'process';
 import { url } from 'inspector';
+import { Icon } from 'ionicons/dist/types/components/icon/icon';
 
 register();
 
@@ -13,6 +14,7 @@ register();
 })
 export class AppComponent {
   public appPages = [
+    {title: "WEATHER.COMPONENT_TITLE", url: "/LaLa", icon: "cloud-circle"},
     {title: 'Video editor', url: 'veditor', icon: 'videocam'},
     { title: 'PHP.COMPONENT_TITLE', url: 'predicting-house-prices', icon: 'business'},
     { title: 'TIERLIST.TITLE', url: '/Jwsr', icon: 'prism'},

@@ -1,4 +1,4 @@
-<ion-page class="library-page">
+<div class="library-page">
   <ion-header translucent>
     <ion-toolbar>
       <ion-title>Виртуальная книжная полка</ion-title>
@@ -8,34 +8,75 @@
   <ion-content fullscreen class="library-content">
     <section class="hero-section">
       <div class="hero-copy">
-        <span class="section-label">Zotero-подобная библиотека</span>
-        <h1>Собери коллекцию, расставь книги и сохрани полку.</h1>
-        <p>Перемещайте книги, загружайте коллекцию JSON и выгружайте библиотеку для обмена или резервного копирования.</p>
+        
+        <h2>Собирай книги, двигай их по полке и храни коллекцию в JSON.</h2>
+        <p>
+          Добавляй книги вручную или случайно, переставляй их, скачивай коллекцию
+          для резервной копии и загружай её обратно в приложение.
+        </p>
+
+        <div class="library-stats">
+          <div>
+            <strong>{{ totalBooks }}</strong>
+            <span>книг на полке</span>
+          </div>
+          <div>
+            <strong>JSON</strong>
+            <span>импорт / экспорт</span>
+          </div>
+        </div>
       </div>
-      <div class="hero-actions">
-        <ion-button expand="block" color="primary" (click)="addRandomBook()">Добавить случайную книгу</ion-button>
-        <ion-button expand="block" fill="outline" color="secondary" (click)="downloadLibrary()">Скачать коллекцию</ion-button>
-        <ion-button expand="block" fill="clear" color="medium" (click)="fileInput.click()">Загрузить коллекцию</ion-button>
-        <input #fileInput type="file" hidden accept="application/json" (change)="uploadBooks($event)">
+
+      <div class="hero-actions glass-panel">
+        <ion-button expand="block" color="primary" (click)="addRandomBook()">
+          Добавить случайную книгу
+        </ion-button>
+        <ion-button expand="block" fill="outline" color="secondary" (click)="downloadLibrary()" [disabled]="!library.length">
+          Скачать коллекцию
+        </ion-button>
+        <ion-button expand="block" fill="clear" color="light" (click)="fileInput.click()">
+          Загрузить коллекцию
+        </ion-button>
+        <input #fileInput type="file" hidden accept="application/json" (change)="uploadBooks($event)" />
       </div>
     </section>
 
-    <section class="new-book-section">
+    <section class="new-book-section glass-panel">
+      <div class="form-heading">
+        <span class="section-label">Новая книга</span>
+        <h2>Добавить вручную</h2>
+      </div>
+
       <ion-item>
         <ion-label position="floating">Название книги</ion-label>
         <ion-input [(ngModel)]="newBook.title" type="text"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">Автор</ion-label>
         <ion-input [(ngModel)]="newBook.author" type="text"></ion-input>
       </ion-item>
-      <ion-button expand="block" color="success" (click)="addManualBook()">Добавить книгу</ion-button>
+
+      <ion-item>
+        <ion-label position="floating">Год издания</ion-label>
+        <ion-input [(ngModel)]="newBook.year" type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Заметка</ion-label>
+        <ion-textarea [(ngModel)]="newBook.note" autoGrow="true"></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" color="success" (click)="addManualBook()">
+        Добавить книгу
+      </ion-button>
+
+      <p class="status-message" *ngIf="statusMessage">{{ statusMessage }}</p>
     </section>
 
     <section class="shelf-section">
-      <div class="shelf-decor"></div>
-      <div class="shelf-board"></div>
-      <div class="shelf-banner">Моя полка – коллекция {{ library.length }} книг</div>
+      <div class="shelf-glow"></div>
+      <div class="shelf-banner">Моя полка — коллекция {{ library.length }} книг</div>
 
       <div class="bookshelf" *ngIf="library.length; else emptyShelf">
         <article
@@ -52,27 +93,53 @@
           <div class="book-spine">
             <span>{{ book.title }}</span>
           </div>
+
           <div class="book-cover">
-            <div class="cover-top"></div>
+            <div class="cover-top">
+              <span>{{ book.year || 'BOOK' }}</span>
+            </div>
+
             <div class="cover-content">
               <h2>{{ book.title }}</h2>
-              <p>{{ book.author }}</p>
+              <p class="author">{{ book.author }}</p>
+              <p class="note" *ngIf="book.note">{{ book.note }}</p>
             </div>
-          </div>
-          <div class="book-controls">
-            <ion-button size="small" fill="clear" color="light" (click)="moveBook(i, -1)" [disabled]="i === 0">←</ion-button>
-            <ion-button size="small" fill="clear" color="light" (click)="moveBook(i, 1)" [disabled]="i === library.length - 1">→</ion-button>
-            <ion-button size="small" fill="clear" color="danger" (click)="deleteBook(i)">✕</ion-button>
+
+            <div class="book-controls">
+              <ion-button size="small" fill="clear" color="light" (click)="moveBook(i, -1)" [disabled]="i === 0">
+                ←
+              </ion-button>
+              <ion-button size="small" fill="clear" color="light" (click)="moveBook(i, 1)" [disabled]="i === library.length - 1">
+                →
+              </ion-button>
+              <ion-button size="small" fill="clear" color="danger" (click)="deleteBook(i)">
+                ✕
+              </ion-button>
+            </div>
           </div>
         </article>
       </div>
 
+      <div class="shelf-board"></div>
+
       <ng-template #emptyShelf>
-        <div class="empty-state">
+        <div class="empty-state glass-panel">
           <h2>Полка пуста</h2>
-          <p>Добавьте книгу вручную или загрузите коллекцию, чтобы оживить библиотеку.</p>
+          <p>Добавьте книгу вручную, нажмите случайное добавление или загрузите JSON-коллекцию.</p>
+          <ion-button color="primary" (click)="restoreSamples()">Вернуть демо-книги</ion-button>
         </div>
       </ng-template>
     </section>
+
+    <section class="library-tools glass-panel">
+      <div>
+        <h2>Управление коллекцией</h2>
+        <p>JSON-файл можно сохранить у себя и потом снова загрузить в библиотеку.</p>
+      </div>
+      <div class="tool-actions">
+        <ion-button fill="outline" color="light" (click)="restoreSamples()">Демо-книги</ion-button>
+        <ion-button fill="clear" color="danger" (click)="clearLibrary()" [disabled]="!library.length">Очистить</ion-button>
+      </div>
+    </section>
   </ion-content>
-</ion-page>
+</div>

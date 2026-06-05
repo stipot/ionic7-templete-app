@@ -1,3 +1,78 @@
-<p>
-  my-library works!
-</p>
+<ion-page class="library-page">
+  <ion-header translucent>
+    <ion-toolbar>
+      <ion-title>Виртуальная книжная полка</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content fullscreen class="library-content">
+    <section class="hero-section">
+      <div class="hero-copy">
+        <span class="section-label">Zotero-подобная библиотека</span>
+        <h1>Собери коллекцию, расставь книги и сохрани полку.</h1>
+        <p>Перемещайте книги, загружайте коллекцию JSON и выгружайте библиотеку для обмена или резервного копирования.</p>
+      </div>
+      <div class="hero-actions">
+        <ion-button expand="block" color="primary" (click)="addRandomBook()">Добавить случайную книгу</ion-button>
+        <ion-button expand="block" fill="outline" color="secondary" (click)="downloadLibrary()">Скачать коллекцию</ion-button>
+        <ion-button expand="block" fill="clear" color="medium" (click)="fileInput.click()">Загрузить коллекцию</ion-button>
+        <input #fileInput type="file" hidden accept="application/json" (change)="uploadBooks($event)">
+      </div>
+    </section>
+
+    <section class="new-book-section">
+      <ion-item>
+        <ion-label position="floating">Название книги</ion-label>
+        <ion-input [(ngModel)]="newBook.title" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Автор</ion-label>
+        <ion-input [(ngModel)]="newBook.author" type="text"></ion-input>
+      </ion-item>
+      <ion-button expand="block" color="success" (click)="addManualBook()">Добавить книгу</ion-button>
+    </section>
+
+    <section class="shelf-section">
+      <div class="shelf-decor"></div>
+      <div class="shelf-board"></div>
+      <div class="shelf-banner">Моя полка – коллекция {{ library.length }} книг</div>
+
+      <div class="bookshelf" *ngIf="library.length; else emptyShelf">
+        <article
+          class="book-card"
+          *ngFor="let book of library; let i = index"
+          draggable="true"
+          (dragstart)="dragStart($event, i)"
+          (dragover)="dragOver($event)"
+          (drop)="drop($event, i)"
+          (dragend)="dragEnd()"
+          [class.dragging]="draggingIndex === i"
+          [ngStyle]="{ '--book-color': book.color }"
+        >
+          <div class="book-spine">
+            <span>{{ book.title }}</span>
+          </div>
+          <div class="book-cover">
+            <div class="cover-top"></div>
+            <div class="cover-content">
+              <h2>{{ book.title }}</h2>
+              <p>{{ book.author }}</p>
+            </div>
+          </div>
+          <div class="book-controls">
+            <ion-button size="small" fill="clear" color="light" (click)="moveBook(i, -1)" [disabled]="i === 0">←</ion-button>
+            <ion-button size="small" fill="clear" color="light" (click)="moveBook(i, 1)" [disabled]="i === library.length - 1">→</ion-button>
+            <ion-button size="small" fill="clear" color="danger" (click)="deleteBook(i)">✕</ion-button>
+          </div>
+        </article>
+      </div>
+
+      <ng-template #emptyShelf>
+        <div class="empty-state">
+          <h2>Полка пуста</h2>
+          <p>Добавьте книгу вручную или загрузите коллекцию, чтобы оживить библиотеку.</p>
+        </div>
+      </ng-template>
+    </section>
+  </ion-content>
+</ion-page>

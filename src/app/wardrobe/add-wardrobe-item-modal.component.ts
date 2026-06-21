@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
+interface WardrobeForm {
+  name: string;
+  type: string;
+  season: string;
+  size: string;
+  photo?: string;
+}
+
 @Component({
   selector: 'app-add-wardrobe-item-modal',
   templateUrl: './add-wardrobe-item-modal.component.html',
   styleUrls: ['./add-wardrobe-item-modal.component.scss']
 })
 export class AddWardrobeItemModalComponent {
-  form: any = {
+  form: WardrobeForm = {
     name: '',
     type: '',
     season: '',
@@ -20,8 +28,9 @@ export class AddWardrobeItemModalComponent {
 
   constructor(private modalController: ModalController) { }
 
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {

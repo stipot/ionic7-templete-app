@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { WardrobeStorageService } from './wardrobe-storage.service';
+import { WardrobeStorageService, WardrobeItem } from './wardrobe-storage.service';
 import { AddWardrobeItemModalComponent } from './add-wardrobe-item-modal.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { AddWardrobeItemModalComponent } from './add-wardrobe-item-modal.compone
   styleUrls: ['./wardrobe.component.scss'],
 })
 export class WardrobeComponent implements OnInit {
-  items: any[] = [];
+  items: WardrobeItem[] = [];
 
   constructor(
     private modalController: ModalController,
@@ -42,14 +42,14 @@ export class WardrobeComponent implements OnInit {
     }
   }
 
-  deleteItem(id: any) {
+  deleteItem(id: number) {
     if (confirm('Вы уверены?')) {
       this.storage.deleteItem(id);
       this.loadItems();
     }
   }
 
-  trackByFn(index: number, item: any) {
+  trackByFn(index: number, item: WardrobeItem) {
     return item.id;
   }
 }

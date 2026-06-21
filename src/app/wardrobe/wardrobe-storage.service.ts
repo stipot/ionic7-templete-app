@@ -1,5 +1,17 @@
 import { Injectable } from '@angular/core';
 
+export interface WardrobeItem {
+  id: number;
+  name: string;
+  type: string;
+  season: string;
+  size: string;
+  photo?: string;
+  createdAt: string;
+}
+
+export type WardrobeItemInput = Omit<WardrobeItem, 'id' | 'createdAt'>;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -8,29 +20,25 @@ export class WardrobeStorageService {
 
   constructor() { }
 
-  getItems() {
+  getItems(): WardrobeItem[] {
     const data = localStorage.getItem(this.STORAGE_KEY);
-    if (data) {
-      return JSON.parse(data);
-    }
-    return [];
+    return data ? JSON.parse(data) : [];
   }
 
-  addItem(item: any) {
+  addItem(item: WardrobeItemInput): WardrobeItem {
     const items = this.getItems();
-    const newItem = {
+    const newItem: WardrobeItem = {
       ...item,
-      id: Date.now() + Math.random(),
-      createdAt: new Date()
+      id: Date.now(),
+      createdAt: new Date().toISOString()
     };
     items.push(newItem);
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items));
     return newItem;
   }
 
-  deleteItem(id: any) {
-    let items = this.getItems();
-    items = items.filter((item: any) => item.id !== id);
+  deleteItem(id: number) {
+    const items = this.getItems().filter(item => item.id !== id);
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items));
   }
 }

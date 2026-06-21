@@ -24,8 +24,16 @@
     <ion-row class="ion-align-items-stretch">
       <ion-col size="12" sizeMd="6" sizeLg="4" *ngFor="let item of items; trackBy: trackByFn">
         <ion-card class="wardrobe-card">
-          <div *ngIf="item.photo" class="photo-container">
-            <img [src]="item.photo" alt="{{ item.name }}" />
+          <div class="photo-container">
+            <ng-container *ngIf="item.photo; else noPhoto">
+              <img [src]="item.photo" alt="{{ item.name }}" />
+            </ng-container>
+            <ng-template #noPhoto>
+              <div class="photo-placeholder">
+                <ion-icon name="shirt-outline"></ion-icon>
+              </div>
+            </ng-template>
+
             <div class="overlay">
               <ion-button 
                 fill="clear" 
@@ -35,9 +43,6 @@
                 <ion-icon name="trash"></ion-icon>
               </ion-button>
             </div>
-          </div>
-          <div *ngIf="!item.photo" class="photo-placeholder">
-            <ion-icon name="shirt-outline"></ion-icon>
           </div>
 
           <ion-card-header>

@@ -1,1 +1,175 @@
-<p>Lfsds</p>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Опросы</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Действия</ion-card-title>
+            <ion-card-subtitle>Создавайте, открывайте и смотрите результаты.</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button expand="block" color="primary" (click)="openCreateSurveyModal()">
+              Создать опрос
+            </ion-button>
+            <ion-button expand="block" color="secondary" fill="outline" (click)="toggleAllResults()" class="ion-margin-top">
+              {{ showAllResults ? 'Скрыть результаты' : 'Показать результаты' }}
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card *ngIf="surveys.length > 0">
+          <ion-card-header>
+            <ion-card-title>Сохранённые опросы</ion-card-title>
+          </ion-card-header>
+          <ion-list>
+            <ion-item *ngFor="let survey of surveys" button (click)="openSurvey(survey)">
+              <ion-label>
+                <h2>{{ survey.title }}</h2>
+                <p>{{ survey.questions[0]?.text }}</p>
+              </ion-label>
+              <ion-badge color="tertiary" slot="end">{{ survey.answers.length }}</ion-badge>
+              <ion-button fill="clear" color="danger" slot="end" (click)="deleteSurvey(survey, $event)" size="small">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-card>
+
+        <ion-card *ngIf="surveys.length === 0">
+          <ion-card-content>
+            Пока нет опросов. Нажмите кнопку «Создать опрос», чтобы добавить первый.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="6">
+        <div *ngIf="activeSurvey">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>{{ activeSurvey.title }}</ion-col>
+                    <ion-col size="auto">
+                      <ion-button fill="clear" color="danger" (click)="deleteSurvey(activeSurvey, $event)" size="small">
+                        <ion-icon name="trash"></ion-icon>
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-title>
+              <ion-card-subtitle *ngIf="activeSurvey.questions && activeSurvey.questions.length">{{ activeSurvey.questions[0].text }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-item>
+                <ion-label position="stacked">Ваше имя</ion-label>
+                <ion-input [(ngModel)]="respondentName"></ion-input>
+              </ion-item>
+
+              <div *ngFor="let q of activeSurvey.questions; let i = index" class="question-block">
+                <h3>{{ i + 1 }}. {{ q.text }}</h3>
+
+                <div *ngIf="q.type === 'radio'">
+                  <ion-radio-group [(ngModel)]="answerMap[q.id]">
+                    <ion-item *ngFor="let option of q.options; trackBy: trackByOption">
+                      <ion-radio slot="start" [value]="option"></ion-radio>
+                      <ion-label>{{ option }}</ion-label>
+                    </ion-item>
+                  </ion-radio-group>
+                </div>
+
+                <div *ngIf="q.type === 'checkbox'">
+                  <ion-list>
+                    <ion-item *ngFor="let option of q.options; trackBy: trackByOption">
+                      <ion-checkbox slot="start" [checked]="isOptionCheckedFor(q.id, option)" (ionChange)="toggleOptionFor(q.id, option, $event.detail.checked)"></ion-checkbox>
+                      <ion-label>{{ option }}</ion-label>
+                    </ion-item>
+                  </ion-list>
+                </div>
+
+                <div *ngIf="q.type === 'text'">
+                  <ion-item>
+                    <ion-textarea [(ngModel)]="answerMap[q.id]" [ngModelOptions]="{updateOn: 'blur'}"></ion-textarea>
+                  </ion-item>
+                </div>
+              </div>
+
+              <ion-button expand="block" color="success" class="ion-margin-top" (click)="submitAnswer()">
+                Сохранить ответы
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div *ngIf="selectedResultSurvey">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>Результаты: {{ selectedResultSurvey.title }}</ion-col>
+                    <ion-col size="auto">
+                      <ion-button fill="clear" color="danger" (click)="deleteSurvey(selectedResultSurvey, $event)" size="small">
+                        <ion-icon name="trash"></ion-icon>
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item *ngFor="let saved of selectedResultSurvey.answers">
+                  <ion-label>
+                    <h3>{{ saved.respondent }}</h3>
+                    <small>{{ saved.createdAt }}</small>
+                    <div *ngFor="let qa of saved.answers">
+                      <p><strong>{{ getQuestionText(selectedResultSurvey, qa.questionId) }}:</strong> {{ formatAnswer(qa.answer) }}</p>
+                    </div>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+              <ion-note *ngIf="selectedResultSurvey.answers.length === 0">
+                Здесь пока нет ответов.
+              </ion-note>
+            </ion-card-content>
+          </ion-card>
+        </div>
+
+        <div *ngIf="showAllResults">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Все результаты</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list *ngIf="hasAnyResults; else noResults">
+                <ion-item *ngFor="let survey of surveys" lines="full">
+                  <ion-label>
+                    <h3>{{ survey.title }}</h3>
+                    <p>{{ survey.questions[0]?.text }}</p>
+                    <p><strong>Всего ответов:</strong> {{ survey.answers.length }}</p>
+                    <ion-button fill="clear" size="small" color="primary" (click)="selectResultSurvey(survey)">
+                      Смотреть ответы
+                    </ion-button>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+              <ng-template #noResults>
+                <ion-note>Здесь будут отображаться ответы респондентов после прохождения опросов.</ion-note>
+              </ng-template>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

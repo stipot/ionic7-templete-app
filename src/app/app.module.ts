@@ -52,6 +52,7 @@ import { RssDataComponent } from './rss-data/rss-data.component';
 import { CalcModule } from './calc/calc.module';
 import { WaterTrackerComponent } from './water-tracker/water-tracker.component';
 import { GazonComponent } from './gazon/gazon.component';
+import { MorscoyBoiModule } from './morscoy-boi/morscoy-boi.module';
 import { RolepModule } from './rolep/rolep.module';
 import { ClothingShopPage } from './clothing-shop/clothing-shop.page';
 import {PredictingHousePricesModule} from './predicting-house-prices/predicting-house-prices.module'
@@ -61,8 +62,6 @@ import { PaintModule } from './paint/paint.module';
 import { TierListComponent } from './tier-list/tier-list.component'
 import { TierListModule } from './tier-list/tier-list.module';
 import { MuivSheduleModule } from './muiv-schedule/muiv-schedule.module';
-
-
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -126,6 +125,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MuivSheduleModule,
     DragDropModule,
     WeatherModule,
+    MorscoyBoiModule,
     IonicStorageModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

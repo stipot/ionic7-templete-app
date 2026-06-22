@@ -202,6 +202,10 @@ const routes: Routes = [
     component: KanbanComponent
   },
   {
+    path: 'wardrobe',
+    loadChildren: () => import('./wardrobe/wardrobe.module').then(m => m.WardrobeModule)
+  },
+  {
     path: 'camera',
     loadChildren: () => import('./camera/camera.module').then(m => m.CameraPageModule)
   },

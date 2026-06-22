@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Spectrum Simulator</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Spectrum Simulator</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container">
+    <ion-item>
+      <ion-label>Добавьте CSV Датасет, Датасет assets/SpectrmixerDataset</ion-label>
+      <input type="file" accept=".csv" (change)="onFileSelected($event)" />
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Пик (нм)</ion-label>
+      <ion-input type="number" placeholder="420" [(ngModel)]="newPeakWavelength"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Мощность (Вт)</ion-label>
+      <ion-input type="number" placeholder="1" [(ngModel)]="newPower"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Кол-во</ion-label>
+      <ion-input type="number" placeholder="1" [(ngModel)]="newCount"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="addGaussianDataset()">Добавить датасет</ion-button>
+
+    <ion-list>
+      <ion-item *ngFor="let dataset of datasets; let i = index">
+        <ion-label>
+          {{ dataset.name }}<br />
+          Мощность: {{ dataset.power }} Вт, Кол-во: {{ dataset.count }}
+        </ion-label>
+        <ion-button slot="end" fill="clear" (click)="removeDataset(i)">Удалить</ion-button>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="block" (click)="calculateCombinedSpectrum()">Посчитать спектр</ion-button>
+
+    <canvas #chartCanvas width="400" height="200"></canvas>
+  </div>
+</ion-content>

@@ -71,20 +71,25 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
+
             "production": {
               "browserTarget": "app:build:production"
             },
             "development": {
+    
               "browserTarget": "app:build:development"
             },
+            
             "ci": {
               "progress": false
             }
           },
           "defaultConfiguration": "development"
         },
+        
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {

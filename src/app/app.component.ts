@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { TranslateService } from '@ngx-translate/core';
-import { title } from 'process';
-import { url } from 'inspector';
-import { Icon } from 'ionicons/dist/types/components/icon/icon';
 
 register();
 
@@ -14,13 +11,6 @@ register();
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Расписание muiv.ru', url: '/schedule', icon: 'calendar-number'},
-    { title: "WEATHER.COMPONENT_TITLE", url: "/LaLa", icon: "cloud-circle"},
-    { title: 'Video editor', url: 'veditor', icon: 'videocam'},
-    { title: 'PHP.COMPONENT_TITLE', url: 'predicting-house-prices', icon: 'business'},
-    { title: 'TIERLIST.TITLE', url: '/Jwsr', icon: 'prism'},
-    { title: 'SPEEDOMETER.TITLE', url: '/speedometer', icon: 'speedometer'},
-    { title: 'TIMER.COMPONENT_TITLE', url: '/timer', icon: 'timer'},
     { title: 'Face Detector', url: '/face-detector', icon: 'scan' },  // ДОБАВЛЕНО
     { title: 'FLORIST.COMPONENT_TITLE', url: '/florist', icon: 'leaf' },
     { title: 'FRONTPAGE.COMPONENT_TITLE', url: '/front-layout', icon: 'grid' },

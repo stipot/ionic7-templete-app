@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Создание опроса</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Отмена</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Название опроса</ion-label>
+    <ion-input [(ngModel)]="title"></ion-input>
+  </ion-item>
+
+  <div *ngFor="let q of questions; let i = index; trackBy: trackByQuestion" class="question-edit">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Вопрос {{ i + 1 }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Текст вопроса</ion-label>
+          <ion-input [value]="q.text" (ionInput)="q.text = $any($event).detail.value"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Тип вопроса</ion-label>
+          <ion-select [(ngModel)]="q.type">
+            <ion-select-option value="radio">Радио</ion-select-option>
+            <ion-select-option value="checkbox">Флажки</ion-select-option>
+            <ion-select-option value="text">Ввод текста</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <div *ngIf="q.type !== 'text'">
+          <div *ngFor="let opt of q.options; let j = index; trackBy: trackByOption" class="option-row">
+            <ion-item>
+              <ion-label position="stacked">Вариант {{ j + 1 }}</ion-label>
+              <ion-input [value]="opt.text" (ionInput)="opt.text = $any($event).detail.value"></ion-input>
+              <ion-button fill="clear" color="danger" (click)="removeOption(i, j)">Удалить</ion-button>
+            </ion-item>
+          </div>
+          <ion-button fill="clear" (click)="addOption(i)">Добавить вариант</ion-button>
+        </div>
+
+        <ion-button color="danger" fill="clear" (click)="removeQuestion(i)" *ngIf="questions.length>1">Удалить вопрос</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-button expand="block" (click)="addQuestion()">Добавить вопрос</ion-button>
+
+  <ion-button expand="block" color="primary" (click)="save()" class="ion-margin-top">Сохранить опрос</ion-button>
+</ion-content>

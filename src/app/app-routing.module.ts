@@ -53,6 +53,10 @@ const routes: Routes = [
     path: 'game-2048',
     loadChildren: () => import('./g2048/g2048.module').then(m => m.G2048Module)
   },
+    {
+    path: 'getforms',
+    loadChildren: () => import('./getforms/getforms.module').then(m => m.GetformsModule)
+  },
   {
     path: 'gazon',
     component: GazonComponent

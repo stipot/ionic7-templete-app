@@ -2,6 +2,7 @@
   "1": "Welcome",
   "Inbox": "Inbox",
   "outbox": "Outbox",
+  "speedometer":"Speedometer",
   "favorites": "Favorites",
   "archived": "Archived",
   "trash": "Trash",
@@ -71,6 +72,9 @@
   "Mood Statistic": "Mood Statistic",
   "Water-tracker": "Water balance",
 
+  "CLOTHING_SHOP": {
+  "TITLE": "Clothing Store"
+  },
   "FRONTPAGE": {
     "COMPONENT_TITLE": "FrontPage"
   },
@@ -79,6 +83,9 @@
   },
   "INTRO": {
     "COMPONENT_TITLE": "Intro"
+  },
+  "ROLEP": {
+    "COMPONENT_TITLE": "RPG"
   },
   "2048GAME": {
     "COMPONENT_TITLE": "2048 Game"
@@ -171,6 +178,27 @@
     "MAP_WITH_POINT_TEXT": "This is a map with a marker via code and click coordinate handling."
   },
   
+  "VIDEOEDITOR": {
+    "COMPONENT_TITLE": "Video Editor",
+    "FIRST_TXT": "This is a simple video editor! Here you can trim videos, apply filters, and change the format. Just click the 'Add Video' button on the right to get started!",
+    "ADD_VIDEO": "Add video",
+    "TRIM": "Trim",
+    "FILTERS": "Filters",
+    "FORMAT": "Format",
+    "TRIM_D": "Trim video",
+    "TRIM_PRIM": "Apply trim",
+    "RESET_TO_ORIGINAL": "Reset to original",
+    "TIME_OF_FRAGMENT": "Duration of fragment:",
+    "CHOOSE_FILTER": "Choose a filter",
+    "SETTINGS_OF_FORMAT": "Format settings",
+    "FORMAT1": "Original",
+    "MAKE_REC": "Processing...",
+    "SAVEV": "Save video",
+    "TEXT2": "Please do not close the tab. The video is being recorded in real-time...",
+    "RECREC": "Recording:",
+    "TEXT3": "Please do not close the page"
+  },
+
     "WIDGET":{
     "COMPONENT_TITLE": "Widget",
     "LOADING": "Loading",
@@ -219,5 +247,68 @@
 
   ,"DEVELOPMENT": {
     "COMPONENTS": "Components in development:"
+  },
+  "PAINT":{
+    "COMPONENT_TITLE": "Paint"
+  }, 
+  "SPEEDOMETER": {
+  "TITLE": "Speedometer",
+  "DOWNLOAD": "Download",
+  "PING": "Ping",
+  "UNIT_MBPS": "Mbps",
+  "UNIT_MS": "ms",
+  "NOT_MEASURED": "Not measured",
+  "VERY_SLOW": "Very slow",
+  "NORMAL": "Normal",
+  "GOOD": "Good",
+  "EXCELLENT": "Excellent",
+  "TEST_BUTTON": "Run test",
+  "TESTING": "Testing..."
+  },
+  "TIMER": {
+  "COMPONENT_TITLE": "Timer",
+  "START": "Start",
+  "STOP": "Stop",
+  "RESET": "Reset",
+  "FINISHED_MSG": "Time is up!",
+  "HOURS": "HOURS",
+  "MINUTES": "MINUTES",
+  "SECONDS": "SECONDS",
+  "RECENT": "RECENT",
+  "NAME": "Name",
+  "NAME2": "The input field"
+  },
+  "FLORIST": {
+    "COMPONENT_TITLE": "Florist Assistant",
+    "EMPTY_STATE_TITLE": "You have no plants yet",
+    "EMPTY_STATE_SUBTITLE": "Press + in the top right corner to add your first plant!",
+    "DAYS_UNTIL_WATER": "Water in {{days}} d.",
+    "URGENT_WATER": "Needs watering!",
+    "LAST_WATERED": "Last watered: {{date}}",
+    "WATER_BUTTON": "Water",
+    "NEW_PLANT_TITLE": "New plant",
+    "CLOSE": "Close",
+    "PLANT_NAME": "Name (nickname)",
+    "PLANT_SPECIES": "Plant species",
+    "WATER_FREQUENCY": "Water every ... days",
+    "PHOTO_URL": "Photo URL (optional)",
+    "ADD_BUTTON": "Add",
+    "PLACEHOLDER_NAME": "e.g., Boris",
+    "PLACEHOLDER_SPECIES": "e.g., Cactus"
+  },
+    "PHP":{
+    "COMPONENT_TITLE": "Predicting the price of an apartment"
   }
+
+  ,"WEATHER": {
+  "COMPONENT_TITLE": "Weather",
+  "LOADING": "Loading weather...",
+  "ERROR": "Failed to load weather data",
+  "CITY_PLACEHOLDER": "Select city",
+  "FEELS_LIKE": "Feels like",
+  "BUT_ACTUALLY": "but actually",
+  "CITY_NOT_FOUND": "City not found",
+  "WEEKDAY": ["mon, tue, wed, thu, fri, sat, sun"],
+  "REPEAT": "Repeat"
+}
 }

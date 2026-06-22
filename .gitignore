@@ -67,6 +67,7 @@ testem.log
 .DS_Store
 Thumbs.db
 .firebase
+gha-creds-*.json
 .github/workflows/firebase-hosting-pull-request.yml
 .venv
 site

@@ -1,0 +1,261 @@
+.editor-content {
+  --background: #121212; // Темный фон страницы
+}
+
+.editor-canvas {
+  display: flex;;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 16px;
+}
+
+// Та самая закругленная коробка с тенью
+.player-frame {
+  position: relative;
+  width: auto;
+  max-width: 800px;
+  margin: 0 auto;
+  background: green;
+  border-radius: 20px;
+  overflow: hidden; // чтобы не вылезало за углы
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease; 
+
+  video {
+    width: 100%;
+    height: auto; // Позволяем высоте меняться
+    display: block;
+    transition: all 0.5s ease;
+
+    &.ratio-square {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border: 3px solid #00f2ea;
+    }
+    
+    &.ratio-portrait {
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      max-height: 60vh; // Ограничиваем высоту, чтобы видео не улетало вниз
+      border: 3px solid #ff0050; // Яркая розовая рамка для проверки (потом удалишь)
+    }
+  }
+}
+
+// Оверлей для кнопок управления
+.controls-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: rgba(0, 0, 0, 0.2); // Легкое затемнение видео
+
+  button {
+    border: none;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px); // Матовое стекло
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s;
+    &:active { transform: scale(0.9); }
+  }
+}
+
+.central-play-btn {
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+}
+
+.skip-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  
+  .skip-label {
+    position: absolute;
+    font-size: 9px;
+    font-weight: bold;
+    margin-top: 2px;
+  }
+  
+  .flip-icon {
+    transform: scaleX(-1);
+  }
+}
+
+// Полоса прокрутки
+.controls-bar {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 15px;
+
+  ion-label { color: #666; font-size: 13px;}
+}
+
+// 5. ОБЛАСТЬ ИНСТРУМЕНТОВ И КНОПКИ ФУНКЦИЙ
+.tools-area {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+.function-buttons {
+  display: grid;             // Используем сетку для ровных квадратов
+  grid-template-columns: repeat(3, 100px); // 3 колонки по 100px (для Обрезки, Фильтров и будущей Качества)
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+
+  .tool-tile {
+    width: 100px;
+    height: 100px;
+    background: white;         // Черное плато
+    border: 2px solid #333;   // Тонкая граница, чтобы плитки не сливались
+    border-radius: 18px;      // Красивое закругление
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    ion-icon {
+      font-size: 28px;
+      color: var(--ion-color-primary); // Иконки будут яркими
+    }
+
+    span {
+      font-size: 11px;
+      color: blue;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    &:active {
+      transform: scale(0.9);  // Приятное нажатие
+      background: #1a1a1a;    // Легкий отклик по цвету
+    }
+  }
+}
+// 6. ПАНЕЛЬ ФИЛЬТРОВ
+.filters-container {
+  animation: slideUp 0.3s ease-out;
+
+  .tool-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    span { color: #fff; font-size: 14px; margin-left: 5px; }
+    ion-button { --color: #aaa; }
+  }
+}
+
+.filters-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 10px 5px;
+  &::-webkit-scrollbar { display: none; } // Скрываем скроллбар
+
+  .filter-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 70px;
+    
+    .filter-preview {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      background: #333;
+      border: 2px solid transparent;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+      background-image: url('https://ionicframework.com');
+      background-size: cover;
+    }
+
+    .filter-name { font-size: 11px; color: #888; }
+
+    &.active {
+      .filter-preview {
+        border-color: var(--ion-color-primary);
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(var(--ion-color-primary-rgb), 0.4);
+      }
+      .filter-name { color: var(--ion-color-primary); font-weight: 600; }
+    }
+  }
+}
+// 7. ОПРЕДЕЛЕНИЕ CSS ФИЛЬТРОВ
+video, .filter-preview {
+  &.grayscale { filter: grayscale(1); }
+  &.sepia { filter: sepia(1); }
+  &.invert { filter: invert(1); }
+  &.saturate { filter: saturate(2.5); }
+  &.sharpen { filter: contrast(1.5) brightness(1.1); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.processing-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px); // Размытие заднего фона
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; // Поверх всего
+  animation: fadeIn 0.3s ease;
+
+  .loader-content {
+    text-align: center;
+    color: white;
+    padding: 20px;
+
+    ion-spinner {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    ion-progress-bar {
+      border-radius: 10px;
+      height: 6px;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

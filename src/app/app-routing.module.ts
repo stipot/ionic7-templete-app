@@ -8,6 +8,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoTaskComponent } from './todo-task/todo-task.component';
 import { FashionComponent } from './fashion/fashion.component';
 import { FashionDetailComponent } from './fashion-detail/fashion-detail.component';
+import { ClothingShopPage } from './clothing-shop/clothing-shop.page';
 import { PrivacyPolicyComponent } from "./privacy-policy/privacy-policy.component";
 import { IntroComponent } from './intro/intro.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -39,6 +40,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'front-layout',
     pathMatch: 'full'
+  },
+  {
+    path: 'veditor',
+    loadChildren: () => import('./videoeditor/videoeditor.module').then(m => m.VideoeditorModule)
   },
   {
     path: 'face-detector',
@@ -168,10 +173,10 @@ const routes: Routes = [
     path: 'barcode-scanner',
     component: BarcodeScannerComponent
   },
-  {
-    path: 'widget',
-    loadChildren: () => import('./widget/widget.module').then( m => m.WidgetModule)
-  },
+//  {
+//    path: 'widget',
+//    loadChildren: () => import('./widget/widget.module').then( m => m.WidgetModule)
+//  },
   {
     path: 'forgot-password',
     loadChildren: () => import('./forgot-password/forgot-password-routing.module').then( m => m.ForgotPasswordPageRoutingModule)
@@ -221,11 +226,15 @@ const routes: Routes = [
     component: FashionDetailComponent
   },
   {
+    path: 'rolep',
+    loadChildren: () => import('./rolep/rolep.module').then(m => m.RolepModule)
+  },
+  {
     path: '**',
     redirectTo: 'page-not-found'
   },
 ];
-
+ 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

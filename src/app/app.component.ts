@@ -22,6 +22,7 @@ export class AppComponent {
     { title: 'ROLEP.COMPONENT_TITLE', url: '/rolep', icon: 'game-controller' }, 
     { title: 'MAP.YANDEXMAPS', url: '/maps', icon: 'map' },
     { title: 'GAZON.MENU', url: '/gazon', icon: 'sync' },
+    { title: 'Get Forms', url: '/getforms', icon: 'globe' },
     { title: 'MINIBLOG.COMPONENT_TITLE', url: '/miniblog', icon: 'book' },
     { title: 'KANBAN.COMPONENT_TITLE', url: '/kanban', icon: 'albums' },
     { title: 'RECIPES.COMPONENT_TITLE', url: '/recipes', icon: 'pizza' },

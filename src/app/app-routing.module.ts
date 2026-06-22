@@ -25,6 +25,7 @@ import { CryptoRatesComponent } from './cryptorates/cryptorates.component';
 import { MplayerComponent } from "./mplayer/mplayer.component";
 import { KanbanComponent } from './kanban/kanban.component';
 import { FileViewerComponent } from './file-viewer/file-viewer.component';
+import { SpectrmixerComponent } from './spectrmixer/spectrmixer.component';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component'
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RsaComponent } from './rsa/rsa.component';
@@ -136,6 +137,10 @@ const routes: Routes = [
   {
     path:'cryptorates',
     component: CryptoRatesComponent
+  },
+  {
+    path: 'spectrmixer',
+    component: SpectrmixerComponent
   },
   {
     path: 'notes',

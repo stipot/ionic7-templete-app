@@ -62,6 +62,7 @@ import { PaintModule } from './paint/paint.module';
 import { TierListComponent } from './tier-list/tier-list.component'
 import { TierListModule } from './tier-list/tier-list.module';
 import { MuivSheduleModule } from './muiv-schedule/muiv-schedule.module';
+import { SpectrmixerComponent } from './spectrmixer/spectrmixer.component';
 
 // Фабрика для загрузчика переводов
 export function HttpLoaderFactory(http: HttpClient) {
@@ -105,7 +106,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     GazonComponent,
     ClothingShopPage,
     FloristAssistantComponent,
-    
+    SpectrmixerComponent,
   ],
   imports: [
     BrowserModule,

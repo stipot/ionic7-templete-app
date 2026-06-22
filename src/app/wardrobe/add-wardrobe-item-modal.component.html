@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Добавить элемент одежды</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Название</ion-label>
+    <ion-input [(ngModel)]="form.name" placeholder="Например: Синяя рубашка"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Тип одежды</ion-label>
+    <ion-input [(ngModel)]="form.type" placeholder="Например: Рубашка, Платье, Обувь"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Сезон</ion-label>
+    <ion-select [(ngModel)]="form.season">
+      <ion-select-option *ngFor="let season of seasons" [value]="season">{{ season }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Размер</ion-label>
+    <ion-select [(ngModel)]="form.size">
+      <ion-select-option *ngFor="let size of sizes" [value]="size">{{ size }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Фотография</ion-label>
+    <input type="file" accept="image/*" (change)="onFileSelected($event)" class="file-input" />
+    <div *ngIf="form.photo" class="photo-preview">
+      <img [src]="form.photo" alt="Preview" />
+    </div>
+  </ion-item>
+
+  <ion-button expand="block" color="primary" (click)="confirm()" class="ion-margin-top">
+    <ion-icon name="checkmark" slot="start"></ion-icon>
+    Сохранить
+  </ion-button>
+</ion-content>

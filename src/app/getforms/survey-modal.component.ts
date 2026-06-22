@@ -9,7 +9,6 @@ type SurveyType = 'radio' | 'checkbox' | 'text';
 })
 export class SurveyModalComponent {
   title = '';
-  // support multiple questions
   questions: { id: string; text: string; type: SurveyType; options: { id: string; text: string }[] }[] = [
     { id: `${Date.now()}-0`, text: '', type: 'radio', options: [{ id: `${Date.now()}-opt0`, text: '' }, { id: `${Date.now()}-opt1`, text: '' }] },
   ];
@@ -49,7 +48,6 @@ export class SurveyModalComponent {
   }
 
   save() {
-    // validate questions
     for (const q of this.questions) {
       if (!q.text.trim()) {
         alert('Введите текст вопроса.');
@@ -61,7 +59,7 @@ export class SurveyModalComponent {
           alert('Введите хотя бы два варианта для каждого вопроса.');
           return;
         }
-        // replace options objects with plain strings for the saved survey
+
         (q as any).options = opts;
       } else {
         (q as any).options = [];

@@ -12,14 +12,18 @@ register();
 export class AppComponent {
   public appPages = [
     { title: 'Face Detector', url: '/face-detector', icon: 'scan' },  // ДОБАВЛЕНО
+    { title: 'FLORIST.COMPONENT_TITLE', url: '/florist', icon: 'leaf' },
     { title: 'FRONTPAGE.COMPONENT_TITLE', url: '/front-layout', icon: 'grid' },
     { title: 'WardrobeOnline', url: '/wardrobe', icon: 'shirt' },
     { title: 'SETTINGS.COMPONENT_TITLE', url: '/settings', icon: 'settings' },
     { title: 'INTRO.COMPONENT_TITLE', url: '/intro', icon: 'easel' },
     { title: '2048GAME.COMPONENT_TITLE', url: '/game-2048', icon: 'game-controller' },
+    { title: 'PAINT.COMPONENT_TITLE', url: '/paint', icon: 'color-palette' },
     { title: 'calc.name', url: '/calc', icon: 'calculator' },
+    { title: 'ROLEP.COMPONENT_TITLE', url: '/rolep', icon: 'game-controller' }, 
     { title: 'MAP.YANDEXMAPS', url: '/maps', icon: 'map' },
     { title: 'GAZON.MENU', url: '/gazon', icon: 'sync' },
+    { title: 'Get Forms', url: '/getforms', icon: 'globe' },
     { title: 'MINIBLOG.COMPONENT_TITLE', url: '/miniblog', icon: 'book' },
     { title: 'KANBAN.COMPONENT_TITLE', url: '/kanban', icon: 'albums' },
     { title: 'RECIPES.COMPONENT_TITLE', url: '/recipes', icon: 'pizza' },
@@ -64,10 +68,11 @@ export class AppComponent {
     { title: 'Deals', url: '/deals', icon: '' },
     { title: 'Fashion', url: '/fashion', icon: '' },
     { title: 'Profile', url: '/profil', icon: '' },
+    { title: 'CLOTHING_SHOP.TITLE', url: '/clothing-shop', icon: 'heart' },
   ];
   constructor(private translate: TranslateService) {
     this.translate.setDefaultLang('ru');
-    this.translate.addLangs(['en', 'ru']);
+    this.translate.addLangs(['en', 'ru', 'fr', 'it']);
     this.translate.use('ru');
   }
 

@@ -30,7 +30,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-label');
-    expect(menuItems.length).toEqual(32);
+    expect(menuItems.length).toEqual(44);
     expect(menuItems[0].textContent).toContain('FrontPage');
     expect(menuItems[1].textContent).toContain('Settings');
   });
@@ -40,7 +40,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const app = fixture.nativeElement;
     const menuItems = app.querySelectorAll('ion-item');
-    expect(menuItems.length).toEqual(32);
+    expect(menuItems.length).toEqual(44);
     expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/front-layout');
     expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/settings');
   });

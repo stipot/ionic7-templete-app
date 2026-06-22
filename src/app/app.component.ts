@@ -11,6 +11,7 @@ register();
 })
 export class AppComponent {
   public appPages = [
+    { title: 'Морской Бой', url: '/boi', icon: 'boat' },
     { title: 'Face Detector', url: '/face-detector', icon: 'scan' },  // ДОБАВЛЕНО
     { title: 'FLORIST.COMPONENT_TITLE', url: '/florist', icon: 'leaf' },
     { title: 'FRONTPAGE.COMPONENT_TITLE', url: '/front-layout', icon: 'grid' },
